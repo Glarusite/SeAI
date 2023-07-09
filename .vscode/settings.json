@@ -1,0 +1,17 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+  },
+  "eslint.rules.customizations": [
+    {
+      "rule": "*",
+      "severity": "downgrade",
+    },
+  ],
+  "files.insertFinalNewline": true,
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "files.exclude": {
+    "**/node_modules": true
+  },
+}
