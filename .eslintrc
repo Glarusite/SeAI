@@ -1,4 +1,108 @@
 {
   "root": true,
-  "extends": "universe/native"
+  "extends": [
+    "universe/native",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:unicorn/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": [
+    "**/.git",
+    "**/.expo",
+    "**/.yarn",
+    "**/node_modules",
+    "expo-env.d.ts",
+    "*.js"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": [
+      "tsconfig.json",
+      "tsconfig.test.json"
+    ]
+  },
+  "plugins": [
+    "unused-imports",
+    "import",
+    "unicorn",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": [
+          "camelCase",
+          "PascalCase",
+          "UPPER_CASE"
+        ],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "function",
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ]
+      },
+      {
+        "selector": "typeLike",
+        "format": [
+          "PascalCase"
+        ]
+      }
+    ],
+    "curly": [
+      "error",
+      "all"
+    ],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "ignore": [
+          "[Pp]rops",
+          "[Rr]ef"
+        ]
+      }
+    ],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  }
 }

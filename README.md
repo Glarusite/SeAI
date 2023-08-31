@@ -1,4 +1,4 @@
-# MarineDocs
+# SeAI
 
 React-native/Expo front-end solution for a Marine documents manager hybrid app.
 
@@ -12,7 +12,7 @@ React-native/Expo front-end solution for a Marine documents manager hybrid app.
 
 ## Setup
 
-1. ```git clone https://github.com/Glarusite/MarineDocs.git```
+1. ```git clone https://github.com/Glarusite/SeAI.git```
 2. ```npm install -g yarn```
 3. Open PS with admin rights and execute ```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned```
 4. ```yarn install```
