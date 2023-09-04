@@ -1,13 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { useAppDispatch } from "@src/hooks/store";
+import { setUser } from "@src/slices/user-slice";
+import { Link } from "expo-router";
+import { useCallback } from "react";
+import { Text } from "react-native";
 
-import styles from "./index.styles";
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const logout = useCallback(() => {
+    dispatch(setUser({}));
+  }, [dispatch]);
 
-const App: React.FC = () => (
-  <View style={styles.container}>
-    <Text>Open up App.tsx to start working on your app!</Text>
-    <StatusBar style="auto" />
-  </View>
-);
+  return (
+    <>
+      <Text>Home</Text>
+      <Link href="/user/">Profile</Link>
+      <Text onPress={logout}>Logout</Text>
+    </>
+  );
+};
 
 export default App;

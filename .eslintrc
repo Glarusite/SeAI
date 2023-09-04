@@ -84,7 +84,14 @@
         "newlines-between": "always"
       }
     ],
+    "no-void": [
+      "error",
+      {
+        "allowAsStatement": true
+      }
+    ],
     "react/react-in-jsx-scope": "off",
+    "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": [
       "error",
       {
