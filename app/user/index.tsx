@@ -1,11 +1,13 @@
 import { Link } from "expo-router";
-import { Text } from "react-native";
+import { Text } from "react-native-paper";
 
 const Profile: React.FC = () => {
   return (
     <>
       <Text>Profile</Text>
-      <Link href="/">Home</Link>
+      <Link href="/">
+        <Text>Home</Text>
+      </Link>
     </>
   );
 };

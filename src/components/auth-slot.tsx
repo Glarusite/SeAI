@@ -9,7 +9,7 @@ const AuthSlot: React.FC = () => {
   useEffect(() => {
     if (user.id && segments.includes("user") && segments.length > 1) {
       router.replace("/");
-    } else if (user.id == null) {
+    } else if (user.id == null && !segments.some(segments => allowedSegments.has(segments))) {
       router.replace("/user/login");
     }
   }, [user.id, segments]);
@@ -18,3 +18,5 @@ const AuthSlot: React.FC = () => {
 };
 
 export default AuthSlot;
+
+const allowedSegments = new Set(["login", "register", "about"]);
