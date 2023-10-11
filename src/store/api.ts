@@ -55,7 +55,7 @@ const injectedRtkApi = api
     overrideExisting: false,
   });
 export { injectedRtkApi as api };
-export type HandleFileUploadApiResponse = /** Status 200 OK */ MarineDocument;
+export type HandleFileUploadApiResponse = /** status 200 OK */ MarineDocument;
 export type HandleFileUploadParameters = {
   userId: string;
   body: {
@@ -77,15 +77,15 @@ export type RegisterApiResponse = unknown;
 export type RegisterParameters = {
   userRegisterRequest: UserRegisterRequest;
 };
-export type AuthenticateAndGetTokenApiResponse = /** Status 200 OK */ AuthResponse;
+export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ AuthResponse;
 export type AuthenticateAndGetTokenParameters = {
   authRequest: AuthRequest;
 };
-export type SaveDocument1ApiResponse = /** Status 200 OK */ MarineDocument[];
+export type SaveDocument1ApiResponse = /** status 200 OK */ MarineDocument[];
 export type SaveDocument1Parameters = {
   userId: string;
 };
-export type DownloadApiResponse = /** Status 200 OK */ string[];
+export type DownloadApiResponse = /** status 200 OK */ string[];
 export type DownloadParameters = {
   userId: string;
   documentId: string;

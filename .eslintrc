@@ -89,6 +89,16 @@
         "allowAsStatement": true
       }
     ],
+    "prefer-destructuring": [
+      "error",
+      {
+        "object": true,
+        "array": true
+      },
+      {
+        "enforceForRenamedProperties": true
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": [
