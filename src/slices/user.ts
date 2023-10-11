@@ -1,8 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { User } from "@src/models/user";
 
-export type UserState = Readonly<Partial<User>>;
-
 const initialState: UserState = {};
 
 const UserSlice = createSlice({
@@ -15,6 +13,6 @@ const UserSlice = createSlice({
   },
 });
 
-const { reducer: user, actions } = UserSlice;
-export default user;
-export const { setUser } = actions;
+export default UserSlice;
+export const { setUser } = UserSlice.actions;
+export type UserState = Readonly<Partial<User>>;

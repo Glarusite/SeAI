@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@src/hooks/store";
-import { setUser } from "@src/slices/user-slice";
+import { setUser } from "@src/slices/user";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import { useCallback, useState } from "react";
