@@ -3,16 +3,16 @@ import { Slot, router, useSegments } from "expo-router";
 import { useEffect } from "react";
 
 const AuthSlot: React.FC = () => {
-  const user = useAppSelector(state => state.user);
+  const accessToken = useAppSelector(state => state.user.accessToken);
   const segments: string[] = useSegments();
 
   useEffect(() => {
-    if (user.id && segments.includes("user") && segments.length > 1) {
+    if (accessToken && segments.includes("user") && segments.length > 1) {
       router.replace("/");
-    } else if (user.id == null && !segments.some(segments => allowedSegments.has(segments))) {
+    } else if (accessToken == null && !segments.some(segments => allowedSegments.has(segments))) {
       router.replace("/user/login");
     }
-  }, [user.id, segments]);
+  }, [accessToken, segments]);
 
   return <Slot />;
 };

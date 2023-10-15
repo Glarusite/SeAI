@@ -9,14 +9,6 @@
     "plugin:unicorn/recommended",
     "prettier"
   ],
-  "ignorePatterns": [
-    "**/.git",
-    "**/.expo",
-    "**/.yarn",
-    "**/node_modules",
-    "expo-env.d.ts",
-    "*.js"
-  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -67,6 +59,14 @@
         "format": [
           "PascalCase"
         ]
+      }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": {
+          "attributes": false
+        }
       }
     ],
     "curly": [

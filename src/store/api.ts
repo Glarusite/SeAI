@@ -1,4 +1,4 @@
-import { api } from "./api.base";
+import { baseApi as api } from "./api.base";
 export const addTagTypes = ["document-controller", "auth-controller"] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -30,19 +30,15 @@ const injectedRtkApi = api
         invalidatesTags: ["document-controller"],
       }),
       register: build.mutation<RegisterApiResponse, RegisterParameters>({
-        query: queryArgument => ({
-          url: `/api/v1/auth/register`,
-          method: "POST",
-          body: queryArgument.userRegisterRequest,
-        }),
+        query: queryArgument => ({ url: `/api/v1/auth/register`, method: "POST", body: queryArgument }),
         invalidatesTags: ["auth-controller"],
       }),
       authenticateAndGetToken: build.mutation<AuthenticateAndGetTokenApiResponse, AuthenticateAndGetTokenParameters>({
-        query: queryArgument => ({ url: `/api/v1/auth/login`, method: "POST", body: queryArgument.authRequest }),
+        query: queryArgument => ({ url: `/api/v1/auth/login`, method: "POST", body: queryArgument }),
         invalidatesTags: ["auth-controller"],
       }),
       saveDocument1: build.query<SaveDocument1ApiResponse, SaveDocument1Parameters>({
-        query: queryArgument => ({ url: `/api/v1/users/${queryArgument.userId}/documents` }),
+        query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/documents` }),
         providesTags: ["document-controller"],
       }),
       download: build.query<DownloadApiResponse, DownloadParameters>({
@@ -74,17 +70,11 @@ export type DiscardParameters = {
   documentId: string;
 };
 export type RegisterApiResponse = unknown;
-export type RegisterParameters = {
-  userRegisterRequest: UserRegisterRequest;
-};
+export type RegisterParameters = UserRegisterRequest;
 export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ AuthResponse;
-export type AuthenticateAndGetTokenParameters = {
-  authRequest: AuthRequest;
-};
+export type AuthenticateAndGetTokenParameters = AuthRequest;
 export type SaveDocument1ApiResponse = /** status 200 OK */ MarineDocument[];
-export type SaveDocument1Parameters = {
-  userId: string;
-};
+export type SaveDocument1Parameters = string;
 export type DownloadApiResponse = /** status 200 OK */ string[];
 export type DownloadParameters = {
   userId: string;
@@ -114,3 +104,12 @@ export type AuthRequest = {
   email: string;
   password: string;
 };
+export const {
+  useHandleFileUploadMutation,
+  useSaveDocumentMutation,
+  useDiscardMutation,
+  useRegisterMutation,
+  useAuthenticateAndGetTokenMutation,
+  useSaveDocument1Query,
+  useDownloadQuery,
+} = injectedRtkApi;

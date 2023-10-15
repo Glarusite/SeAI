@@ -9,14 +9,13 @@ import { reducer } from "./reducer";
 export async function configureAsyncStorageAppStore() {
   const state = await AsyncStorage.getItem("state");
   const preloadedState = safeJsonParse<AppState>(state);
-
   const store = configureAppStore(preloadedState);
 
   store.subscribe(
     debounce(() => {
       const state = store.getState();
       void AsyncStorage.setItem("state", JSON.stringify(state));
-    }, 500),
+    }, 50),
   );
 
   return store;
