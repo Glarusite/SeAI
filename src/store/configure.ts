@@ -1,15 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StateFromReducersMapObject, configureStore } from "@reduxjs/toolkit";
-import { safeJsonParse } from "@src/common/json";
 import { debounce } from "lodash";
 
 import { api } from "./api";
+import { getAsyncStorageState } from "./async-storage";
 import { reducer } from "./reducer";
 
-export async function configureAsyncStorageAppStore() {
-  const state = await AsyncStorage.getItem("state");
-  const preloadedState = safeJsonParse<AppState>(state);
-  const store = configureAppStore(preloadedState);
+export async function configureAppStore() {
+  const preloadedState = await getAsyncStorageState();
+  const store = configureTypedStore(preloadedState);
 
   store.subscribe(
     debounce(() => {
@@ -21,7 +20,7 @@ export async function configureAsyncStorageAppStore() {
   return store;
 }
 
-function configureAppStore(preloadedState: AppState | undefined) {
+function configureTypedStore(preloadedState: AppStoreState | undefined) {
   return configureStore({
     reducer,
     preloadedState,
@@ -29,5 +28,5 @@ function configureAppStore(preloadedState: AppState | undefined) {
   });
 }
 
-export type AppStore = ReturnType<typeof configureAppStore>;
-export type AppState = StateFromReducersMapObject<typeof reducer>;
+export type AppStore = ReturnType<typeof configureTypedStore>;
+export type AppStoreState = StateFromReducersMapObject<typeof reducer>;

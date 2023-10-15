@@ -1,12 +1,12 @@
-import AuthSlot from "@src/components/auth-slot";
-import LogoImage from "@src/components/logo-image";
-import { useCreateStore } from "@src/hooks/store";
-import { useAppTheme } from "@src/hooks/theme";
+import { AppTheme, useAppTheme } from "@src/components/app/app-theme";
+import AuthSlot from "@src/components/app/auth-slot";
+import WebSplashScreen from "@src/components/ui/web-splash-screen";
+import { useCreateStore } from "@src/store";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useMemo } from "react";
 import { Platform, StyleSheet, View } from "react-native";
-import { ActivityIndicator, MD3Theme, PaperProvider } from "react-native-paper";
+import { PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
@@ -33,10 +33,7 @@ const AppLayout: React.FC = () => {
     return (
       <PaperProvider theme={theme}>
         <View style={styles.container}>
-          <View style={styles.logoWrapper}>
-            <LogoImage />
-          </View>
-          <ActivityIndicator style={styles.spinner} size={200} />
+          <WebSplashScreen />
         </View>
       </PaperProvider>
     );
@@ -45,7 +42,7 @@ const AppLayout: React.FC = () => {
 
 export default AppLayout;
 
-function useStyles({ colors }: MD3Theme) {
+function useStyles({ colors }: AppTheme) {
   return useMemo(
     () =>
       StyleSheet.create({
@@ -55,18 +52,6 @@ function useStyles({ colors }: MD3Theme) {
           padding: 16,
           alignItems: "center",
           backgroundColor: colors.background,
-        },
-
-        logoWrapper: {
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        },
-
-        spinner: {
-          flex: 1,
-          alignSelf: "center",
         },
       }),
     [colors],

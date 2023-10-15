@@ -1,26 +1,19 @@
 import React, { ReactElement } from "react";
-import {
-  Controller,
-  FieldErrors,
-  FieldValues,
-  Path,
-  PathValue,
-  Resolver,
-  SubmitHandler,
-  UseFormReturn,
-  useForm,
-} from "react-hook-form";
+import type * as ReactForm from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { HelperText, TextInput } from "react-native-paper";
 
-export interface FormViewProps<TData extends FieldValues, TContext = unknown> {
-  children(errors: FieldErrors<TData>): Record<Path<TData>, ReactElement> & { submit: ReactElement };
+export interface FormViewProps<TData extends ReactForm.FieldValues, TContext = unknown> {
+  children(
+    errors: ReactForm.FieldErrors<TData>,
+  ): Record<ReactForm.Path<TData>, ReactElement> & { submit: ReactElement };
   context?: TContext;
-  resolver: Resolver<TData, TContext>;
-  submitFactory(formHooks: SubmitFormHooks<TData, TContext>): SubmitHandler<TData>;
+  resolver: ReactForm.Resolver<TData, TContext>;
+  submitFactory(formHooks: SubmitFormHooks<TData, TContext>): ReactForm.SubmitHandler<TData>;
 }
 
-export default function FormView<TData extends FieldValues, TContext = unknown>({
+export default function FormView<TData extends ReactForm.FieldValues, TContext = unknown>({
   children,
   context,
   resolver,
@@ -42,7 +35,7 @@ export default function FormView<TData extends FieldValues, TContext = unknown>(
   const onSubmit = handleSubmit(submitFactory({ clearErrors, reset, resetField, setError }));
 
   const { submit, ...inputs } = children(errors);
-  const formInputs = Object.entries(inputs) as [Path<TData>, ReactElement][];
+  const formInputs = Object.entries(inputs) as [ReactForm.Path<TData>, ReactElement][];
 
   return (
     <>
@@ -72,11 +65,11 @@ const RootComponent = Platform.OS === "web" ? "form" : React.Fragment;
 
 function getDefaultValue<TData>(type: ReactElement["type"]) {
   if (type === TextInput) {
-    return "" as PathValue<TData, Path<TData>>;
+    return "" as ReactForm.PathValue<TData, ReactForm.Path<TData>>;
   }
 }
 
-type SubmitFormHooks<TData extends FieldValues, TContext> = Pick<
-  UseFormReturn<TData, TContext>,
+type SubmitFormHooks<TData extends ReactForm.FieldValues, TContext> = Pick<
+  ReactForm.UseFormReturn<TData, TContext>,
   "clearErrors" | "reset" | "resetField" | "setError"
 >;

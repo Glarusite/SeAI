@@ -1,5 +1,4 @@
-import { useAppDispatch } from "@src/hooks/store";
-import { setUser } from "@src/slices/user";
+import { setUser, useAppDispatch } from "@src/store";
 import { Link } from "expo-router";
 import { useCallback } from "react";
 import { Text } from "react-native-paper";

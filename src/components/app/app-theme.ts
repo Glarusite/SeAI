@@ -95,3 +95,5 @@ export function useAppTheme() {
         },
       };
 }
+
+export type AppTheme = ReturnType<typeof useAppTheme>;
