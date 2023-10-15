@@ -38,8 +38,8 @@ function useStyles({ colors }: MD3Theme) {
         container: {
           flex: 1,
           gap: 16,
+          padding: 16,
           alignItems: "center",
-          justifyContent: "center",
           backgroundColor: colors.background,
         },
       }),

@@ -1,51 +1,102 @@
+import { isBlank, isEmail } from "@src/common/validators";
+import FormView, { FormViewProps } from "@src/components/form-view";
 import { useAppDispatch } from "@src/hooks/store";
+import { LoginFormData } from "@src/models";
 import { setUser } from "@src/slices/user";
 import { useAuthenticateAndGetTokenMutation } from "@src/store/api";
-import { Image } from "expo-image";
+import { Image, ImageSource } from "expo-image";
 import { router } from "expo-router";
-import { useCallback, useState } from "react";
+import { FieldErrors } from "react-hook-form";
+import { StyleSheet, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 
 const Login: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [authenticateAndGetToken] = useAuthenticateAndGetTokenMutation();
-
-  const login = useCallback(async () => {
-    try {
-      const { accessToken, userId } = await authenticateAndGetToken({ email, password }).unwrap();
-      dispatch(setUser({ accessToken, email, userId }));
-    } catch (error) {
-      alert(JSON.stringify(error));
-    }
-  }, [authenticateAndGetToken, dispatch, email, password]);
+  const login = useLogin();
 
   return (
-    <>
-      <Image source={require("@assets/icon.png")} style={{ height: 166, width: 190 }} />
-      <Text style={{ fontSize: 48, fontFamily: "Impact" }}>SeAI</Text>
-      <TextInput label="Email" value={email} onChangeText={setEmail} />
-      <TextInput label="Password" value={password} onChangeText={setPassword} secureTextEntry />
-      <Button onPress={login} mode="contained">
-        Login
-      </Button>
-      <Button onPress={register} mode="outlined">
+    <View style={styles.container}>
+      <Image source={require("@assets/icon.png") as ImageSource} style={styles.image} />
+      <Text style={styles.titleText}>SeAI</Text>
+
+      <FormView submitFactory={login} resolver={resolver}>
+        {errors => ({
+          email: <TextInput label="Email" mode="outlined" keyboardType="email-address" error={errors.email != null} />,
+          password: <TextInput label="Password" mode="outlined" secureTextEntry error={errors.password != null} />,
+          submit: <Button mode="contained">Login</Button>,
+        })}
+      </FormView>
+
+      <Button mode="outlined" onPress={() => router.replace("/user/register")}>
         Register
       </Button>
-      <Button onPress={about} mode="outlined">
+      <Button mode="outlined" onPress={() => router.replace("/about")}>
         About
       </Button>
-    </>
+    </View>
   );
 };
 
 export default Login;
 
-function register() {
-  router.replace("/user/register");
+function useLogin() {
+  const dispatch = useAppDispatch();
+  const [authenticateAndGetToken] = useAuthenticateAndGetTokenMutation();
+
+  const login: FormViewProps<LoginFormData>["submitFactory"] =
+    ({ setError, resetField }) =>
+    async ({ email, password }: LoginFormData) => {
+      try {
+        console.log("login");
+        const { accessToken, userId } = await authenticateAndGetToken({ email, password }).unwrap();
+        dispatch(setUser({ accessToken, email, userId }));
+      } catch (error) {
+        const message = JSON.stringify(error, null, 2);
+        setError("root", { message });
+        resetField("password");
+      }
+    };
+
+  return login;
 }
 
-function about() {
-  router.replace("/about");
+function resolver(values: LoginFormData) {
+  const { email, password } = values;
+  const errors: FieldErrors<LoginFormData> = {};
+
+  if (isBlank(email)) {
+    errors.email = { type: "required", message: "Email is required" };
+  } else if (!isEmail(email)) {
+    errors.email = { type: "pattern", message: "Email is invalid" };
+  }
+
+  if (isBlank(password)) {
+    errors.password = { type: "required", message: "Password is required" };
+  }
+
+  return {
+    errors,
+    values,
+  };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    gap: 16,
+    width: "100%",
+    maxWidth: 480,
+    justifyContent: "center",
+  },
+
+  image: {
+    height: 166,
+    width: 190,
+    alignSelf: "center",
+  },
+
+  titleText: {
+    fontSize: 48,
+    fontFamily: "Impact",
+    alignSelf: "center",
+  },
+});

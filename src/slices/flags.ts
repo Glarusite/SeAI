@@ -1,5 +1,5 @@
 import { Draft, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Flags } from "@src/models/flags";
+import { Flags } from "@src/models";
 
 const initialState: FlagsState = {};
 
@@ -17,7 +17,9 @@ const FlagsSlice = createSlice({
 });
 
 export default FlagsSlice;
-export const { setFlagValue } = FlagsSlice.actions;
+export const {
+  actions: { setFlagValue },
+} = FlagsSlice;
 export type FlagsState = Readonly<Partial<Flags>>;
 
 type SetFlagValuePayloadAction<TKey extends keyof FlagsState> = PayloadAction<{

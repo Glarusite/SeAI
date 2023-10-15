@@ -69,10 +69,12 @@
         }
       }
     ],
+    "@typescript-eslint/no-var-requires": "off",
     "curly": [
       "error",
       "all"
     ],
+    "dot-notation": "error",
     "import/order": [
       "error",
       {
@@ -99,6 +101,7 @@
         "enforceForRenamedProperties": true
       }
     ],
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": [
@@ -110,6 +113,7 @@
         ]
       }
     ],
+    "unicorn/prefer-module": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

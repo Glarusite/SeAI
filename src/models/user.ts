@@ -1,3 +1,8 @@
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
 export interface User {
   accessToken: string;
   userId: string;

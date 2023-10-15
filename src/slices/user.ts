@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { User } from "@src/models/user";
+import { User } from "@src/models";
 
 const initialState: UserState = {};
 
@@ -14,5 +14,7 @@ const UserSlice = createSlice({
 });
 
 export default UserSlice;
-export const { setUser } = UserSlice.actions;
+export const {
+  actions: { setUser },
+} = UserSlice;
 export type UserState = Readonly<Partial<User>>;
