@@ -40,14 +40,20 @@ export default function FormView<TData extends ReactForm.FieldValues, TContext =
   return (
     <>
       <KeyboardAvoidingView>
-        <RootComponent onSubmit={onSubmit}>
+        <RootComponent>
           {formInputs.map(([key, { type, props }]) => (
             <React.Fragment key={key}>
               <Controller
                 control={control}
                 defaultValue={getDefaultValue(type)}
                 name={key}
-                render={({ field }) => React.createElement(type, { ...props, ...field })}
+                render={({ field }) =>
+                  React.createElement(type, {
+                    ...props,
+                    ...field,
+                    onSubmitEditing: onSubmit,
+                  })
+                }
               />
               {errors[key] && <HelperText type="error">{errors[key]?.message as string}</HelperText>}
             </React.Fragment>
@@ -56,7 +62,11 @@ export default function FormView<TData extends ReactForm.FieldValues, TContext =
         </RootComponent>
       </KeyboardAvoidingView>
 
-      {React.createElement(submit.type, { ...submit.props, disabled: isSubmitting, onPress: onSubmit })}
+      {React.createElement(submit.type, {
+        ...submit.props,
+        disabled: isSubmitting,
+        onPress: onSubmit,
+      })}
     </>
   );
 }
