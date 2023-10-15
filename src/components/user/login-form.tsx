@@ -34,7 +34,7 @@ function useLogin() {
         dispatch(setUser({ accessToken, email, userId }));
       } catch (error) {
         const message =
-          typeof error === "object" && error != null && "data" in error && typeof error.data === "string" && error.data
+          typeof error === "object" && error != null && "data" in error && typeof error.data === "string"
             ? error.data === "Bad credentials"
               ? "Invalid email or password"
               : error.data
