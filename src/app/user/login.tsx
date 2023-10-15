@@ -1,10 +1,10 @@
 import { isBlank, isEmail } from "@src/common/validators";
 import FormView, { FormViewProps } from "@src/components/form-view";
+import LogoImage from "@src/components/logo-image";
 import { useAppDispatch } from "@src/hooks/store";
 import { LoginFormData } from "@src/models";
 import { setUser } from "@src/slices/user";
 import { useAuthenticateAndGetTokenMutation } from "@src/store/api";
-import { Image, ImageSource } from "expo-image";
 import { router } from "expo-router";
 import { FieldErrors } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("@assets/icon.png") as ImageSource} style={styles.image} />
+      <LogoImage />
       <Text style={styles.titleText}>SeAI</Text>
 
       <FormView submitFactory={login} resolver={resolver}>
@@ -29,6 +29,7 @@ const Login: React.FC = () => {
       <Button mode="outlined" onPress={() => router.replace("/user/register")}>
         Register
       </Button>
+
       <Button mode="outlined" onPress={() => router.replace("/about")}>
         About
       </Button>
