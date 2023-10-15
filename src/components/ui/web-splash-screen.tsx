@@ -9,7 +9,7 @@ const WebSplashScreen: React.FC = () => {
       <View style={styles.logoContainer}>
         <LogoImage />
       </View>
-      <ActivityIndicator style={styles.spinner} size={200} />
+      <ActivityIndicator style={styles.spinner} size={240} />
     </>
   );
 };
