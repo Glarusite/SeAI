@@ -30,11 +30,16 @@ function useLogin() {
     ({ setError, resetField }) =>
     async ({ email, password }) => {
       try {
-        console.log("login");
         const { accessToken, userId } = await authenticateAndGetToken({ email, password }).unwrap();
         dispatch(setUser({ accessToken, email, userId }));
       } catch (error) {
-        const message = JSON.stringify(error, null, 2);
+        const message =
+          typeof error === "object" && error != null && "data" in error && typeof error.data === "string" && error.data
+            ? error.data === "Bad credentials"
+              ? "Invalid email or password"
+              : error.data
+            : JSON.stringify(error);
+
         setError("root", { message });
         resetField("password");
       }
