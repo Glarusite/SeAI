@@ -10,6 +10,8 @@ export async function configureAppStore() {
   const preloadedState = await getAsyncStorageState();
   const store = configureTypedStore(preloadedState);
 
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
   store.subscribe(
     debounce(() => {
       const state = store.getState();

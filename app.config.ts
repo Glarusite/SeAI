@@ -7,6 +7,7 @@ const AppConfig: ExpoConfig = {
   },
   name: "SeAI",
   slug: "SeAI",
+  scheme: "seai",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -17,20 +18,19 @@ const AppConfig: ExpoConfig = {
     backgroundColor: "#ffffff",
   },
   assetBundlePatterns: ["**/*"],
-  ios: {
-    supportsTablet: true,
-  },
   android: {
     adaptiveIcon: {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#ffffff",
     },
   },
+  ios: {
+    supportsTablet: true,
+  },
   web: {
     bundler: "metro",
     favicon: "./assets/favicon.png",
   },
-  plugins: ["expo-router"],
 };
 
 export default AppConfig;

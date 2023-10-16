@@ -26,14 +26,6 @@ const Login: React.FC = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: 16,
-    width: "100%",
-    maxWidth: 480,
-    justifyContent: "center",
-  },
-
   titleText: {
     fontSize: 48,
     fontFamily: "Impact",

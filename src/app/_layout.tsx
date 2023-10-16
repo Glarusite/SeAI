@@ -5,7 +5,7 @@ import { useCreateStore } from "@src/store";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useMemo } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
 
@@ -20,10 +20,12 @@ const AppLayout: React.FC = () => {
     return (
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <View style={styles.container}>
-            <AuthSlot />
-            <StatusBar style="auto" />
-          </View>
+          <SafeAreaView style={styles.rootContainer}>
+            <View style={styles.container}>
+              <AuthSlot />
+              <StatusBar style="auto" />
+            </View>
+          </SafeAreaView>
         </PaperProvider>
       </Provider>
     );
@@ -32,7 +34,7 @@ const AppLayout: React.FC = () => {
   if (Platform.OS === "web") {
     return (
       <PaperProvider theme={theme}>
-        <View style={styles.container}>
+        <View style={{ ...styles.rootContainer }}>
           <WebSplashScreen />
         </View>
       </PaperProvider>
@@ -46,12 +48,16 @@ function useStyles({ colors }: AppTheme) {
   return useMemo(
     () =>
       StyleSheet.create({
+        rootContainer: {
+          flex: 1,
+          backgroundColor: colors.background,
+        },
+
         container: {
           flex: 1,
           gap: 16,
           padding: 16,
           alignItems: "center",
-          backgroundColor: colors.background,
         },
       }),
     [colors],
