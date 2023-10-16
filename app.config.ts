@@ -3,7 +3,6 @@ import { ExpoConfig } from "expo/config";
 const AppConfig: ExpoConfig = {
   experiments: {
     tsconfigPaths: true,
-    turboModules: true,
     typedRoutes: true,
   },
   name: "SeAI",

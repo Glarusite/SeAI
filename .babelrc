@@ -2,8 +2,8 @@
   "presets": ["babel-preset-expo"],
   "plugins": [
     "@babel/plugin-proposal-export-namespace-from",
-    "react-native-reanimated/plugin",
+    "expo-router/babel",
     "react-native-paper/babel",
-    "expo-router/babel"
+    "react-native-reanimated/plugin"
   ]
 }
