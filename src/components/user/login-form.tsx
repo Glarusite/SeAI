@@ -4,14 +4,14 @@ import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@sr
 import { FieldErrors, useForm } from "react-hook-form";
 import { ActivityIndicator, Button, HelperText } from "react-native-paper";
 
-import Form from "../ui/form";
 import ControlledTextInput from "../ui/form/controlled-text-input";
+import FormView from "../ui/form/form-view";
 
 const LoginForm: React.FC = () => {
   const { control, errors, isSubmitting, login, setFocus } = useLogin();
 
   return (
-    <Form>
+    <FormView>
       <ControlledTextInput
         control={control}
         name="email"
@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
       <Button mode="contained" onPress={login} disabled={isSubmitting}>
         {isSubmitting ? <ActivityIndicator /> : "Login"}
       </Button>
-    </Form>
+    </FormView>
   );
 };
 
@@ -45,7 +45,7 @@ export default LoginForm;
 
 function useLogin() {
   const dispatch = useAppDispatch();
-  const [authenticateAndGetToken] = useAuthenticateAndGetTokenMutation();
+  const [loginRequest] = useAuthenticateAndGetTokenMutation();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -57,7 +57,7 @@ function useLogin() {
 
   const login = handleSubmit(async ({ email, password }) => {
     try {
-      const { accessToken, userId } = await authenticateAndGetToken({ email, password }).unwrap();
+      const { accessToken, userId } = await loginRequest({ email, password }).unwrap();
       dispatch(setUser({ accessToken, email, userId }));
     } catch (error) {
       const message =

@@ -3,6 +3,14 @@ export interface LoginFormData {
   password: string;
 }
 
+export interface RegisterFormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  repeatPassword: string;
+}
+
 export interface User {
   accessToken: string;
   userId: string;

@@ -1,8 +1,8 @@
+import LinkButton from "@src/components/ui/link-button";
 import LogoImage from "@src/components/ui/logo-image";
 import LoginForm from "@src/components/user/login-form";
-import { router } from "expo-router";
 import { StyleSheet } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 
 const Login: React.FC = () => {
   return (
@@ -12,13 +12,9 @@ const Login: React.FC = () => {
 
       <LoginForm />
 
-      <Button mode="outlined" onPress={() => router.replace("/user/register")}>
-        Register
-      </Button>
+      <LinkButton href="/user/register">Register</LinkButton>
 
-      <Button mode="outlined" onPress={() => router.replace("/about")}>
-        About
-      </Button>
+      <LinkButton href="/about">About</LinkButton>
     </>
   );
 };

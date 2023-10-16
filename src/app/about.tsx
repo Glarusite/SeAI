@@ -1,17 +1,13 @@
-import { router } from "expo-router";
-import { Text, Button } from "react-native-paper";
+import LinkButton from "@src/components/ui/link-button";
+import { Text } from "react-native-paper";
 
 const About: React.FC = () => {
   return (
     <>
       <Text>About</Text>
-      <Button onPress={home}>Home</Button>
+      <LinkButton href="/">Home</LinkButton>
     </>
   );
 };
 
 export default About;
-
-function home() {
-  router.replace("/");
-}

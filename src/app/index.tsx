@@ -1,5 +1,5 @@
+import LinkButton from "@src/components/ui/link-button";
 import { setUser, useAppDispatch } from "@src/store";
-import { Link } from "expo-router";
 import { useCallback } from "react";
 import { Text } from "react-native-paper";
 
@@ -12,9 +12,8 @@ const App: React.FC = () => {
   return (
     <>
       <Text>Home</Text>
-      <Link href="/user/">
-        <Text>Profile</Text>
-      </Link>
+      <LinkButton href="/user/">Profile</LinkButton>
+
       <Text onPress={logout}>Logout</Text>
     </>
   );

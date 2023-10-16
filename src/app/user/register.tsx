@@ -1,17 +1,25 @@
-import { router } from "expo-router";
-import { Button, Text } from "react-native-paper";
+import LinkButton from "@src/components/ui/link-button";
+import RegisterForm from "@src/components/user/register-form";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 
 const Register: React.FC = () => {
   return (
     <>
-      <Text>Register</Text>
-      <Button onPress={login}>Already have an account?</Button>
+      <Text style={styles.titleText}>Register, Seaman!</Text>
+      <RegisterForm />
+      <LinkButton href="/user/login" mode="text">
+        Already have an account?
+      </LinkButton>
     </>
   );
 };
 
 export default Register;
 
-function login() {
-  router.replace("/user/login");
-}
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 36,
+    alignSelf: "center",
+  },
+});

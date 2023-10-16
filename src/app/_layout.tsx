@@ -4,9 +4,10 @@ import WebSplashScreen from "@src/components/ui/web-splash-screen";
 import { useCreateStore } from "@src/store";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
+import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
@@ -23,6 +24,7 @@ const AppLayout: React.FC = () => {
           <SafeAreaView style={styles.rootContainer}>
             <View style={styles.container}>
               <AuthSlot />
+              <Toast />
               <StatusBar style="auto" />
             </View>
           </SafeAreaView>
