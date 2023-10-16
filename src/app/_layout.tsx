@@ -58,7 +58,7 @@ function useStyles({ colors }: AppTheme) {
         container: {
           flex: 1,
           gap: 16,
-          padding: 16,
+          paddingHorizontal: 16,
           alignItems: "center",
         },
       }),
