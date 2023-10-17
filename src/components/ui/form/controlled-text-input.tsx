@@ -1,6 +1,8 @@
 import { Control, Controller, FieldValues, Path, PathValue } from "react-hook-form";
 import { View } from "react-native";
-import { HelperText, TextInput, TextInputProps } from "react-native-paper";
+import { TextInput, TextInputProps } from "react-native-paper";
+
+import ValidationText from "./validation-text";
 
 export type ControlledTextInputProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;
@@ -20,7 +22,7 @@ export default function ControlledTextInput<TData extends FieldValues, TContext 
       render={({ field: { onChange, ...controlProps }, fieldState: { error } }) => (
         <View>
           <TextInput onChangeText={onChange} error={error != null} {...{ ...inputProps, ...controlProps }} />
-          {error != null && <HelperText type="error">{error.message}</HelperText>}
+          <ValidationText error={error} />
         </View>
       )}
     />

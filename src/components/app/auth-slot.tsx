@@ -2,7 +2,7 @@ import { useAppSelector } from "@src/store";
 import { Slot, router, useSegments } from "expo-router";
 import { useEffect } from "react";
 
-const AuthSlot: React.FC = () => {
+export default function AuthSlot() {
   const accessToken = useAppSelector(state => state.user.accessToken);
   const segments: string[] = useSegments();
 
@@ -15,8 +15,6 @@ const AuthSlot: React.FC = () => {
   }, [accessToken, segments]);
 
   return <Slot />;
-};
-
-export default AuthSlot;
+}
 
 const allowedSegments = new Set(["login", "register", "about"]);

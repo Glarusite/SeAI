@@ -1,15 +1,13 @@
 import { Slot } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
-const UserLayout: React.FC = () => {
+export default function UserLayout() {
   return (
     <View style={styles.container}>
       <Slot />
     </View>
   );
-};
-
-export default UserLayout;
+}
 
 const styles = StyleSheet.create({
   container: {

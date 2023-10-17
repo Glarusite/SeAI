@@ -2,12 +2,13 @@ import { isBlank, isEmail } from "@src/common/validators";
 import { LoginFormData } from "@src/models";
 import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@src/store";
 import { FieldErrors, useForm } from "react-hook-form";
-import { ActivityIndicator, Button, HelperText } from "react-native-paper";
+import { ActivityIndicator, Button } from "react-native-paper";
 
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
+import ValidationText from "../ui/form/validation-text";
 
-const LoginForm: React.FC = () => {
+export default function LoginForm() {
   const { control, errors, isSubmitting, login, setFocus } = useLogin();
 
   return (
@@ -32,16 +33,14 @@ const LoginForm: React.FC = () => {
         onSubmitEditing={() => login()}
       />
 
-      {errors.root && <HelperText type="error">{errors.root?.message}</HelperText>}
+      <ValidationText error={errors.root} />
 
       <Button mode="contained" onPress={login} disabled={isSubmitting}>
         {isSubmitting ? <ActivityIndicator /> : "Login"}
       </Button>
     </FormView>
   );
-};
-
-export default LoginForm;
+}
 
 function useLogin() {
   const dispatch = useAppDispatch();

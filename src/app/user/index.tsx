@@ -1,13 +1,11 @@
 import LinkButton from "@src/components/ui/link-button";
-import { Text } from "react-native-paper";
+import { TitleText } from "@src/components/ui/title-text";
 
-const Profile: React.FC = () => {
+export default function Profile() {
   return (
     <>
-      <Text>Profile</Text>
+      <TitleText>Profile</TitleText>
       <LinkButton href="/">Home</LinkButton>
     </>
   );
-};
-
-export default Profile;
+}

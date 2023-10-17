@@ -1,13 +1,11 @@
 import LinkButton from "@src/components/ui/link-button";
-import { Text } from "react-native-paper";
+import { TitleText } from "@src/components/ui/title-text";
 
-const About: React.FC = () => {
+export default function About() {
   return (
     <>
-      <Text>About</Text>
+      <TitleText>About</TitleText>
       <LinkButton href="/">Home</LinkButton>
     </>
   );
-};
-
-export default About;
+}

@@ -1,21 +1,19 @@
 import LinkButton from "@src/components/ui/link-button";
+import { TitleText } from "@src/components/ui/title-text";
 import RegisterForm from "@src/components/user/register-form";
 import { StyleSheet } from "react-native";
-import { Text } from "react-native-paper";
 
-const Register: React.FC = () => {
+export default function Register() {
   return (
     <>
-      <Text style={styles.titleText}>Register, Seaman!</Text>
+      <TitleText>Register, Seaman!</TitleText>
       <RegisterForm />
       <LinkButton href="/user/login" mode="text">
         Already have an account?
       </LinkButton>
     </>
   );
-};
-
-export default Register;
+}
 
 const styles = StyleSheet.create({
   titleText: {

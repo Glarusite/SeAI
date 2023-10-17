@@ -3,7 +3,7 @@ import { ActivityIndicator } from "react-native-paper";
 
 import LogoImage from "./logo-image";
 
-const WebSplashScreen: React.FC = () => {
+export default function WebSplashScreen() {
   return (
     <>
       <View style={styles.logoContainer}>
@@ -12,9 +12,7 @@ const WebSplashScreen: React.FC = () => {
       <ActivityIndicator style={styles.spinner} size={240} />
     </>
   );
-};
-
-export default WebSplashScreen;
+}
 
 const styles = StyleSheet.create({
   logoContainer: {

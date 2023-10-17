@@ -5,14 +5,15 @@ import { useCreateStore } from "@src/store";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useMemo } from "react";
-import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { PaperProvider } from "react-native-paper";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
 
-const AppLayout: React.FC = () => {
+export default function AppLayout() {
   const store = useCreateStoreEffect();
   const theme = useAppTheme();
   const styles = useStyles(theme);
@@ -21,13 +22,13 @@ const AppLayout: React.FC = () => {
     return (
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <SafeAreaView style={styles.rootContainer}>
-            <View style={styles.container}>
+          <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
               <AuthSlot />
               <Toast />
               <StatusBar style="auto" />
-            </View>
-          </SafeAreaView>
+            </SafeAreaView>
+          </SafeAreaProvider>
         </PaperProvider>
       </Provider>
     );
@@ -36,29 +37,25 @@ const AppLayout: React.FC = () => {
   if (Platform.OS === "web") {
     return (
       <PaperProvider theme={theme}>
-        <View style={{ ...styles.rootContainer }}>
-          <WebSplashScreen />
-        </View>
+        <SafeAreaProvider>
+          <SafeAreaView style={{ ...styles.container }}>
+            <WebSplashScreen />
+          </SafeAreaView>
+        </SafeAreaProvider>
       </PaperProvider>
     );
   }
-};
-
-export default AppLayout;
+}
 
 function useStyles({ colors }: AppTheme) {
   return useMemo(
     () =>
       StyleSheet.create({
-        rootContainer: {
-          flex: 1,
-          backgroundColor: colors.background,
-        },
-
         container: {
           flex: 1,
           gap: 16,
-          paddingHorizontal: 16,
+          [Platform.OS === "web" ? "padding" : "paddingHorizontal"]: 16,
+          backgroundColor: colors.background,
           alignItems: "center",
         },
       }),

@@ -1,6 +1,6 @@
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 
-const FormView: React.FC<React.PropsWithChildren> = ({ children }) => {
+export default function FormView({ children }: React.PropsWithChildren) {
   if (Platform.OS === "web") {
     return (
       <form>
@@ -14,9 +14,7 @@ const FormView: React.FC<React.PropsWithChildren> = ({ children }) => {
       {children}
     </KeyboardAvoidingView>
   );
-};
-
-export default FormView;
+}
 
 const styles = StyleSheet.create({
   container: {

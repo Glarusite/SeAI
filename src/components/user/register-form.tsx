@@ -4,13 +4,14 @@ import { useRegisterMutation } from "@src/store";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
-import { ActivityIndicator, Button, HelperText } from "react-native-paper";
+import { ActivityIndicator, Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
+import ValidationText from "../ui/form/validation-text";
 
-const RegisterForm: React.FC = () => {
+export default function RegisterForm() {
   const { control, errors, isSubmitting, register, setFocus } = useRegister();
 
   return (
@@ -61,16 +62,14 @@ const RegisterForm: React.FC = () => {
         onSubmitEditing={() => register()}
       />
 
-      {errors.root && <HelperText type="error">{errors.root?.message}</HelperText>}
+      <ValidationText error={errors.root} />
 
       <Button mode="contained" onPress={register} disabled={isSubmitting}>
         {isSubmitting ? <ActivityIndicator /> : "Register"}
       </Button>
     </FormView>
   );
-};
-
-export default RegisterForm;
+}
 
 function useRegister() {
   const [registerRequest] = useRegisterMutation();

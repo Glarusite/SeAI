@@ -1,9 +1,24 @@
 import { Image, ImageSource } from "expo-image";
 import { StyleSheet } from "react-native";
 
-const LogoImage: React.FC = () => <Image source={require("@assets/icon.png") as ImageSource} style={styles.image} />;
+import { TitleText } from "./title-text";
 
-export default LogoImage;
+export interface LogoImageProps {
+  title?: string;
+}
+
+export default function LogoImage({ title }: LogoImageProps) {
+  return (
+    <>
+      <Image source={require("@assets/icon.png") as ImageSource} style={styles.image} />
+      {title && (
+        <TitleText fontSize={46} fontFamily="Impact">
+          {title}
+        </TitleText>
+      )}
+    </>
+  );
+}
 
 const styles = StyleSheet.create({
   image: {
