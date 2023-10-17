@@ -1,7 +1,6 @@
 import LinkButton from "@src/components/ui/link-button";
 import { TitleText } from "@src/components/ui/title-text";
 import RegisterForm from "@src/components/user/register-form";
-import { StyleSheet } from "react-native";
 
 export default function Register() {
   return (
@@ -14,10 +13,3 @@ export default function Register() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  titleText: {
-    fontSize: 36,
-    alignSelf: "center",
-  },
-});
