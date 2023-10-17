@@ -5,10 +5,13 @@ import { debounce } from "lodash";
 import { api } from "./api";
 import { getAsyncStorageState } from "./async-storage";
 import { reducer } from "./reducer";
+import { setAppValue } from "./slices/app";
 
 export async function configureAppStore() {
   const preloadedState = await getAsyncStorageState();
   const store = configureTypedStore(preloadedState);
+
+  await new Promise(resolve => setTimeout(resolve, 10_000));
 
   store.subscribe(
     debounce(() => {
@@ -16,6 +19,8 @@ export async function configureAppStore() {
       void AsyncStorage.setItem("state", JSON.stringify(state));
     }, 50),
   );
+
+  store.dispatch(setAppValue({ name: "fullscreen", value: false }));
 
   return store;
 }

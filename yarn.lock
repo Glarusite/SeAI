@@ -5931,6 +5931,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-camera@npm:~13.4.4":
+  version: 13.4.4
+  resolution: "expo-camera@npm:13.4.4"
+  dependencies:
+    invariant: ^2.2.4
+  peerDependencies:
+    expo: "*"
+  checksum: d2730038029e770de2f5106c24d6b5ec58131ac77bb06efc7892fd2dde9e813fd0141950d15ea3a2a997f0271916bc33a659341660b3ad357354630ed56adbbf
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~14.4.2":
   version: 14.4.2
   resolution: "expo-constants@npm:14.4.2"
@@ -5940,6 +5951,15 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 393158c537af73a00ca612e31389d889dfa7adcf07fb1028879ff8bfd65b2f2d0b8c81c8f148fa0c43f1b1656504bb35e5a25235446418b3d99bdb3681e84d74
+  languageName: node
+  linkType: hard
+
+"expo-document-picker@npm:~11.5.4":
+  version: 11.5.4
+  resolution: "expo-document-picker@npm:11.5.4"
+  peerDependencies:
+    expo: "*"
+  checksum: a59571a356830b698ebeeb29cf1b33e42dcd05b348fe1125c5c52f0ef0bae410d9e6e57d62b7f9e9a699b38d824e90f787282d80b3feeddb35dcc319a389e546
   languageName: node
   linkType: hard
 
@@ -5975,6 +5995,26 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: d17b98c7ad9ad3b995ed2f41d3e7d439d890cd52cd5e82c613227c082887ae0b6c725c5876acdbe2ba2b256f31d7af2bc4f00220cc19efe72eed0911e89945d1
+  languageName: node
+  linkType: hard
+
+"expo-image-loader@npm:~4.3.0":
+  version: 4.3.0
+  resolution: "expo-image-loader@npm:4.3.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 0440ac80a7b2331cdfd0db88aac0ba2fe61689e6347e2c6bedba6bf3220b95410c724ac9004252486870b582fc36d47d4bff008bba7052dcee2830256950974f
+  languageName: node
+  linkType: hard
+
+"expo-image-picker@npm:~14.3.2":
+  version: 14.3.2
+  resolution: "expo-image-picker@npm:14.3.2"
+  dependencies:
+    expo-image-loader: ~4.3.0
+  peerDependencies:
+    expo: "*"
+  checksum: 301a5e11cdd436717051fdd8b0f943210d281ca94d1417bb2e1b29a8fa02d3bc6f9321c4cac49376b6f3b76e78cecb23e42bc32131fce3d78006a44d64bfba56
   languageName: node
   linkType: hard
 
@@ -11151,8 +11191,11 @@ __metadata:
     eslint-plugin-unicorn: 48.0.1
     eslint-plugin-unused-imports: 3.0.0
     expo: 49.0.14
+    expo-camera: ~13.4.4
     expo-constants: ~14.4.2
+    expo-document-picker: ~11.5.4
     expo-image: ~1.3.4
+    expo-image-picker: ~14.3.2
     expo-linking: ~5.0.2
     expo-router: ^2.0.9
     expo-status-bar: ~1.6.0

@@ -1,13 +1,14 @@
-import { AppTheme, useAppTheme } from "@src/components/app/app-theme";
+import AppRootView from "@src/components/app/app-root-view";
+import { useAppTheme } from "@src/components/app/app-theme";
 import AuthSlot from "@src/components/app/auth-slot";
 import WebSplashScreen from "@src/components/ui/web-splash-screen";
 import { useCreateStore } from "@src/store";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useMemo } from "react";
-import { Platform, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { Platform, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 
@@ -16,18 +17,17 @@ SplashScreen.preventAutoHideAsync();
 export default function AppLayout() {
   const store = useCreateStoreEffect();
   const theme = useAppTheme();
-  const styles = useStyles(theme);
 
   if (store) {
     return (
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <AppRootView>
               <AuthSlot />
               <Toast />
               <StatusBar style="auto" />
-            </SafeAreaView>
+            </AppRootView>
           </SafeAreaProvider>
         </PaperProvider>
       </Provider>
@@ -37,30 +37,12 @@ export default function AppLayout() {
   if (Platform.OS === "web") {
     return (
       <PaperProvider theme={theme}>
-        <SafeAreaProvider>
-          <SafeAreaView style={{ ...styles.container }}>
-            <WebSplashScreen />
-          </SafeAreaView>
-        </SafeAreaProvider>
+        <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+          <WebSplashScreen />
+        </View>
       </PaperProvider>
     );
   }
-}
-
-function useStyles({ colors }: AppTheme) {
-  return useMemo(
-    () =>
-      StyleSheet.create({
-        container: {
-          flex: 1,
-          gap: 16,
-          [Platform.OS === "web" ? "padding" : "paddingHorizontal"]: 16,
-          backgroundColor: colors.background,
-          alignItems: "center",
-        },
-      }),
-    [colors],
-  );
 }
 
 function useCreateStoreEffect() {

@@ -2,8 +2,9 @@ import { isBlank, isEmail } from "@src/common/validators";
 import { LoginFormData } from "@src/models";
 import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@src/store";
 import { FieldErrors, useForm } from "react-hook-form";
-import { ActivityIndicator, Button } from "react-native-paper";
+import { Button } from "react-native-paper";
 
+import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
@@ -36,7 +37,7 @@ export default function LoginForm() {
       <ValidationText error={errors.root} />
 
       <Button mode="contained" onPress={login} disabled={isSubmitting}>
-        {isSubmitting ? <ActivityIndicator /> : "Login"}
+        {isSubmitting ? <ButtonActivityIndicator /> : "Login"}
       </Button>
     </FormView>
   );

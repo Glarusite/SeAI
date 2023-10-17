@@ -1,14 +1,14 @@
 import { Draft, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Flags } from "@src/models";
 
-const initialState: FlagsState = {};
+const initialState: AppState = {};
 
 const FlagsSlice = createSlice({
-  name: "flags",
+  name: "app",
   initialState,
   reducers: {
-    setFlagValue<TKey extends keyof FlagsState>(
-      state: Draft<FlagsState>,
+    setAppValue<TKey extends keyof AppState>(
+      state: Draft<AppState>,
       { payload: { name, value } }: SetFlagValuePayloadAction<TKey>,
     ) {
       state[name] = value;
@@ -18,11 +18,11 @@ const FlagsSlice = createSlice({
 
 export default FlagsSlice;
 export const {
-  actions: { setFlagValue },
+  actions: { setAppValue },
 } = FlagsSlice;
-export type FlagsState = Readonly<Partial<Flags>>;
+export type AppState = Readonly<Partial<Flags>>;
 
-type SetFlagValuePayloadAction<TKey extends keyof FlagsState> = PayloadAction<{
+type SetFlagValuePayloadAction<TKey extends keyof AppState> = PayloadAction<{
   name: TKey;
-  value: FlagsState[TKey];
+  value: AppState[TKey];
 }>;

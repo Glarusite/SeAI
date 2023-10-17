@@ -4,9 +4,10 @@ import { useRegisterMutation } from "@src/store";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
-import { ActivityIndicator, Button } from "react-native-paper";
+import { Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
+import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
@@ -65,7 +66,7 @@ export default function RegisterForm() {
       <ValidationText error={errors.root} />
 
       <Button mode="contained" onPress={register} disabled={isSubmitting}>
-        {isSubmitting ? <ActivityIndicator /> : "Register"}
+        {isSubmitting ? <ButtonActivityIndicator /> : "Register"}
       </Button>
     </FormView>
   );

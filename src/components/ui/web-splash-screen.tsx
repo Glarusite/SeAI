@@ -24,6 +24,5 @@ const styles = StyleSheet.create({
 
   spinner: {
     flex: 1,
-    alignSelf: "center",
   },
 });

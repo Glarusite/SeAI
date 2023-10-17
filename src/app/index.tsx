@@ -1,7 +1,7 @@
 import LogoImage from "@src/components/ui/logo-image";
 import Navigation from "@src/components/ui/navigation";
 
-export default function App() {
+export default function Home() {
   return (
     <>
       <LogoImage title="SeAI" />

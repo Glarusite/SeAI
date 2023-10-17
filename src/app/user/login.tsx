@@ -1,4 +1,4 @@
-import LinkButton from "@src/components/ui/link-button";
+import LinkButton from "@src/components/ui/buttons/link-button";
 import LogoImage from "@src/components/ui/logo-image";
 import LoginForm from "@src/components/user/login-form";
 
@@ -7,7 +7,9 @@ export default function Login() {
     <>
       <LogoImage title="SeAI" />
       <LoginForm />
-      <LinkButton href="/user/register">Register</LinkButton>
+      <LinkButton href="/user/register" mode="contained-tonal">
+        Register
+      </LinkButton>
       <LinkButton href="/about">About</LinkButton>
     </>
   );
