@@ -7,10 +7,14 @@ export default function AuthSlot() {
   const segments: string[] = useSegments();
 
   useEffect(() => {
-    if (accessToken && segments.includes("user") && segments.length > 1) {
-      router.replace("/");
-    } else if (accessToken == null && !segments.some(segments => allowedSegments.has(segments))) {
-      router.replace("/user/login");
+    if (accessToken) {
+      if (segments.includes("user") && segments.length > 1) {
+        router.replace("/");
+      }
+    } else {
+      if (segments.every(segments => !allowedSegments.has(segments))) {
+        router.replace("/user/login");
+      }
     }
   }, [accessToken, segments]);
 
