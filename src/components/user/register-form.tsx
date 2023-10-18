@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@src/common/error";
 import { isBlank, isEmail } from "@src/common/validators";
 import { RegisterFormData } from "@src/models";
 import { useRegisterMutation } from "@src/store";
@@ -96,11 +97,7 @@ function useRegister() {
         text2: "You can now continue to login",
       });
     } catch (error) {
-      const message =
-        typeof error === "object" && error != null && "data" in error && typeof error.data === "string"
-          ? error.data
-          : JSON.stringify(error);
-
+      const message = toErrorMessage(error);
       setError("root", { message });
       resetField("password");
       resetField("repeatPassword");

@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@src/common/error";
 import { isBlank, isEmail } from "@src/common/validators";
 import { LoginFormData } from "@src/models";
 import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@src/store";
@@ -60,13 +61,8 @@ function useLogin() {
       const { accessToken, userId } = await loginRequest({ email, password }).unwrap();
       dispatch(setUser({ accessToken, email, userId }));
     } catch (error) {
-      const message =
-        typeof error === "object" && error != null && "data" in error && typeof error.data === "string"
-          ? error.data === "Bad credentials"
-            ? "Invalid email or password"
-            : error.data
-          : JSON.stringify(error);
-
+      const originalMessage = toErrorMessage(error);
+      const message = originalMessage === "Bad credentials" ? "Invalid e-mail or password" : originalMessage;
       setError("root", { message });
       resetField("password");
       setFocus("password");
