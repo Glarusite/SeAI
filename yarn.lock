@@ -5954,15 +5954,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-document-picker@npm:~11.5.4":
-  version: 11.5.4
-  resolution: "expo-document-picker@npm:11.5.4"
-  peerDependencies:
-    expo: "*"
-  checksum: a59571a356830b698ebeeb29cf1b33e42dcd05b348fe1125c5c52f0ef0bae410d9e6e57d62b7f9e9a699b38d824e90f787282d80b3feeddb35dcc319a389e546
-  languageName: node
-  linkType: hard
-
 "expo-file-system@npm:~15.4.0, expo-file-system@npm:~15.4.4":
   version: 15.4.4
   resolution: "expo-file-system@npm:15.4.4"
@@ -11193,7 +11184,6 @@ __metadata:
     expo: 49.0.14
     expo-camera: ~13.4.4
     expo-constants: ~14.4.2
-    expo-document-picker: ~11.5.4
     expo-image: ~1.3.4
     expo-image-picker: ~14.3.2
     expo-linking: ~5.0.2

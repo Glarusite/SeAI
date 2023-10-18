@@ -1,5 +1,4 @@
 import CameraLinkButton from "@src/components/scanner/camera-button";
-import PdfUploadButton from "@src/components/scanner/pdf-upload-button";
 import PhotoUploadButton from "@src/components/scanner/photo-upload-button";
 import BackButton from "@src/components/ui/buttons/back-button";
 import ButtonActivityIndicator from "@src/components/ui/buttons/button-activity-indicator";
@@ -33,18 +32,12 @@ export default function Scanner() {
         Upload saved photo
       </PhotoUploadButton>
 
-      <PdfUploadButton mode="contained-tonal" disabled={isLoading}>
-        Upload saved PDF
-      </PdfUploadButton>
-
       <BackButton />
     </>
   );
 }
 
 function useScannerIsLoading() {
-  const [, { isLoading: isImageLoading }] = useHandleFileUploadMutation({ fixedCacheKey: "imageUpload" });
-  const [, { isLoading: isPdfLoading }] = useHandleFileUploadMutation({ fixedCacheKey: "pdfUpload" });
-  const isLoading = isImageLoading || isPdfLoading;
+  const [, { isLoading }] = useHandleFileUploadMutation({ fixedCacheKey: "imageUpload" });
   return isLoading;
 }
