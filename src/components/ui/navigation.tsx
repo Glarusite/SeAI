@@ -22,6 +22,7 @@ export default function Navigation() {
     </NarrowView>
   );
 }
+
 function useNavigation() {
   const dispatch = useAppDispatch();
   const logout = useCallback(() => dispatch(setUser({})), [dispatch]);
