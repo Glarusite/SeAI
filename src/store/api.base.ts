@@ -11,9 +11,7 @@ export const baseApi = createApi({
     const appFetchQuery = fetchBaseQuery({
       baseUrl,
       responseHandler: async response => {
-        console.log(response.status);
         if (response.status === 403) {
-          console.log("403");
           dispatch(setUser({}));
         }
 

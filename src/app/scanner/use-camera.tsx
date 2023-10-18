@@ -23,7 +23,6 @@ function useTakePicture() {
         await fileUpload(uri);
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
-        console.error(errorMessage);
         Toast.show({
           type: "error",
           text1: "Camera error",
