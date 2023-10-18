@@ -11,11 +11,11 @@ export interface CameraLinkButtonProps<T> extends Omit<LinkButtonProps<T>, "chil
   children(isCameraAvailable: boolean, isCameraChecking: boolean): React.ReactNode;
 }
 
-export default function CameraLinkButton<T>({ children, ...props }: CameraLinkButtonProps<T>) {
+export default function CameraLinkButton<T>({ children, disabled, ...props }: CameraLinkButtonProps<T>) {
   const { isCameraAvailable, isCameraChecking } = useCameraStatus();
 
   return (
-    <LinkButton disabled={!isCameraAvailable} {...props}>
+    <LinkButton disabled={disabled || !isCameraAvailable} {...props}>
       {isCameraChecking && <ButtonActivityIndicator />}
       {children(isCameraAvailable, isCameraChecking)}
     </LinkButton>
