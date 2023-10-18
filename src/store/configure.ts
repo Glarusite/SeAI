@@ -1,21 +1,24 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StateFromReducersMapObject, configureStore } from "@reduxjs/toolkit";
+import { safeJsonParse } from "@src/common/json";
 import { debounce } from "lodash";
 
 import { api } from "./api";
-import { getAsyncStorageState } from "./async-storage";
 import { reducer } from "./reducer";
 import { setAppValue } from "./slices/app";
 
 export async function configureAppStore() {
-  const preloadedState = await getAsyncStorageState();
-  const store = configureTypedStore(preloadedState);
-
-  await new Promise(resolve => setTimeout(resolve, 10_000));
+  const state = await AsyncStorage.getItem("state");
+  const preloadedState = safeJsonParse<AppStoreState>(state);
+  const store = configureStore({
+    reducer,
+    preloadedState,
+    middleware: getDefaultMiddleware => [...getDefaultMiddleware(), api.middleware],
+  });
 
   store.subscribe(
     debounce(() => {
-      const state = store.getState();
+      const { api: _, ...state } = store.getState();
       void AsyncStorage.setItem("state", JSON.stringify(state));
     }, 50),
   );

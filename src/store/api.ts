@@ -11,6 +11,7 @@ const injectedRtkApi = api
           url: `/api/v1/users/${queryArgument.userId}/ocr`,
           method: "POST",
           body: queryArgument.body,
+          formData: true,
         }),
         invalidatesTags: ["document-controller"],
       }),
@@ -48,15 +49,13 @@ const injectedRtkApi = api
         providesTags: ["document-controller"],
       }),
     }),
-    overrideExisting: false,
+    overrideExisting: true,
   });
 export { injectedRtkApi as api };
 export type HandleFileUploadApiResponse = /** status 200 OK */ MarineDocument;
 export type HandleFileUploadParameters = {
   userId: string;
-  body: {
-    file: Blob;
-  };
+  body: FormData;
 };
 export type SaveDocumentApiResponse = unknown;
 export type SaveDocumentParameters = {
