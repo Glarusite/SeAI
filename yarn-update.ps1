@@ -13,9 +13,6 @@ function Assert-Yarn {
 
 function Update-Yarn {
   yarn set version stable
-  yarn plugin import interactive-tools
-  yarn plugin import typescript
-  yarn plugin import workspace-tools
 }
 
 function Update-Packages {
