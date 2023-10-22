@@ -15,7 +15,8 @@ export const baseApi = createApi({
           dispatch(setUser({}));
         }
 
-        if (response.status >= 400) {
+        const isEmptyResponse = Number(response.headers.get("content-length")) === 0;
+        if (response.status >= 400 || isEmptyResponse) {
           return response.text();
         }
 
