@@ -1,4 +1,4 @@
-import { useAsyncEffect } from "@src/common/hooks";
+import { useAsync } from "@src/common/hooks";
 import { Camera } from "expo-camera";
 import { useState } from "react";
 import { Platform } from "react-native";
@@ -26,7 +26,7 @@ function useCameraStatus() {
   const [isCameraAvailable, setIsCameraAvailable] = useState(false);
   const [isCameraChecking, setIsCameraChecking] = useState(true);
 
-  useAsyncEffect(async () => {
+  useAsync(async () => {
     try {
       if (Platform.OS === "web") {
         const [isAvailable, cameraTypes] = await Promise.all([

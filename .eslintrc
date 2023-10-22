@@ -103,6 +103,12 @@
     ],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "(useAsync|useNavigation)"
+      }
+    ],
     "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": [
       "error",
