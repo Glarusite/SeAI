@@ -18,7 +18,6 @@ export default function LoginForm() {
       <ControlledTextInput
         control={control}
         name="email"
-        mode="outlined"
         label="E-mail"
         inputMode="email"
         textContentType="emailAddress"
@@ -28,9 +27,8 @@ export default function LoginForm() {
       <ControlledTextInput
         control={control}
         name="password"
-        mode="outlined"
         label="Password"
-        inputMode="email"
+        textContentType="password"
         secureTextEntry
         onSubmitEditing={() => login()}
       />

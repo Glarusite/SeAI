@@ -12,16 +12,22 @@ export type ControlledTextInputProps<TData extends FieldValues, TContext = unkno
 export default function ControlledTextInput<TData extends FieldValues, TContext = unknown>({
   name,
   control,
+  defaultValue = "",
   ...inputProps
 }: ControlledTextInputProps<TData, TContext>) {
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={"" as PathValue<TData, Path<TData>>}
+      defaultValue={defaultValue as PathValue<TData, Path<TData>>}
       render={({ field: { onChange, ...controlProps }, fieldState: { error } }) => (
         <View>
-          <TextInput onChangeText={onChange} error={error != null} {...{ ...inputProps, ...controlProps }} />
+          <TextInput
+            mode="outlined"
+            onChangeText={onChange}
+            error={error != null}
+            {...{ ...inputProps, ...controlProps }}
+          />
           <ValidationText error={error} />
         </View>
       )}

@@ -21,7 +21,6 @@ export default function RegisterForm() {
       <ControlledTextInput
         control={control}
         name="email"
-        mode="outlined"
         label="E-mail"
         inputMode="email"
         textContentType="emailAddress"
@@ -31,7 +30,6 @@ export default function RegisterForm() {
       <ControlledTextInput
         control={control}
         name="firstName"
-        mode="outlined"
         label="First name"
         textContentType="givenName"
         onSubmitEditing={() => setFocus("lastName")}
@@ -40,7 +38,6 @@ export default function RegisterForm() {
       <ControlledTextInput
         control={control}
         name="lastName"
-        mode="outlined"
         label="Last name"
         textContentType="familyName"
         onSubmitEditing={() => setFocus("password")}
@@ -49,8 +46,8 @@ export default function RegisterForm() {
       <ControlledTextInput
         control={control}
         name="password"
-        mode="outlined"
         label="Password"
+        textContentType="newPassword"
         secureTextEntry
         onSubmitEditing={() => setFocus("repeatPassword")}
       />
@@ -60,6 +57,7 @@ export default function RegisterForm() {
         name="repeatPassword"
         mode="outlined"
         label="Repeat password"
+        textContentType="newPassword"
         secureTextEntry
         onSubmitEditing={() => register()}
       />
@@ -87,9 +85,9 @@ function useRegister() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setFocus("email"), []);
 
-  const register = handleSubmit(async formData => {
+  const register = handleSubmit(async values => {
     try {
-      await registerRequest(formData).unwrap();
+      await registerRequest(values).unwrap();
       router.replace("/user/login");
       Toast.show({
         type: "success",
