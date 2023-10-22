@@ -1,10 +1,13 @@
 import { toErrorMessage } from "@src/common/error";
-import { useAppSelector, useHandleFileUploadMutation } from "@src/store";
+import { useAppDispatch, useAppSelector, useHandleFileUploadMutation } from "@src/store";
+import { setScan } from "@src/store/slices/scan";
+import { router } from "expo-router";
 import { useCallback } from "react";
 import { Platform } from "react-native";
 import Toast from "react-native-toast-message";
 
 export function useFileUpload(fixedCacheKey: string) {
+  const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.user.userId);
   const [handleFileUpload, { isLoading }] = useHandleFileUploadMutation({ fixedCacheKey });
 
@@ -25,13 +28,14 @@ export function useFileUpload(fixedCacheKey: string) {
       }
 
       try {
-        const response = await handleFileUpload({ userId, body }).unwrap();
-        console.log(response);
+        const scanResponse = await handleFileUpload({ userId, body }).unwrap();
+        dispatch(setScan({ uri, ...scanResponse }));
+        router.push("/scanner/review");
       } catch (error) {
         Toast.show({ type: "error", text1: "Upload error", text2: toErrorMessage(error) });
       }
     },
-    [handleFileUpload, userId],
+    [dispatch, handleFileUpload, userId],
   );
 
   return { fileUpload, isLoading };
