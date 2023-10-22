@@ -1,13 +1,8 @@
-export interface LoginFormData {
-  email: string;
-  password: string;
-}
+import { AuthRequest, UserRegisterRequest } from "@src/store";
 
-export interface RegisterFormData {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
+export interface LoginFormData extends AuthRequest {}
+
+export interface RegisterFormData extends UserRegisterRequest {
   repeatPassword: string;
 }
 
