@@ -30,7 +30,7 @@ export function useFileUpload(fixedCacheKey: string) {
       try {
         const scanResponse = await handleFileUpload({ userId, body }).unwrap();
         dispatch(setScan({ uri, ...scanResponse }));
-        router.push("/scanner/review");
+        router.push("/scanner/verify");
       } catch (error) {
         Toast.show({ type: "error", text1: "Upload error", text2: toErrorMessage(error) });
       }

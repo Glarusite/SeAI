@@ -8,12 +8,13 @@ const ScanSlice = createSlice({
   initialState,
   reducers: {
     setScan: (_, { payload }: PayloadAction<Scan>) => payload,
+    resetScan: () => initialState,
   },
 });
 
 export default ScanSlice;
 export const {
-  actions: { setScan },
+  actions: { setScan, resetScan },
 } = ScanSlice;
 
 export type ScanState = Readonly<Partial<Scan>>;
