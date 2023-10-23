@@ -6,7 +6,7 @@ import LinkButton from "./buttons/link-button";
 import NarrowView from "./narrow-view";
 
 export default function Navigation() {
-  const { logout } = useNavigation();
+  const logout = useLogout();
 
   return (
     <NarrowView>
@@ -23,8 +23,8 @@ export default function Navigation() {
   );
 }
 
-function useNavigation() {
+function useLogout() {
   const dispatch = useAppDispatch();
   const logout = useCallback(() => dispatch(setUser({})), [dispatch]);
-  return { logout };
+  return logout;
 }
