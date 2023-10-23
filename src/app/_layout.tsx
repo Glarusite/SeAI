@@ -52,7 +52,7 @@ function useCreateStoreEffect() {
     if (store) {
       SplashScreen.hideAsync();
     }
-  });
+  }, [store]);
 
   return store;
 }
