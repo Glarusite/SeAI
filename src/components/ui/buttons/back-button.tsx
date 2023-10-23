@@ -1,6 +1,7 @@
 import { safeBack } from "@src/common/router";
 import React from "react";
-import { Button, ButtonProps } from "react-native-paper";
+import type { ButtonProps } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 export type BackButtonProps = React.PropsWithChildren<Omit<ButtonProps, "children" | "onPress">> & object;
 

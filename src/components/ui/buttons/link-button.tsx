@@ -1,6 +1,8 @@
-import { LinkProps, router } from "expo-router";
+import type { LinkProps } from "expo-router";
+import { router } from "expo-router";
 import React, { useCallback } from "react";
-import { Button, ButtonProps } from "react-native-paper";
+import type { ButtonProps } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 export type LinkButtonProps<T> = Omit<ButtonProps, "onPress"> & {
   href: LinkProps<T>["href"];

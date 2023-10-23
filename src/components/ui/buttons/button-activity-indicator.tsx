@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { ActivityIndicator, ActivityIndicatorProps } from "react-native-paper";
+import type { ActivityIndicatorProps } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function ButtonActivityIndicator(props: ActivityIndicatorProps) {
   return <ActivityIndicator style={styles.spinner} size={16} {...props} />;
