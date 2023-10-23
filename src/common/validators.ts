@@ -1,4 +1,4 @@
-export function isBlank(value: string | null | undefined): value is string {
+export function isBlank(value: string | null | undefined): value is undefined {
   return value == null || value.trim().length === 0;
 }
 
