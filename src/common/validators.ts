@@ -5,3 +5,7 @@ export function isBlank(value: string | null | undefined): value is undefined {
 export function isEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+export function isValidDate(date: Date) {
+  return !Number.isNaN(date.getTime());
+}
