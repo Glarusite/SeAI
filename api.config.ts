@@ -1,4 +1,4 @@
-import { ConfigFile } from "@rtk-query/codegen-openapi";
+import type { ConfigFile } from "@rtk-query/codegen-openapi";
 
 const ApiConfig: ConfigFile = {
   schemaFile: "http://ec2-18-194-242-209.eu-central-1.compute.amazonaws.com:8080/v3/api-docs",
