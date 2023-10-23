@@ -1,5 +1,6 @@
-import { Draft, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Flags } from "@src/models";
+import type { Draft, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { Flags } from "@src/models";
 
 const initialState: AppState = {};
 

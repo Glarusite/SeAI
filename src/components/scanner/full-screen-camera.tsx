@@ -5,7 +5,8 @@ import { setAppValue, useAppDispatch } from "@src/store";
 import { Camera, CameraType } from "expo-camera";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
-import { ActivityIndicator, Button, ButtonProps, Icon } from "react-native-paper";
+import type { ButtonProps } from "react-native-paper";
+import { ActivityIndicator, Button, Icon } from "react-native-paper";
 
 export interface FullScreenCameraProps {
   isLoading?: boolean;

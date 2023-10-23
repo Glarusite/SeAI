@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StateFromReducersMapObject, configureStore } from "@reduxjs/toolkit";
+import type { StateFromReducersMapObject } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { safeJsonParse } from "@src/common/json";
 import { debounce } from "lodash";
 

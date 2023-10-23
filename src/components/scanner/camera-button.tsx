@@ -5,7 +5,8 @@ import { Platform } from "react-native";
 import Toast from "react-native-toast-message";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
-import LinkButton, { LinkButtonProps } from "../ui/buttons/link-button";
+import type { LinkButtonProps } from "../ui/buttons/link-button";
+import LinkButton from "../ui/buttons/link-button";
 
 export interface CameraLinkButtonProps<T> extends Omit<LinkButtonProps<T>, "children"> {
   children(isCameraAvailable: boolean, isCameraChecking: boolean): React.ReactNode;

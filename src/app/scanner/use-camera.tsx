@@ -1,6 +1,6 @@
 import FullScreenCamera from "@src/components/scanner/full-screen-camera";
 import { useFileUpload } from "@src/components/scanner/handle-file-upload";
-import { Camera } from "expo-camera";
+import type { Camera } from "expo-camera";
 import { useCallback, useRef } from "react";
 import Toast from "react-native-toast-message";
 

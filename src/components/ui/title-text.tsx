@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { StyleSheet, TextStyle } from "react-native";
+import type { TextStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
 export type TitleTextProps = React.PropsWithChildren<Pick<TextStyle, "alignSelf" | "fontFamily" | "fontSize">>;

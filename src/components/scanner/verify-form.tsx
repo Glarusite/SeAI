@@ -1,11 +1,12 @@
 import { toErrorMessage } from "@src/common/error";
 import { isBlank } from "@src/common/validators";
-import { VerifyFormData } from "@src/models";
+import type { VerifyFormData } from "@src/models";
 import { useAppSelector, useSaveDocumentMutation } from "@src/store";
 import { resetScan } from "@src/store/slices/scan";
 import { router } from "expo-router";
 import { useCallback } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import { useDispatch } from "react-redux";

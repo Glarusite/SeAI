@@ -1,12 +1,13 @@
-import { FetchArgs, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { FetchArgs } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { AppStore, AppStoreState } from "./configure";
+import type { AppStore, AppStoreState } from "./configure";
 import { setUser } from "./slices/user";
 
 const baseUrl = "http://ec2-18-194-242-209.eu-central-1.compute.amazonaws.com:8080/";
 
 export const baseApi = createApi({
-  baseQuery: (queryParameters: FetchArgs, api, extraOptions) => {
+  baseQuery: (queryParameters: string | FetchArgs, api, extraOptions) => {
     const dispatch = api.dispatch as AppStore["dispatch"];
     const appFetchQuery = fetchBaseQuery({
       baseUrl,

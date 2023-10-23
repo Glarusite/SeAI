@@ -5,7 +5,8 @@ import BackButton from "@src/components/ui/buttons/back-button";
 import { TitleText } from "@src/components/ui/title-text";
 import { useAppSelector } from "@src/store";
 import { Image } from "expo-image";
-import { DimensionValue, StyleSheet } from "react-native";
+import { type DimensionValue } from "react-native";
+import { StyleSheet } from "react-native";
 
 export default function Verify() {
   const uri = useAppSelector(state => state.scan.uri);

@@ -1,5 +1,5 @@
-import { Nullable } from "@src/models";
-import { FieldError, GlobalError } from "react-hook-form";
+import type { Nullable } from "@src/models";
+import type { FieldError, GlobalError } from "react-hook-form";
 import { HelperText } from "react-native-paper";
 
 export interface ValidationTextProps {

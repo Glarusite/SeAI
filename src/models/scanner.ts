@@ -1,4 +1,4 @@
-import { MarineDocument } from "@src/store";
+import type { MarineDocument } from "@src/store";
 
 export interface Scan extends MarineDocument {
   uri: string;

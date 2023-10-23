@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
-import { AppStore, AppStoreState, configureAppStore } from "./configure";
+import type { AppStore, AppStoreState } from "./configure";
+import { configureAppStore } from "./configure";
 
 export function useCreateStore() {
   const [store, setStore] = useState<AppStore>();

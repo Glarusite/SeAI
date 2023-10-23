@@ -1,10 +1,11 @@
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isEmail } from "@src/common/validators";
-import { RegisterFormData } from "@src/models";
+import type { RegisterFormData } from "@src/models";
 import { useRegisterMutation } from "@src/store";
 import { router } from "expo-router";
 import { useEffect } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 

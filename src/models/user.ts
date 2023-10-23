@@ -1,4 +1,4 @@
-import { AuthRequest, UserRegisterRequest } from "@src/store";
+import type { AuthRequest, UserRegisterRequest } from "@src/store";
 
 export interface LoginFormData extends AuthRequest {}
 

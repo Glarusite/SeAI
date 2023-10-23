@@ -1,4 +1,4 @@
-import { MaybePromise } from "@reduxjs/toolkit/dist/query/tsHelpers";
+import type { MaybePromise } from "@reduxjs/toolkit/dist/query/tsHelpers";
 import { useRootNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 

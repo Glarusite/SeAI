@@ -1,6 +1,7 @@
 import { MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import { useCallback } from "react";
-import { Button, ButtonProps } from "react-native-paper";
+import type { ButtonProps } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 
