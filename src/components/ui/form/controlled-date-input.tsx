@@ -25,7 +25,7 @@ export default function ControlledTextInput<TData extends FieldValues, TContext 
       control={control}
       defaultValue={defaultValue as PathValue<TData, Path<TData>>}
       render={({ field: controlProps, fieldState: { error } }) => (
-        <View>
+        <View style={{ minHeight: 56 }}>
           <DatePickerInput mode="outlined" error={error != null} {...{ ...inputProps, ...controlProps }} />
           <ValidationText error={error} />
         </View>
