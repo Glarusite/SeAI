@@ -91,9 +91,8 @@ function useRegister() {
       await registerRequest(values).unwrap();
       router.replace("/user/login");
       Toast.show({
-        type: "success",
-        text1: "Registration successful!",
-        text2: "You can now continue to login",
+        text1: "Registration successful",
+        text2: "You can now continue to login.",
       });
     } catch (error) {
       const message = toErrorMessage(error);
