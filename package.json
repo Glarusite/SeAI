@@ -62,6 +62,7 @@
     "start": "yarn run lint && expo start",
     "android": "yarn run lint && expo start --android",
     "ios": "yarn run lint && expo start --ios",
-    "web": "yarn run lint && expo start --web"
+    "web": "yarn run lint && expo start --web",
+    "export": "yarn run lint && expo export"
   }
 }
