@@ -34,7 +34,7 @@ function useStyles() {
   return useMemo(
     () =>
       StyleSheet.create({
-        image: { height: height * 0.4 },
+        image: { height: height / 3 },
       }),
     [height],
   );
