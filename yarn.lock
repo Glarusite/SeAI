@@ -3858,14 +3858,14 @@ __metadata:
   linkType: hard
 
 "babel-plugin-polyfill-corejs3@npm:^0.8.5":
-  version: 0.8.5
-  resolution: "babel-plugin-polyfill-corejs3@npm:0.8.5"
+  version: 0.8.6
+  resolution: "babel-plugin-polyfill-corejs3@npm:0.8.6"
   dependencies:
     "@babel/helper-define-polyfill-provider": "npm:^0.4.3"
-    core-js-compat: "npm:^3.32.2"
+    core-js-compat: "npm:^3.33.1"
   peerDependencies:
     "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
-  checksum: 577a072971bda2929a87655c816ad14b6a8f7276e6914851b98a6465bdb56f7f2e3db6136c8b8607bd6ba4cde3cd9cbde21f0078250cd93aee3df977c0a731d0
+  checksum: 97d974c1dfbefdf27866e21a1ac757f6ab1626379b544d6f8ddb05f7bfa02173f8347b6140295b0f770394549f9321775d3048e466a9a02b99b88ad5f0346858
   languageName: node
   linkType: hard
 
@@ -4690,7 +4690,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-compat@npm:^3.31.0, core-js-compat@npm:^3.32.2":
+"core-js-compat@npm:^3.31.0, core-js-compat@npm:^3.33.1":
   version: 3.33.1
   resolution: "core-js-compat@npm:3.33.1"
   dependencies:
@@ -5108,9 +5108,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.535":
-  version: 1.4.563
-  resolution: "electron-to-chromium@npm:1.4.563"
-  checksum: 2f5b7ff65b863378f737467f694041d73de79812c8ed46ff405e319ff0fb12dd0e978f6f1769407879ea694b18117947370e9ba40be51aef50f224f1d36ed11a
+  version: 1.4.565
+  resolution: "electron-to-chromium@npm:1.4.565"
+  checksum: 9593bae9ebd00b94ef872207afee434696cf30ad47a98286a68785cba0eac70d3fd2a0701ffc483d5dc4b64daca73be6ffd525f20ebbaf3fab03119de76a5ae5
   languageName: node
   linkType: hard
 
