@@ -44,6 +44,12 @@ const AppConfig: ExpoConfig = {
         photosPermission: "Allow $(PRODUCT_NAME) to access your photos for upload.",
       },
     ],
+    [
+      "expo-screen-orientation",
+      {
+        initialOrientation: "DEFAULT",
+      },
+    ],
   ],
 };
 

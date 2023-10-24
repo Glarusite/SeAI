@@ -1,14 +1,24 @@
+import { useAppSelector } from "@src/store";
+import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function NarrowView({ children }: React.PropsWithChildren) {
+  const styles = useStyles();
   return <View style={styles.container}>{children}</View>;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: 16,
-    width: "100%",
-    maxWidth: 480,
-  },
-});
+function useStyles() {
+  const fullscreen = useAppSelector(state => state.app.fullscreen);
+
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          gap: 16,
+          width: "100%",
+          maxWidth: fullscreen ? undefined : 480,
+        },
+      }),
+    [fullscreen],
+  );
+}

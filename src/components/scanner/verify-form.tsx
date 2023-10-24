@@ -1,8 +1,8 @@
-import { toDate } from "@src/common/date";
+import { toDate, toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isValidDate } from "@src/common/validators";
 import type { VerifyFormData } from "@src/models";
-import { useAppSelector, useSaveDocumentMutation } from "@src/store";
+import { useAppSelector, useDiscardMutation, useSaveDocumentMutation } from "@src/store";
 import { resetScan } from "@src/store/slices/scan";
 import { router } from "expo-router";
 import { useCallback } from "react";
@@ -19,7 +19,7 @@ import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
 export default function VerifyForm() {
-  const { control, errors, isSubmitting, verify, setFocus, resetValues } = useVerify();
+  const { control, errors, isSubmitting, discard, verify, setFocus, resetValues } = useVerify();
 
   return (
     <FormView>
@@ -66,6 +66,10 @@ export default function VerifyForm() {
       <Button mode="contained-tonal" onPress={resetValues}>
         Reset
       </Button>
+
+      <Button mode="contained-tonal" onPress={discard}>
+        Discard
+      </Button>
     </FormView>
   );
 }
@@ -85,8 +89,8 @@ function useVerify() {
     defaultValues: {
       name: scan.name,
       number: scan.number,
-      issueDate: toDate(scan.issueDate),
-      expiryDate: toDate(scan.expiryDate),
+      issueDate: toLocalDate(scan.issueDate),
+      expiryDate: toLocalDate(scan.expiryDate),
     },
     resolver,
   });
@@ -104,15 +108,14 @@ function useVerify() {
         marineDocument: {
           name,
           number,
-          issueDate: issueDate?.toJSON(),
-          expiryDate: issueDate?.toJSON(),
+          issueDate: toUtcDate(issueDate)?.toJSON(),
+          expiryDate: toUtcDate(expiryDate)?.toJSON(),
         },
       }).unwrap();
       dispatch(resetScan());
       router.replace("/scanner/");
       Toast.show({
-        type: "success",
-        text1: "Verification successful!",
+        text1: "Verification successful",
         text2: "Your document has been saved to your profile.",
       });
     } catch (error) {
@@ -121,6 +124,23 @@ function useVerify() {
     }
   });
 
+  const [discardRequest] = useDiscardMutation();
+  const discard = useCallback(async () => {
+    try {
+      if (scan.id == null || userId == null) {
+        return;
+      }
+
+      await discardRequest({ documentId: scan.id, userId }).unwrap();
+      dispatch(resetScan());
+      router.replace("/scanner/");
+      Toast.show({ type: "info", text1: "Document discarded" });
+    } catch (error) {
+      const message = toErrorMessage(error);
+      Toast.show({ type: "error", text1: "Discard error", text2: message });
+    }
+  }, [discardRequest, dispatch, scan.id, userId]);
+
   const resetValues = useCallback(() => {
     setValue("name", scan.name);
     setValue("number", scan.number);
@@ -128,7 +148,7 @@ function useVerify() {
     setValue("expiryDate", toDate(scan.expiryDate));
   }, [scan, setValue]);
 
-  return { control, errors, isSubmitting, verify, setFocus, resetValues };
+  return { control, errors, isSubmitting, discard, verify, setFocus, resetValues };
 }
 
 function resolver(values: VerifyFormData) {
