@@ -1,3 +1,4 @@
+import { useDimensions } from "@src/common/hooks";
 import { useAppSelector } from "@src/store";
 import { useMemo } from "react";
 import { Keyboard, Platform, Pressable, StyleSheet, View } from "react-native";
@@ -9,11 +10,15 @@ export default function AppRootView({ children }: React.PropsWithChildren) {
   const { fullscreen, styles } = useAppRootView();
 
   if (fullscreen || Platform.OS === "web") {
-    return <View style={styles.container}>{children}</View>;
+    return (
+      <View style={styles.scrollContainer}>
+        <View style={styles.container}>{children}</View>
+      </View>
+    );
   }
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={styles.scrollContainer}>
       <Pressable onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.container}>{children}</SafeAreaView>
       </Pressable>
@@ -23,20 +28,25 @@ export default function AppRootView({ children }: React.PropsWithChildren) {
 
 function useAppRootView() {
   const { colors } = useTheme();
-
+  const { height } = useDimensions();
   const fullscreen = useAppSelector(state => state.app.fullscreen);
 
   const styles = useMemo(
     () =>
       StyleSheet.create({
+        scrollContainer: {
+          height,
+          overflowY: "auto",
+        },
+
         container: {
           gap: 16,
-          [Platform.OS === "web" ? "padding" : "paddingHorizontal"]: fullscreen ? undefined : 16,
+          padding: fullscreen ? undefined : 16,
           backgroundColor: colors.background,
           alignItems: "center",
         },
       }),
-    [colors.background, fullscreen],
+    [colors.background, fullscreen, height],
   );
 
   return { fullscreen, styles };
