@@ -1,7 +1,6 @@
 import type { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query/react";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { memoize } from "lodash";
-import Toast from "react-native-toast-message";
 
 import type { AppStoreState } from "./configure";
 import { setUser } from "./slices/user";
@@ -29,11 +28,6 @@ const createAppFetchBaseQuery = memoize((dispatch: BaseQueryApi["dispatch"]) =>
       const { status, headers } = response;
       if (status === 401 || status === 403) {
         dispatch(setUser({}));
-        Toast.show({
-          type: "error",
-          text1: "Session expired",
-          text2: "Please, log in again.",
-        });
       }
 
       const contentType = headers.get("content-type");
