@@ -63,7 +63,10 @@ function useAppLayout() {
 
   useEffect(() => {
     if (appState === "active") {
-      void unlockAsync();
+      if (Platform.OS !== "web") {
+        void unlockAsync();
+      }
+
       void setBackgroundColorAsync(theme.colors.background);
     }
   }, [appState, theme.colors.background]);
