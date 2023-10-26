@@ -1756,9 +1756,9 @@ __metadata:
   linkType: hard
 
 "@eslint-community/regexpp@npm:^4.5.1, @eslint-community/regexpp@npm:^4.6.1":
-  version: 4.9.1
-  resolution: "@eslint-community/regexpp@npm:4.9.1"
-  checksum: d0e1bd1a37cb2cb6bbac88dfe97b62b412d4b6ea3a4bb1c4e1e503be03125063db5d80999cef9728f57b19b49979aa902ac68182bcf5f80dfce6fa9a9d34eee1
+  version: 4.10.0
+  resolution: "@eslint-community/regexpp@npm:4.10.0"
+  checksum: c5f60ef1f1ea7649fa7af0e80a5a79f64b55a8a8fa5086de4727eb4c86c652aedee407a9c143b8995d2c0b2d75c1222bec9ba5d73dbfc1f314550554f0979ef4
   languageName: node
   linkType: hard
 
@@ -2047,15 +2047,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/metro-runtime@npm:2.2.11":
-  version: 2.2.11
-  resolution: "@expo/metro-runtime@npm:2.2.11"
+"@expo/metro-runtime@npm:2.2.12":
+  version: 2.2.12
+  resolution: "@expo/metro-runtime@npm:2.2.12"
   dependencies:
     "@bacons/react-views": "npm:^1.1.3"
     qs: "npm:^6.10.3"
   peerDependencies:
     react-native: "*"
-  checksum: 68c901fc34b13320f9949aa8fc8f5c9cf160297757e6dc0b7c5e92ebb3c3bee7c6b12f83ccc84b8ec5650d9d2d573a5bb7a66fc5fa362184a5fdccadb7af8eb5
+  checksum: 43a7612489b8c195fcda588730f5e5b1a5facf5658336d1ddc80b4f072f36f7e4700ce68571f84b6a7c77deff193c1fa5bc49aa039f99206384b1add5a8c1ddc
   languageName: node
   linkType: hard
 
@@ -3069,11 +3069,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 20.8.8
-  resolution: "@types/node@npm:20.8.8"
+  version: 20.8.9
+  resolution: "@types/node@npm:20.8.9"
   dependencies:
-    undici-types: "npm:~5.25.1"
-  checksum: 739b3d6f4aa760d72373d504d91adec86ac2eab502f68a80214711983e7d1886fd276ade78a276a2affe4942a55ad65cf655c3aa9464d1150f6405445c5ba635
+    undici-types: "npm:~5.26.4"
+  checksum: 6fb5604ac087c8be9aeb9ee1413fae2e691c603c9a691bd722e113597b883f21e8380a44d114ab894b435a491bfc939c8478cd57bcf890c585b961343b124964
   languageName: node
   linkType: hard
 
@@ -3099,13 +3099,13 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:*, @types/react@npm:^18.2":
-  version: 18.2.31
-  resolution: "@types/react@npm:18.2.31"
+  version: 18.2.33
+  resolution: "@types/react@npm:18.2.33"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: d2793873aef68038e0dc3ee05a573c663fcd3ba7402f1134a633df25aaeb72fd397479d5a5f02e9edc8cd5d000479a73f7bdc64cf00c50fb022c883f22e1fd0f
+  checksum: d3392785660d78121541403a5d1da57dc79e8ce402769251a626aa06a6886a6aaead868a01ee473661380ddd4ac79743de78853d69f652544da191d435f78afb
   languageName: node
   linkType: hard
 
@@ -4301,9 +4301,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001541":
-  version: 1.0.30001553
-  resolution: "caniuse-lite@npm:1.0.30001553"
-  checksum: 75656429566b44f968e5575f2bc4a27052ed5bb49763069f6b6c3f64c5a2d4c561dc17342faee42ef42d004572fba7c214d5321d18d9283c95f3bf17e5498355
+  version: 1.0.30001554
+  resolution: "caniuse-lite@npm:1.0.30001554"
+  checksum: 1ef7647d005ff4b6d2797dd3d4d47cf66733531999e40b50dcbe3c84f59f8ecac92ffba7ca35b932bd1ce5f8aedbf22f3bd464898be00874e3db99ef869bd726
   languageName: node
   linkType: hard
 
@@ -5108,9 +5108,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.535":
-  version: 1.4.565
-  resolution: "electron-to-chromium@npm:1.4.565"
-  checksum: 9593bae9ebd00b94ef872207afee434696cf30ad47a98286a68785cba0eac70d3fd2a0701ffc483d5dc4b64daca73be6ffd525f20ebbaf3fab03119de76a5ae5
+  version: 1.4.567
+  resolution: "electron-to-chromium@npm:1.4.567"
+  checksum: 323206c97e6251c947dd4518465fa12f91696a9189e8d40efcaf7d0e608767eb29e894ec09bd30154633741ce0d4fb5d2b074262df1e0e108bf9dd2e8b7f958e
   languageName: node
   linkType: hard
 
@@ -5863,16 +5863,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-head@npm:0.0.15":
-  version: 0.0.15
-  resolution: "expo-head@npm:0.0.15"
+"expo-head@npm:0.0.16":
+  version: 0.0.16
+  resolution: "expo-head@npm:0.0.16"
   dependencies:
     react-helmet-async: "npm:^1.3.0"
   peerDependencies:
     expo: "*"
     react: "*"
     react-native: "*"
-  checksum: 71131a2dd23f2e3eaa10cbd517318aedb2f38c65f18b6678b7b924b7facd3b9f2dcbf801cfc09fae7d1c8820303bb2210b5aa0cdd09a153dbf77da28c8159b39
+  checksum: 5b6cd514a01a89e3fe6d3fb6131a779cb960be338737bf51799e39d363d956ba2ed6b1f9fad375f3d5aea9b7f4fe4aa6a928c44389e891b8bf799a3388fecaba
   languageName: node
   linkType: hard
 
@@ -5953,17 +5953,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-router@npm:^2.0.9":
-  version: 2.0.9
-  resolution: "expo-router@npm:2.0.9"
+"expo-router@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "expo-router@npm:2.0.10"
   dependencies:
     "@bacons/react-views": "npm:^1.1.3"
-    "@expo/metro-runtime": "npm:2.2.11"
+    "@expo/metro-runtime": "npm:2.2.12"
     "@radix-ui/react-slot": "npm:1.0.1"
     "@react-navigation/bottom-tabs": "npm:~6.5.7"
     "@react-navigation/native": "npm:~6.1.6"
     "@react-navigation/native-stack": "npm:~6.9.12"
-    expo-head: "npm:0.0.15"
+    expo-head: "npm:0.0.16"
     expo-splash-screen: "npm:~0.20.2"
     query-string: "npm:7.1.3"
     react-helmet-async: "npm:^1.3.0"
@@ -5987,7 +5987,7 @@ __metadata:
       optional: true
     react-native-reanimated:
       optional: true
-  checksum: c5b12354ca737d468897a68ad41657fd1be80861de8842b51cf910d790e4a6655bf03159838771955e74c02876d48296f3ee5ed4a8d34c183d8b50827ac4e944
+  checksum: dd83557d99dec47e11fcc716c056ac0b3145da821e74909efae738ca22e600816055212ea8eb9cd5e6075ca5c739e50e2acf295c52484e85c03bfa19c504fd82
   languageName: node
   linkType: hard
 
@@ -6314,9 +6314,9 @@ __metadata:
   linkType: hard
 
 "flow-parser@npm:0.*":
-  version: 0.219.4
-  resolution: "flow-parser@npm:0.219.4"
-  checksum: 4a85ddd4b137c46664be4ab8ba8b9883ddc58564017d3fa5223a9b7087b441d474b8cb8589ffbeeb3e5f6ea37bef9153ebd5075a1722c6d550974f1eefefa999
+  version: 0.219.5
+  resolution: "flow-parser@npm:0.219.5"
+  checksum: 1e4dee929b899eb8e35c5976072511fa2bfdbd85c95ee715d54742e69799a01460dd065eeb94e82e90b0d2a07434dc4e4ce4f6f0eecfa0df3d0825fda4f36461
   languageName: node
   linkType: hard
 
@@ -10217,12 +10217,12 @@ __metadata:
   linkType: hard
 
 "react-devtools-core@npm:^4.27.2":
-  version: 4.28.4
-  resolution: "react-devtools-core@npm:4.28.4"
+  version: 4.28.5
+  resolution: "react-devtools-core@npm:4.28.5"
   dependencies:
     shell-quote: "npm:^1.6.1"
     ws: "npm:^7"
-  checksum: 3fbb61a11f79aad2cda9c499f23f74f748d0c8c4b65d133d0dd6ed4495beaccd6cd4b223dc47aabc5196f75362de687d38110851bcd3b386855486d6da8f953c
+  checksum: 1d71f9b69b8f557a752ba778a20eee9d33bf4393546dd32c96fa034a4b7cc4053f1ac4fccf1ed686a18e1149aa94c26f6d6c3a2c131c958a504199e8503d9ee1
   languageName: node
   linkType: hard
 
@@ -10337,9 +10337,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper-dates@npm:^0.20.1":
-  version: 0.20.1
-  resolution: "react-native-paper-dates@npm:0.20.1"
+"react-native-paper-dates@npm:^0.20.3":
+  version: 0.20.3
+  resolution: "react-native-paper-dates@npm:0.20.3"
   dependencies:
     color: "npm:^3.2.1"
   peerDependencies:
@@ -10347,7 +10347,7 @@ __metadata:
     react-native: "*"
     react-native-paper: "*"
     react-native-vector-icons: "*"
-  checksum: 626b7ffa659c532616fd722717f00dcc2f2beefd1d861a50493abf939f105a012542b9071177d3c54aa4a841afb7494dfe38664f1d4121f72291971faf5db735
+  checksum: 3fe3996346bffc6f8a9caf727aec40038d4c312cca361c12729bf97dd11d31e0cc8ffb1f95fb19ddca75e582177c52f9790c1a625242ceea6bc880887e2b8da6
   languageName: node
   linkType: hard
 
@@ -11120,7 +11120,7 @@ __metadata:
     expo-image: "npm:~1.3.4"
     expo-image-picker: "npm:~14.3.2"
     expo-linking: "npm:~5.0.2"
-    expo-router: "npm:^2.0.9"
+    expo-router: "npm:^2.0.10"
     expo-screen-orientation: "npm:~6.0.6"
     expo-status-bar: "npm:~1.6.0"
     expo-system-ui: "npm:~2.4.0"
@@ -11133,7 +11133,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.12.1"
     react-native-keyboard-aware-scroll-view: "npm:^0.9.5"
     react-native-paper: "npm:5.11.1"
-    react-native-paper-dates: "npm:^0.20.1"
+    react-native-paper-dates: "npm:^0.20.3"
     react-native-reanimated: "npm:~3.3.0"
     react-native-safe-area-context: "npm:4.6.3"
     react-native-screens: "npm:~3.22.1"
@@ -12553,10 +12553,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~5.25.1":
-  version: 5.25.3
-  resolution: "undici-types@npm:5.25.3"
-  checksum: 60a47c6db451c00d27186d86a41fbd9677fa1f6d1a5350bff342c3985bd79fc3f5a638ebf56bbce21df46c701a687db43b3fbd588e1726e58047cea14d182fef
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
   languageName: node
   linkType: hard
 
