@@ -56,13 +56,13 @@
     "typescript": "5.2.2"
   },
   "scripts": {
-    "api": "npx @rtk-query/codegen-openapi ./api.config.ts && npx eslint --fix ./src/store/api.ts",
-    "lint": "eslint . --cache --fix",
+    "api": "npx @rtk-query/codegen-openapi ./api.config.ts && eslint --fix ./src/store/api.ts",
+    "lint": "eslint --cache --fix .",
     "upgrade": "yarn upgrade-interactive && expo install --fix",
-    "start": "yarn run lint && expo start",
-    "android": "yarn run lint && expo start --android",
-    "ios": "yarn run lint && expo start --ios",
-    "web": "yarn run lint && expo start --web",
-    "export": "yarn run lint && expo export"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "export": "run lint && expo export"
   }
 }
