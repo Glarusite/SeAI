@@ -1,4 +1,4 @@
-import { toDate, toLocalDate, toUtcDate } from "@src/common/date";
+import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isValidDate } from "@src/common/validators";
 import type { VerifyFormData } from "@src/models";
@@ -19,7 +19,7 @@ import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
 export default function VerifyForm() {
-  const { control, errors, isSubmitting, discard, verify, setFocus, resetValues } = useVerify();
+  const { control, errors, isSubmitting, discard, verify, setFocus } = useVerify();
 
   return (
     <FormView>
@@ -63,10 +63,6 @@ export default function VerifyForm() {
         {isSubmitting ? <ButtonActivityIndicator /> : "Verify"}
       </Button>
 
-      <Button mode="contained-tonal" onPress={resetValues}>
-        Reset
-      </Button>
-
       <Button mode="contained-tonal" onPress={discard}>
         Discard
       </Button>
@@ -82,7 +78,6 @@ function useVerify() {
     control,
     formState: { errors, isSubmitting },
     handleSubmit,
-    setValue,
     setError,
     setFocus,
   } = useForm<VerifyFormData>({
@@ -141,14 +136,7 @@ function useVerify() {
     }
   }, [discardRequest, dispatch, scan.id, userId]);
 
-  const resetValues = useCallback(() => {
-    setValue("name", scan.name);
-    setValue("number", scan.number);
-    setValue("issueDate", toDate(scan.issueDate));
-    setValue("expiryDate", toDate(scan.expiryDate));
-  }, [scan, setValue]);
-
-  return { control, errors, isSubmitting, discard, verify, setFocus, resetValues };
+  return { control, errors, isSubmitting, discard, verify, setFocus };
 }
 
 function resolver(values: VerifyFormData) {
