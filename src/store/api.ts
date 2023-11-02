@@ -1,11 +1,38 @@
 import { baseApi as api } from "./api.base";
-export const addTagTypes = ["document-controller", "auth-controller"] as const;
+export const addTagTypes = ["voyage-controller", "document-controller", "auth-controller"] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
   })
   .injectEndpoints({
     endpoints: build => ({
+      createVoyage: build.mutation<CreateVoyageApiResponse, CreateVoyageParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/voyages/${queryArgument.voyageId}`,
+          method: "PUT",
+          body: queryArgument.updateVoyageRequest,
+        }),
+        invalidatesTags: ["voyage-controller"],
+      }),
+      deleteVoyage: build.mutation<DeleteVoyageApiResponse, DeleteVoyageParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/voyages/${queryArgument.voyageId}`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["voyage-controller"],
+      }),
+      findAllByUser: build.query<FindAllByUserApiResponse, FindAllByUserParameters>({
+        query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/voyages` }),
+        providesTags: ["voyage-controller"],
+      }),
+      createVoyage1: build.mutation<CreateVoyage1ApiResponse, CreateVoyage1Parameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/voyages`,
+          method: "POST",
+          body: queryArgument.createVoyageRequest,
+        }),
+        invalidatesTags: ["voyage-controller"],
+      }),
       handleFileUpload: build.mutation<HandleFileUploadApiResponse, HandleFileUploadParameters>({
         query: queryArgument => ({
           url: `/api/v1/users/${queryArgument.userId}/ocr`,
@@ -52,6 +79,24 @@ const injectedRtkApi = api
     overrideExisting: true,
   });
 export { injectedRtkApi as api };
+export type CreateVoyageApiResponse = unknown;
+export type CreateVoyageParameters = {
+  userId: string;
+  voyageId: string;
+  updateVoyageRequest: UpdateVoyageRequest;
+};
+export type DeleteVoyageApiResponse = unknown;
+export type DeleteVoyageParameters = {
+  userId: string;
+  voyageId: string;
+};
+export type FindAllByUserApiResponse = /** status 200 OK */ Voyage[];
+export type FindAllByUserParameters = string;
+export type CreateVoyage1ApiResponse = unknown;
+export type CreateVoyage1Parameters = {
+  userId: string;
+  createVoyageRequest: CreateVoyageRequest;
+};
 export type HandleFileUploadApiResponse = /** status 200 OK */ MarineDocument;
 export type HandleFileUploadParameters = {
   userId: string;
@@ -79,6 +124,37 @@ export type DownloadParameters = {
   userId: string;
   documentId: string;
 };
+export type UpdateVoyageRequest = {
+  vesselName?: string;
+  rank?: "CAPAIN";
+  imoNumber?: string;
+  joiningPort?: string;
+  joiningDate?: string;
+  leavingPort?: string;
+  leavingDate?: string;
+  remarks?: string;
+};
+export type Voyage = {
+  id?: string;
+  vesselName?: string;
+  rank?: "CAPAIN";
+  imoNumber?: string;
+  joiningPort?: string;
+  joiningDate?: string;
+  leavingPort?: string;
+  leavingDate?: string;
+  remarks?: string;
+};
+export type CreateVoyageRequest = {
+  vesselName?: string;
+  rank?: "CAPAIN";
+  imoNumber?: string;
+  joiningPort?: string;
+  joiningDate?: string;
+  leavingPort?: string;
+  leavingDate?: string;
+  remarks?: string;
+};
 export type MarineDocument = {
   id?: string;
   name?: string;
@@ -104,6 +180,10 @@ export type AuthRequest = {
   password: string;
 };
 export const {
+  useCreateVoyageMutation,
+  useDeleteVoyageMutation,
+  useFindAllByUserQuery,
+  useCreateVoyage1Mutation,
   useHandleFileUploadMutation,
   useSaveDocumentMutation,
   useDiscardMutation,
