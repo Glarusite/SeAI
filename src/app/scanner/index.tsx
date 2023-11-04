@@ -15,7 +15,7 @@ export default function ScannerPage() {
     <>
       <LogoImage />
       <TitleText>Smart scanner™</TitleText>
-      <CameraLinkButton href="/scanner/use-camera" mode="contained" disabled={isLoading}>
+      <CameraLinkButton href="/scanner/camera" mode="contained" disabled={isLoading}>
         {(isCameraAvailable, isCameraChecking) =>
           isCameraAvailable ? (
             <>Use camera</>
