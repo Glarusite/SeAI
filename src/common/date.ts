@@ -11,6 +11,14 @@ export function toDate(value: Nullable<string>) {
   }
 }
 
+export function toLocaleDateString(date: Nullable<string> | DateTime) {
+  if (typeof date === "string") {
+    date = toDate(date);
+  }
+
+  return date?.toLocaleDateString();
+}
+
 export function toLocalDate(date: Nullable<string> | DateTime) {
   if (typeof date === "string") {
     date = toDate(date);

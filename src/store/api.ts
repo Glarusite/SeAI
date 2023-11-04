@@ -119,7 +119,7 @@ export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ AuthRespon
 export type AuthenticateAndGetTokenParameters = AuthRequest;
 export type SaveDocument1ApiResponse = /** status 200 OK */ MarineDocument[];
 export type SaveDocument1Parameters = string;
-export type DownloadApiResponse = /** status 200 OK */ string[];
+export type DownloadApiResponse = /** status 200 OK */ string;
 export type DownloadParameters = {
   userId: string;
   documentId: string;
