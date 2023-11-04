@@ -8,7 +8,7 @@ import { Image } from "expo-image";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
 
-export default function Verify() {
+export default function VerifyPage() {
   const uri = useAppSelector(state => state.scan.uri);
   const styles = useStyles();
 

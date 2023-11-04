@@ -2,7 +2,7 @@ import LinkButton from "@src/components/ui/buttons/link-button";
 import LogoImage from "@src/components/ui/logo-image";
 import LoginForm from "@src/components/user/login-form";
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <>
       <LogoImage title="SeAI" />

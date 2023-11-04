@@ -8,7 +8,7 @@ import { TitleText } from "@src/components/ui/title-text";
 import { useAppSelector, useHandleFileUploadMutation } from "@src/store";
 import { router } from "expo-router";
 
-export default function Scanner() {
+export default function ScannerPage() {
   const { isLoading } = useScanner();
 
   return (

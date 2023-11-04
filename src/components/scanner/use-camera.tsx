@@ -4,7 +4,7 @@ import type { Camera } from "expo-camera";
 import { useCallback, useRef } from "react";
 import Toast from "react-native-toast-message";
 
-export default function UseCamera() {
+export default function useCamera() {
   const { cameraRef, isLoading, takePicture } = useTakePicture();
 
   return <FullScreenCamera ref={cameraRef} isLoading={isLoading} onTakePicture={takePicture} />;
