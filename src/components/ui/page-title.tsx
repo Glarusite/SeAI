@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { TextStyle } from "react-native";
 import { StyleSheet } from "react-native";
-import { Title } from "react-native-paper";
+import { Text } from "react-native-paper";
 
 export type TitleTextProps = React.PropsWithChildren<Pick<TextStyle, "alignSelf" | "fontFamily" | "fontSize">>;
 
@@ -11,5 +11,5 @@ export function PageTitle({ alignSelf = "center", fontFamily, fontSize = 36, chi
     [alignSelf, fontFamily, fontSize],
   );
 
-  return <Title style={styles.titleText}>{children}</Title>;
+  return <Text style={styles.titleText}>{children}</Text>;
 }
