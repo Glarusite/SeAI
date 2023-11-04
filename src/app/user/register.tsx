@@ -1,11 +1,11 @@
 import LinkButton from "@src/components/ui/buttons/link-button";
-import { TitleText } from "@src/components/ui/title-text";
+import { PageTitle } from "@src/components/ui/page-title";
 import RegisterForm from "@src/components/user/register-form";
 
 export default function RegisterPage() {
   return (
     <>
-      <TitleText>Register, Seaman!</TitleText>
+      <PageTitle>Register, Seaman!</PageTitle>
       <RegisterForm />
       <LinkButton href="/user/login" mode="text">
         Already have an account?

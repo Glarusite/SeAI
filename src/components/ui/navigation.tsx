@@ -13,6 +13,9 @@ export default function Navigation() {
       <LinkButton href="/scanner/" mode="contained">
         Smart Scanner
       </LinkButton>
+      <LinkButton href="/documents/" mode="contained">
+        Documents
+      </LinkButton>
       <LinkButton href="/user/" mode="contained-tonal">
         Profile
       </LinkButton>

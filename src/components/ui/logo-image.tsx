@@ -2,7 +2,7 @@ import logoImageSource from "@assets/icon.png";
 import { Image } from "expo-image";
 import { StyleSheet } from "react-native";
 
-import { TitleText } from "./title-text";
+import { PageTitle } from "./page-title";
 
 export interface LogoImageProps {
   title?: string;
@@ -13,9 +13,9 @@ export default function LogoImage({ title }: LogoImageProps) {
     <>
       <Image source={logoImageSource} style={styles.image} />
       {title && (
-        <TitleText fontSize={46} fontFamily="Impact">
+        <PageTitle fontSize={46} fontFamily="Impact">
           {title}
-        </TitleText>
+        </PageTitle>
       )}
     </>
   );

@@ -4,7 +4,7 @@ import PhotoUploadButton from "@src/components/scanner/photo-upload-button";
 import BackButton from "@src/components/ui/buttons/back-button";
 import ButtonActivityIndicator from "@src/components/ui/buttons/button-activity-indicator";
 import LogoImage from "@src/components/ui/logo-image";
-import { TitleText } from "@src/components/ui/title-text";
+import { PageTitle } from "@src/components/ui/page-title";
 import { useAppSelector, useHandleFileUploadMutation } from "@src/store";
 import { router } from "expo-router";
 
@@ -14,7 +14,7 @@ export default function ScannerPage() {
   return (
     <>
       <LogoImage />
-      <TitleText>Smart scanner™</TitleText>
+      <PageTitle>Smart scanner™</PageTitle>
       <CameraLinkButton href="/scanner/camera" mode="contained" disabled={isLoading}>
         {(isCameraAvailable, isCameraChecking) =>
           isCameraAvailable ? (
