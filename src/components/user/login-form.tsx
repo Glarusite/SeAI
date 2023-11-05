@@ -18,6 +18,7 @@ export default function LoginForm() {
     <FormView>
       <ControlledTextInput
         control={control}
+        testID="email"
         name="email"
         label="E-mail"
         inputMode="email"
@@ -36,7 +37,7 @@ export default function LoginForm() {
 
       <ValidationText error={errors.root} />
 
-      <Button mode="contained" onPress={login} disabled={isSubmitting}>
+      <Button icon="login" mode="contained" onPress={login} disabled={isSubmitting}>
         {isSubmitting ? <ButtonActivityIndicator /> : "Login"}
       </Button>
     </FormView>

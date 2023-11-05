@@ -14,7 +14,7 @@ import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
-export default function RegisterForm() {
+export default function RegistrationForm() {
   const { control, errors, isSubmitting, register, setFocus } = useRegister();
 
   return (
@@ -65,7 +65,7 @@ export default function RegisterForm() {
 
       <ValidationText error={errors.root} />
 
-      <Button mode="contained" onPress={register} disabled={isSubmitting}>
+      <Button icon="account-plus" mode="contained" onPress={register} disabled={isSubmitting}>
         {isSubmitting ? <ButtonActivityIndicator /> : "Register"}
       </Button>
     </FormView>

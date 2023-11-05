@@ -1,15 +1,15 @@
 import { setUser, useAppDispatch } from "@src/store";
+import { router } from "expo-router";
 import { useCallback } from "react";
 import { Button } from "react-native-paper";
 
 import LinkButton from "./buttons/link-button";
-import NarrowView from "./narrow-view";
 
 export default function Navigation() {
   const logout = useLogout();
 
   return (
-    <NarrowView>
+    <>
       <LinkButton href="/scanner/" mode="contained">
         Smart Scanner
       </LinkButton>
@@ -22,12 +22,15 @@ export default function Navigation() {
       <Button onPress={logout} mode="outlined">
         Logout
       </Button>
-    </NarrowView>
+    </>
   );
 }
 
 function useLogout() {
   const dispatch = useAppDispatch();
-  const logout = useCallback(() => dispatch(setUser({})), [dispatch]);
+  const logout = useCallback(() => {
+    dispatch(setUser({}));
+    router.replace("/user/login");
+  }, [dispatch]);
   return logout;
 }

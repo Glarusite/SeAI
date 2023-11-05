@@ -1,45 +1,37 @@
-import AppRootView from "@src/components/app/app-root-view";
+import AppDrawer from "@src/components/app/app-drawer";
 import { useAppTheme } from "@src/components/app/app-theme";
-import AuthSlot from "@src/components/app/auth-slot";
-import WebSplashScreen from "@src/components/ui/web-splash-screen";
+import AppThemeProvider from "@src/components/app/app-theme-provider";
 import { useCreateStore } from "@src/store";
 import { SplashScreen } from "expo-router";
 import { unlockAsync } from "expo-screen-orientation";
-import { StatusBar } from "expo-status-bar";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import React, { useEffect, useState } from "react";
 import { AppState, Platform, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
-import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function AppLayout() {
-  const { store, theme } = useAppLayout();
+  const { store, appTheme } = useAppLayout();
 
   if (store) {
     return (
       <Provider store={store}>
-        <PaperProvider theme={theme}>
-          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            <AppRootView>
-              <AuthSlot />
-              <StatusBar style="auto" />
-            </AppRootView>
-            <Toast />
-          </SafeAreaProvider>
-        </PaperProvider>
+        <AppThemeProvider>
+          <AppDrawer />
+          <Toast />
+        </AppThemeProvider>
       </Provider>
     );
   }
 
   if (Platform.OS === "web") {
     return (
-      <PaperProvider theme={theme}>
-        <View style={{ backgroundColor: theme.colors.background }}>
-          <WebSplashScreen />
+      <PaperProvider theme={appTheme}>
+        <View style={{ backgroundColor: appTheme.colors.background }}>
+          <SplashScreen />
         </View>
       </PaperProvider>
     );
@@ -48,8 +40,9 @@ export default function AppLayout() {
 
 function useAppLayout() {
   const store = useCreateStore();
-  const theme = useAppTheme();
+  const { appTheme } = useAppTheme(store?.getState().app.colorScheme);
   const [appState, setAppState] = useState(AppState.currentState);
+
   useEffect(() => {
     const appStateHandler = AppState.addEventListener("change", setAppState);
     return () => appStateHandler.remove();
@@ -67,9 +60,9 @@ function useAppLayout() {
         void unlockAsync();
       }
 
-      void setBackgroundColorAsync(theme.colors.background);
+      void setBackgroundColorAsync(appTheme.colors.background);
     }
-  }, [appState, theme.colors.background]);
+  }, [appState, appTheme.colors.background]);
 
-  return { store, theme };
+  return { store, appTheme };
 }

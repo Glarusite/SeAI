@@ -2,6 +2,7 @@ import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { useAppSelector, useSaveDocument1Query } from "@src/store";
 import { View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
 
 import DocumentImage from "./document-image";
@@ -18,8 +19,9 @@ export function DocumentsList() {
   }
 
   return (
-    <>
-      {data?.map(({ id, name, number, issueDate, expiryDate, createdDate }) => (
+    <FlatList
+      data={data}
+      renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
         <Card key={id} style={{ height: "auto" }}>
           <List.Item
             title={name}
@@ -34,8 +36,8 @@ export function DocumentsList() {
             }
           />
         </Card>
-      ))}
-    </>
+      )}
+    />
   );
 }
 

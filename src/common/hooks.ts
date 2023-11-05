@@ -10,7 +10,7 @@ export function useAsync(effect: () => Promise<void>, deps: unknown[]) {
   }, deps);
 }
 
-export function useNavigation(effect: () => MaybePromise<void>, deps: unknown[]) {
+export function useAppNavigation(effect: () => MaybePromise<void>, deps: unknown[]) {
   const rootNavigation = useRootNavigation();
   const [isNavigationReady, setIsNavigationReady] = useState(false);
   const setIsReady = () => setIsNavigationReady(true);

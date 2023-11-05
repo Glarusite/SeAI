@@ -15,14 +15,14 @@ export default function DocumentImage({ documentId = "" }: DocumentImageProps) {
   const [uri, setUri] = useState<string | ImageSource>();
 
   useAsync(async () => {
-    const uri = `${baseUrl}/api/v1/users/${userId}/documents/${documentId}/download`;
+    const apiUri = `${baseUrl}/api/v1/users/${userId}/documents/${documentId}/download`;
     const headers = { Authorization: `Bearer ${accessToken}` };
     if (Platform.OS !== "web") {
-      setUri({ uri, headers });
+      setUri({ uri: apiUri, headers });
       return;
     }
 
-    const imageResponse = await fetch(uri, { headers });
+    const imageResponse = await fetch(apiUri, { headers });
     if (imageResponse.ok) {
       setUri(URL.createObjectURL(await imageResponse.blob()));
     }
