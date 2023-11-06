@@ -4,7 +4,7 @@ import type { ColorSchemeName } from "react-native";
 import { useColorScheme } from "react-native";
 import { MD3DarkTheme, MD3LightTheme } from "react-native-paper";
 
-export function useAppTheme(appColorScheme: ColorSchemeName) {
+export function useAppTheme(appColorScheme: ColorSchemeName | undefined) {
   const colorScheme = useColorScheme();
   appColorScheme = appColorScheme || colorScheme;
 
