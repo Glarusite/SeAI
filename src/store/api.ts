@@ -38,7 +38,6 @@ const injectedRtkApi = api
           url: `/api/v1/users/${queryArgument.userId}/ocr`,
           method: "POST",
           body: queryArgument.body,
-          formData: true,
         }),
         invalidatesTags: ["document-controller"],
       }),
@@ -69,14 +68,8 @@ const injectedRtkApi = api
         query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/documents` }),
         providesTags: ["document-controller"],
       }),
-      download: build.query<DownloadApiResponse, DownloadParameters>({
-        query: queryArgument => ({
-          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/download`,
-        }),
-        providesTags: ["document-controller"],
-      }),
     }),
-    overrideExisting: true,
+    overrideExisting: false,
   });
 export { injectedRtkApi as api };
 export type CreateVoyageApiResponse = unknown;
@@ -119,11 +112,6 @@ export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ AuthRespon
 export type AuthenticateAndGetTokenParameters = AuthRequest;
 export type SaveDocument1ApiResponse = /** status 200 OK */ MarineDocument[];
 export type SaveDocument1Parameters = string;
-export type DownloadApiResponse = /** status 200 OK */ string;
-export type DownloadParameters = {
-  userId: string;
-  documentId: string;
-};
 export type UpdateVoyageRequest = {
   vesselName?: string;
   rank?: "CAPAIN";
@@ -190,5 +178,4 @@ export const {
   useRegisterMutation,
   useAuthenticateAndGetTokenMutation,
   useSaveDocument1Query,
-  useDownloadQuery,
 } = injectedRtkApi;
