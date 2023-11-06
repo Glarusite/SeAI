@@ -69,6 +69,6 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "export": "expo export -p web",
-    "update": "eas update"
+    "update": "npx eas-cli@latest update"
   }
 }
