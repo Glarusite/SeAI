@@ -5,9 +5,8 @@ import { memoize } from "lodash";
 import type { AppStoreState } from "./configure";
 import { setUser } from "./slices/user";
 
-export const {
-  env: { EXPO_PUBLIC_API_URL: baseUrl },
-} = process;
+// eslint-disable-next-line prefer-destructuring
+export const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export const baseApi = createApi({
   baseQuery: (queryParameters: string | FetchArgs, api, extraOptions) => {
