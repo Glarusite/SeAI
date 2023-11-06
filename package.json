@@ -69,6 +69,6 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "export": "expo export -p web",
-    "update": "npx eas-cli@latest update --auto"
+    "update": "npx dotenv-cli@latest -e .env.development -- npx eas-cli@latest update --auto"
   }
 }
