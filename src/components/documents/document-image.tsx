@@ -4,17 +4,22 @@ import { baseUrl } from "@src/store/api.base";
 import type { ImageSource } from "expo-image";
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
-import { Platform, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
+import { Icon } from "react-native-paper";
 
 export interface DocumentImageProps {
   documentId: string | undefined;
 }
 
-export default function DocumentImage({ documentId = "" }: DocumentImageProps) {
+export default function DocumentImage({ documentId }: DocumentImageProps) {
   const { userId, accessToken } = useAppSelector(state => state.user);
   const [uri, setUri] = useState<string | ImageSource>();
 
   useAsync(async () => {
+    if (!userId || !accessToken || !documentId) {
+      return;
+    }
+
     const apiUri = `${baseUrl}/api/v1/users/${userId}/documents/${documentId}/download`;
     const headers = { Authorization: `Bearer ${accessToken}` };
     if (Platform.OS !== "web") {
@@ -38,8 +43,19 @@ export default function DocumentImage({ documentId = "" }: DocumentImageProps) {
   );
 
   return (
-    <View style={{ paddingStart: 16 }}>
-      <Image source={uri} style={{ width: 100, height: "100%" }} contentFit="contain" />
+    <View style={styles.container}>
+      {uri ? <Image source={uri} style={styles.image} contentFit="contain" /> : <Icon source="file" size={80} />}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingStart: 16,
+  },
+
+  image: {
+    width: 80,
+    height: "100%",
+  },
+});
