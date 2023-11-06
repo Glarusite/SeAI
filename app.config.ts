@@ -6,7 +6,7 @@ const AppConfig: ExpoConfig = {
     typedRoutes: true,
   },
   name: "SeAI",
-  slug: "SeAI",
+  slug: "seai",
   scheme: "seai",
   version: "1.0.0",
   orientation: "portrait",
@@ -30,6 +30,17 @@ const AppConfig: ExpoConfig = {
   web: {
     bundler: "metro",
     favicon: "./assets/favicon.png",
+  },
+  extra: {
+    eas: {
+      projectId: "b7b7d3e6-2ad7-4a5b-a877-6a6dbed92ebd",
+    },
+  },
+  updates: {
+    url: "https://u.expo.dev/b7b7d3e6-2ad7-4a5b-a877-6a6dbed92ebd",
+  },
+  runtimeVersion: {
+    policy: "appVersion",
   },
   plugins: [
     [

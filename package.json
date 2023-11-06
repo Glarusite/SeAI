@@ -12,6 +12,7 @@
     "expo": "49.0.16",
     "expo-camera": "~13.4.4",
     "expo-constants": "~14.4.2",
+    "expo-dev-client": "~2.4.11",
     "expo-image": "~1.3.4",
     "expo-image-picker": "~14.3.2",
     "expo-linking": "~5.0.2",
@@ -19,6 +20,7 @@
     "expo-screen-orientation": "~6.0.6",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
+    "expo-updates": "~0.18.17",
     "lodash": "4.17.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -66,6 +68,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "export": "run lint && expo export"
+    "export": "expo export -p web",
+    "update": "eas update"
   }
 }
