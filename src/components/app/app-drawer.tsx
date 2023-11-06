@@ -23,6 +23,7 @@ export default function AppDrawer() {
       )}
       screenOptions={{
         headerShown: false,
+        lazy: true,
       }}
     />
   );

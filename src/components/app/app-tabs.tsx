@@ -11,6 +11,7 @@ export default function AppTabs({ children }: Pick<ScreenProps, "children">) {
         headerTitleAlign: "center",
         tabBarStyle: { bottom: 2 },
         unmountOnBlur: true,
+        lazy: true,
       }}
     >
       {children}
