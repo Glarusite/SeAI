@@ -1,12 +1,12 @@
 import type { Control, ControllerRenderProps, FieldValues, Path, PathValue } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { View } from "react-native";
-import { DatePickerInput, en, registerTranslation } from "react-native-paper-dates";
+import { DatePickerInput, enGB, registerTranslation } from "react-native-paper-dates";
 import type { DatePickerInputProps } from "react-native-paper-dates/lib/typescript/Date/DatePickerInput.shared";
 
 import ValidationText from "./validation-text";
 
-registerTranslation("en", en);
+registerTranslation("en", enGB);
 
 export type ControlledDateInputProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;

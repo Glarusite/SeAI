@@ -2,7 +2,6 @@ import { useDimensions, useAppNavigation } from "@src/common/hooks";
 import { safeBack } from "@src/common/router";
 import AppScrollView from "@src/components/app/app-scroll-view";
 import VerifyForm from "@src/components/scanner/verify-form";
-import { PageTitle } from "@src/components/ui/page-title";
 import { useAppSelector } from "@src/store";
 import { Image } from "expo-image";
 import { useMemo } from "react";
@@ -20,7 +19,6 @@ export default function VerifyPage() {
 
   return (
     <AppScrollView>
-      <PageTitle>Verify scanned data</PageTitle>
       <Image source={uri} style={styles.image} contentFit="contain" />
       <VerifyForm />
     </AppScrollView>

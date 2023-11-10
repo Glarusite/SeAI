@@ -44,7 +44,7 @@ export default function VerifyForm() {
         name="issueDate"
         label="Issue date"
         inputMode="start"
-        locale="en"
+        locale="en-GB"
         onSubmitEditing={() => setFocus("expiryDate")}
       />
 
@@ -53,7 +53,7 @@ export default function VerifyForm() {
         name="expiryDate"
         label="Expiration date"
         inputMode="start"
-        locale="en"
+        locale="en-GB"
         onSubmitEditing={() => setFocus("expiryDate")}
       />
 
