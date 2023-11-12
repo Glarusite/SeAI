@@ -6,7 +6,7 @@ const injectedRtkApi = api
   })
   .injectEndpoints({
     endpoints: build => ({
-      createVoyage: build.mutation<CreateVoyageApiResponse, CreateVoyageParameters>({
+      updateVoyage: build.mutation<UpdateVoyageApiResponse, UpdateVoyageParameters>({
         query: queryArgument => ({
           url: `/api/v1/users/${queryArgument.userId}/voyages/${queryArgument.voyageId}`,
           method: "PUT",
@@ -25,7 +25,7 @@ const injectedRtkApi = api
         query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/voyages` }),
         providesTags: ["voyage-controller"],
       }),
-      createVoyage1: build.mutation<CreateVoyage1ApiResponse, CreateVoyage1Parameters>({
+      createVoyage: build.mutation<CreateVoyageApiResponse, CreateVoyageParameters>({
         query: queryArgument => ({
           url: `/api/v1/users/${queryArgument.userId}/voyages`,
           method: "POST",
@@ -72,8 +72,8 @@ const injectedRtkApi = api
     overrideExisting: false,
   });
 export { injectedRtkApi as api };
-export type CreateVoyageApiResponse = unknown;
-export type CreateVoyageParameters = {
+export type UpdateVoyageApiResponse = unknown;
+export type UpdateVoyageParameters = {
   userId: string;
   voyageId: string;
   updateVoyageRequest: UpdateVoyageRequest;
@@ -85,8 +85,8 @@ export type DeleteVoyageParameters = {
 };
 export type FindAllByUserApiResponse = /** status 200 OK */ Voyage[];
 export type FindAllByUserParameters = string;
-export type CreateVoyage1ApiResponse = unknown;
-export type CreateVoyage1Parameters = {
+export type CreateVoyageApiResponse = unknown;
+export type CreateVoyageParameters = {
   userId: string;
   createVoyageRequest: CreateVoyageRequest;
 };
@@ -114,7 +114,7 @@ export type SaveDocument1ApiResponse = /** status 200 OK */ MarineDocument[];
 export type SaveDocument1Parameters = string;
 export type UpdateVoyageRequest = {
   vesselName?: string;
-  rank?: "CAPAIN";
+  rank?: "CAPTAIN";
   imoNumber?: string;
   joiningPort?: string;
   joiningDate?: string;
@@ -125,7 +125,7 @@ export type UpdateVoyageRequest = {
 export type Voyage = {
   id?: string;
   vesselName?: string;
-  rank?: "CAPAIN";
+  rank?: "CAPTAIN";
   imoNumber?: string;
   joiningPort?: string;
   joiningDate?: string;
@@ -135,7 +135,7 @@ export type Voyage = {
 };
 export type CreateVoyageRequest = {
   vesselName?: string;
-  rank?: "CAPAIN";
+  rank?: "CAPTAIN";
   imoNumber?: string;
   joiningPort?: string;
   joiningDate?: string;
@@ -158,6 +158,15 @@ export type UserRegisterRequest = {
   password: string;
   firstName?: string;
   lastName?: string;
+  rank?: "CAPTAIN";
+  presentEmployer?: string;
+  dateOfBirth?: string;
+  manningAgents?: string;
+  status?: "ONBOARD" | "HOME";
+  vesselType?: "OIL_TANKER";
+  homeAirport?: string;
+  readinessDate?: string;
+  contractDuration?: number;
 };
 export type AuthResponse = {
   userId?: string;
@@ -168,10 +177,10 @@ export type AuthRequest = {
   password: string;
 };
 export const {
-  useCreateVoyageMutation,
+  useUpdateVoyageMutation,
   useDeleteVoyageMutation,
   useFindAllByUserQuery,
-  useCreateVoyage1Mutation,
+  useCreateVoyageMutation,
   useHandleFileUploadMutation,
   useSaveDocumentMutation,
   useDiscardMutation,

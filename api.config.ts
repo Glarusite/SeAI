@@ -1,7 +1,7 @@
 import type { ConfigFile } from "@rtk-query/codegen-openapi";
 
 const ApiConfig: ConfigFile = {
-  schemaFile: "http://ec2-18-194-242-209.eu-central-1.compute.amazonaws.com:8080/v3/api-docs",
+  schemaFile: `${process.env.EXPO_PUBLIC_API_URL}/v3/api-docs`,
   apiFile: "./src/store/api.base.ts",
   apiImport: "baseApi",
   outputFile: "./src/store/api.ts",

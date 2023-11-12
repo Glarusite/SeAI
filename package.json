@@ -60,7 +60,7 @@
     "typescript": "5.2.2"
   },
   "scripts": {
-    "api": "npx @rtk-query/codegen-openapi ./api.config.ts && eslint --fix ./src/store/api.ts",
+    "api": "npx dotenv-cli@latest -e .env -- npx @rtk-query/codegen-openapi ./api.config.ts && eslint --fix ./src/store/api.ts",
     "clean": "git clean -fdx -e node_modules",
     "lint": "eslint --cache --fix .",
     "upgrade": "yarn upgrade-interactive && expo install --fix",
@@ -69,6 +69,6 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "export": "expo export -p web",
-    "update": "npx dotenv-cli@latest -e .env.development -- npx eas-cli@latest update --auto"
+    "update": "npx dotenv-cli@latest -e .env -- npx eas-cli@latest update --auto"
   }
 }
