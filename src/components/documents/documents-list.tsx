@@ -1,11 +1,11 @@
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
-import { useAppSelector, useSaveDocument1Query } from "@src/store";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
 
 import DocumentImage from "./document-image";
+import { useDocuments } from "./documents";
 
 export function DocumentsList() {
   const { data, isLoading, error } = useDocuments();
@@ -29,7 +29,7 @@ export function DocumentsList() {
         <Card key={id} style={styles.card}>
           <List.Item
             title={name}
-            left={() => <DocumentImage documentId={id} />}
+            left={() => <DocumentImage documentId={id} size={80} />}
             description={
               <View style={styles.gridContainer}>
                 <View>
@@ -72,12 +72,3 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-
-function useDocuments() {
-  const userId = useAppSelector(state => state.user.userId) || "";
-  const { data, isLoading, error } = useSaveDocument1Query(userId, {
-    skip: !userId,
-  });
-
-  return { data, isLoading, error };
-}

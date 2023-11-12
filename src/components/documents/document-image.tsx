@@ -3,17 +3,19 @@ import { useAppSelector } from "@src/store";
 import { baseUrl } from "@src/store/api.base";
 import type { ImageSource } from "expo-image";
 import { Image } from "expo-image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Icon } from "react-native-paper";
 
 export interface DocumentImageProps {
   documentId: string | undefined;
+  size: number;
 }
 
-export default function DocumentImage({ documentId }: DocumentImageProps) {
+export default function DocumentImage({ documentId, size }: DocumentImageProps) {
   const { userId, accessToken } = useAppSelector(state => state.user);
   const [uri, setUri] = useState<string | ImageSource>();
+  const styles = useStyles({ size });
 
   useAsync(async () => {
     if (!userId || !accessToken || !documentId) {
@@ -44,18 +46,25 @@ export default function DocumentImage({ documentId }: DocumentImageProps) {
 
   return (
     <View style={styles.container}>
-      {uri ? <Image source={uri} style={styles.image} contentFit="contain" /> : <Icon source="file" size={80} />}
+      {uri ? <Image source={uri} style={styles.image} contentFit="contain" /> : <Icon source="file" size={size} />}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingStart: 16,
-  },
+function useStyles({ size }: Pick<DocumentImageProps, "size">) {
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          paddingStart: 16,
+        },
 
-  image: {
-    width: 80,
-    height: "100%",
-  },
-});
+        image: {
+          width: size,
+          minHeight: size,
+          height: "100%",
+        },
+      }),
+    [size],
+  );
+}
