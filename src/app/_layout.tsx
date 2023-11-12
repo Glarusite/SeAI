@@ -46,5 +46,13 @@ function useAppLayout() {
     }
   }, [appState]);
 
+  // disable scrolling on web
+  useEffect(() => {
+    if (Platform.OS === "web") {
+      // eslint-disable-next-line no-eval
+      eval(`document.body.style.overflow = "hidden"`);
+    }
+  }, []);
+
   return { store };
 }
