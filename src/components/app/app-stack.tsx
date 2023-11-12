@@ -4,7 +4,8 @@ import { Icon, useTheme } from "react-native-paper";
 import type { ScreenProps } from "react-native-screens";
 
 import BackButton from "../ui/buttons/back-button";
-import DrawerMenu from "../ui/drawer-menu";
+
+import AppDrawerMenu from "./app-drawer-menu";
 
 export default function AppStack({ children }: Pick<ScreenProps, "children">) {
   const theme = useTheme();
@@ -14,18 +15,20 @@ export default function AppStack({ children }: Pick<ScreenProps, "children">) {
         contentStyle: {
           backgroundColor: theme.colors.background,
         },
-        gestureEnabled: true,
+        gestureEnabled: false,
         headerBackVisible: true,
         headerLeft({ canGoBack }) {
-          if (canGoBack && Platform.OS === "web") {
-            return (
-              <BackButton mode="text">
-                <Icon source="arrow-left" size={24} />
-              </BackButton>
-            );
+          if (canGoBack) {
+            if (Platform.OS === "web") {
+              return (
+                <BackButton mode="text">
+                  <Icon source="arrow-left" size={24} />
+                </BackButton>
+              );
+            }
+          } else {
+            return <AppDrawerMenu />;
           }
-
-          return <DrawerMenu />;
         },
         headerTitleAlign: "center",
         headerTitleStyle: {

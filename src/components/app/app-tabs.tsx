@@ -1,13 +1,13 @@
 import { Tabs } from "expo-router";
 import type { ScreenProps } from "react-native-screens";
 
-import DrawerMenu from "../ui/drawer-menu";
+import AppDrawerMenu from "./app-drawer-menu";
 
 export default function AppTabs({ children }: Pick<ScreenProps, "children">) {
   return (
     <Tabs
       screenOptions={{
-        headerLeft: () => <DrawerMenu />,
+        headerLeft: () => <AppDrawerMenu />,
         headerTitleAlign: "center",
         tabBarStyle: { bottom: 2 },
         unmountOnBlur: true,
