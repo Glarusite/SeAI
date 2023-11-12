@@ -11,23 +11,25 @@ export default function AppStack({ children }: Pick<ScreenProps, "children">) {
   return (
     <Stack
       screenOptions={{
-        headerLeft: ({ canGoBack }) =>
-          canGoBack ? (
-            Platform.OS === "web" && (
+        contentStyle: {
+          backgroundColor: theme.colors.background,
+        },
+        gestureEnabled: true,
+        headerBackVisible: true,
+        headerLeft({ canGoBack }) {
+          if (canGoBack && Platform.OS === "web") {
+            return (
               <BackButton mode="text">
                 <Icon source="arrow-left" size={24} />
               </BackButton>
-            )
-          ) : (
-            <DrawerMenu />
-          ),
-        headerBackVisible: true,
+            );
+          }
+
+          return <DrawerMenu />;
+        },
         headerTitleAlign: "center",
         headerTitleStyle: {
           fontWeight: "bold",
-        },
-        contentStyle: {
-          backgroundColor: theme.colors.background,
         },
       }}
     >
