@@ -5,7 +5,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
 
 import DocumentImage from "./document-image";
-import { useDocuments } from "./documents";
+import { useDocuments } from "./use-documents";
 
 export function DocumentsList() {
   const { data, isLoading, error } = useDocuments();

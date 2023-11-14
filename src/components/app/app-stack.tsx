@@ -1,9 +1,8 @@
+import { safeBack } from "@src/common/router";
 import { Stack } from "expo-router";
-import { Platform } from "react-native";
-import { Icon, useTheme } from "react-native-paper";
+import { Platform, View } from "react-native";
+import { IconButton, useTheme } from "react-native-paper";
 import type { ScreenProps } from "react-native-screens";
-
-import BackButton from "../ui/buttons/back-button";
 
 import AppDrawerMenu from "./app-drawer-menu";
 
@@ -21,9 +20,10 @@ export default function AppStack({ children }: Pick<ScreenProps, "children">) {
           if (canGoBack) {
             if (Platform.OS === "web") {
               return (
-                <BackButton mode="text">
-                  <Icon source="arrow-left" size={24} />
-                </BackButton>
+                <View style={{ flexDirection: "row" }}>
+                  <IconButton icon="arrow-left" onPress={safeBack} />
+                  <AppDrawerMenu />
+                </View>
               );
             }
           } else {

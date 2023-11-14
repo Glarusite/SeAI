@@ -9,16 +9,20 @@ import type { LinkButtonProps } from "../ui/buttons/link-button";
 import LinkButton from "../ui/buttons/link-button";
 
 export interface CameraLinkButtonProps<T> extends Omit<LinkButtonProps<T>, "children"> {
-  children(isCameraAvailable: boolean, isCameraChecking: boolean): React.ReactNode;
+  children(isCameraChecking: boolean): React.ReactNode;
 }
 
 export default function CameraLinkButton<T>({ children, disabled, ...props }: CameraLinkButtonProps<T>) {
   const { isCameraAvailable, isCameraChecking } = useCameraStatus();
 
+  if (!isCameraAvailable) {
+    return;
+  }
+
   return (
     <LinkButton disabled={disabled || !isCameraAvailable} {...props}>
       {isCameraChecking && <ButtonActivityIndicator />}
-      {children(isCameraAvailable, isCameraChecking)}
+      {children(isCameraChecking)}
     </LinkButton>
   );
 }

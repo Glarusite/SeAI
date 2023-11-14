@@ -54,7 +54,6 @@ export default function VerifyForm() {
         label="Expiration date"
         inputMode="start"
         locale="en-GB"
-        onSubmitEditing={() => setFocus("expiryDate")}
       />
 
       <ValidationText error={errors.root} />
@@ -107,6 +106,7 @@ function useVerify() {
           expiryDate: toUtcDate(expiryDate)?.toJSON(),
         },
       }).unwrap();
+
       dispatch(resetScan());
       router.replace("/scanner/");
       Toast.show({
@@ -127,6 +127,7 @@ function useVerify() {
       }
 
       await discardRequest({ documentId: scan.id, userId }).unwrap();
+
       dispatch(resetScan());
       router.replace("/scanner/");
       Toast.show({ type: "info", text1: "Document discarded" });

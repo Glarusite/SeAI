@@ -6,7 +6,7 @@ import type { DatePickerInputProps } from "react-native-paper-dates/lib/typescri
 
 import ValidationText from "./validation-text";
 
-registerTranslation("en", enGB);
+registerTranslation("en-GB", enGB);
 
 export type ControlledDateInputProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;

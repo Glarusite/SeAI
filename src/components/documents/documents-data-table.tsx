@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, DataTable, HelperText } from "react-native-paper";
 
 import DocumentImage from "./document-image";
-import { useDocuments } from "./documents";
+import { useDocuments } from "./use-documents";
 
 export default function DocumentsDataTable() {
   const { data, isLoading, error } = useDocuments();
