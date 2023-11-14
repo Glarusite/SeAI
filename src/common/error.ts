@@ -5,8 +5,8 @@ export function toErrorMessage(error: unknown) {
     "data" in (error as FetchBaseQueryError)
       ? (error as FetchBaseQueryError).data
       : error instanceof Error
-      ? error.message
-      : error;
+        ? error.message
+        : error;
   const errorMessage = typeof errorData === "string" ? errorData : JSON.stringify(errorData);
   return errorMessage;
 }

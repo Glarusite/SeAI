@@ -32,6 +32,6 @@ function useStyles({ style, wide }: AppScrollViewProps) {
           ...style,
         },
       }),
-    [],
+    [style, wide],
   );
 }
