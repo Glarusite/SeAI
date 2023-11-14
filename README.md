@@ -18,3 +18,9 @@ React-native/Expo front-end solution for a Marine documents manager hybrid app.
 4. Open PS with admin rights and execute ```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned```
 5. ```yarn install```
 6. ```npx expo start```
+
+# Deployment
+
+## Prerequisites
+
+1. [AWS CLI](https://awscli.amazonaws.com/AWSCLIV2.msi)
