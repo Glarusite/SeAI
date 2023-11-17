@@ -23,12 +23,12 @@ const AppConfig: ExpoConfig = {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#ffffff",
     },
-    package: "co.seai.app",
+    package: "co.seai",
     versionCode: 1,
   },
   ios: {
     supportsTablet: true,
-    bundleIdentifier: "co.seai.app",
+    bundleIdentifier: "co.seai",
   },
   web: {
     bundler: "metro",

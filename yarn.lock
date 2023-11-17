@@ -6011,13 +6011,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-modules-core@npm:1.5.11":
-  version: 1.5.11
-  resolution: "expo-modules-core@npm:1.5.11"
+"expo-modules-core@npm:1.5.12":
+  version: 1.5.12
+  resolution: "expo-modules-core@npm:1.5.12"
   dependencies:
     compare-versions: "npm:^3.4.0"
     invariant: "npm:^2.2.4"
-  checksum: 6a9dadcde8b18e69be83dd22aa0e5e3b693281236aeccbf53fa5f752250147731763d7e8494963589ed3b46d10a25c3915ac72edea9f788c34d71bed67909c3e
+  checksum: d28260bc4df77816619cbf703afedc8267bf102f4184daede76c85c8b330f6baaad881cd18cdb3a381481fc0a0eb925f1452aa02d5460e6697658e931734026b
   languageName: node
   linkType: hard
 
@@ -6137,9 +6137,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:49.0.18":
-  version: 49.0.18
-  resolution: "expo@npm:49.0.18"
+"expo@npm:49.0.19":
+  version: 49.0.19
+  resolution: "expo@npm:49.0.19"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/cli": "npm:0.10.15"
@@ -6154,7 +6154,7 @@ __metadata:
     expo-font: "npm:~11.4.0"
     expo-keep-awake: "npm:~12.3.0"
     expo-modules-autolinking: "npm:1.5.1"
-    expo-modules-core: "npm:1.5.11"
+    expo-modules-core: "npm:1.5.12"
     fbemitter: "npm:^3.0.0"
     invariant: "npm:^2.2.4"
     md5-file: "npm:^3.2.3"
@@ -6163,7 +6163,7 @@ __metadata:
     uuid: "npm:^3.4.0"
   bin:
     expo: bin/cli
-  checksum: b70a0d4e685c4369bc029214e6320efe099d0872dcc4602e67f0d8e841f12ec72f62025a936a4011414c5e6edd7bc7ae4650749d1decefaae1ef90d1dbccf600
+  checksum: 101a43fbcc76548392ee784cb022a211cc9ac8b8c3d0d31f1bb1402fae048faea7c1c113e191abbb1494a5caf404e04f4a273d9098df057d4eb4b96db1fa3da8
   languageName: node
   linkType: hard
 
@@ -10443,7 +10443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:~3.3.0":
+"react-native-reanimated@npm:3.3.0":
   version: 3.3.0
   resolution: "react-native-reanimated@npm:3.3.0"
   dependencies:
@@ -11192,7 +11192,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:4.6.0"
     eslint-plugin-unicorn: "npm:49.0.0"
     eslint-plugin-unused-imports: "npm:3.0.0"
-    expo: "npm:49.0.18"
+    expo: "npm:49.0.19"
     expo-camera: "npm:~13.4.4"
     expo-constants: "npm:~14.4.2"
     expo-dev-client: "npm:~2.4.12"
@@ -11214,7 +11214,7 @@ __metadata:
     react-native-keyboard-aware-scroll-view: "npm:^0.9.5"
     react-native-paper: "npm:5.11.1"
     react-native-paper-dates: "npm:^0.20.4"
-    react-native-reanimated: "npm:~3.3.0"
+    react-native-reanimated: "npm:3.3.0"
     react-native-safe-area-context: "npm:4.6.3"
     react-native-screens: "npm:~3.22.1"
     react-native-toast-message: "npm:2.1.7"
