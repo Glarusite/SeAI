@@ -33,7 +33,6 @@ const AppConfig: ExpoConfig = {
   web: {
     bundler: "metro",
     favicon: "./assets/favicon.png",
-    output: "static",
   },
   extra: {
     eas: {
