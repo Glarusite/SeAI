@@ -1,5 +1,6 @@
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
+import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, DataTable, HelperText } from "react-native-paper";
 
@@ -39,7 +40,7 @@ export default function DocumentsDataTable() {
       </DataTable.Header>
 
       {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }) => (
-        <DataTable.Row key={id} style={{ padding: 8 }}>
+        <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/(auth)/documents/${id}`)}>
           <DataTable.Cell>
             <DocumentImage documentId={id} size={60} />
           </DataTable.Cell>
