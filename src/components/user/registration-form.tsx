@@ -1,5 +1,5 @@
 import { toErrorMessage } from "@src/common/error";
-import { isBlank, isEmail } from "@src/common/validators";
+import { isBlank, isNotEmail } from "@src/common/validators";
 import type { RegisterFormData } from "@src/models";
 import { useRegisterMutation } from "@src/store";
 import { router } from "expo-router";
@@ -111,7 +111,7 @@ function resolver(values: RegisterFormData) {
 
   if (isBlank(email)) {
     errors.email = { type: "required", message: "E-mail is required" };
-  } else if (!isEmail(email)) {
+  } else if (isNotEmail(email)) {
     errors.email = { type: "pattern", message: "E-mail is invalid" };
   }
 

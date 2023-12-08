@@ -1,5 +1,5 @@
 import { toErrorMessage } from "@src/common/error";
-import { isBlank, isEmail } from "@src/common/validators";
+import { isBlank, isNotEmail } from "@src/common/validators";
 import type { LoginFormData } from "@src/models";
 import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@src/store";
 import type { FieldErrors } from "react-hook-form";
@@ -78,7 +78,7 @@ function resolver(values: LoginFormData) {
 
   if (isBlank(email)) {
     errors.email = { type: "required", message: "E-mail is required" };
-  } else if (!isEmail(email)) {
+  } else if (isNotEmail(email)) {
     errors.email = { type: "pattern", message: "E-mail is invalid" };
   }
 

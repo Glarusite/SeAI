@@ -1,4 +1,4 @@
-import { isBlank, isValidDate } from "@src/common/validators";
+import { isBlank, isInvalidDate } from "@src/common/validators";
 import type { DocumentFormData } from "@src/models";
 import { useCallback } from "react";
 import type { Control, FieldErrors } from "react-hook-form";
@@ -68,13 +68,13 @@ export function resolver(values: DocumentFormData) {
 
   if (issueDate == null) {
     errors.issueDate = { type: "required", message: "Issue date is required" };
-  } else if (!isValidDate(issueDate)) {
+  } else if (isInvalidDate(issueDate)) {
     errors.issueDate = { type: "invalid", message: "Issue date is invalid" };
   }
 
   if (expiryDate == null) {
     errors.expiryDate = { type: "required", message: "Expiration date is required" };
-  } else if (!isValidDate(expiryDate)) {
+  } else if (isInvalidDate(expiryDate)) {
     errors.expiryDate = { type: "invalid", message: "Expiration date is invalid" };
   }
 

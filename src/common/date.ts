@@ -1,13 +1,15 @@
 import type { DateTime, LocalDateTime, Nullable, UtcDateTime } from "@src/models";
 
-import { isValidDate } from "./validators";
+import { isInvalidDate } from "./validators";
 
 export function toDate(value: Nullable<string>) {
   if (value != null) {
     const date = new Date(value);
-    if (isValidDate(date)) {
-      return date;
+    if (isInvalidDate(date)) {
+      return;
     }
+
+    return date;
   }
 }
 

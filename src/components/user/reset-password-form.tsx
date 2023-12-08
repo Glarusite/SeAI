@@ -1,4 +1,4 @@
-import { isBlank, isEmail } from "@src/common/validators";
+import { isBlank, isNotEmail } from "@src/common/validators";
 import type { PasswordResetFormData } from "@src/models";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -77,7 +77,7 @@ function resolver(values: PasswordResetFormData) {
 
   if (isBlank(email)) {
     errors.email = { type: "required", message: "E-mail is required" };
-  } else if (!isEmail(email)) {
+  } else if (isNotEmail(email)) {
     errors.email = { type: "pattern", message: "E-mail is invalid" };
   }
 

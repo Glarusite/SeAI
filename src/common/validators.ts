@@ -1,11 +1,11 @@
 export function isBlank(value: string | null | undefined): value is undefined {
-  return value == null || value.trim().length === 0;
+  return !value || value.trim().length === 0;
 }
 
-export function isEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+export function isNotEmail(email: string) {
+  return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export function isValidDate(date: Date) {
-  return !Number.isNaN(date.getTime());
+export function isInvalidDate(date: Date) {
+  return Number.isNaN(date.getTime());
 }
