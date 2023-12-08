@@ -55,7 +55,7 @@ function useDocument({ id }: DocumentFormProps) {
     formState: { errors, isSubmitting },
     setError,
     setFocus,
-    setValue,
+    reset,
   } = useForm<DocumentFormData>({
     disabled,
     resolver,
@@ -71,13 +71,10 @@ function useDocument({ id }: DocumentFormProps) {
   useEffect(() => {
     if (document) {
       const { name, number, issueDate, expiryDate, createdDate } = document;
-      setValue("name", name);
-      setValue("number", number);
-      setValue("issueDate", toLocalDate(issueDate));
-      setValue("expiryDate", toLocalDate(expiryDate));
+      reset({ name, number, issueDate: toLocalDate(issueDate), expiryDate: toLocalDate(expiryDate) });
       setUploadDate(toLocalDate(createdDate));
     }
-  }, [document, setValue]);
+  }, [document, reset]);
 
   return { uploadDate, control, disabled, errors, isLoading, isSubmitting, setDisabled, setFocus };
 }
