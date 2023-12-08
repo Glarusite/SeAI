@@ -69,7 +69,7 @@
     "ios": "expo start --ios --go",
     "web": "expo start --web --go",
     "export": "expo export -p web",
-    "publish": "aws s3 cp ./dist s3://seai.co --recursive",
+    "publish": "run export && aws s3 cp ./dist s3://seai.co --recursive",
     "update": "npx dotenv-cli@latest -e .env -- npx eas-cli@latest update --auto"
   }
 }
