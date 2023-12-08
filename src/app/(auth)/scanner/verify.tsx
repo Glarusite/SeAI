@@ -1,4 +1,4 @@
-import { useDimensions, useAppNavigation } from "@src/common/hooks";
+import { useAppDimensions, useAppNavigation } from "@src/common/hooks";
 import { safeBack } from "@src/common/router";
 import AppScrollView from "@src/components/app/app-scroll-view";
 import VerifyForm from "@src/components/scanner/verify-form";
@@ -26,7 +26,7 @@ export default function VerifyPage() {
 }
 
 function useStyles() {
-  const { height } = useDimensions();
+  const { height } = useAppDimensions();
 
   return useMemo(
     () =>

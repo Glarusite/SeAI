@@ -4,7 +4,7 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, DataTable, HelperText } from "react-native-paper";
 
-import DocumentImage from "./document-image";
+import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
 export default function DocumentsDataTable() {
@@ -42,7 +42,7 @@ export default function DocumentsDataTable() {
       {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }) => (
         <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/(auth)/documents/${id}`)}>
           <DataTable.Cell>
-            <DocumentImage documentId={id} size={60} />
+            <DocumentThumbnail documentId={id} size={60} />
           </DataTable.Cell>
           <DataTable.Cell>{name}</DataTable.Cell>
           <DataTable.Cell>{number}</DataTable.Cell>

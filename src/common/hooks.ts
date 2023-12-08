@@ -32,7 +32,7 @@ export function useAppNavigation(effect: () => MaybePromise<void>, deps: unknown
   }, [isNavigationReady, ...deps]);
 }
 
-export function useDimensions(dimension: "screen" | "window" = "window") {
+export function useAppDimensions(dimension: "screen" | "window" = "window") {
   const [dimensions, setDimensions] = useState(Dimensions.get(dimension));
   useEffect(() => {
     const dimensionsHandler = Dimensions.addEventListener("change", () => setDimensions(Dimensions.get(dimension)));

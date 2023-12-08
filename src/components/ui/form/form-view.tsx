@@ -1,15 +1,13 @@
 import { Platform, StyleSheet, View } from "react-native";
 
 export default function FormView({ children }: React.PropsWithChildren) {
-  if (Platform.OS === "web") {
-    return (
-      <form>
-        <View style={styles.container}>{children}</View>
-      </form>
-    );
+  const formView = <View style={styles.container}>{children}</View>;
+
+  if (Platform.OS !== "web") {
+    return formView;
   }
 
-  return <View style={styles.container}>{children}</View>;
+  return <form>{formView}</form>;
 }
 
 const styles = StyleSheet.create({

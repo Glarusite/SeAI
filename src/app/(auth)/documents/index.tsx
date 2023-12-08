@@ -1,4 +1,4 @@
-import { useDimensions as useAppDimensions } from "@src/common/hooks";
+import { useAppDimensions } from "@src/common/hooks";
 import AppScrollView from "@src/components/app/app-scroll-view";
 import DocumentsDataTable from "@src/components/documents/documents-data-table";
 import { DocumentsList } from "@src/components/documents/documents-list";

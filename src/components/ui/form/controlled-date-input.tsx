@@ -11,6 +11,7 @@ registerTranslation("en-GB", enGB);
 export type ControlledDateInputProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;
   control: Control<TData, TContext>;
+  disabled?: boolean;
 } & Omit<DatePickerInputProps, keyof ControllerRenderProps>;
 
 export default function ControlledTextInput<TData extends FieldValues, TContext = unknown>({
@@ -24,9 +25,15 @@ export default function ControlledTextInput<TData extends FieldValues, TContext 
       name={name}
       control={control}
       defaultValue={defaultValue as PathValue<TData, Path<TData>>}
-      render={({ field: controlProps, fieldState: { error } }) => (
+      render={({ field: { disabled, ...controlProps }, fieldState: { error } }) => (
         <View>
-          <DatePickerInput mode="outlined" error={error != null} {...{ ...inputProps, ...controlProps }} />
+          <DatePickerInput
+            mode="outlined"
+            error={error != null}
+            iconStyle={{ display: disabled ? "none" : undefined }}
+            disabled={disabled}
+            {...{ ...inputProps, ...controlProps }}
+          />
           <ValidationText error={error} />
         </View>
       )}

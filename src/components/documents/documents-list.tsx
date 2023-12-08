@@ -1,10 +1,11 @@
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
+import { router } from "expo-router";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
 
-import DocumentImage from "./document-image";
+import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
 export function DocumentsList() {
@@ -26,10 +27,10 @@ export function DocumentsList() {
       keyExtractor={({ id }) => id!}
       removeClippedSubviews
       renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
-        <Card key={id} style={styles.card}>
+        <Card key={id} style={styles.card} onPress={() => router.push(`/(auth)/documents/${id}`)}>
           <List.Item
             title={name}
-            left={() => <DocumentImage documentId={id} size={80} />}
+            left={() => <DocumentThumbnail documentId={id} size={80} />}
             description={
               <View style={styles.gridContainer}>
                 <View>

@@ -9,6 +9,7 @@ import ValidationText from "./validation-text";
 export type ControlledTextInputProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;
   control: Control<TData, TContext>;
+  disabled?: boolean;
 } & Omit<TextInputProps, "onChangeText" | keyof ControllerRenderProps>;
 
 export default function ControlledTextInput<TData extends FieldValues, TContext = unknown>({
