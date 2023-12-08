@@ -26,6 +26,16 @@ export default function ProfileForm() {
 
   return (
     <FormView>
+      <ControlledDateInput
+        control={control}
+        name="readinessDate"
+        label="Readiness date"
+        inputMode="start"
+        locale="en-GB"
+      />
+
+      <ControlledDropDown control={control} name="status" label="Status" list={statusList} />
+
       <TextInput label="E-mail" mode="outlined" value={email} disabled />
 
       <ControlledTextInput
@@ -56,16 +66,6 @@ export default function ProfileForm() {
 
       <ControlledTextInput control={control} name="presentEmployer" label="Present employer" />
 
-      <ControlledDateInput
-        control={control}
-        name="readinessDate"
-        label="Readiness date"
-        inputMode="start"
-        locale="en-GB"
-      />
-
-      <ControlledDropDown control={control} name="status" label="Status" list={statusList} />
-
       <ControlledTextInput control={control} name="homeAirport" label="Home airport" />
 
       <ValidationText error={errors.root} />
@@ -77,20 +77,62 @@ export default function ProfileForm() {
   );
 }
 
-const rankList: DropDownList<ProfileFormData["rank"]> = [
-  { label: "Not selected", value: undefined },
-  { label: "Captain", value: "CAPTAIN" },
-];
-
-const vesselTypeList: DropDownList<ProfileFormData["vesselType"]> = [
-  { label: "Not selected", value: undefined },
-  { label: "Oil tanker", value: "OIL_TANKER" },
-];
-
 const statusList: DropDownList<ProfileFormData["status"]> = [
   { label: "Not selected", value: undefined },
   { label: "Home", value: "HOME" },
   { label: "On board", value: "ONBOARD" },
+];
+
+const rankList: DropDownList<ProfileFormData["rank"]> = [
+  { label: "Not selected", value: undefined },
+  { label: "Master/Captain (CPT)", value: "CAPTAIN" },
+  { label: "Chief Officer (C/O)", value: "CAPTAIN" },
+  { label: "First Officer", value: "CAPTAIN" },
+  { label: "Second Officer (2/O)", value: "CAPTAIN" },
+  { label: "Third Officer (3/O)", value: "CAPTAIN" },
+  { label: "Deck Cadet (D/C)", value: "CAPTAIN" },
+  { label: "Chief Engineer (C/E)", value: "CAPTAIN" },
+  { label: "First Engineer (1/E)", value: "CAPTAIN" },
+  { label: "Second Engineer (2/E)", value: "CAPTAIN" },
+  { label: "Third Engineer (3/E)", value: "CAPTAIN" },
+  { label: "Forth Engineer (4/E)", value: "CAPTAIN" },
+  { label: "Electro-Technical Officer (ETO)", value: "CAPTAIN" },
+  { label: "Boatswain (BSN)", value: "CAPTAIN" },
+  { label: "Able Seaman (AB)", value: "CAPTAIN" },
+  { label: "Ordinary Seaman (OS)", value: "CAPTAIN" },
+  { label: "Chief Steward (C/STW)", value: "CAPTAIN" },
+  { label: "Steward (STW)", value: "CAPTAIN" },
+  { label: "Messman (MSN)", value: "CAPTAIN" },
+  { label: "Fitter (FTR)", value: "CAPTAIN" },
+  { label: "Pumpman (P/P)", value: "CAPTAIN" },
+  { label: "Cook (C/K)", value: "CAPTAIN" },
+  { label: "Motorman (M/M)", value: "CAPTAIN" },
+  { label: "Oiler", value: "CAPTAIN" },
+  { label: "Welder", value: "CAPTAIN" },
+  { label: "Refrigeration Engineer", value: "CAPTAIN" },
+  { label: "Trainee Officer", value: "CAPTAIN" },
+  { label: "Radio Officer/Radio Operator", value: "CAPTAIN" },
+];
+
+const vesselTypeList: DropDownList<ProfileFormData["vesselType"]> = [
+  { label: "Not selected", value: undefined },
+  { label: "Container", value: "OIL_TANKER" },
+  { label: "Crude Oil", value: "OIL_TANKER" },
+  { label: "Product Oil", value: "OIL_TANKER" },
+  { label: "LPG (Liquefied Petroleum Gas)", value: "OIL_TANKER" },
+  { label: "LNG (Liquefied Natural Gas)", value: "OIL_TANKER" },
+  { label: "Reefer", value: "OIL_TANKER" },
+  { label: "Ro-Ro (Roll-On/Roll-Off)", value: "OIL_TANKER" },
+  { label: "General Cargo", value: "OIL_TANKER" },
+  { label: "Cruise", value: "OIL_TANKER" },
+  { label: "Ferry", value: "OIL_TANKER" },
+  { label: "Ocean Liner", value: "OIL_TANKER" },
+  { label: "Catamaran", value: "OIL_TANKER" },
+  { label: "Motor Yacht", value: "OIL_TANKER" },
+  { label: "Sailing Yacht", value: "OIL_TANKER" },
+  { label: "Mega Yacht", value: "OIL_TANKER" },
+  { label: "Explorer Yacht", value: "OIL_TANKER" },
+  { label: "Sport Fishing Yacht", value: "OIL_TANKER" },
 ];
 
 function useProfile() {
@@ -151,7 +193,11 @@ function useProfile() {
   useEffect(() => {
     if (queryError) {
       const message = toErrorMessage(queryError);
-      setError("root", { message });
+      Toast.show({
+        type: "error",
+        text1: "Profile load error",
+        text2: message,
+      });
     }
   }, [queryError, setError]);
 
