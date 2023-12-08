@@ -7,3 +7,5 @@ export type DateTime = Date & {
 export type UtcDateTime = Date & { kind: "utc" };
 
 export type LocalDateTime = Date & { kind: "local" };
+
+export type Unboxed<T> = T extends (infer U)[] ? U : T;

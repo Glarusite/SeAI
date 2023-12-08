@@ -1,7 +1,7 @@
 import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isInvalidDate } from "@src/common/validators";
-import type { ProfileFormData } from "@src/models";
+import type { DropDownList, ProfileFormData } from "@src/models";
 import { useAppSelector, useGetUserQuery, useUpdateUserMutation } from "@src/store";
 import { useEffect } from "react";
 import type { FieldErrors } from "react-hook-form";
@@ -11,6 +11,7 @@ import Toast from "react-native-toast-message";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import ControlledDateInput from "../ui/form/controlled-date-input";
+import ControlledDropDown from "../ui/form/controlled-drop-down";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
@@ -45,11 +46,11 @@ export default function ProfileForm() {
         locale="en-GB"
       />
 
-      <ControlledTextInput control={control} name="rank" label="Rank" />
+      <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
 
       <ControlledTextInput control={control} name="contractDuration" label="Contract duration" keyboardType="numeric" />
 
-      <ControlledTextInput control={control} name="vesselType" label="Vessel type" />
+      <ControlledDropDown control={control} name="vesselType" label="Vessel type" list={vesselTypeList} />
 
       <ControlledTextInput control={control} name="manningAgents" label="Manning agents" />
 
@@ -63,7 +64,7 @@ export default function ProfileForm() {
         locale="en-GB"
       />
 
-      <ControlledTextInput control={control} name="status" label="Status" />
+      <ControlledDropDown control={control} name="status" label="Status" list={statusList} />
 
       <ControlledTextInput control={control} name="homeAirport" label="Home airport" />
 
@@ -75,6 +76,22 @@ export default function ProfileForm() {
     </FormView>
   );
 }
+
+const rankList: DropDownList<ProfileFormData["rank"]> = [
+  { label: "Not selected", value: undefined },
+  { label: "Captain", value: "CAPTAIN" },
+];
+
+const vesselTypeList: DropDownList<ProfileFormData["vesselType"]> = [
+  { label: "Not selected", value: undefined },
+  { label: "Oil tanker", value: "OIL_TANKER" },
+];
+
+const statusList: DropDownList<ProfileFormData["status"]> = [
+  { label: "Not selected", value: undefined },
+  { label: "Home", value: "HOME" },
+  { label: "On board", value: "ONBOARD" },
+];
 
 function useProfile() {
   const userId = useAppSelector(state => state.user.userId) || "";
