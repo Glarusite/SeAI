@@ -19,6 +19,22 @@ export default function Navigation() {
       <LinkButton href="/user/" mode="contained-tonal">
         Profile
       </LinkButton>
+      <LinkButton href="/(auth)/" mode="contained-tonal">
+        Chat
+      </LinkButton>
+      <LinkButton href="/(auth)/" mode="contained-tonal">
+        Booking
+      </LinkButton>
+      <LinkButton href="/(auth)/" mode="contained-tonal">
+        Events
+      </LinkButton>
+      <LinkButton href="/(auth)/" mode="contained-tonal">
+        Maritime Administration
+      </LinkButton>
+      <LinkButton href="/(auth)/" mode="contained-tonal">
+        Information
+      </LinkButton>
+
       <Button onPress={logout} mode="outlined">
         Logout
       </Button>

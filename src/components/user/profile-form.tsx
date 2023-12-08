@@ -1,11 +1,13 @@
 import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
+import { useAppDimensions } from "@src/common/hooks";
 import { isBlank, isInvalidDate } from "@src/common/validators";
 import type { DropDownList, ProfileFormData } from "@src/models";
 import { useAppSelector, useGetUserQuery, useUpdateUserMutation } from "@src/store";
 import { useEffect } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import { Platform, View } from "react-native";
 import { ActivityIndicator, Button, TextInput } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
@@ -19,6 +21,7 @@ import ValidationText from "../ui/form/validation-text";
 export default function ProfileForm() {
   const { control, errors, isDirty, isLoading, isSubmitting, update, setFocus } = useProfile();
   const email = useAppSelector(state => state.user.email);
+  const { width } = useAppDimensions();
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -26,49 +29,60 @@ export default function ProfileForm() {
 
   return (
     <FormView>
-      <ControlledDateInput
-        control={control}
-        name="readinessDate"
-        label="Readiness date"
-        inputMode="start"
-        locale="en-GB"
-      />
+      <View style={{ flexDirection: Platform.OS === "web" && width >= 720 ? "row" : undefined, gap: 16 }}>
+        <View style={{ gap: 16, width: Platform.OS === "web" && width >= 720 ? "calc(50% - 8px)" : undefined }}>
+          <ControlledDateInput
+            control={control}
+            name="readinessDate"
+            label="Readiness date"
+            inputMode="start"
+            locale="en-GB"
+          />
 
-      <ControlledDropDown control={control} name="status" label="Status" list={statusList} />
+          <ControlledDropDown control={control} name="status" label="Status" list={statusList} />
 
-      <TextInput label="E-mail" mode="outlined" value={email} disabled />
+          <TextInput label="E-mail" mode="outlined" value={email} disabled />
 
-      <ControlledTextInput
-        control={control}
-        name="firstName"
-        label="First name"
-        textContentType="givenName"
-        onSubmitEditing={() => setFocus("lastName")}
-      />
+          <ControlledTextInput
+            control={control}
+            name="firstName"
+            label="First name"
+            textContentType="givenName"
+            onSubmitEditing={() => setFocus("lastName")}
+          />
 
-      <ControlledTextInput control={control} name="lastName" label="Last name" textContentType="familyName" />
+          <ControlledTextInput control={control} name="lastName" label="Last name" textContentType="familyName" />
 
-      <ControlledDateInput
-        control={control}
-        name="dateOfBirth"
-        label="Date of birth"
-        inputMode="start"
-        locale="en-GB"
-      />
+          <ControlledDateInput
+            control={control}
+            name="dateOfBirth"
+            label="Date of birth"
+            inputMode="start"
+            locale="en-GB"
+          />
+        </View>
 
-      <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
+        <View style={{ gap: 16, width: Platform.OS === "web" && width >= 720 ? "calc(50% - 8px)" : undefined }}>
+          <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
 
-      <ControlledTextInput control={control} name="contractDuration" label="Contract duration" keyboardType="numeric" />
+          <ControlledTextInput
+            control={control}
+            name="contractDuration"
+            label="Contract duration"
+            keyboardType="numeric"
+          />
 
-      <ControlledDropDown control={control} name="vesselType" label="Vessel type" list={vesselTypeList} />
+          <ControlledDropDown control={control} name="vesselType" label="Vessel type" list={vesselTypeList} />
 
-      <ControlledTextInput control={control} name="manningAgents" label="Manning agents" />
+          <ControlledTextInput control={control} name="manningAgents" label="Manning agents" />
 
-      <ControlledTextInput control={control} name="presentEmployer" label="Present employer" />
+          <ControlledTextInput control={control} name="presentEmployer" label="Present employer" />
 
-      <ControlledTextInput control={control} name="homeAirport" label="Home airport" />
+          <ControlledTextInput control={control} name="homeAirport" label="Home airport" />
 
-      <ValidationText error={errors.root} />
+          <ValidationText error={errors.root} />
+        </View>
+      </View>
 
       <Button icon="account-edit" mode="contained" onPress={update} disabled={!isDirty || isSubmitting}>
         {isSubmitting ? <ButtonActivityIndicator /> : "Update"}

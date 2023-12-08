@@ -10,12 +10,19 @@ export default function AnonymousLayout() {
 
   useAppNavigation(() => {
     if (accessToken && group === "(anon)") {
-      router.replace("/");
+      router.replace("/(auth)/");
     }
   }, [accessToken, group]);
 
   return (
     <AppTabs>
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "SeAI",
+          href: null,
+        }}
+      />
       <Tabs.Screen
         name="user/login"
         options={{
