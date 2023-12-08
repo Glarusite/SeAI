@@ -1,17 +1,18 @@
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
+import AppScrollView from "../app/app-scroll-view";
+
 import LogoImage from "./logo-image";
-import NarrowView from "./narrow-view";
 
 export default function WebSplashScreen() {
   return (
-    <NarrowView>
+    <AppScrollView>
       <View style={styles.logoContainer}>
         <LogoImage />
       </View>
       <ActivityIndicator style={styles.spinner} size={240} />
-    </NarrowView>
+    </AppScrollView>
   );
 }
 
