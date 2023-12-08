@@ -40,7 +40,7 @@ export function toLocalDate(date: Nullable<string> | DateTime) {
 }
 
 export function toUtcDate(date: Nullable<DateTime>) {
-  if (date == null) {
+  if (!date) {
     return;
   }
 
