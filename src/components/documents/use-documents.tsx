@@ -1,7 +1,7 @@
-import { useAppSelector, useSaveDocument1Query } from "@src/store";
+import { useAppSelector, useFindAllUserDocumentsQuery } from "@src/store";
 
 export function useDocuments() {
   const userId = useAppSelector(state => state.user.userId) || "";
-  const { data = [], isLoading, error } = useSaveDocument1Query(userId, { skip: !userId });
+  const { data = [], isLoading, error } = useFindAllUserDocumentsQuery(userId, { skip: !userId });
   return { data, isLoading, error };
 }
