@@ -1,7 +1,7 @@
 import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import type { DocumentFormData } from "@src/models";
-import { useAppSelector, useDiscardMutation, useSaveDocumentMutation } from "@src/store";
+import { useAppSelector, useDiscardMutation, useVerifyDocumentMutation } from "@src/store";
 import { resetScan } from "@src/store/slices/scan";
 import { router } from "expo-router";
 import { useCallback } from "react";
@@ -55,7 +55,7 @@ function useVerify() {
     resolver,
   });
 
-  const [verifyRequest] = useSaveDocumentMutation();
+  const [verifyRequest] = useVerifyDocumentMutation();
   const verify = handleSubmit(async ({ name, number, issueDate, expiryDate }) => {
     try {
       if (scan.id == null || userId == null) {
@@ -65,11 +65,12 @@ function useVerify() {
       await verifyRequest({
         documentId: scan.id,
         userId,
-        marineDocument: {
+        verifyDocumentRequest: {
           name,
           number,
           issueDate: toUtcDate(issueDate)?.toJSON(),
           expiryDate: toUtcDate(expiryDate)?.toJSON(),
+          notifyBefore: [],
         },
       }).unwrap();
 

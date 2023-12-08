@@ -1,11 +1,23 @@
 import { baseApi as api } from "./api.base";
-export const addTagTypes = ["voyage-controller", "document-controller", "auth-controller"] as const;
+export const addTagTypes = ["user-controller", "voyage-controller", "document-controller", "auth-controller"] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
   })
   .injectEndpoints({
     endpoints: build => ({
+      getUser: build.query<GetUserApiResponse, GetUserParameters>({
+        query: queryArgument => ({ url: `/api/v1/users/${queryArgument}` }),
+        providesTags: ["user-controller"],
+      }),
+      updateUser: build.mutation<UpdateUserApiResponse, UpdateUserParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}`,
+          method: "PUT",
+          body: queryArgument.userUpdateRequest,
+        }),
+        invalidatesTags: ["user-controller"],
+      }),
       updateVoyage: build.mutation<UpdateVoyageApiResponse, UpdateVoyageParameters>({
         query: queryArgument => ({
           url: `/api/v1/users/${queryArgument.userId}/voyages/${queryArgument.voyageId}`,
@@ -41,11 +53,11 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["document-controller"],
       }),
-      saveDocument: build.mutation<SaveDocumentApiResponse, SaveDocumentParameters>({
+      verifyDocument: build.mutation<VerifyDocumentApiResponse, VerifyDocumentParameters>({
         query: queryArgument => ({
           url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/verify`,
           method: "POST",
-          body: queryArgument.marineDocument,
+          body: queryArgument.verifyDocumentRequest,
         }),
         invalidatesTags: ["document-controller"],
       }),
@@ -64,14 +76,27 @@ const injectedRtkApi = api
         query: queryArgument => ({ url: `/api/v1/auth/login`, method: "POST", body: queryArgument }),
         invalidatesTags: ["auth-controller"],
       }),
-      saveDocument1: build.query<SaveDocument1ApiResponse, SaveDocument1Parameters>({
+      findAllUserDocuments: build.query<FindAllUserDocumentsApiResponse, FindAllUserDocumentsParameters>({
         query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/documents` }),
+        providesTags: ["document-controller"],
+      }),
+      findUserDocument: build.query<FindUserDocumentApiResponse, FindUserDocumentParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}`,
+        }),
         providesTags: ["document-controller"],
       }),
     }),
     overrideExisting: false,
   });
 export { injectedRtkApi as api };
+export type GetUserApiResponse = /** status 200 OK */ GetUserResponse;
+export type GetUserParameters = string;
+export type UpdateUserApiResponse = unknown;
+export type UpdateUserParameters = {
+  userId: string;
+  userUpdateRequest: UserUpdateRequest;
+};
 export type UpdateVoyageApiResponse = unknown;
 export type UpdateVoyageParameters = {
   userId: string;
@@ -95,11 +120,11 @@ export type HandleFileUploadParameters = {
   userId: string;
   body: FormData;
 };
-export type SaveDocumentApiResponse = unknown;
-export type SaveDocumentParameters = {
+export type VerifyDocumentApiResponse = unknown;
+export type VerifyDocumentParameters = {
   userId: string;
   documentId: string;
-  marineDocument: MarineDocument;
+  verifyDocumentRequest: VerifyDocumentRequest;
 };
 export type DiscardApiResponse = unknown;
 export type DiscardParameters = {
@@ -110,8 +135,39 @@ export type RegisterApiResponse = unknown;
 export type RegisterParameters = UserRegisterRequest;
 export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ AuthResponse;
 export type AuthenticateAndGetTokenParameters = AuthRequest;
-export type SaveDocument1ApiResponse = /** status 200 OK */ MarineDocument[];
-export type SaveDocument1Parameters = string;
+export type FindAllUserDocumentsApiResponse = /** status 200 OK */ MarineDocument[];
+export type FindAllUserDocumentsParameters = string;
+export type FindUserDocumentApiResponse = /** status 200 OK */ MarineDocument;
+export type FindUserDocumentParameters = {
+  userId: string;
+  documentId: string;
+};
+export type GetUserResponse = {
+  firstName?: string;
+  lastName?: string;
+  rank?: "CAPTAIN";
+  presentEmployer?: string;
+  dateOfBirth?: string;
+  manningAgents?: string;
+  status?: "ONBOARD" | "HOME";
+  vesselType?: "OIL_TANKER";
+  homeAirport?: string;
+  readinessDate?: string;
+  contractDuration?: number;
+};
+export type UserUpdateRequest = {
+  firstName?: string;
+  lastName?: string;
+  rank?: "CAPTAIN";
+  presentEmployer?: string;
+  dateOfBirth?: string;
+  manningAgents?: string;
+  status?: "ONBOARD" | "HOME";
+  vesselType?: "OIL_TANKER";
+  homeAirport?: string;
+  readinessDate?: string;
+  contractDuration?: number;
+};
 export type UpdateVoyageRequest = {
   vesselName?: string;
   rank?: "CAPTAIN";
@@ -153,20 +209,19 @@ export type MarineDocument = {
   path?: string;
   verified?: boolean;
 };
+export type VerifyDocumentRequest = {
+  name?: string;
+  number?: string;
+  issueDate?: string;
+  expiryDate?: string;
+  notifyAt?: string;
+  notifyBefore?: number[];
+};
 export type UserRegisterRequest = {
   email: string;
   password: string;
   firstName?: string;
   lastName?: string;
-  rank?: "CAPTAIN";
-  presentEmployer?: string;
-  dateOfBirth?: string;
-  manningAgents?: string;
-  status?: "ONBOARD" | "HOME";
-  vesselType?: "OIL_TANKER";
-  homeAirport?: string;
-  readinessDate?: string;
-  contractDuration?: number;
 };
 export type AuthResponse = {
   userId?: string;
@@ -177,14 +232,17 @@ export type AuthRequest = {
   password: string;
 };
 export const {
+  useGetUserQuery,
+  useUpdateUserMutation,
   useUpdateVoyageMutation,
   useDeleteVoyageMutation,
   useFindAllByUserQuery,
   useCreateVoyageMutation,
   useHandleFileUploadMutation,
-  useSaveDocumentMutation,
+  useVerifyDocumentMutation,
   useDiscardMutation,
   useRegisterMutation,
   useAuthenticateAndGetTokenMutation,
-  useSaveDocument1Query,
+  useFindAllUserDocumentsQuery,
+  useFindUserDocumentQuery,
 } = injectedRtkApi;
