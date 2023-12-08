@@ -10410,9 +10410,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper-dates@npm:^0.20.4":
-  version: 0.20.4
-  resolution: "react-native-paper-dates@npm:0.20.4"
+"react-native-paper-dates@npm:0.20.5":
+  version: 0.20.5
+  resolution: "react-native-paper-dates@npm:0.20.5"
   dependencies:
     color: "npm:^3.2.1"
   peerDependencies:
@@ -10420,7 +10420,7 @@ __metadata:
     react-native: "*"
     react-native-paper: "*"
     react-native-vector-icons: "*"
-  checksum: c827c757a73de6453cb728711914c688c70a0b93a7ad2d903faf21a708dad95c669ea70ec0ae215fc99d51153c4af8f207c7199e56e1457e06ff52ae82a03a88
+  checksum: f896c4677d627887f9d0e774ca460b560fcfbf65a46dacfe9bb10710960c0ecd7dfd860ba0caa7caab827f025168a9b4dbe32374c9ae2755bac483370b721544
   languageName: node
   linkType: hard
 
@@ -11211,7 +11211,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.12.1"
     react-native-keyboard-aware-scroll-view: "npm:^0.9.5"
     react-native-paper: "npm:5.11.3"
-    react-native-paper-dates: "npm:^0.20.4"
+    react-native-paper-dates: "npm:0.20.5"
     react-native-reanimated: "npm:~3.3.0"
     react-native-safe-area-context: "npm:4.6.3"
     react-native-screens: "npm:~3.22.1"
