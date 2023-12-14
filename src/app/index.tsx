@@ -1,4 +1,4 @@
-import splashImageSource from "@assets/background.jpg";
+import backgroundImageSource from "@assets/background.webp";
 import logoImageSource from "@assets/icon.png";
 import { useAppNavigation } from "@src/common/hooks";
 import LinkButton from "@src/components/ui/buttons/link-button";
@@ -19,7 +19,7 @@ export default function MarketingPage() {
 
   return (
     <>
-      <Image source={splashImageSource} style={{ height: "100%", width: "100%" }} contentFit="cover" />
+      <Image source={backgroundImageSource} style={{ height: "100%", width: "100%" }} contentFit="cover" />
       <View
         style={{
           position: "absolute",
