@@ -5,10 +5,11 @@ import { Platform } from "react-native";
 
 export default function ProfilePage() {
   const { width } = useAppDimensions();
+  const wide = Platform.OS === "web" && width > 720;
 
   return (
-    <AppScrollView wide={Platform.OS === "web" && width > 720}>
-      <ProfileForm />
+    <AppScrollView wide={wide}>
+      <ProfileForm wide={wide} />
     </AppScrollView>
   );
 }

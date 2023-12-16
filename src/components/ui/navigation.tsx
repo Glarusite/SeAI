@@ -16,6 +16,9 @@ export default function Navigation() {
       <LinkButton href="/documents/" mode="contained-tonal">
         Documents
       </LinkButton>
+      <LinkButton href="/voyages/" mode="contained-tonal">
+        Voyages
+      </LinkButton>
       <LinkButton href="/user/" mode="contained-tonal">
         Profile
       </LinkButton>

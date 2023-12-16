@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { Control, ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import type { DropDownPropsInterface } from "react-native-paper-dropdown";
 import DropDown from "react-native-paper-dropdown";
@@ -20,7 +20,8 @@ export default function ControlledDropDown<TData extends FieldValues, TContext =
   ...inputProps
 }: ControlledDropDownProps<TData, TContext>) {
   const [visible, setVisible] = useState(false);
-  const theme = useTheme();
+  const styles = useStyles();
+
   return (
     <Controller
       name={name}
@@ -34,12 +35,25 @@ export default function ControlledDropDown<TData extends FieldValues, TContext =
             showDropDown={() => setVisible(true)}
             onDismiss={() => setVisible(false)}
             visible={visible}
-            dropDownItemTextStyle={{ color: theme.colors.onBackground }}
+            dropDownItemTextStyle={styles.dropDownItemText}
             {...{ ...inputProps, ...controlProps }}
           />
           <ValidationText error={error} />
         </View>
       )}
     />
+  );
+}
+
+function useStyles() {
+  const { colors } = useTheme();
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        dropDownItemText: {
+          color: colors.onBackground,
+        },
+      }),
+    [colors],
   );
 }

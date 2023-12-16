@@ -1,13 +1,13 @@
 import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
-import { useAppDimensions } from "@src/common/hooks";
 import { isBlank, isInvalidDate } from "@src/common/validators";
 import type { DropDownList, ProfileFormData } from "@src/models";
 import { useAppSelector, useGetUserQuery, useUpdateUserMutation } from "@src/store";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { Platform, View } from "react-native";
+import type { DimensionValue } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ActivityIndicator, Button, TextInput } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
@@ -18,10 +18,14 @@ import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
-export default function ProfileForm() {
+export interface ProfileFormProps {
+  wide: boolean;
+}
+
+export default function ProfileForm(props: ProfileFormProps) {
   const { control, errors, isDirty, isLoading, isSubmitting, update, setFocus } = useProfile();
   const email = useAppSelector(state => state.user.email);
-  const { width } = useAppDimensions();
+  const styles = useStyles(props);
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -29,8 +33,8 @@ export default function ProfileForm() {
 
   return (
     <FormView>
-      <View style={{ flexDirection: Platform.OS === "web" && width >= 720 ? "row" : undefined, gap: 16 }}>
-        <View style={{ gap: 16, width: Platform.OS === "web" && width >= 720 ? "calc(50% - 8px)" : undefined }}>
+      <View style={styles.formContainer}>
+        <View style={styles.inputContainer}>
           <ControlledDateInput
             control={control}
             name="readinessDate"
@@ -62,7 +66,7 @@ export default function ProfileForm() {
           />
         </View>
 
-        <View style={{ gap: 16, width: Platform.OS === "web" && width >= 720 ? "calc(50% - 8px)" : undefined }}>
+        <View style={styles.inputContainer}>
           <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
 
           <ControlledTextInput
@@ -148,6 +152,25 @@ const vesselTypeList: DropDownList<ProfileFormData["vesselType"]> = [
   { label: "Explorer Yacht", value: "OIL_TANKER" },
   { label: "Sport Fishing Yacht", value: "OIL_TANKER" },
 ];
+
+function useStyles({ wide }: ProfileFormProps) {
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        formContainer: {
+          flexDirection: wide ? "row" : undefined,
+          gap: 16,
+        },
+
+        inputContainer: {
+          // TODO: figure out how to make calc work on iOS and Android
+          width: wide ? ("calc(50% - 8px)" as DimensionValue) : undefined,
+          gap: 16,
+        },
+      }),
+    [wide],
+  );
+}
 
 function useProfile() {
   const userId = useAppSelector(state => state.user.userId) || "";
