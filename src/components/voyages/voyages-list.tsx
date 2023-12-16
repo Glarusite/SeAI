@@ -35,7 +35,7 @@ export function VoyagesList() {
         }) => (
           <Card key={id} style={styles.card} onPress={() => router.push(`/voyages/${id}`)}>
             <List.Item
-              title={`#${index + 1}`}
+              title={`#${data.length - index}`}
               description={
                 <View style={styles.gridContainer}>
                   <View>

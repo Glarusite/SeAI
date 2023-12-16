@@ -54,7 +54,7 @@ export default function VoyagesDataTable() {
           ?.slice(from, to)
           .map(({ id, vesselName, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate }, index) => (
             <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/voyages/${id}`)}>
-              <DataTable.Cell>{index + 1}</DataTable.Cell>
+              <DataTable.Cell>{data.length - from - index}</DataTable.Cell>
               <DataTable.Cell>{vesselName}</DataTable.Cell>
               <DataTable.Cell>N/A</DataTable.Cell>
               <DataTable.Cell>{rank}</DataTable.Cell>
