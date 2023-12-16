@@ -7,5 +7,5 @@ export function isNotEmail(email: string) {
 }
 
 export function isInvalidDate(date: Date) {
-  return Number.isNaN(date.getTime());
+  return typeof date.getTime !== "function" || Number.isNaN(date.getTime());
 }

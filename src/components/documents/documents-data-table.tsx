@@ -10,7 +10,6 @@ import { useDocuments } from "./use-documents";
 export default function DocumentsDataTable() {
   const { data, isLoading, error } = useDocuments();
   const [page, setPage] = useState<number>(0);
-  const [numberOfItemsPerPageList] = useState([10, 20, 50]);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[0]);
 
   const from = page * itemsPerPage;
@@ -40,7 +39,7 @@ export default function DocumentsDataTable() {
       </DataTable.Header>
 
       {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }) => (
-        <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/(auth)/documents/${id}`)}>
+        <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/documents/${id}`)}>
           <DataTable.Cell>
             <DocumentThumbnail documentId={id} size={60} />
           </DataTable.Cell>
@@ -66,3 +65,5 @@ export default function DocumentsDataTable() {
     </DataTable>
   );
 }
+
+const numberOfItemsPerPageList = [10, 20, 50];

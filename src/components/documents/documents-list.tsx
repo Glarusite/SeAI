@@ -27,17 +27,17 @@ export function DocumentsList() {
       keyExtractor={({ id }) => id!}
       removeClippedSubviews
       renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
-        <Card key={id} style={styles.card} onPress={() => router.push(`/(auth)/documents/${id}`)}>
+        <Card key={id} style={styles.card} onPress={() => router.push(`/documents/${id}`)}>
           <List.Item
             title={name}
             left={() => <DocumentThumbnail documentId={id} size={80} />}
             description={
               <View style={styles.gridContainer}>
                 <View>
-                  <Text>Number: </Text>
-                  <Text>Issue date: </Text>
-                  <Text>Expiration date: </Text>
-                  <Text>Upload date: </Text>
+                  <Text>Number:</Text>
+                  <Text>Issue date:</Text>
+                  <Text>Expiration date:</Text>
+                  <Text>Upload date:</Text>
                 </View>
 
                 <View>
@@ -71,5 +71,6 @@ const styles = StyleSheet.create({
 
   gridContainer: {
     flexDirection: "row",
+    gap: 16,
   },
 });
