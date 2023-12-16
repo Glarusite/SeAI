@@ -1,6 +1,6 @@
-import logoImageSource from "@assets/icon.png";
+import logoDarkImageSource from "@assets/icon-dark.png";
+import logoLightImageSource from "@assets/icon-light.png";
 import { Image } from "expo-image";
-import { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
@@ -11,12 +11,16 @@ export interface LogoImageProps {
 }
 
 export default function LogoImage({ title }: LogoImageProps) {
-  const styles = useStyles();
+  const {
+    dark,
+    colors: { primary },
+  } = useTheme();
+
   return (
     <>
-      <Image source={logoImageSource} style={styles.image} />
+      <Image source={dark ? logoDarkImageSource : logoLightImageSource} style={styles.image} />
       {title && (
-        <PageTitle fontSize={46} fontFamily="Impact">
+        <PageTitle fontSize={46} fontFamily="Impact" color={dark ? "white" : primary}>
           {title}
         </PageTitle>
       )}
@@ -24,19 +28,10 @@ export default function LogoImage({ title }: LogoImageProps) {
   );
 }
 
-function useStyles() {
-  const { dark } = useTheme();
-
-  return useMemo(
-    () =>
-      StyleSheet.create({
-        image: {
-          height: 150,
-          width: 150,
-          alignSelf: "center",
-          filter: dark ? undefined : "invert(1)",
-        },
-      }),
-    [dark],
-  );
-}
+const styles = StyleSheet.create({
+  image: {
+    height: 150,
+    width: 150,
+    alignSelf: "center",
+  },
+});

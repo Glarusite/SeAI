@@ -10,7 +10,7 @@ const AppConfig: ExpoConfig = {
   scheme: "seai",
   version: "1.0.0",
   orientation: "portrait",
-  icon: "./assets/icon.png",
+  icon: "./assets/icon-light.png",
   userInterfaceStyle: "automatic",
   splash: {
     image: "./assets/splash.png",

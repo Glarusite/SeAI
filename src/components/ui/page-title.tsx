@@ -3,12 +3,14 @@ import type { TextStyle } from "react-native";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
-export type TitleTextProps = React.PropsWithChildren<Pick<TextStyle, "alignSelf" | "fontFamily" | "fontSize">>;
+export type TitleTextProps = React.PropsWithChildren<
+  Pick<TextStyle, "alignSelf" | "fontFamily" | "fontSize" | "color">
+>;
 
-export function PageTitle({ alignSelf = "center", fontFamily, fontSize = 36, children }: TitleTextProps) {
+export function PageTitle({ alignSelf = "center", fontFamily, fontSize = 36, color, children }: TitleTextProps) {
   const styles = useMemo(
-    () => StyleSheet.create({ titleText: { fontSize, fontFamily, alignSelf } }),
-    [alignSelf, fontFamily, fontSize],
+    () => StyleSheet.create({ titleText: { fontSize, fontFamily, alignSelf, color } }),
+    [alignSelf, fontFamily, fontSize, color],
   );
 
   return <Text style={styles.titleText}>{children}</Text>;

@@ -1,5 +1,5 @@
 import backgroundImageSource from "@assets/background.webp";
-import logoImageSource from "@assets/icon.png";
+import logoDarkImageSource from "@assets/icon-dark.png";
 import { useAppNavigation } from "@src/common/hooks";
 import LinkButton from "@src/components/ui/buttons/link-button";
 import { useAppSelector } from "@src/store";
@@ -29,7 +29,7 @@ export default function MarketingPage() {
           gap: Platform.OS === "web" ? undefined : 10,
         }}
       >
-        <Image source={logoImageSource} style={{ height: 100, width: 100 }} />
+        <Image source={logoDarkImageSource} style={{ height: 100, width: 100 }} />
         <Title style={{ fontSize: 40, fontWeight: "800", lineHeight: 40, color: "white" }}>SeAI</Title>
       </View>
       <View style={{ position: "absolute", top: 35, right: "5%", flexDirection: "row" }}>
