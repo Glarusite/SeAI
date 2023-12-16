@@ -7,6 +7,8 @@ import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text } from "react-native-paper";
 
+import TextValue from "../ui/text-value";
+
 import { useVoyages } from "./use-voyages";
 
 export function VoyagesList() {
@@ -50,14 +52,14 @@ export function VoyagesList() {
                   </View>
 
                   <View>
-                    <Text>{vesselName}</Text>
-                    <Text>{rank}</Text>
-                    <Text>N/A</Text>
-                    <Text>{imoNumber}</Text>
-                    <Text>{joiningPort}</Text>
-                    <Text>{toLocaleDateString(joiningDate)}</Text>
-                    <Text>{leavingPort}</Text>
-                    <Text>{toLocaleDateString(leavingDate)}</Text>
+                    <TextValue>{vesselName}</TextValue>
+                    <TextValue>{rank}</TextValue>
+                    <TextValue>N/A</TextValue>
+                    <TextValue>{imoNumber}</TextValue>
+                    <TextValue>{joiningPort}</TextValue>
+                    <TextValue>{toLocaleDateString(joiningDate)}</TextValue>
+                    <TextValue>{leavingPort}</TextValue>
+                    <TextValue>{toLocaleDateString(leavingDate)}</TextValue>
                   </View>
                 </View>
               }

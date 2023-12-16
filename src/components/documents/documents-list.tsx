@@ -5,6 +5,8 @@ import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
 
+import TextValue from "../ui/text-value";
+
 import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
@@ -41,10 +43,10 @@ export function DocumentsList() {
                 </View>
 
                 <View>
-                  <Text>{number}</Text>
-                  <Text>{toLocaleDateString(issueDate)}</Text>
-                  <Text>{toLocaleDateString(expiryDate)}</Text>
-                  <Text>{toLocaleDateString(createdDate)}</Text>
+                  <TextValue>{number}</TextValue>
+                  <TextValue>{toLocaleDateString(issueDate)}</TextValue>
+                  <TextValue>{toLocaleDateString(expiryDate)}</TextValue>
+                  <TextValue>{toLocaleDateString(createdDate)}</TextValue>
                 </View>
               </View>
             }
