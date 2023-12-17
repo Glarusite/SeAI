@@ -1,9 +1,16 @@
+import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
-export interface ValueProps {
-  children: string | undefined;
+export default function TextValue({ children }: React.PropsWithChildren) {
+  return (
+    <Text style={style.text} numberOfLines={1}>
+      {children || <>&nbsp;</>}
+    </Text>
+  );
 }
 
-export default function TextValue({ children }: ValueProps) {
-  return <Text>{children || <>&nbsp;</>}</Text>;
-}
+const style = StyleSheet.create({
+  text: {
+    textOverflow: "ellipsis",
+  },
+});

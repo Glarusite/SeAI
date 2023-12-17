@@ -52,3 +52,15 @@ export function toUtcDate(date: Nullable<DateTime>) {
 
   return date as UtcDateTime;
 }
+
+export function isSameDate(startDate: Date | undefined, endDate: Date | undefined) {
+  if (startDate === undefined || endDate === undefined) {
+    return false;
+  }
+
+  return (
+    startDate.getFullYear() === endDate.getFullYear() &&
+    startDate.getMonth() === endDate.getMonth() &&
+    startDate.getDate() === endDate.getDate()
+  );
+}

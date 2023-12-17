@@ -13,20 +13,20 @@ export default function Navigation() {
       <LinkButton href="/scanner/" mode="contained">
         Smart Scanner
       </LinkButton>
+      <LinkButton href="/user/" mode="contained-tonal">
+        Profile
+      </LinkButton>
       <LinkButton href="/documents/" mode="contained-tonal">
         Documents
       </LinkButton>
       <LinkButton href="/voyages/" mode="contained-tonal">
         Voyages
       </LinkButton>
-      <LinkButton href="/user/" mode="contained-tonal">
-        Profile
+      <LinkButton href="/booking/" mode="contained-tonal">
+        Booking
       </LinkButton>
       <LinkButton href="/(auth)/" mode="contained-tonal">
         Chat
-      </LinkButton>
-      <LinkButton href="/(auth)/" mode="contained-tonal">
-        Booking
       </LinkButton>
       <LinkButton href="/(auth)/" mode="contained-tonal">
         Events

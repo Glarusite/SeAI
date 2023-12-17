@@ -16,6 +16,7 @@ export default function AuthorizedLayout() {
   return (
     <AppStack>
       <Stack.Screen name="index" options={{ title: "Home" }} />
+      <Stack.Screen name="booking/index" options={{ title: "Booking" }} />
       <Stack.Screen name="documents/[id]" options={{ title: "Document Review" }} />
       <Stack.Screen name="documents/index" options={{ title: "Documents" }} />
       <Stack.Screen name="scanner/index" options={{ title: "Scanner" }} />

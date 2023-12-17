@@ -42,14 +42,14 @@ export default function VoyagesDataTable() {
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>#</DataTable.Title>
-          <DataTable.Title>Vessel Name</DataTable.Title>
-          <DataTable.Title>Vessel Type</DataTable.Title>
+          <DataTable.Title>Vessel name</DataTable.Title>
+          <DataTable.Title>Vessel type</DataTable.Title>
           <DataTable.Title>Rank</DataTable.Title>
-          <DataTable.Title>IMO Number</DataTable.Title>
-          <DataTable.Title>Joining Port</DataTable.Title>
-          <DataTable.Title>Joining Date</DataTable.Title>
-          <DataTable.Title>Leaving Port</DataTable.Title>
-          <DataTable.Title>Leaving Date</DataTable.Title>
+          <DataTable.Title>IMO number</DataTable.Title>
+          <DataTable.Title>Joining port</DataTable.Title>
+          <DataTable.Title>Joining date</DataTable.Title>
+          <DataTable.Title>Leaving port</DataTable.Title>
+          <DataTable.Title>Leaving date</DataTable.Title>
         </DataTable.Header>
 
         {data

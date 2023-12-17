@@ -41,17 +41,17 @@ export function VoyagesList() {
               description={
                 <View style={styles.gridContainer}>
                   <View>
-                    <Text>Vessel Name:</Text>
+                    <Text>Vessel name:</Text>
                     <Text>Rank:</Text>
-                    <Text>Vessel Type:</Text>
-                    <Text>IMO Number:</Text>
-                    <Text>Joining Port:</Text>
-                    <Text>Joining Date:</Text>
-                    <Text>Leaving Port:</Text>
-                    <Text>Leaving Date:</Text>
+                    <Text>Vessel type:</Text>
+                    <Text>IMO number:</Text>
+                    <Text>Joining port:</Text>
+                    <Text>Joining date:</Text>
+                    <Text>Leaving port:</Text>
+                    <Text>Leaving date:</Text>
                   </View>
 
-                  <View>
+                  <View style={styles.valueContainer}>
                     <TextValue>{vesselName}</TextValue>
                     <TextValue>{rank}</TextValue>
                     <TextValue>N/A</TextValue>
@@ -100,6 +100,11 @@ const styles = StyleSheet.create({
 
   gridContainer: {
     flexDirection: "row",
+    width: "100%",
     gap: 16,
+  },
+
+  valueContainer: {
+    flex: 1,
   },
 });

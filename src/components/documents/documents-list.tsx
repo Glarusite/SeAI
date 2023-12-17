@@ -42,7 +42,7 @@ export function DocumentsList() {
                   <Text>Upload date:</Text>
                 </View>
 
-                <View>
+                <View style={styles.valueContainer}>
                   <TextValue>{number}</TextValue>
                   <TextValue>{toLocaleDateString(issueDate)}</TextValue>
                   <TextValue>{toLocaleDateString(expiryDate)}</TextValue>
@@ -73,6 +73,11 @@ const styles = StyleSheet.create({
 
   gridContainer: {
     flexDirection: "row",
+    width: "100%",
     gap: 16,
+  },
+
+  valueContainer: {
+    flex: 1,
   },
 });
