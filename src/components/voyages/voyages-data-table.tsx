@@ -5,6 +5,8 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
 
+import DataTableRow from "../ui/data-table-row";
+
 import { useVoyages } from "./use-voyages";
 
 export default function VoyagesDataTable() {
@@ -53,7 +55,7 @@ export default function VoyagesDataTable() {
         {data
           ?.slice(from, to)
           .map(({ id, vesselName, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate }, index) => (
-            <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/voyages/${id}`)}>
+            <DataTableRow key={id} index={index} onPress={() => router.push(`/voyages/${id}`)}>
               <DataTable.Cell>{data.length - from - index}</DataTable.Cell>
               <DataTable.Cell>{vesselName}</DataTable.Cell>
               <DataTable.Cell>N/A</DataTable.Cell>
@@ -63,7 +65,7 @@ export default function VoyagesDataTable() {
               <DataTable.Cell>{toLocaleDateString(joiningDate)}</DataTable.Cell>
               <DataTable.Cell>{leavingPort}</DataTable.Cell>
               <DataTable.Cell>{toLocaleDateString(leavingDate)}</DataTable.Cell>
-            </DataTable.Row>
+            </DataTableRow>
           ))}
 
         <DataTable.Pagination

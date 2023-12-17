@@ -4,6 +4,8 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, DataTable, HelperText } from "react-native-paper";
 
+import DataTableRow from "../ui/data-table-row";
+
 import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
@@ -38,9 +40,9 @@ export default function DocumentsDataTable() {
         <DataTable.Title>Upload date</DataTable.Title>
       </DataTable.Header>
 
-      {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }) => (
-        <DataTable.Row key={id} style={{ padding: 8 }} onPress={() => router.push(`/documents/${id}`)}>
-          <DataTable.Cell>
+      {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }, index) => (
+        <DataTableRow key={id} index={index} onPress={() => router.push(`/documents/${id}`)}>
+          <DataTable.Cell style={{ padding: 8 }}>
             <DocumentThumbnail documentId={id} size={60} />
           </DataTable.Cell>
           <DataTable.Cell>{name}</DataTable.Cell>
@@ -48,7 +50,7 @@ export default function DocumentsDataTable() {
           <DataTable.Cell>{toLocaleDateString(issueDate)}</DataTable.Cell>
           <DataTable.Cell>{toLocaleDateString(expiryDate)}</DataTable.Cell>
           <DataTable.Cell>{toLocaleDateString(createdDate)}</DataTable.Cell>
-        </DataTable.Row>
+        </DataTableRow>
       ))}
 
       <DataTable.Pagination
