@@ -2,10 +2,9 @@ import { toLocalDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { router } from "expo-router";
-import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text } from "react-native-paper";
+import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
 
 import TextValue from "../ui/text-value";
 
@@ -13,7 +12,6 @@ import { useBookings } from "./use-bookings";
 
 export function BookingsList() {
   const { data, isLoading, error } = useBookings();
-  const [fabGroupState, setFabGroupState] = useState({ open: false });
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -86,19 +84,6 @@ export function BookingsList() {
           );
         }}
       />
-
-      <Portal>
-        <FAB.Group
-          visible
-          icon={fabGroupState.open ? "close" : "plus"}
-          open={fabGroupState.open}
-          onStateChange={setFabGroupState}
-          actions={[
-            { icon: "camera", label: "Scan Booking List", onPress: showFeatureInDevelopmentToast },
-            { icon: "plus", label: "Add New Booking", onPress: () => router.push("/voyages/new") },
-          ]}
-        />
-      </Portal>
     </>
   );
 }
