@@ -12,7 +12,7 @@ import { useDocuments } from "./use-documents";
 export default function DocumentsDataTable() {
   const { data, isLoading, error } = useDocuments();
   const [page, setPage] = useState<number>(0);
-  const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[0]);
+  const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
 
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, data.length);

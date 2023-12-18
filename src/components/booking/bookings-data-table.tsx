@@ -12,7 +12,7 @@ import { useBookings } from "./use-bookings";
 export default function BookingsDataTable() {
   const { data, isLoading, error } = useBookings();
   const [page, setPage] = useState<number>(0);
-  const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[0]);
+  const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
 
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, data.length);
