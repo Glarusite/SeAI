@@ -150,7 +150,7 @@ function useVoyage({ id, disabled = false }: VoyageFormProps) {
 }
 
 export function resolver(values: VoyageFormData) {
-  const { vesselName, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate } = values;
+  const { vesselName, rank, imoNumber, joiningDate, leavingDate } = values;
   const errors: FieldErrors<VoyageFormData> = {};
 
   if (isBlank(vesselName)) {
