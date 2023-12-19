@@ -52,7 +52,7 @@ export function useAppTheme(appColorScheme: ColorSchemeName | undefined) {
                 level5: "rgb(218, 229, 245)",
               },
               surfaceDisabled: "rgba(26, 27, 30, 0.12)",
-              onSurfaceDisabled: "rgba(26, 27, 30, 0.38)",
+              onSurfaceDisabled: "rgba(26, 27, 30, 0.66)",
               backdrop: "rgba(45, 48, 56, 0.4)",
             },
           }
@@ -97,7 +97,7 @@ export function useAppTheme(appColorScheme: ColorSchemeName | undefined) {
                 level5: "rgb(46, 51, 62)",
               },
               surfaceDisabled: "rgba(227, 226, 230, 0.12)",
-              onSurfaceDisabled: "rgba(227, 226, 230, 0.38)",
+              onSurfaceDisabled: "rgba(227, 226, 230, 0.66)",
               backdrop: "rgba(45, 48, 56, 0.4)",
             },
           };
