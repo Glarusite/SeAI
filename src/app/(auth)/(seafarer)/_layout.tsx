@@ -4,7 +4,7 @@ import { useAppSelector } from "@src/store";
 import { Stack, router } from "expo-router";
 
 export default function SeafarerLayout() {
-  const role = useAppSelector(state => state.user.role);
+  const role = useAppSelector(state => state.user.role) || "SEAFARER";
 
   useAppNavigation(() => {
     if (role !== "SEAFARER") {

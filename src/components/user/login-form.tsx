@@ -59,7 +59,7 @@ function useLogin() {
   const login = handleSubmit(async ({ email, password }) => {
     try {
       const { accessToken, userId } = await loginRequest({ email, password }).unwrap();
-      dispatch(setUser({ accessToken, email, userId }));
+      dispatch(setUser({ accessToken, email, userId, role: "SEAFARER" }));
     } catch (error) {
       const originalMessage = toErrorMessage(error);
       const message = originalMessage === "Bad credentials" ? "Invalid e-mail or password" : originalMessage;
