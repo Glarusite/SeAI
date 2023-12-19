@@ -4,7 +4,6 @@ import { useAppDimensions } from "@src/common/hooks";
 import AppScrollView from "@src/components/app/app-scroll-view";
 import { Image } from "expo-image";
 import { View } from "react-native";
-import { Title } from "react-native-paper";
 
 export default function TrainingCenterDashboard() {
   const { width, height } = useAppDimensions();
@@ -12,7 +11,6 @@ export default function TrainingCenterDashboard() {
 
   return (
     <AppScrollView wide={wide}>
-      <Title style={{ alignSelf: "center" }}>Training Center Dashboard</Title>
       <View style={{ flexDirection: wide ? "row" : undefined, height: wide ? height - 200 : undefined }}>
         <Image
           source={dashboardImage1}
