@@ -1,27 +1,22 @@
-import { useMemo, useState } from "react";
 import type { Control, ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import { StyleSheet, View } from "react-native";
-import { useTheme } from "react-native-paper";
-import type { DropDownPropsInterface } from "react-native-paper-dropdown";
-import DropDown from "react-native-paper-dropdown";
+import { View } from "react-native";
 
+import type { DropDownProps } from "./drop-down";
+import DropDown from "./drop-down";
 import ValidationText from "./validation-text";
 
 export type ControlledDropDownProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;
   control: Control<TData, TContext>;
   disabled?: boolean;
-} & Omit<DropDownPropsInterface, keyof ControllerRenderProps | "onDismiss" | "showDropDown" | "visible" | "setValue">;
+} & Omit<DropDownProps, keyof ControllerRenderProps | "setValue">;
 
 export default function ControlledDropDown<TData extends FieldValues, TContext = unknown>({
   name,
   control,
   ...inputProps
 }: ControlledDropDownProps<TData, TContext>) {
-  const [visible, setVisible] = useState(false);
-  const styles = useStyles();
-
   return (
     <Controller
       name={name}
@@ -32,28 +27,11 @@ export default function ControlledDropDown<TData extends FieldValues, TContext =
             mode="outlined"
             setValue={value => controlProps.onChange(value)}
             inputProps={{ error: error != null, disabled }}
-            showDropDown={() => setVisible(true)}
-            onDismiss={() => setVisible(false)}
-            visible={visible}
-            dropDownItemTextStyle={styles.dropDownItemText}
             {...{ ...inputProps, ...controlProps }}
           />
           <ValidationText error={error} />
         </View>
       )}
     />
-  );
-}
-
-function useStyles() {
-  const { colors } = useTheme();
-  return useMemo(
-    () =>
-      StyleSheet.create({
-        dropDownItemText: {
-          color: colors.onBackground,
-        },
-      }),
-    [colors],
   );
 }

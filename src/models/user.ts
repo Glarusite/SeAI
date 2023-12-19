@@ -20,4 +20,5 @@ export interface User {
   accessToken: string;
   userId: string;
   email: string;
+  role: "SEAFARER" | "TRAINING_CENTER_ADMIN" | "TRAINING_CENTER_USER";
 }

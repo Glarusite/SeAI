@@ -6,7 +6,11 @@ import type { ScreenProps } from "react-native-screens";
 
 import AppDrawerMenu from "./app-drawer-menu";
 
-export default function AppStack({ children }: Pick<ScreenProps, "children">) {
+export type AppStackProps = Pick<ScreenProps, "children"> & {
+  headerShown?: boolean;
+};
+
+export default function AppStack({ children, headerShown }: AppStackProps) {
   const theme = useTheme();
   return (
     <Stack
@@ -30,6 +34,7 @@ export default function AppStack({ children }: Pick<ScreenProps, "children">) {
             return <AppDrawerMenu />;
           }
         },
+        headerShown,
         headerTitleAlign: "center",
         headerTitleStyle: {
           fontWeight: "bold",
