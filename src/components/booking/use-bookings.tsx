@@ -8,7 +8,7 @@ export function useBookings() {
   const data: Booking[] = [
     {
       id: "3f29b2f8-60ee-4f0c-9973-4b77aa8d47e1",
-      trainingCenter: "ACME Training Center",
+      trainingCenter: "BMKC",
       courseName: "Basic Safety Training",
       startDateTime: `2024-${nextMonth}-12T08:00:00.000Z`,
       endDateTime: `2024-${nextMonth}-12T16:00:00.000Z`,
@@ -19,7 +19,7 @@ export function useBookings() {
     },
     {
       id: "7e57d004-2b97-0e7a-b45f-538736290d53",
-      trainingCenter: "ACME Training Center",
+      trainingCenter: "BMKC",
       courseName: "Proficiency in Survival Craft and Rescue Boats",
       startDateTime: `2024-${nextMonth}-13T09:30:00.000Z`,
       endDateTime: `2024-${nextMonth}-13T15:45:00.000Z`,
@@ -30,7 +30,7 @@ export function useBookings() {
     },
     {
       id: "5c60f693-befa-41a0-83b1-4763b6a6ef33",
-      trainingCenter: "Umbrella Corporation Training Center",
+      trainingCenter: "BMKC",
       courseName: "Advanced Training in Fire Fighting",
       startDateTime: `2024-${nextMonth}-14T10:00:00.000Z`,
       endDateTime: `2024-${nextMonth}-14T15:00:00.000Z`,
@@ -41,7 +41,7 @@ export function useBookings() {
     },
     {
       id: "3f0a7d6b-2510-4dbe-aeca-2c6f207e8a02",
-      trainingCenter: "Umbrella Corporation Training Center",
+      trainingCenter: "BMKC",
       courseName: "Proficiency in Medical First Aid",
       startDateTime: `2024-${nextMonth}-15T16:00:00.000Z`,
       endDateTime: `2024-${nextMonth}-15T20:00:00.000Z`,
@@ -52,7 +52,7 @@ export function useBookings() {
     },
     {
       id: "7e2e4fd8-230f-4a48-a8f3-0af8e7c8b2a1",
-      trainingCenter: "Helios Training Center",
+      trainingCenter: "BMKC",
       courseName: "Proficiency in Medical Care on Board",
       startDateTime: `2024-${nextMonth}-16T18:00:00.000Z`,
       endDateTime: `2024-${nextMonth}-16T20:40:00.000Z`,
@@ -63,7 +63,7 @@ export function useBookings() {
     },
     {
       id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
-      trainingCenter: "Helios Training Center",
+      trainingCenter: "BMKC",
       courseName: "Maritime Environmental Awareness",
       startDateTime: `2024-${nextMonth}-17T11:30:00.000Z`,
       endDateTime: `2024-${nextMonth}-17T15:00:00.000Z`,
@@ -74,7 +74,7 @@ export function useBookings() {
     },
     {
       id: "83d33b10-3b91-4f6f-a7a6-1583f3738cbb",
-      trainingCenter: "Adastra Training Solutions",
+      trainingCenter: "BMKC",
       courseName: "Ship Security Officer",
       startDateTime: `2024-${nextMonth}-18T07:15:00.000Z`,
       endDateTime: `2024-${nextMonth}-19T14:30:00.000Z`,
@@ -85,7 +85,7 @@ export function useBookings() {
     },
     {
       id: "4f90de3f-2b22-4aeb-9739-2fcb4a8a01a3",
-      trainingCenter: "Maritime Excellence Institute",
+      trainingCenter: "BMKC",
       courseName: "Basic Safety Training",
       startDateTime: `2024-02-01T08:00:00.000Z`,
       endDateTime: `2024-02-01T16:00:00.000Z`,
@@ -96,7 +96,7 @@ export function useBookings() {
     },
     {
       id: "6e2027f3-ffa5-4f7d-8e4e-7f1f2a880c18",
-      trainingCenter: "Seafarer Skills Academy",
+      trainingCenter: "BMKC",
       courseName: "Proficiency in Survival Craft",
       startDateTime: `2024-03-01T09:00:00.000Z`,
       endDateTime: `2024-03-01T15:30:00.000Z`,
@@ -107,7 +107,7 @@ export function useBookings() {
     },
     {
       id: "9b72a99b-61a8-4e80-a1b0-c1c4c4d0a9e0",
-      trainingCenter: "Nautical Knowledge Center",
+      trainingCenter: "BMKC",
       courseName: "Advanced Fire Fighting",
       startDateTime: `2024-04-01T07:30:00.000Z`,
       endDateTime: `2024-04-01T14:00:00.000Z`,
@@ -118,7 +118,7 @@ export function useBookings() {
     },
     {
       id: "2d4cf7b6-56ac-4758-a9c4-d1922430dc9c",
-      trainingCenter: "Global Maritime Training",
+      trainingCenter: "BMKC",
       courseName: "Medical First Aid",
       startDateTime: `2024-05-01T08:15:00.000Z`,
       endDateTime: `2024-05-01T15:45:00.000Z`,
@@ -129,7 +129,7 @@ export function useBookings() {
     },
     {
       id: "7e2e4fd8-230f-4a48-a8f3-0af8e7c8b2a1",
-      trainingCenter: "Ocean Navigator School",
+      trainingCenter: "BMKC",
       courseName: "Personal Safety and Social Responsibilities",
       startDateTime: `2024-06-01T09:30:00.000Z`,
       endDateTime: `2024-06-01T16:30:00.000Z`,
@@ -140,7 +140,7 @@ export function useBookings() {
     },
     {
       id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
-      trainingCenter: "Sailor's Edge Institute",
+      trainingCenter: "BMKC",
       courseName: "Ship Security Officer",
       startDateTime: `2024-07-01T07:00:00.000Z`,
       endDateTime: `2024-07-01T14:15:00.000Z`,
@@ -151,7 +151,7 @@ export function useBookings() {
     },
     {
       id: "9f39e21d-8df1-4a91-98a2-b3eed6b3c790",
-      trainingCenter: "Maritime Professional Education",
+      trainingCenter: "BMKC",
       courseName: "Proficiency in Fast Rescue Boats",
       startDateTime: `2024-08-01T08:45:00.000Z`,
       endDateTime: `2024-08-01T15:00:00.000Z`,
