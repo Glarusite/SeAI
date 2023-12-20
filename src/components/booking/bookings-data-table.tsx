@@ -9,7 +9,11 @@ import DataTableRow from "../ui/data-table-row";
 
 import { useBookings } from "./use-bookings";
 
-export default function BookingsDataTable() {
+export interface BookingsDataTableProps {
+  actionLabel: string;
+}
+
+export default function BookingsDataTable({ actionLabel }: BookingsDataTableProps) {
   const { data, isLoading, error } = useBookings();
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
@@ -79,7 +83,7 @@ export default function BookingsDataTable() {
                       onPress={showFeatureInDevelopmentToast}
                       disabled={totalSlots - bookedSlots <= 0}
                     >
-                      Book
+                      {actionLabel}
                     </Button>
                   </DataTable.Cell>
                 </DataTableRow>
