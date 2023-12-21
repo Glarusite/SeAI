@@ -2,7 +2,7 @@ import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { setUser, useAppDispatch, useAppSelector } from "@src/store";
 import { router } from "expo-router";
 import { useCallback } from "react";
-import { Button, Title } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 import LinkButton from "./buttons/link-button";
 
@@ -71,8 +71,6 @@ function TrainingCenterNavigation() {
 
   return (
     <>
-      <Title style={{ alignSelf: "center" }}>Welcome to Training Center</Title>
-
       <LinkButton href="/(auth)/(training)/dashboard" mode="contained">
         Dashboard
       </LinkButton>

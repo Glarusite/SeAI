@@ -5,7 +5,7 @@ import Navigation from "@src/components/ui/navigation";
 export default function HomePage() {
   return (
     <AppScrollView>
-      <LogoImage title="SeAI" />
+      <LogoImage title="SeAI - BMKC" />
       <Navigation />
     </AppScrollView>
   );

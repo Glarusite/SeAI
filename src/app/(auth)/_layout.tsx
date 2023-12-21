@@ -6,7 +6,6 @@ export default function AuthorizedLayout() {
   const accessToken = useAppSelector(state => state.user.accessToken);
   const segments: string[] = useSegments();
   const { 0: group } = segments;
-  const isRootGroup = segments.filter(segment => segment.startsWith("(")).length === 1;
 
   useAppNavigation(() => {
     if (!accessToken && group === "(auth)") {

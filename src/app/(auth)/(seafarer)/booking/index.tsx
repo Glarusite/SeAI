@@ -11,7 +11,7 @@ export default function BookingPage() {
 
   return (
     <AppScrollView wide>
-      <BookingsDataTable actionLabel="Book" />
+      <BookingsDataTable />
     </AppScrollView>
   );
 }

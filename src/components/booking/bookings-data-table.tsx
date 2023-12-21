@@ -1,6 +1,7 @@
 import { toLocalDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
+import { useAppSelector } from "@src/store";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
@@ -9,14 +10,12 @@ import DataTableRow from "../ui/data-table-row";
 
 import { useBookings } from "./use-bookings";
 
-export interface BookingsDataTableProps {
-  actionLabel: string;
-}
-
-export default function BookingsDataTable({ actionLabel }: BookingsDataTableProps) {
+export default function BookingsDataTable() {
   const { data, isLoading, error } = useBookings();
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
+  const role = useAppSelector(state => state.user.role) || "SEAFARER";
+  const isSeafarer = role === "SEAFARER";
 
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, data.length);
@@ -65,7 +64,7 @@ export default function BookingsDataTable({ actionLabel }: BookingsDataTableProp
                   <DataTable.Cell style={styles.cell}>{startDate?.toLocaleDateString()}</DataTable.Cell>
                   <DataTable.Cell style={styles.cell}>{endDate?.toLocaleDateString()}</DataTable.Cell>
                   <DataTable.Cell style={styles.wideCell} textStyle={styles.text}>
-                    {trainingCenter}
+                    {isSeafarer ? trainingCenter : "BMKC"}
                   </DataTable.Cell>
                   <DataTable.Cell style={styles.wideCell} textStyle={styles.text}>
                     {courseName}
@@ -81,9 +80,9 @@ export default function BookingsDataTable({ actionLabel }: BookingsDataTableProp
                     <Button
                       mode="contained"
                       onPress={showFeatureInDevelopmentToast}
-                      disabled={totalSlots - bookedSlots <= 0}
+                      disabled={isSeafarer && totalSlots - bookedSlots <= 0}
                     >
-                      {actionLabel}
+                      {isSeafarer ? "Book" : "Info"}
                     </Button>
                   </DataTable.Cell>
                 </DataTableRow>
