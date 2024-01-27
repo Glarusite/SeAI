@@ -1,14 +1,14 @@
 import AppDrawer from "@src/components/app/app-drawer";
 import AppThemeProvider from "@src/components/app/app-theme-provider";
 import { useCreateStore } from "@src/store";
-import { SplashScreen } from "expo-router";
 import { unlockAsync } from "expo-screen-orientation";
+import { preventAutoHideAsync, hideAsync } from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { AppState, Platform } from "react-native";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 
-SplashScreen.preventAutoHideAsync();
+void preventAutoHideAsync();
 
 export default function AppLayout() {
   const { store } = useAppLayout();
@@ -36,7 +36,7 @@ function useAppLayout() {
 
   useEffect(() => {
     if (store) {
-      SplashScreen.hideAsync();
+      void hideAsync();
     }
   }, [store]);
 
