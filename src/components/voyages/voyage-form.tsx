@@ -103,9 +103,10 @@ function useVoyage({ id, disabled = false }: VoyageFormProps) {
         joiningDate: toUtcDate(values.joiningDate)?.toJSON(),
         leavingDate: toUtcDate(values.leavingDate)?.toJSON(),
       };
-      await (id === undefined
-        ? createVoyage({ userId, createVoyageRequest: voyageRequest })
-        : updateVoyage({ userId, voyageId: id, updateVoyageRequest: voyageRequest })
+      await (
+        id === undefined
+          ? createVoyage({ userId, createVoyageRequest: voyageRequest })
+          : updateVoyage({ userId, voyageId: id, updateVoyageRequest: voyageRequest })
       ).unwrap();
 
       Toast.show({
