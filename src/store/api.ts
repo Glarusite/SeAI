@@ -1,5 +1,11 @@
 import { baseApi as api } from "./api.base";
-export const addTagTypes = ["user-controller", "voyage-controller", "document-controller", "auth-controller"] as const;
+export const addTagTypes = [
+  "user-controller",
+  "voyage-controller",
+  "document-controller",
+  "file-controller",
+  "auth-controller",
+] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
@@ -33,6 +39,34 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["voyage-controller"],
       }),
+      find: build.query<FindApiResponse, FindParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}`,
+        }),
+        providesTags: ["document-controller"],
+      }),
+      update: build.mutation<UpdateApiResponse, UpdateParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}`,
+          method: "PUT",
+          body: queryArgument.updateDocumentRequest,
+        }),
+        invalidatesTags: ["document-controller"],
+      }),
+      deleteApiV1UsersByUserIdDocumentsAndDocumentId: build.mutation<
+        DeleteApiV1UsersByUserIdDocumentsAndDocumentIdApiResponse,
+        DeleteApiV1UsersByUserIdDocumentsAndDocumentIdParameters
+      >({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["document-controller"],
+      }),
+      createUser: build.mutation<CreateUserApiResponse, CreateUserParameters>({
+        query: queryArgument => ({ url: `/api/v1/users`, method: "POST", body: queryArgument }),
+        invalidatesTags: ["user-controller"],
+      }),
       findAllByUser: build.query<FindAllByUserApiResponse, FindAllByUserParameters>({
         query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/voyages` }),
         providesTags: ["voyage-controller"],
@@ -45,7 +79,7 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["voyage-controller"],
       }),
-      handleFileUpload: build.mutation<HandleFileUploadApiResponse, HandleFileUploadParameters>({
+      upload: build.mutation<UploadApiResponse, UploadParameters>({
         query: queryArgument => ({
           url: `/api/v1/users/${queryArgument.userId}/ocr`,
           method: "POST",
@@ -53,38 +87,42 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["document-controller"],
       }),
-      verifyDocument: build.mutation<VerifyDocumentApiResponse, VerifyDocumentParameters>({
-        query: queryArgument => ({
-          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/verify`,
-          method: "POST",
-          body: queryArgument.verifyDocumentRequest,
-        }),
-        invalidatesTags: ["document-controller"],
-      }),
-      discard: build.mutation<DiscardApiResponse, DiscardParameters>({
-        query: queryArgument => ({
-          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/discard`,
-          method: "POST",
-        }),
-        invalidatesTags: ["document-controller"],
-      }),
-      register: build.mutation<RegisterApiResponse, RegisterParameters>({
-        query: queryArgument => ({ url: `/api/v1/auth/register`, method: "POST", body: queryArgument }),
-        invalidatesTags: ["auth-controller"],
-      }),
-      authenticateAndGetToken: build.mutation<AuthenticateAndGetTokenApiResponse, AuthenticateAndGetTokenParameters>({
-        query: queryArgument => ({ url: `/api/v1/auth/login`, method: "POST", body: queryArgument }),
-        invalidatesTags: ["auth-controller"],
-      }),
-      findAllUserDocuments: build.query<FindAllUserDocumentsApiResponse, FindAllUserDocumentsParameters>({
+      findAll: build.query<FindAllApiResponse, FindAllParameters>({
         query: queryArgument => ({ url: `/api/v1/users/${queryArgument}/documents` }),
         providesTags: ["document-controller"],
       }),
-      findUserDocument: build.query<FindUserDocumentApiResponse, FindUserDocumentParameters>({
+      create: build.mutation<CreateApiResponse, CreateParameters>({
         query: queryArgument => ({
-          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}`,
+          url: `/api/v1/users/${queryArgument.userId}/documents`,
+          method: "POST",
+          body: queryArgument.createDocumentRequest,
         }),
-        providesTags: ["document-controller"],
+        invalidatesTags: ["document-controller"],
+      }),
+      download: build.query<DownloadApiResponse, DownloadParameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/files`,
+        }),
+        providesTags: ["file-controller"],
+      }),
+      upload1: build.mutation<Upload1ApiResponse, Upload1Parameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/files`,
+          method: "POST",
+          body: queryArgument.body,
+        }),
+        invalidatesTags: ["file-controller"],
+      }),
+      delete1: build.mutation<Delete1ApiResponse, Delete1Parameters>({
+        query: queryArgument => ({
+          url: `/api/v1/users/${queryArgument.userId}/documents/${queryArgument.documentId}/files`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["file-controller"],
+      }),
+      authenticateAndGetToken: build.mutation<AuthenticateAndGetTokenApiResponse, AuthenticateAndGetTokenParameters>({
+        query: queryArgument => ({ url: `/api/v1/users/authentication`, method: "POST", body: queryArgument }),
+        invalidatesTags: ["auth-controller"],
       }),
     }),
     overrideExisting: false,
@@ -108,40 +146,65 @@ export type DeleteVoyageParameters = {
   userId: string;
   voyageId: string;
 };
-export type FindAllByUserApiResponse = /** status 200 OK */ Voyage[];
+export type FindApiResponse = /** status 200 OK */ GetDocumentResponse;
+export type FindParameters = {
+  userId: string;
+  documentId: string;
+};
+export type UpdateApiResponse = unknown;
+export type UpdateParameters = {
+  userId: string;
+  documentId: string;
+  updateDocumentRequest: UpdateDocumentRequest;
+};
+export type DeleteApiV1UsersByUserIdDocumentsAndDocumentIdApiResponse = unknown;
+export type DeleteApiV1UsersByUserIdDocumentsAndDocumentIdParameters = {
+  userId: string;
+  documentId: string;
+};
+export type CreateUserApiResponse = unknown;
+export type CreateUserParameters = UserRegisterRequest;
+export type FindAllByUserApiResponse = /** status 200 OK */ GetVoyageResponse[];
 export type FindAllByUserParameters = string;
 export type CreateVoyageApiResponse = unknown;
 export type CreateVoyageParameters = {
   userId: string;
   createVoyageRequest: CreateVoyageRequest;
 };
-export type HandleFileUploadApiResponse = /** status 200 OK */ MarineDocument;
-export type HandleFileUploadParameters = {
+export type UploadApiResponse = /** status 200 OK */ GetDocumentResponse;
+export type UploadParameters = {
   userId: string;
-  body: FormData;
+  body: {
+    file: Blob;
+  };
 };
-export type VerifyDocumentApiResponse = unknown;
-export type VerifyDocumentParameters = {
+export type FindAllApiResponse = /** status 200 OK */ GetDocumentResponse[];
+export type FindAllParameters = string;
+export type CreateApiResponse = unknown;
+export type CreateParameters = {
   userId: string;
-  documentId: string;
-  verifyDocumentRequest: VerifyDocumentRequest;
+  createDocumentRequest: CreateDocumentRequest;
 };
-export type DiscardApiResponse = unknown;
-export type DiscardParameters = {
-  userId: string;
-  documentId: string;
-};
-export type RegisterApiResponse = unknown;
-export type RegisterParameters = UserRegisterRequest;
-export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ AuthResponse;
-export type AuthenticateAndGetTokenParameters = AuthRequest;
-export type FindAllUserDocumentsApiResponse = /** status 200 OK */ MarineDocument[];
-export type FindAllUserDocumentsParameters = string;
-export type FindUserDocumentApiResponse = /** status 200 OK */ MarineDocument;
-export type FindUserDocumentParameters = {
+export type DownloadApiResponse = /** status 200 OK */ string[];
+export type DownloadParameters = {
   userId: string;
   documentId: string;
 };
+export type Upload1ApiResponse = unknown;
+export type Upload1Parameters = {
+  userId: string;
+  documentId: string;
+  body: {
+    file: Blob;
+  };
+};
+export type Delete1ApiResponse = unknown;
+export type Delete1Parameters = {
+  userId: string;
+  documentId: string;
+};
+export type AuthenticateAndGetTokenApiResponse = /** status 200 OK */ UserAuthenticationResponse;
+export type AuthenticateAndGetTokenParameters = UserAuthentaicationRequest;
 export type GetUserResponse = {
   firstName?: string;
   lastName?: string;
@@ -178,7 +241,29 @@ export type UpdateVoyageRequest = {
   leavingDate?: string;
   remarks?: string;
 };
-export type Voyage = {
+export type GetDocumentResponse = {
+  id?: string;
+  name?: string;
+  number?: string;
+  issueDate?: string;
+  expiryDate?: string;
+  createdDate?: string;
+  verified?: boolean;
+};
+export type UpdateDocumentRequest = {
+  name?: string;
+  number?: string;
+  issueDate?: string;
+  expiryDate?: string;
+  verified?: boolean;
+};
+export type UserRegisterRequest = {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+};
+export type GetVoyageResponse = {
   id?: string;
   vesselName?: string;
   rank?: "CAPTAIN";
@@ -199,35 +284,18 @@ export type CreateVoyageRequest = {
   leavingDate?: string;
   remarks?: string;
 };
-export type MarineDocument = {
-  id?: string;
+export type CreateDocumentRequest = {
   name?: string;
   number?: string;
   issueDate?: string;
   expiryDate?: string;
-  createdDate?: string;
-  path?: string;
   verified?: boolean;
 };
-export type VerifyDocumentRequest = {
-  name?: string;
-  number?: string;
-  issueDate?: string;
-  expiryDate?: string;
-  notifyAt?: string;
-  notifyBefore?: number[];
-};
-export type UserRegisterRequest = {
-  email: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
-};
-export type AuthResponse = {
+export type UserAuthenticationResponse = {
   userId?: string;
   accessToken?: string;
 };
-export type AuthRequest = {
+export type UserAuthentaicationRequest = {
   email: string;
   password: string;
 };
@@ -236,13 +304,17 @@ export const {
   useUpdateUserMutation,
   useUpdateVoyageMutation,
   useDeleteVoyageMutation,
+  useFindQuery,
+  useUpdateMutation,
+  useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation,
+  useCreateUserMutation,
   useFindAllByUserQuery,
   useCreateVoyageMutation,
-  useHandleFileUploadMutation,
-  useVerifyDocumentMutation,
-  useDiscardMutation,
-  useRegisterMutation,
+  useUploadMutation,
+  useFindAllQuery,
+  useCreateMutation,
+  useDownloadQuery,
+  useUpload1Mutation,
+  useDelete1Mutation,
   useAuthenticateAndGetTokenMutation,
-  useFindAllUserDocumentsQuery,
-  useFindUserDocumentQuery,
 } = injectedRtkApi;

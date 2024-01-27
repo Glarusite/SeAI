@@ -4,7 +4,7 @@ import CameraLinkButton from "@src/components/scanner/camera-button";
 import PhotoUploadButton from "@src/components/scanner/photo-upload-button";
 import LogoImage from "@src/components/ui/logo-image";
 import { PageTitle } from "@src/components/ui/page-title";
-import { useAppSelector, useHandleFileUploadMutation } from "@src/store";
+import { useAppSelector, useUploadMutation } from "@src/store";
 import { router } from "expo-router";
 
 export default function ScannerPage() {
@@ -30,10 +30,10 @@ function useScanner() {
 
   useAppNavigation(() => {
     if (Object.keys(scan).length > 0) {
-      router.replace("/scanner/verify");
+      router.push("/scanner/verify");
     }
   }, [scan]);
 
-  const [, { isLoading }] = useHandleFileUploadMutation({ fixedCacheKey: "imageUpload" });
+  const [, { isLoading }] = useUploadMutation({ fixedCacheKey: "imageUpload" });
   return { isLoading };
 }

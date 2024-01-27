@@ -10,7 +10,6 @@ const ApiConfig: ConfigFile = {
   tag: true,
   hooks: true,
   flattenArg: true,
-  filterEndpoints: endpoint => endpoint !== "download",
 };
 
 export default ApiConfig;

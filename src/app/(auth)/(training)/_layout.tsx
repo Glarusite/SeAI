@@ -8,7 +8,7 @@ export default function TrainingCenterLayout() {
 
   useAppNavigation(() => {
     if (role === "SEAFARER") {
-      router.replace("/(auth)/(seafarer)/");
+      router.push("/(auth)/(seafarer)/");
     }
   }, [role]);
 

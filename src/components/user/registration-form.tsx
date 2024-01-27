@@ -1,7 +1,7 @@
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isNotEmail } from "@src/common/validators";
 import type { RegisterFormData } from "@src/models";
-import { useRegisterMutation } from "@src/store";
+import { useCreateUserMutation } from "@src/store";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import type { FieldErrors } from "react-hook-form";
@@ -73,7 +73,7 @@ export default function RegistrationForm() {
 }
 
 function useRegister() {
-  const [registerRequest] = useRegisterMutation();
+  const [registerRequest] = useCreateUserMutation();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -89,7 +89,7 @@ function useRegister() {
   const register = handleSubmit(async values => {
     try {
       await registerRequest(values).unwrap();
-      router.replace("/user/login");
+      router.push("/user/login");
       Toast.show({
         text1: "Registration successful",
         text2: "You can now continue to login.",

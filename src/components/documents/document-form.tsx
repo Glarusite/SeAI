@@ -1,11 +1,14 @@
 import { toLocalDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import type { DocumentFormData } from "@src/models";
+import { useAppSelector, useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation } from "@src/store";
+import { router } from "expo-router";
 import { noop } from "lodash";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, Button } from "react-native-paper";
 import { DatePickerInput } from "react-native-paper-dates";
+import Toast from "react-native-toast-message";
 
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
@@ -18,7 +21,7 @@ export interface DocumentFormProps {
 }
 
 export function DocumentForm(props: DocumentFormProps) {
-  const { uploadDate, control, errors, isLoading, setFocus } = useDocument(props);
+  const { uploadDate, control, errors, isLoading, deleteDocument, setFocus } = useDocument(props);
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -40,6 +43,10 @@ export function DocumentForm(props: DocumentFormProps) {
       />
 
       <ValidationText error={errors.root} />
+
+      <Button mode="contained-tonal" onPress={deleteDocument}>
+        Delete
+      </Button>
     </FormView>
   );
 }
@@ -47,8 +54,11 @@ export function DocumentForm(props: DocumentFormProps) {
 function useDocument({ id }: DocumentFormProps) {
   const { data, isLoading, error } = useDocuments();
   const document = data.find(item => item.id === id);
+  const userId = useAppSelector(state => state.user.userId);
+
   const [disabled, setDisabled] = useState(true);
   const [uploadDate, setUploadDate] = useState<Date | undefined>();
+  const [deleteRequest] = useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation();
 
   const {
     control,
@@ -76,5 +86,21 @@ function useDocument({ id }: DocumentFormProps) {
     }
   }, [document, reset]);
 
-  return { uploadDate, control, disabled, errors, isLoading, isSubmitting, setDisabled, setFocus };
+  const deleteDocument = useCallback(async () => {
+    try {
+      if (id == null || userId == null) {
+        return;
+      }
+
+      await deleteRequest({ documentId: id, userId }).unwrap();
+
+      router.replace("/(auth)/(seafarer)/documents/");
+      Toast.show({ type: "info", text1: "Document deleted" });
+    } catch (deleteError) {
+      const message = toErrorMessage(deleteError);
+      Toast.show({ type: "error", text1: "Delete error", text2: message });
+    }
+  }, [deleteRequest, id, userId]);
+
+  return { uploadDate, control, disabled, errors, isLoading, isSubmitting, deleteDocument, setDisabled, setFocus };
 }

@@ -9,7 +9,7 @@ export default function AuthorizedLayout() {
 
   useAppNavigation(() => {
     if (!accessToken && group === "(auth)") {
-      router.replace("/user/login");
+      router.push("/user/login");
     }
   }, [accessToken, group]);
 

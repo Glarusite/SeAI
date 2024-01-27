@@ -115,7 +115,7 @@ function useVoyage({ id, disabled = false }: VoyageFormProps) {
       });
 
       if (isNew) {
-        router.replace("/voyages/");
+        router.push("/voyages/");
       } else {
         reset(values);
       }

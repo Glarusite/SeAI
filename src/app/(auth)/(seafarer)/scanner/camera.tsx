@@ -19,7 +19,7 @@ function useTakePicture() {
     if (cameraRef.current != null) {
       try {
         const { uri } = await cameraRef.current.takePictureAsync({ quality: 0.1 });
-        cameraRef.current.pausePreview();
+        await cameraRef.current.pausePreview();
         await fileUpload(uri);
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
@@ -29,7 +29,7 @@ function useTakePicture() {
           text2: errorMessage,
         });
       } finally {
-        cameraRef.current.resumePreview();
+        await cameraRef.current.resumePreview();
       }
     }
   }, [fileUpload]);

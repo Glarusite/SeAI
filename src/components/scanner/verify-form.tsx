@@ -1,7 +1,11 @@
 import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import type { DocumentFormData } from "@src/models";
-import { useAppSelector, useDiscardMutation, useVerifyDocumentMutation } from "@src/store";
+import {
+  useAppSelector,
+  useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation,
+  useUpdateMutation,
+} from "@src/store";
 import { resetScan } from "@src/store/slices/scan";
 import { router } from "expo-router";
 import { useCallback } from "react";
@@ -55,7 +59,7 @@ function useVerify() {
     resolver,
   });
 
-  const [verifyRequest] = useVerifyDocumentMutation();
+  const [verifyRequest] = useUpdateMutation();
   const verify = handleSubmit(async ({ name, number, issueDate, expiryDate }) => {
     try {
       if (scan.id == null || userId == null) {
@@ -65,17 +69,17 @@ function useVerify() {
       await verifyRequest({
         documentId: scan.id,
         userId,
-        verifyDocumentRequest: {
+        updateDocumentRequest: {
           name,
           number,
           issueDate: toUtcDate(issueDate)?.toJSON(),
           expiryDate: toUtcDate(expiryDate)?.toJSON(),
-          notifyBefore: [],
+          verified: true,
         },
       }).unwrap();
 
       dispatch(resetScan());
-      router.replace("/scanner/");
+      router.replace("/(auth)/(seafarer)/scanner/");
       Toast.show({
         text1: "Verification successful",
         text2: "Your document has been saved to your profile.",
@@ -86,23 +90,23 @@ function useVerify() {
     }
   });
 
-  const [discardRequest] = useDiscardMutation();
+  const [deleteRequest] = useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation();
   const discard = useCallback(async () => {
     try {
       if (scan.id == null || userId == null) {
         return;
       }
 
-      await discardRequest({ documentId: scan.id, userId }).unwrap();
+      await deleteRequest({ documentId: scan.id, userId }).unwrap();
 
       dispatch(resetScan());
-      router.replace("/scanner/");
+      router.replace("/(auth)/(seafarer)/scanner/");
       Toast.show({ type: "info", text1: "Document discarded" });
     } catch (error) {
       const message = toErrorMessage(error);
       Toast.show({ type: "error", text1: "Discard error", text2: message });
     }
-  }, [discardRequest, dispatch, scan.id, userId]);
+  }, [deleteRequest, dispatch, scan.id, userId]);
 
   return { control, errors, isSubmitting, discard, verify, setFocus };
 }

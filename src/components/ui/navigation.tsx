@@ -25,7 +25,7 @@ function useLogout() {
   const dispatch = useAppDispatch();
   const logout = useCallback(() => {
     dispatch(setUser({}));
-    router.replace("/user/login");
+    router.push("/user/login");
   }, [dispatch]);
   return logout;
 }

@@ -1,5 +1,5 @@
 import { toErrorMessage } from "@src/common/error";
-import { useAppDispatch, useAppSelector, useHandleFileUploadMutation } from "@src/store";
+import { useAppDispatch, useAppSelector, useUploadMutation } from "@src/store";
 import { setScan } from "@src/store/slices/scan";
 import { router } from "expo-router";
 import { useCallback } from "react";
@@ -9,7 +9,7 @@ import Toast from "react-native-toast-message";
 export function useFileUpload(fixedCacheKey: string) {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.user.userId);
-  const [handleFileUpload, { isLoading }] = useHandleFileUploadMutation({ fixedCacheKey });
+  const [handleFileUpload, { isLoading }] = useUploadMutation({ fixedCacheKey });
 
   const fileUpload = useCallback(
     async (uri: string) => {

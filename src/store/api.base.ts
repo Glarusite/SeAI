@@ -19,9 +19,9 @@ export const baseApi = createApi({
 const createAppFetchBaseQuery = memoize((dispatch: BaseQueryApi["dispatch"]) =>
   fetchBaseQuery({
     baseUrl,
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, { getState, endpoint }) => {
       const state = getState() as AppStoreState;
-      if (state?.user.accessToken) {
+      if (!anonymousEndpoints.has(endpoint) && state?.user.accessToken) {
         headers.set("Authorization", `Bearer ${state.user.accessToken}`);
       }
     },
@@ -40,3 +40,6 @@ const createAppFetchBaseQuery = memoize((dispatch: BaseQueryApi["dispatch"]) =>
     },
   }),
 );
+
+// TODO: Make sure to not have to keep endpoint names updated
+const anonymousEndpoints = new Set(["authenticateAndGetToken", "createUser"]);

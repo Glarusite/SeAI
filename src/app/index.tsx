@@ -13,7 +13,8 @@ export default function MarketingPage() {
 
   useAppNavigation(() => {
     if (accessToken) {
-      router.replace("/(auth)/");
+      console.log(accessToken);
+      router.push("/(auth)/");
     }
   }, [accessToken]);
 

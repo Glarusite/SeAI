@@ -1,8 +1,8 @@
-import type { AuthRequest, GetUserResponse, UserRegisterRequest } from "@src/store";
+import type { UserAuthentaicationRequest, GetUserResponse, UserRegisterRequest } from "@src/store";
 
-export interface LoginFormData extends AuthRequest {}
+export interface LoginFormData extends UserAuthentaicationRequest {}
 
-export interface PasswordResetFormData extends AuthRequest {
+export interface PasswordResetFormData extends UserAuthentaicationRequest {
   repeatPassword: string;
 }
 

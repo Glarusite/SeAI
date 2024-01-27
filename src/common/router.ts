@@ -4,6 +4,6 @@ export function safeBack() {
   if (router.canGoBack()) {
     router.back();
   } else {
-    router.replace("/");
+    router.push("/");
   }
 }

@@ -14,7 +14,8 @@ export function useDocumentImageUri(documentId: string | undefined) {
       return;
     }
 
-    const apiUri = `${baseUrl}/api/v1/users/${userId}/documents/${documentId}/download`;
+    // TODO: Keep url synchronized
+    const apiUri = `${baseUrl}/api/v1/users/${userId}/documents/${documentId}/files`;
     const headers = { Authorization: `Bearer ${accessToken}` };
     if (Platform.OS !== "web") {
       setUri({ uri: apiUri, headers });

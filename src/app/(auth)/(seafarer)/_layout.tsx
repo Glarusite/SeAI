@@ -8,7 +8,7 @@ export default function SeafarerLayout() {
 
   useAppNavigation(() => {
     if (role !== "SEAFARER") {
-      router.replace("/(auth)/(training)/");
+      router.push("/(auth)/(training)/");
     }
   }, [role]);
 

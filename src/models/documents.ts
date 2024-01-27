@@ -1,10 +1,10 @@
-import type { MarineDocument } from "@src/store";
+import type { GetDocumentResponse } from "@src/store";
 
-export interface Scan extends MarineDocument {
+export interface Scan extends GetDocumentResponse {
   uri: string;
 }
 
-export interface DocumentFormData extends Pick<MarineDocument, "name" | "number"> {
+export interface DocumentFormData extends Pick<GetDocumentResponse, "name" | "number"> {
   issueDate?: Date;
   expiryDate?: Date;
 }
