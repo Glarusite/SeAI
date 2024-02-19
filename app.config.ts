@@ -63,7 +63,6 @@ const AppConfig: ExpoConfig = {
       {
         origin: "http://seai.co",
         asyncRoutes: {
-          web: true,
           default: "development",
         },
       },
