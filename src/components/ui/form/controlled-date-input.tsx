@@ -14,7 +14,7 @@ export type ControlledDateInputProps<TData extends FieldValues, TContext = unkno
   disabled?: boolean;
 } & Omit<DatePickerInputProps, keyof ControllerRenderProps>;
 
-export default function ControlledTextInput<TData extends FieldValues, TContext = unknown>({
+export default function ControlledDateInput<TData extends FieldValues, TContext = unknown>({
   name,
   control,
   defaultValue = "",
