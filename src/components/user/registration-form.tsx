@@ -1,21 +1,26 @@
+import gdprPolicy from "@assets/gdpr.pdf";
+import { A } from "@expo/html-elements";
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isNotEmail } from "@src/common/validators";
 import type { RegisterFormData } from "@src/models";
 import { useCreateUserMutation } from "@src/store";
+import { useAssets } from "expo-asset";
 import { router } from "expo-router";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
+import ControlledCheckBox from "../ui/form/controlled-check-box";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
 export default function RegistrationForm() {
   const { control, errors, isSubmitting, register, setFocus } = useRegister();
+  const [gdprPolicyAsset, gdprPolicyAssetError] = useAssets(gdprPolicy);
 
   return (
     <FormView>
@@ -63,6 +68,17 @@ export default function RegistrationForm() {
         onSubmitEditing={() => register()}
       />
 
+      {gdprPolicyAssetError ? (
+        <ValidationText error={{ message: "Error loading GDPR policy, please try again later" }} />
+      ) : (
+        <ControlledCheckBox name="gdprAccepted" control={control}>
+          I have read and accept the{" "}
+          <A href={gdprPolicyAsset?.[0].uri} target="_blank">
+            GDPR policy
+          </A>
+        </ControlledCheckBox>
+      )}
+
       <ValidationText error={errors.root} />
 
       <Button icon="account-plus" mode="contained" onPress={register} disabled={isSubmitting}>
@@ -81,7 +97,12 @@ function useRegister() {
     resetField,
     setError,
     setFocus,
-  } = useForm<RegisterFormData>({ resolver });
+  } = useForm<RegisterFormData>({
+    resolver,
+    defaultValues: {
+      gdprAccepted: false,
+    },
+  });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setFocus("email"), []);
@@ -106,7 +127,7 @@ function useRegister() {
 }
 
 function resolver(values: RegisterFormData) {
-  const { email, firstName, lastName, password, repeatPassword } = values;
+  const { email, firstName, lastName, password, repeatPassword, gdprAccepted } = values;
   const errors: FieldErrors<RegisterFormData> = {};
 
   if (isBlank(email)) {
@@ -131,6 +152,10 @@ function resolver(values: RegisterFormData) {
     errors.repeatPassword = { type: "required", message: "Repeat password is required" };
   } else if (password !== repeatPassword) {
     errors.repeatPassword = { type: "validate", message: "Passwords do not match" };
+  }
+
+  if (!gdprAccepted) {
+    errors.gdprAccepted = { type: "required", message: "You must accept the GDPR policy" };
   }
 
   return { errors, values };

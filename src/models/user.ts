@@ -8,6 +8,7 @@ export interface PasswordResetFormData extends UserAuthentaicationRequest {
 
 export interface RegisterFormData extends Pick<UserRegisterRequest, "email" | "firstName" | "lastName" | "password"> {
   repeatPassword: string;
+  gdprAccepted: boolean;
 }
 
 export interface ProfileFormData extends Omit<GetUserResponse, "contractDuration" | "dateOfBirth" | "readinessDate"> {

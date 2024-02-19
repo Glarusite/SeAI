@@ -2035,6 +2035,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo/html-elements@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "@expo/html-elements@npm:0.9.1"
+  checksum: 10c0/f41194341d5e9e9e9ea994244d10342594a6742c49307e7f2e5fb9a8482651c279a3ea7c362aca8930f060985ef58cd6151c7a395911311b676d8170b0934a59
+  languageName: node
+  linkType: hard
+
 "@expo/image-utils@npm:^0.4.0":
   version: 0.4.1
   resolution: "@expo/image-utils@npm:0.4.1"
@@ -11256,6 +11263,7 @@ __metadata:
   resolution: "seai@workspace:."
   dependencies:
     "@babel/core": "npm:7.23.9"
+    "@expo/html-elements": "npm:^0.9.1"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-navigation/drawer": "npm:^6.6.7"
     "@react-navigation/native": "npm:^6.1.10"
@@ -11276,6 +11284,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:51.0.1"
     eslint-plugin-unused-imports: "npm:3.1.0"
     expo: "npm:50.0.7"
+    expo-asset: "npm:~9.0.2"
     expo-camera: "npm:~14.0.5"
     expo-constants: "npm:~15.4.5"
     expo-dev-client: "npm:~3.3.8"
