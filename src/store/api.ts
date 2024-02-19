@@ -174,9 +174,7 @@ export type CreateVoyageParameters = {
 export type UploadApiResponse = /** status 200 OK */ GetDocumentResponse;
 export type UploadParameters = {
   userId: string;
-  body: {
-    file: Blob;
-  };
+  body: FormData;
 };
 export type FindAllApiResponse = /** status 200 OK */ GetDocumentResponse[];
 export type FindAllParameters = string;
@@ -194,9 +192,7 @@ export type Upload1ApiResponse = unknown;
 export type Upload1Parameters = {
   userId: string;
   documentId: string;
-  body: {
-    file: Blob;
-  };
+  body: FormData;
 };
 export type Delete1ApiResponse = unknown;
 export type Delete1Parameters = {

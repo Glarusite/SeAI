@@ -3,9 +3,9 @@ import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { isBlank, isInvalidDate } from "@src/common/validators";
 import type { DropDownList, ProfileFormData, VoyageFormData } from "@src/models";
-import { useAppSelector, useCreateVoyageMutation, useUpdateVoyageMutation } from "@src/store";
+import { useAppSelector, useCreateVoyageMutation, useDeleteVoyageMutation, useUpdateVoyageMutation } from "@src/store";
 import { router } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { ActivityIndicator, Button } from "react-native-paper";
@@ -26,7 +26,8 @@ export interface VoyageFormProps {
 }
 
 export function VoyageForm(props: VoyageFormProps) {
-  const { control, disabled, errors, isDirty, isLoading, isNew, isSubmitting, setFocus, submit } = useVoyage(props);
+  const { control, disabled, errors, isDirty, isLoading, isNew, isSubmitting, deleteHandler, setFocus, submit } =
+    useVoyage(props);
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -68,6 +69,10 @@ export function VoyageForm(props: VoyageFormProps) {
           <Button mode="contained" onPress={submit} disabled={!isDirty || isSubmitting}>
             {isSubmitting ? <ButtonActivityIndicator /> : isNew ? "Create" : "Update"}
           </Button>
+
+          <Button mode="contained-tonal" onPress={deleteHandler}>
+            Delete
+          </Button>
         </>
       )}
     </FormView>
@@ -82,6 +87,7 @@ function useVoyage({ id, disabled = false }: VoyageFormProps) {
 
   const [createVoyage] = useCreateVoyageMutation();
   const [updateVoyage] = useUpdateVoyageMutation();
+  const [deleteVoyage] = useDeleteVoyageMutation();
 
   const {
     control,
@@ -147,7 +153,26 @@ function useVoyage({ id, disabled = false }: VoyageFormProps) {
     }
   }, [voyage, reset]);
 
-  return { control, disabled, errors, isDirty, isLoading, isNew, isSubmitting, setFocus, submit };
+  const deleteHandler = useCallback(async () => {
+    if (id == null) {
+      return;
+    }
+
+    // TODO: Add modal confirmation
+    try {
+      await deleteVoyage({ userId, voyageId: id });
+      router.push("/(auth)/(seafarer)/voyages/");
+      Toast.show({ text1: "Voyage deleted" });
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Delete error",
+        text2: toErrorMessage(error),
+      });
+    }
+  }, [deleteVoyage, id, userId]);
+
+  return { control, disabled, errors, isDirty, isLoading, isNew, isSubmitting, deleteHandler, setFocus, submit };
 }
 
 export function resolver(values: VoyageFormData) {

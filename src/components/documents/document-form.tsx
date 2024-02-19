@@ -1,5 +1,6 @@
 import { toLocalDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
+import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import type { DocumentFormData } from "@src/models";
 import { useAppSelector, useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation } from "@src/store";
 import { router } from "expo-router";
@@ -21,7 +22,8 @@ export interface DocumentFormProps {
 }
 
 export function DocumentForm(props: DocumentFormProps) {
-  const { uploadDate, control, errors, isLoading, deleteDocument, setFocus } = useDocument(props);
+  const { uploadDate, control, disabled, errors, isLoading, deleteDocument, setDisabled, setFocus } =
+    useDocument(props);
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -43,6 +45,16 @@ export function DocumentForm(props: DocumentFormProps) {
       />
 
       <ValidationText error={errors.root} />
+
+      {disabled ? (
+        <Button mode="contained" onPress={() => setDisabled(false)}>
+          Edit
+        </Button>
+      ) : (
+        <Button mode="contained" onPress={showFeatureInDevelopmentToast}>
+          Submit
+        </Button>
+      )}
 
       <Button mode="contained-tonal" onPress={deleteDocument}>
         Delete
@@ -92,8 +104,8 @@ function useDocument({ id }: DocumentFormProps) {
         return;
       }
 
+      // TODO: Add modal confirmation
       await deleteRequest({ documentId: id, userId }).unwrap();
-
       router.replace("/(auth)/(seafarer)/documents/");
       Toast.show({ type: "info", text1: "Document deleted" });
     } catch (deleteError) {
