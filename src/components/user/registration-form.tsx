@@ -9,7 +9,7 @@ import { router } from "expo-router";
 import React, { useEffect } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { Button } from "react-native-paper";
+import { Button, useTheme } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
@@ -21,6 +21,7 @@ import ValidationText from "../ui/form/validation-text";
 export default function RegistrationForm() {
   const { control, errors, isSubmitting, register, setFocus } = useRegister();
   const [gdprPolicyAsset, gdprPolicyAssetError] = useAssets(gdprPolicy);
+  const { colors } = useTheme();
 
   return (
     <FormView>
@@ -73,7 +74,11 @@ export default function RegistrationForm() {
       ) : (
         <ControlledCheckBox name="gdprAccepted" control={control}>
           I have read and accept the{" "}
-          <A href={gdprPolicyAsset?.[0].uri} target="_blank">
+          <A
+            href={gdprPolicyAsset?.[0].uri}
+            style={{ fontWeight: "bold", color: colors.primary, textDecorationLine: "underline" }}
+            target="_blank"
+          >
             GDPR policy
           </A>
         </ControlledCheckBox>
