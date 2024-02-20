@@ -29,24 +29,28 @@ export default function ControlledCheckBox<TData extends FieldValues, TContext =
       name={name}
       control={control}
       defaultValue={defaultValue as PathValue<TData, Path<TData>>}
-      render={({ field: { onChange, onBlur, value, disabled }, fieldState: { error } }) => (
-        <View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Checkbox
-              onPress={() => {
-                onChange(!value);
-                onBlur();
-              }}
-              status={value === true ? "checked" : value === false ? "unchecked" : "indeterminate"}
-              disabled={disabled}
-              uncheckedColor={error ? theme.colors.error : undefined}
-              {...inputProps}
-            />
-            <Text>{children}</Text>
+      render={({ field: { onChange, onBlur, value, disabled }, fieldState: { error } }) => {
+        const onPress = () => {
+          onChange(!value);
+          onBlur();
+        };
+
+        return (
+          <View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Checkbox
+                onPress={onPress}
+                status={value === true ? "checked" : value === false ? "unchecked" : "indeterminate"}
+                disabled={disabled}
+                uncheckedColor={error ? theme.colors.error : undefined}
+                {...inputProps}
+              />
+              <Text onPress={onPress}>{children}</Text>
+            </View>
+            <ValidationText error={error} />
           </View>
-          <ValidationText error={error} />
-        </View>
-      )}
+        );
+      }}
     />
   );
 }
