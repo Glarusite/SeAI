@@ -6,7 +6,6 @@ import { useAppSelector, useGetUserQuery, useUpdateUserMutation } from "@src/sto
 import { useEffect, useMemo } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import type { DimensionValue } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator, Button, TextInput } from "react-native-paper";
 import Toast from "react-native-toast-message";
@@ -101,12 +100,12 @@ function useStyles({ wide }: ProfileFormProps) {
       StyleSheet.create({
         formContainer: {
           flexDirection: wide ? "row" : undefined,
+          marginRight: 16,
           gap: 16,
         },
 
         inputContainer: {
-          // TODO: figure out how to make calc work on iOS and Android
-          width: wide ? ("calc(50% - 8px)" as DimensionValue) : undefined,
+          width: wide ? "50%" : undefined,
           gap: 16,
         },
       }),
