@@ -32,7 +32,11 @@ export default function DocumentsDataTable() {
 
   return (
     <>
-      <LinkButton href="/scanner/" icon="plus" mode="contained-tonal">
+      <LinkButton href="/scanner/" icon="camera" mode="contained-tonal">
+        Scan Document
+      </LinkButton>
+
+      <LinkButton href="/documents/new" icon="plus" mode="contained-tonal">
         Add New Document
       </LinkButton>
 

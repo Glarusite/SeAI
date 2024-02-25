@@ -64,7 +64,10 @@ export function DocumentsList() {
           icon={fabGroupState.open ? "close" : "plus"}
           open={fabGroupState.open}
           onStateChange={setFabGroupState}
-          actions={[{ icon: "plus", label: "Add New Document", onPress: () => router.push("/scanner/") }]}
+          actions={[
+            { icon: "camera", label: "Scan Document", onPress: () => router.push("/scanner/") },
+            { icon: "plus", label: "Add New Document", onPress: () => router.push("/documents/new") },
+          ]}
         />
       </Portal>
     </>
