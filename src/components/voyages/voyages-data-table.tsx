@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
 
+import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
 
 import { useVoyages } from "./use-voyages";
@@ -35,9 +36,9 @@ export default function VoyagesDataTable() {
         Scan Voyage List
       </Button>
 
-      <Button icon="plus" mode="contained-tonal" onPress={() => router.push("/voyages/new")}>
+      <LinkButton href="/voyages/new" icon="plus" mode="contained-tonal">
         Add New Voyage
-      </Button>
+      </LinkButton>
 
       <DataTable>
         <DataTable.Header>
