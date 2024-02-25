@@ -6,12 +6,12 @@ import { StyleSheet, View } from "react-native";
 import { DocumentForm } from "./document-form";
 import { useDocumentImageUri } from "./use-document-image";
 
-export interface DocumentReviewProps {
-  documentId: string;
+export interface DocumentFormViewProps {
+  documentId?: string;
   wide: boolean;
 }
 
-export default function DocumentReview(props: DocumentReviewProps) {
+export default function DocumentFormView(props: DocumentFormViewProps) {
   const { styles, uri } = useDocumentPage(props);
 
   return (
@@ -24,7 +24,7 @@ export default function DocumentReview(props: DocumentReviewProps) {
   );
 }
 
-function useDocumentPage({ documentId, wide }: DocumentReviewProps) {
+function useDocumentPage({ documentId, wide }: DocumentFormViewProps) {
   const { height } = useAppDimensions();
   const styles = useStyles(height, wide);
   const uri = useDocumentImageUri(documentId);
@@ -38,6 +38,7 @@ function useStyles(height: number, wide: boolean) {
       StyleSheet.create({
         container: {
           flexDirection: wide ? "row" : undefined,
+          gap: 10,
         },
 
         image: {

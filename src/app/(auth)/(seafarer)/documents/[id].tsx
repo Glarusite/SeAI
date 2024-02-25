@@ -1,6 +1,6 @@
 import { useAppDimensions } from "@src/common/hooks";
 import AppScrollView from "@src/components/app/app-scroll-view";
-import DocumentReview from "@src/components/documents/document-review";
+import DocumentFormView from "@src/components/documents/document-form-view";
 import { useLocalSearchParams } from "expo-router";
 
 export default function DocumentPage() {
@@ -8,7 +8,7 @@ export default function DocumentPage() {
 
   return (
     <AppScrollView wide={wide}>
-      <DocumentReview documentId={documentId} wide={wide} />
+      <DocumentFormView documentId={documentId} wide={wide} />
     </AppScrollView>
   );
 }

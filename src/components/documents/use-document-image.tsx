@@ -8,9 +8,15 @@ import { Platform } from "react-native";
 export function useDocumentImageUri(documentId: string | undefined) {
   const { userId, accessToken } = useAppSelector(state => state.user);
   const [uri, setUri] = useState<string | ImageSource>();
+  const scan = useAppSelector(state => state.scan);
 
   useAsync(async () => {
-    if (!userId || !accessToken || !documentId) {
+    if (documentId == null) {
+      setUri(scan.uri);
+      return;
+    }
+
+    if (!(userId && accessToken)) {
       return;
     }
 
@@ -26,7 +32,7 @@ export function useDocumentImageUri(documentId: string | undefined) {
     if (imageResponse.ok) {
       setUri(URL.createObjectURL(await imageResponse.blob()));
     }
-  }, [accessToken, documentId, userId]);
+  }, [accessToken, documentId, scan.uri, userId]);
 
   useEffect(
     () => () => {

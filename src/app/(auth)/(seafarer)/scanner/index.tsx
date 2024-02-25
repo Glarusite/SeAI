@@ -29,8 +29,11 @@ function useScanner() {
   const scan = useAppSelector(state => state.scan);
 
   useAppNavigation(() => {
-    if (Object.keys(scan).length > 0) {
-      router.push("/scanner/verify");
+    const { id, uri } = scan;
+    if (id != null) {
+      router.push(`/documents/${id}`);
+    } else if (uri) {
+      router.push(`/documents/new`);
     }
   }, [scan]);
 

@@ -1,9 +1,10 @@
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { router } from "expo-router";
+import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator, Card, HelperText, List, Text } from "react-native-paper";
+import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text } from "react-native-paper";
 
 import TextValue from "../ui/text-value";
 
@@ -12,6 +13,7 @@ import { useDocuments } from "./use-documents";
 
 export function DocumentsList() {
   const { data, isLoading, error } = useDocuments();
+  const [fabGroupState, setFabGroupState] = useState({ open: false });
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -22,38 +24,50 @@ export function DocumentsList() {
   }
 
   return (
-    <FlatList
-      data={data}
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-      keyExtractor={({ id }) => id!}
-      removeClippedSubviews
-      renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
-        <Card key={id} style={styles.card} onPress={() => router.push(`/documents/${id}`)}>
-          <List.Item
-            title={name}
-            left={() => <DocumentThumbnail documentId={id} size={80} />}
-            description={
-              <View style={styles.gridContainer}>
-                <View>
-                  <Text>Number:</Text>
-                  <Text>Issue date:</Text>
-                  <Text>Expiration date:</Text>
-                  <Text>Upload date:</Text>
-                </View>
+    <>
+      <FlatList
+        data={data}
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        keyExtractor={({ id }) => id!}
+        removeClippedSubviews
+        renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
+          <Card key={id} style={styles.card} onPress={() => router.push(`/documents/${id}`)}>
+            <List.Item
+              title={name}
+              left={() => <DocumentThumbnail documentId={id} size={80} />}
+              description={
+                <View style={styles.gridContainer}>
+                  <View>
+                    <Text>Number:</Text>
+                    <Text>Issue date:</Text>
+                    <Text>Expiration date:</Text>
+                    <Text>Upload date:</Text>
+                  </View>
 
-                <View style={styles.valueContainer}>
-                  <TextValue>{number}</TextValue>
-                  <TextValue>{toLocaleDateString(issueDate)}</TextValue>
-                  <TextValue>{toLocaleDateString(expiryDate)}</TextValue>
-                  <TextValue>{toLocaleDateString(createdDate)}</TextValue>
+                  <View style={styles.valueContainer}>
+                    <TextValue>{number}</TextValue>
+                    <TextValue>{toLocaleDateString(issueDate)}</TextValue>
+                    <TextValue>{toLocaleDateString(expiryDate)}</TextValue>
+                    <TextValue>{toLocaleDateString(createdDate)}</TextValue>
+                  </View>
                 </View>
-              </View>
-            }
-          />
-        </Card>
-      )}
-    />
+              }
+            />
+          </Card>
+        )}
+      />
+
+      <Portal>
+        <FAB.Group
+          visible
+          icon={fabGroupState.open ? "close" : "plus"}
+          open={fabGroupState.open}
+          onStateChange={setFabGroupState}
+          actions={[{ icon: "plus", label: "Add New Document", onPress: () => router.push("/scanner/") }]}
+        />
+      </Portal>
+    </>
   );
 }
 
