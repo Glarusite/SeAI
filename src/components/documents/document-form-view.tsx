@@ -82,6 +82,6 @@ function useStyles(height: number, wide: boolean) {
           justifyContent: "center",
         },
       }),
-    [height, wide],
+    [colors.inverseSurface, wide],
   );
 }
