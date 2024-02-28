@@ -13,7 +13,8 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "project": [
-      "tsconfig.json"
+      "tsconfig.json",
+      "tsconfig.web.json"
     ]
   },
   "plugins": [
