@@ -1,10 +1,11 @@
 function Start-Update {
-  $ConfirmChoice = Read-Host "[YARN] Do you want to update yarn? This will modify source code files and changes need to be comitted. [y/N]"
-  if ($ConfirmChoice -eq "y") {
-    Assert-Yarn
-    Update-Yarn
-    Update-Packages
+  if ($PSVersionTable.PSVersion.Major -lt 7) {
+    throw "This script can only be run with PowerShell v7 or higher! Please install a newer version from Company Portal."
   }
+
+  Assert-Yarn
+  Update-Yarn
+  Update-Packages
 }
 
 function Assert-Yarn {
@@ -12,11 +13,18 @@ function Assert-Yarn {
 }
 
 function Update-Yarn {
-  yarn set version stable
+  $ConfirmChoice = Read-Host "[YARN] Do you want to update yarn to latest version? [Y/n]"
+  if ($ConfirmChoice -ne "n") {
+    yarn set version stable
+  }
 }
 
 function Update-Packages {
-  Get-Item yarn.lock | Remove-Item
+  $ConfirmChoice = Read-Host "[YARN] Do you want to update all packages to their latest semver range? This will recreate the yarn.lock file. [y/N]"
+  if ($ConfirmChoice -eq "y") {
+    Get-Item yarn.lock | Remove-Item
+  }
+
   yarn install
 }
 
