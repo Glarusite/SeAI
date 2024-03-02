@@ -3,7 +3,7 @@ import AppScrollView from "@src/components/app/app-scroll-view";
 import CameraLinkButton from "@src/components/scanner/camera-button";
 import PhotoUploadButton from "@src/components/scanner/photo-upload-button";
 import LogoImage from "@src/components/ui/logo-image";
-import { PageTitle } from "@src/components/ui/page-title";
+import PageTitle from "@src/components/ui/page-title";
 import { useAppSelector, useUploadMutation } from "@src/store";
 import { router } from "expo-router";
 

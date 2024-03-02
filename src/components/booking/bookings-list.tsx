@@ -10,7 +10,7 @@ import TextValue from "../ui/text-value";
 
 import { useBookings } from "./use-bookings";
 
-export function BookingsList() {
+export default function BookingsList() {
   const { data, isLoading, error } = useBookings();
 
   if (isLoading) {

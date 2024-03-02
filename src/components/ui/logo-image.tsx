@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
-import { PageTitle } from "./page-title";
+import PageTitle from "./page-title";
 
 export interface LogoImageProps {
   title?: string;

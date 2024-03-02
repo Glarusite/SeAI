@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native";
 import type { DropDownProps } from "../ui/form/drop-down";
 import DropDown from "../ui/form/drop-down";
 import Navigation from "../ui/navigation";
-import { PageTitle } from "../ui/page-title";
+import PageTitle from "../ui/page-title";
 import ToggleThemeSwitch from "../ui/toggle-theme-switch";
 
 import AppScrollView from "./app-scroll-view";

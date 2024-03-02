@@ -25,7 +25,7 @@ export interface VoyageFormProps {
   id?: string;
 }
 
-export function VoyageForm(props: VoyageFormProps) {
+export default function VoyageForm(props: VoyageFormProps) {
   const {
     control,
     disabled,

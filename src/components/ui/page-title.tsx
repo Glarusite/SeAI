@@ -7,7 +7,13 @@ export type TitleTextProps = React.PropsWithChildren<
   Pick<TextStyle, "alignSelf" | "fontFamily" | "fontSize" | "color">
 >;
 
-export function PageTitle({ alignSelf = "center", fontFamily, fontSize = 36, color, children }: TitleTextProps) {
+export default function PageTitle({
+  alignSelf = "center",
+  fontFamily,
+  fontSize = 36,
+  color,
+  children,
+}: TitleTextProps) {
   const { colors } = useTheme();
   color = color || colors.onBackground;
   const styles = useMemo(

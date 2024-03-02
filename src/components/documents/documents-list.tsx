@@ -11,7 +11,7 @@ import TextValue from "../ui/text-value";
 import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
-export function DocumentsList() {
+export default function DocumentsList() {
   const { data, isLoading, error } = useDocuments();
   const [fabGroupState, setFabGroupState] = useState({ open: false });
 

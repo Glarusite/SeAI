@@ -11,7 +11,7 @@ import TextValue from "../ui/text-value";
 
 import { useVoyages } from "./use-voyages";
 
-export function VoyagesList() {
+export default function VoyagesList() {
   const { data, isLoading, error } = useVoyages();
   const [fabGroupState, setFabGroupState] = useState({ open: false });
 
