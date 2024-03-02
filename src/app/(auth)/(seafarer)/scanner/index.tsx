@@ -6,6 +6,7 @@ import LogoImage from "@src/components/ui/logo-image";
 import PageTitle from "@src/components/ui/page-title";
 import { useAppSelector, useUploadMutation } from "@src/store";
 import { router } from "expo-router";
+import Toast from "react-native-toast-message";
 
 export default function ScannerPage() {
   const { isLoading } = useScanner();
@@ -31,6 +32,11 @@ function useScanner() {
   useAppNavigation(() => {
     const { id, uri } = scan;
     if (id != null) {
+      Toast.show({
+        type: "info",
+        text1: "Verify scanned document",
+        text2: "Please verify or discard the scanned document",
+      });
       router.push(`/documents/${id}`);
     } else if (uri) {
       router.push(`/documents/new`);

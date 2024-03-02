@@ -20,6 +20,7 @@ export function useFileUpload(fixedCacheKey: string) {
       try {
         const body = await toFormData(uri);
         const { id } = await uploadScan({ userId, body }).unwrap();
+        dispatch(setScan({ id, uri }));
         router.push(`/documents/${id}`);
       } catch (scanError) {
         Toast.show({
@@ -28,7 +29,6 @@ export function useFileUpload(fixedCacheKey: string) {
           text2: toErrorMessage(scanError),
         });
         router.push(`/documents/new`);
-      } finally {
         dispatch(setScan({ uri }));
       }
     },

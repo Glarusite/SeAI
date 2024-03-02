@@ -36,7 +36,7 @@ export default function DocumentsDataTable() {
         Scan Document
       </LinkButton>
 
-      <LinkButton href="/documents/new" icon="plus" mode="contained-tonal">
+      <LinkButton href="/documents/new" icon="plus" mode="contained">
         Add New Document
       </LinkButton>
 

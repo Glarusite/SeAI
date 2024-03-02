@@ -19,7 +19,6 @@ export default function SeafarerLayout() {
       <Stack.Screen name="documents/[id]" options={{ title: "Document Review" }} />
       <Stack.Screen name="documents/index" options={{ title: "Documents" }} />
       <Stack.Screen name="documents/new" options={{ title: "Create document" }} />
-      <Stack.Screen name="documents/verify" options={{ title: "Verify document" }} />
       <Stack.Screen name="scanner/index" options={{ title: "Scanner" }} />
       <Stack.Screen name="scanner/camera" options={{ title: "Scan with camera" }} />
       <Stack.Screen name="user/index" options={{ title: "Profile" }} />

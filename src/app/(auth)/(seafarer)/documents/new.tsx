@@ -1,6 +1,6 @@
 import { useAppDimensions } from "@src/common/hooks";
 import AppScrollView from "@src/components/app/app-scroll-view";
-import DocumentFormView from "@src/components/documents/document-form-view";
+import DocumentForm from "@src/components/documents/document-form";
 
 export default function NewDocumentPage() {
   const { width } = useAppDimensions();
@@ -8,7 +8,7 @@ export default function NewDocumentPage() {
 
   return (
     <AppScrollView wide={wide}>
-      <DocumentFormView wide={wide} />
+      <DocumentForm wide={wide} />
     </AppScrollView>
   );
 }

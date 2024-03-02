@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { useAsync } from "@src/common/hooks";
 import { useAppSelector } from "@src/store";
 import { baseUrl } from "@src/store/api.base";
@@ -9,14 +10,19 @@ export function useDocumentImageUri(documentId: string | undefined) {
   const { userId, accessToken } = useAppSelector(state => state.user);
   const [uri, setUri] = useState<string | ImageSource>();
   const scan = useAppSelector(state => state.scan);
+  const isFocused = useIsFocused();
 
   useAsync(async () => {
-    if (documentId == null) {
+    if (documentId === scan.id) {
       setUri(scan.uri);
       return;
     }
 
     if (!(userId && accessToken)) {
+      return;
+    }
+
+    if (!isFocused) {
       return;
     }
 
@@ -32,7 +38,7 @@ export function useDocumentImageUri(documentId: string | undefined) {
     if (imageResponse.ok) {
       setUri(URL.createObjectURL(await imageResponse.blob()));
     }
-  }, [accessToken, documentId, scan.uri, userId]);
+  }, [accessToken, documentId, scan.uri, userId, isFocused]);
 
   useEffect(
     () => () => {
