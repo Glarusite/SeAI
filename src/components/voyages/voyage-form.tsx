@@ -147,15 +147,15 @@ function useVoyage({ id }: VoyageFormProps) {
     }
   }, [voyage, reset]);
 
-  const submitVoyage = handleSubmit(async ({ rank, vesselType, joiningDate, leavingDate, ...values }) => {
+  const submitVoyage = handleSubmit(async values => {
     setError("root", {});
     try {
       const voyageRequest = {
         ...values,
-        rank: rank || undefined,
-        vesselType: vesselType || undefined,
-        joiningDate: toUtcDate(joiningDate)?.toJSON(),
-        leavingDate: toUtcDate(leavingDate)?.toJSON(),
+        rank: values.rank || undefined,
+        vesselType: values.vesselType || undefined,
+        joiningDate: toUtcDate(values.joiningDate)?.toJSON(),
+        leavingDate: toUtcDate(values.leavingDate)?.toJSON(),
       };
       await (
         id === undefined

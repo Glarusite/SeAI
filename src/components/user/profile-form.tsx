@@ -142,6 +142,9 @@ function useProfile() {
         userId,
         userUpdateRequest: {
           ...values,
+          rank: values.rank || undefined,
+          status: values.status || undefined,
+          vesselType: values.vesselType || undefined,
           contractDuration: Number(values.contractDuration),
           dateOfBirth: toUtcDate(values.dateOfBirth)?.toJSON(),
           readinessDate: toUtcDate(values.readinessDate)?.toJSON(),
