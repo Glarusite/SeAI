@@ -3,7 +3,8 @@ import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { isBlank, isInvalidDate } from "@src/common/validators";
-import type { DropDownList, ProfileFormData, VoyageFormData } from "@src/models";
+import type { VoyageFormData } from "@src/models";
+import { rankList, vesselTypeList } from "@src/models";
 import { useAppSelector, useCreateVoyageMutation, useDeleteVoyageMutation, useUpdateVoyageMutation } from "@src/store";
 import { router } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
@@ -146,13 +147,15 @@ function useVoyage({ id }: VoyageFormProps) {
     }
   }, [voyage, reset]);
 
-  const submitVoyage = handleSubmit(async values => {
+  const submitVoyage = handleSubmit(async ({ rank, vesselType, joiningDate, leavingDate, ...values }) => {
     setError("root", {});
     try {
       const voyageRequest = {
         ...values,
-        joiningDate: toUtcDate(values.joiningDate)?.toJSON(),
-        leavingDate: toUtcDate(values.leavingDate)?.toJSON(),
+        rank: rank || undefined,
+        vesselType: vesselType || undefined,
+        joiningDate: toUtcDate(joiningDate)?.toJSON(),
+        leavingDate: toUtcDate(leavingDate)?.toJSON(),
       };
       await (
         id === undefined
@@ -255,55 +258,3 @@ export function resolver(values: VoyageFormData) {
 
   return { errors, values };
 }
-
-const vesselTypeList: DropDownList<ProfileFormData["vesselType"]> = [
-  { label: "Not selected", value: undefined },
-  { label: "Container", value: "OIL_TANKER" },
-  { label: "Crude Oil", value: "OIL_TANKER" },
-  { label: "Product Oil", value: "OIL_TANKER" },
-  { label: "LPG (Liquefied Petroleum Gas)", value: "OIL_TANKER" },
-  { label: "LNG (Liquefied Natural Gas)", value: "OIL_TANKER" },
-  { label: "Reefer", value: "OIL_TANKER" },
-  { label: "Ro-Ro (Roll-On/Roll-Off)", value: "OIL_TANKER" },
-  { label: "General Cargo", value: "OIL_TANKER" },
-  { label: "Cruise", value: "OIL_TANKER" },
-  { label: "Ferry", value: "OIL_TANKER" },
-  { label: "Ocean Liner", value: "OIL_TANKER" },
-  { label: "Catamaran", value: "OIL_TANKER" },
-  { label: "Motor Yacht", value: "OIL_TANKER" },
-  { label: "Sailing Yacht", value: "OIL_TANKER" },
-  { label: "Mega Yacht", value: "OIL_TANKER" },
-  { label: "Explorer Yacht", value: "OIL_TANKER" },
-  { label: "Sport Fishing Yacht", value: "OIL_TANKER" },
-];
-
-const rankList: DropDownList<ProfileFormData["rank"]> = [
-  { label: "Not selected", value: undefined },
-  { label: "Master/Captain (CPT)", value: "CAPTAIN" },
-  { label: "Chief Officer (C/O)", value: "CAPTAIN" },
-  { label: "First Officer", value: "CAPTAIN" },
-  { label: "Second Officer (2/O)", value: "CAPTAIN" },
-  { label: "Third Officer (3/O)", value: "CAPTAIN" },
-  { label: "Deck Cadet (D/C)", value: "CAPTAIN" },
-  { label: "Chief Engineer (C/E)", value: "CAPTAIN" },
-  { label: "First Engineer (1/E)", value: "CAPTAIN" },
-  { label: "Second Engineer (2/E)", value: "CAPTAIN" },
-  { label: "Third Engineer (3/E)", value: "CAPTAIN" },
-  { label: "Forth Engineer (4/E)", value: "CAPTAIN" },
-  { label: "Electro-Technical Officer (ETO)", value: "CAPTAIN" },
-  { label: "Boatswain (BSN)", value: "CAPTAIN" },
-  { label: "Able Seaman (AB)", value: "CAPTAIN" },
-  { label: "Ordinary Seaman (OS)", value: "CAPTAIN" },
-  { label: "Chief Steward (C/STW)", value: "CAPTAIN" },
-  { label: "Steward (STW)", value: "CAPTAIN" },
-  { label: "Messman (MSN)", value: "CAPTAIN" },
-  { label: "Fitter (FTR)", value: "CAPTAIN" },
-  { label: "Pumpman (P/P)", value: "CAPTAIN" },
-  { label: "Cook (C/K)", value: "CAPTAIN" },
-  { label: "Motorman (M/M)", value: "CAPTAIN" },
-  { label: "Oiler", value: "CAPTAIN" },
-  { label: "Welder", value: "CAPTAIN" },
-  { label: "Refrigeration Engineer", value: "CAPTAIN" },
-  { label: "Trainee Officer", value: "CAPTAIN" },
-  { label: "Radio Officer/Radio Operator", value: "CAPTAIN" },
-];

@@ -38,7 +38,7 @@ export function useDocumentImageUri(documentId: string | undefined) {
     if (imageResponse.ok) {
       setUri(URL.createObjectURL(await imageResponse.blob()));
     }
-  }, [accessToken, documentId, scan.uri, userId, isFocused]);
+  }, [accessToken, documentId, scan, userId, isFocused]);
 
   useEffect(
     () => () => {

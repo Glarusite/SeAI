@@ -4,7 +4,7 @@ import type { AppFlags } from "@src/models";
 
 const initialState: AppState = {};
 
-const FlagsSlice = createSlice({
+const AppSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
@@ -17,10 +17,10 @@ const FlagsSlice = createSlice({
   },
 });
 
-export default FlagsSlice;
+export default AppSlice;
 export const {
   actions: { setAppValue },
-} = FlagsSlice;
+} = AppSlice;
 export type AppState = Readonly<Partial<AppFlags>>;
 
 type SetFlagValuePayloadAction<TKey extends keyof AppState> = PayloadAction<{

@@ -1,4 +1,4 @@
-import type { Booking } from "@src/models/bookings";
+import type { Booking } from "@src/models";
 
 export function useBookings() {
   const isLoading = false;

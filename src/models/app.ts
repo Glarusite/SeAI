@@ -10,5 +10,5 @@ export interface AppFlags {
 export type DropDownList<TValue extends string | number | undefined> = DropDownListItem<TValue>[];
 
 export type DropDownListItem<TValue extends string | number | undefined> = Unboxed<DropDownPropsInterface["list"]> & {
-  value?: TValue;
+  value?: TValue | "";
 };

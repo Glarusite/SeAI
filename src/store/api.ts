@@ -321,12 +321,57 @@ export type GetAllCoursesParameters = void;
 export type GetUserResponse = {
   firstName?: string;
   lastName?: string;
-  rank?: "CAPTAIN";
+  rank?:
+    | "Master/Captain (CPT)"
+    | "Chief Officer (C/O)"
+    | "First Officer"
+    | "Second Officer (2/O)"
+    | "Third Officer (3/O)"
+    | "Deck Cadet (D/C)"
+    | "Chief Engineer (C/E)"
+    | "First Engineer (1/E)"
+    | "Second Engineer (2/E)"
+    | "Third Engineer (3/E)"
+    | "Fourth Engineer (4/E)"
+    | "Electro-Technical Officer (ETO)"
+    | "Boatswain (BSN)"
+    | "Able Seaman (AB)"
+    | "Ordinary Seaman (OS)"
+    | "Chief Steward (C/STW)"
+    | "Steward (STW)"
+    | "Messman (MSN)"
+    | "Fitter (FTR)"
+    | "Pumpman (P/P)"
+    | "Cook (C/K)"
+    | "Motorman (M/M)"
+    | "Oiler"
+    | "Welder"
+    | "Refrigeration Engineer"
+    | "Trainee Officer"
+    | "Radio Officer/Radio Operator";
   presentEmployer?: string;
   dateOfBirth?: string;
   manningAgents?: string;
   status?: "ONBOARD" | "HOME";
-  vesselType?: "OIL_TANKER";
+  vesselType?:
+    | "Bulk Carrier"
+    | "Container"
+    | "Crude Oil"
+    | "Product Oil"
+    | "LPG (Liquefied Petroleum Gas)"
+    | "LNG (Liquefied Natural Gas"
+    | "Reefer"
+    | "Ro-Ro (Roll-On/Roll-Off)"
+    | "General Cargo"
+    | "Cruise"
+    | "Ferry"
+    | "Ocean Liner"
+    | "Catamaran"
+    | "Motor Yacht"
+    | "Sailing Yacht"
+    | "Mega Yacht"
+    | "Explorer Yacht"
+    | "Sport Fishing Yacht";
   homeAirport?: string;
   readinessDate?: string;
   contractDuration?: number;
@@ -334,19 +379,91 @@ export type GetUserResponse = {
 export type UserUpdateRequest = {
   firstName?: string;
   lastName?: string;
-  rank?: "CAPTAIN";
+  rank?:
+    | "Master/Captain (CPT)"
+    | "Chief Officer (C/O)"
+    | "First Officer"
+    | "Second Officer (2/O)"
+    | "Third Officer (3/O)"
+    | "Deck Cadet (D/C)"
+    | "Chief Engineer (C/E)"
+    | "First Engineer (1/E)"
+    | "Second Engineer (2/E)"
+    | "Third Engineer (3/E)"
+    | "Fourth Engineer (4/E)"
+    | "Electro-Technical Officer (ETO)"
+    | "Boatswain (BSN)"
+    | "Able Seaman (AB)"
+    | "Ordinary Seaman (OS)"
+    | "Chief Steward (C/STW)"
+    | "Steward (STW)"
+    | "Messman (MSN)"
+    | "Fitter (FTR)"
+    | "Pumpman (P/P)"
+    | "Cook (C/K)"
+    | "Motorman (M/M)"
+    | "Oiler"
+    | "Welder"
+    | "Refrigeration Engineer"
+    | "Trainee Officer"
+    | "Radio Officer/Radio Operator";
   presentEmployer?: string;
   dateOfBirth?: string;
   manningAgents?: string;
   status?: "ONBOARD" | "HOME";
-  vesselType?: "OIL_TANKER";
+  vesselType?:
+    | "Bulk Carrier"
+    | "Container"
+    | "Crude Oil"
+    | "Product Oil"
+    | "LPG (Liquefied Petroleum Gas)"
+    | "LNG (Liquefied Natural Gas"
+    | "Reefer"
+    | "Ro-Ro (Roll-On/Roll-Off)"
+    | "General Cargo"
+    | "Cruise"
+    | "Ferry"
+    | "Ocean Liner"
+    | "Catamaran"
+    | "Motor Yacht"
+    | "Sailing Yacht"
+    | "Mega Yacht"
+    | "Explorer Yacht"
+    | "Sport Fishing Yacht";
   homeAirport?: string;
   readinessDate?: string;
   contractDuration?: number;
 };
 export type UpdateVoyageRequest = {
   vesselName?: string;
-  rank?: "CAPTAIN";
+  rank?:
+    | "Master/Captain (CPT)"
+    | "Chief Officer (C/O)"
+    | "First Officer"
+    | "Second Officer (2/O)"
+    | "Third Officer (3/O)"
+    | "Deck Cadet (D/C)"
+    | "Chief Engineer (C/E)"
+    | "First Engineer (1/E)"
+    | "Second Engineer (2/E)"
+    | "Third Engineer (3/E)"
+    | "Fourth Engineer (4/E)"
+    | "Electro-Technical Officer (ETO)"
+    | "Boatswain (BSN)"
+    | "Able Seaman (AB)"
+    | "Ordinary Seaman (OS)"
+    | "Chief Steward (C/STW)"
+    | "Steward (STW)"
+    | "Messman (MSN)"
+    | "Fitter (FTR)"
+    | "Pumpman (P/P)"
+    | "Cook (C/K)"
+    | "Motorman (M/M)"
+    | "Oiler"
+    | "Welder"
+    | "Refrigeration Engineer"
+    | "Trainee Officer"
+    | "Radio Officer/Radio Operator";
   imoNumber?: string;
   joiningPort?: string;
   joiningDate?: string;
@@ -379,7 +496,34 @@ export type UserRegisterRequest = {
 export type GetVoyageResponse = {
   id?: string;
   vesselName?: string;
-  rank?: "CAPTAIN";
+  rank?:
+    | "Master/Captain (CPT)"
+    | "Chief Officer (C/O)"
+    | "First Officer"
+    | "Second Officer (2/O)"
+    | "Third Officer (3/O)"
+    | "Deck Cadet (D/C)"
+    | "Chief Engineer (C/E)"
+    | "First Engineer (1/E)"
+    | "Second Engineer (2/E)"
+    | "Third Engineer (3/E)"
+    | "Fourth Engineer (4/E)"
+    | "Electro-Technical Officer (ETO)"
+    | "Boatswain (BSN)"
+    | "Able Seaman (AB)"
+    | "Ordinary Seaman (OS)"
+    | "Chief Steward (C/STW)"
+    | "Steward (STW)"
+    | "Messman (MSN)"
+    | "Fitter (FTR)"
+    | "Pumpman (P/P)"
+    | "Cook (C/K)"
+    | "Motorman (M/M)"
+    | "Oiler"
+    | "Welder"
+    | "Refrigeration Engineer"
+    | "Trainee Officer"
+    | "Radio Officer/Radio Operator";
   imoNumber?: string;
   joiningPort?: string;
   joiningDate?: string;
@@ -389,7 +533,34 @@ export type GetVoyageResponse = {
 };
 export type CreateVoyageRequest = {
   vesselName?: string;
-  rank?: "CAPTAIN";
+  rank?:
+    | "Master/Captain (CPT)"
+    | "Chief Officer (C/O)"
+    | "First Officer"
+    | "Second Officer (2/O)"
+    | "Third Officer (3/O)"
+    | "Deck Cadet (D/C)"
+    | "Chief Engineer (C/E)"
+    | "First Engineer (1/E)"
+    | "Second Engineer (2/E)"
+    | "Third Engineer (3/E)"
+    | "Fourth Engineer (4/E)"
+    | "Electro-Technical Officer (ETO)"
+    | "Boatswain (BSN)"
+    | "Able Seaman (AB)"
+    | "Ordinary Seaman (OS)"
+    | "Chief Steward (C/STW)"
+    | "Steward (STW)"
+    | "Messman (MSN)"
+    | "Fitter (FTR)"
+    | "Pumpman (P/P)"
+    | "Cook (C/K)"
+    | "Motorman (M/M)"
+    | "Oiler"
+    | "Welder"
+    | "Refrigeration Engineer"
+    | "Trainee Officer"
+    | "Radio Officer/Radio Operator";
   imoNumber?: string;
   joiningPort?: string;
   joiningDate?: string;

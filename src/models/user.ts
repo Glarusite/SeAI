@@ -1,5 +1,7 @@
 import type { UserAuthenticationRequest, GetUserResponse, UserRegisterRequest } from "@src/store";
 
+import type { DropDownList } from "./app";
+
 export interface LoginFormData extends UserAuthenticationRequest {}
 
 export interface PasswordResetFormData extends UserAuthenticationRequest {
@@ -23,3 +25,9 @@ export interface User {
   email: string;
   role: "SEAFARER" | "TRAINING_CENTER_ADMIN" | "TRAINING_CENTER_USER";
 }
+
+export const statusList: DropDownList<ProfileFormData["status"]> = [
+  { label: "Not selected", value: "" },
+  { label: "Home", value: "HOME" },
+  { label: "On board", value: "ONBOARD" },
+];
