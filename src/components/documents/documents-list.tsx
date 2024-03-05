@@ -8,6 +8,7 @@ import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text } from "re
 
 import TextValue from "../ui/text-value";
 
+import DocumentReminderStatus from "./document-reminder-status";
 import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
@@ -34,7 +35,12 @@ export default function DocumentsList() {
         renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
           <Card key={id} style={styles.card} onPress={() => router.push(`/documents/${id}`)}>
             <List.Item
-              title={name}
+              title={
+                <View style={styles.titleContainer}>
+                  <Text>{name}</Text>
+                  <DocumentReminderStatus expiryDate={expiryDate} />
+                </View>
+              }
               left={() => <DocumentThumbnail documentId={id} size={80} />}
               description={
                 <View style={styles.gridContainer}>
@@ -88,9 +94,18 @@ const styles = StyleSheet.create({
     height: "auto",
   },
 
-  gridContainer: {
+  titleContainer: {
     flexDirection: "row",
     width: "100%",
+    gap: 8,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    marginBottom: 8,
+  },
+
+  gridContainer: {
+    flexDirection: "row",
     gap: 16,
   },
 

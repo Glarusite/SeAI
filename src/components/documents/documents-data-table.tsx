@@ -7,6 +7,7 @@ import { ActivityIndicator, DataTable, HelperText } from "react-native-paper";
 import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
 
+import DocumentReminderStatus from "./document-reminder-status";
 import DocumentThumbnail from "./document-thumbnail";
 import { useDocuments } from "./use-documents";
 
@@ -48,18 +49,22 @@ export default function DocumentsDataTable() {
           <DataTable.Title>Issue date</DataTable.Title>
           <DataTable.Title>Expiration date</DataTable.Title>
           <DataTable.Title>Upload date</DataTable.Title>
+          <DataTable.Title>Status</DataTable.Title>
         </DataTable.Header>
 
         {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }, index) => (
           <DataTableRow key={id} index={index} onPress={() => router.push(`/documents/${id}`)}>
-            <DataTable.Cell style={{ padding: 8 }}>
-              <DocumentThumbnail documentId={id} size={60} />
+            <DataTable.Cell>
+              <DocumentThumbnail documentId={id} size={64} />
             </DataTable.Cell>
             <DataTable.Cell>{name}</DataTable.Cell>
             <DataTable.Cell>{number}</DataTable.Cell>
             <DataTable.Cell>{toLocaleDateString(issueDate)}</DataTable.Cell>
             <DataTable.Cell>{toLocaleDateString(expiryDate)}</DataTable.Cell>
             <DataTable.Cell>{toLocaleDateString(createdDate)}</DataTable.Cell>
+            <DataTable.Cell>
+              <DocumentReminderStatus expiryDate={expiryDate} />
+            </DataTable.Cell>
           </DataTableRow>
         ))}
 

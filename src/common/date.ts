@@ -30,11 +30,14 @@ export function toLocalDate(date: Nullable<string> | DateTime) {
     return;
   }
 
-  if (date.kind !== "local") {
+  if (date.kind === "local") {
+    date = new Date(date);
+  } else {
     const localDateValue = date.getTime() + date.getTimezoneOffset() * 60_000;
     date = new Date(localDateValue);
-    date.kind = "local";
   }
+
+  date.kind = "local";
 
   return date as LocalDateTime;
 }
@@ -63,4 +66,15 @@ export function isSameDate(startDate: Date | undefined, endDate: Date | undefine
     startDate.getMonth() === endDate.getMonth() &&
     startDate.getDate() === endDate.getDate()
   );
+}
+
+export function getDateInterval(date1: DateTime, date2: DateTime) {
+  const timeIntervals = [31_536_000, 2_628_000, 604_800, 86_400, 3600, 60, 1];
+  const intervalNames = ["year", "month", "week", "day", "hour", "minute", "second"] as const;
+  const diff = (date1.getTime() - date2.getTime()) / 1000;
+  const index = timeIntervals.findIndex(interval => Math.abs(diff) / interval >= 1);
+  console.log(diff, timeIntervals[index], index);
+  const value = Math.floor(diff / timeIntervals[index]);
+  const { [index]: interval } = intervalNames;
+  return { value, interval };
 }

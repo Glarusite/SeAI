@@ -26,7 +26,7 @@ function useStyles({ size }: Pick<DocumentImageProps, "size">) {
     () =>
       StyleSheet.create({
         container: {
-          paddingStart: 16,
+          padding: 8,
         },
 
         image: {
