@@ -2,6 +2,7 @@ export * from "./app";
 export * from "./bookings";
 export * from "./documents";
 export * from "./ranks";
+export * from "./reminders";
 export * from "./types";
 export * from "./user";
 export * from "./vessel-types";

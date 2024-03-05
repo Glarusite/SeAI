@@ -29,4 +29,5 @@ export async function configureAppStore() {
 }
 
 export type AppStore = EnhancedStore;
+export type AppDispatch = AppStore["dispatch"];
 export type AppStoreState = StateFromReducersMapObject<typeof reducer>;

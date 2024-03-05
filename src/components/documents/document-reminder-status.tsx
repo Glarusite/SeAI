@@ -17,9 +17,10 @@ export default function DocumentReminderStatus({ expiryDate }: DocumentReminderS
 
   const { value, interval } = getDateInterval(expiryDate, new Date());
   function expiryValue<T>(valid: T, expires: T, expired: T) {
-    return value > 1 && interval === "year" ? valid : value > 0 ? expires : expired;
+    return value >= 1 && interval === "year" ? valid : value > 0 ? expires : expired;
   }
 
+  const displayValue = Math.abs(Math.floor(value));
   return (
     <Text
       style={{
@@ -27,9 +28,8 @@ export default function DocumentReminderStatus({ expiryDate }: DocumentReminderS
         ...expiryValue(styles.valid, styles.expires, styles.expired),
       }}
     >
-      {expiryValue("Valid for", "Expires in", "Expired")} {Math.abs(value)} {interval}
-      {Math.abs(value) === 1 ? "" : "s"}
-      {value < 0 ? " ago" : ""}
+      {expiryValue("Valid", "Expires", "Expired")} ({displayValue}&nbsp;{interval}
+      {displayValue === 1 ? "" : "s"})
     </Text>
   );
 }

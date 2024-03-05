@@ -10,10 +10,14 @@ import TextValue from "../ui/text-value";
 
 import DocumentReminderStatus from "./document-reminder-status";
 import DocumentThumbnail from "./document-thumbnail";
+import type { DocumentsFilterProps } from "./documents-filter";
+import DocumentsFilter from "./documents-filter";
 import { useDocuments } from "./use-documents";
 
-export default function DocumentsList() {
-  const { data, isLoading, error } = useDocuments();
+export interface DocumentsListProps extends DocumentsFilterProps {}
+
+export default function DocumentsList({ filter }: DocumentsListProps) {
+  const { data, isLoading, error } = useDocuments(filter);
   const [fabGroupState, setFabGroupState] = useState({ open: false });
 
   if (isLoading) {
@@ -26,6 +30,8 @@ export default function DocumentsList() {
 
   return (
     <>
+      <DocumentsFilter style={styles.filterContainer} filter={filter} />
+
       <FlatList
         data={data}
         style={styles.container}
@@ -83,6 +89,12 @@ export default function DocumentsList() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    paddingTop: 0,
+  },
+
+  filterContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 32,
   },
 
   contentContainer: {

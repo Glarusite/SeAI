@@ -9,10 +9,14 @@ import DataTableRow from "../ui/data-table-row";
 
 import DocumentReminderStatus from "./document-reminder-status";
 import DocumentThumbnail from "./document-thumbnail";
+import type { DocumentsFilterProps } from "./documents-filter";
+import DocumentsFilter from "./documents-filter";
 import { useDocuments } from "./use-documents";
 
-export default function DocumentsDataTable() {
-  const { data, isLoading, error } = useDocuments();
+export interface DocumentsDataTableProps extends DocumentsFilterProps {}
+
+export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) {
+  const { data, isLoading, error } = useDocuments(filter);
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
 
@@ -40,6 +44,8 @@ export default function DocumentsDataTable() {
       <LinkButton href="/documents/new" icon="plus" mode="contained">
         Add New Document
       </LinkButton>
+
+      <DocumentsFilter filter={filter} />
 
       <DataTable>
         <DataTable.Header>
