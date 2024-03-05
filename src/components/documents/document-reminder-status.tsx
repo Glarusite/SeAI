@@ -20,7 +20,7 @@ export default function DocumentReminderStatus({ expiryDate }: DocumentReminderS
     return value >= 1 && interval === "year" ? valid : value > 0 ? expires : expired;
   }
 
-  const displayValue = Math.abs(Math.floor(value));
+  const displayValue = Math.floor(Math.abs(value));
   return (
     <Text
       style={{

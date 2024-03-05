@@ -63,7 +63,8 @@ export function getNewDocumentReminders(
   const currentDate = new Date();
   for (const document of documents) {
     const { id, expiryDate } = document;
-    if (id != null && expiryDate != null) {
+    const localExpiryDate = toLocalDate(expiryDate);
+    if (id != null && localExpiryDate != null && localExpiryDate >= currentDate) {
       const period = reminderPeriods
         .map(reminderPeriod => ({ reminderPeriod, reminderDate: toReminderDate(expiryDate, reminderPeriod) }))
         .findLast(({ reminderDate }) => reminderDate && reminderDate <= currentDate)?.reminderPeriod;
