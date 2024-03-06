@@ -75,7 +75,7 @@
     "ios": "expo start --ios --go",
     "web": "expo start --web --go",
     "export": "expo export -p web",
-    "publish": "run export && aws s3 rm s3://bucket-name --recursive && aws s3 cp ./dist s3://seai.co --recursive",
+    "publish": "run export && aws s3 rm s3://seai.co --recursive && aws s3 cp ./dist s3://seai.co --recursive && aws cloudfront create-invalidation --distribution-id E1FIR9JYPYYW4O --paths /",
     "update": "npx dotenv-cli@latest -e .env -- npx eas-cli@latest update --auto"
   }
 }
