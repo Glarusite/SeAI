@@ -67,7 +67,6 @@ function useDocumentReminderNotifications() {
       try {
         if (Platform.OS === "web") {
           const newReminders = getNewDocumentReminders(documents, remindersRef.current, dispatch);
-          console.log(newReminders);
           if (newReminders.length === 0) {
             return;
           }
