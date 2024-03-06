@@ -7,10 +7,11 @@ import type { VoyageFormData } from "@src/models";
 import { rankList, vesselTypeList } from "@src/models";
 import { useAppSelector, useCreateVoyageMutation, useDeleteVoyageMutation, useUpdateVoyageMutation } from "@src/store";
 import { router } from "expo-router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { ActivityIndicator, Button } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, Button, useTheme } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
@@ -27,6 +28,7 @@ export interface VoyageFormProps {
 }
 
 export default function VoyageForm(props: VoyageFormProps) {
+  const styles = useStyles();
   const {
     control,
     disabled,
@@ -71,34 +73,67 @@ export default function VoyageForm(props: VoyageFormProps) {
 
       <ControlledTextInput control={control} name="remarks" label="Remarks" multiline />
 
-      {disabled ? (
-        <Button mode="contained" onPress={() => setDisabled(false)}>
-          Edit
-        </Button>
-      ) : (
-        <>
-          <ValidationText error={errors.root} />
+      {!disabled && <ValidationText error={errors.root} />}
 
+      <View style={styles.buttonContainer}>
+        {!disabled && (
           <Button mode="outlined" icon="plus" onPress={showFeatureInDevelopmentToast}>
-            Add contract document
+            Add contract
           </Button>
+        )}
 
-          <Button mode="contained" onPress={submitVoyage} disabled={!isDirty || isSubmitting}>
+        {disabled ? (
+          <Button mode="contained" icon="file-edit" onPress={() => setDisabled(false)}>
+            Edit
+          </Button>
+        ) : (
+          <Button mode="contained" icon="content-save" disabled={!isDirty || isSubmitting} onPress={submitVoyage}>
             {isSubmitting ? <ButtonActivityIndicator /> : isNew ? "Create" : "Update"}
           </Button>
+        )}
 
-          {!isNew || !disabled ? (
-            <Button mode="contained-tonal" disabled={isSubmitting} onPress={discardVoyage}>
-              Discard
-            </Button>
-          ) : (
-            <Button mode="contained-tonal" disabled={isSubmitting} onPress={deleteVoyage}>
-              Delete
-            </Button>
-          )}
-        </>
-      )}
+        {isNew || !disabled ? (
+          <Button mode="contained-tonal" icon="file-undo" disabled={isSubmitting} onPress={discardVoyage}>
+            Discard
+          </Button>
+        ) : (
+          <Button
+            mode="contained-tonal"
+            icon="delete"
+            style={styles.deleteButton}
+            textColor={styles.deleteButton.color}
+            disabled={isSubmitting}
+            onPress={deleteVoyage}
+          >
+            Delete
+          </Button>
+        )}
+      </View>
     </FormView>
+  );
+}
+
+function useStyles() {
+  const { dark, colors } = useTheme();
+
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        buttonContainer: {
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          gap: 16,
+          width: "100%",
+          justifyContent: "space-evenly",
+        },
+
+        deleteButton: {
+          backgroundColor: dark ? colors.errorContainer : colors.error,
+          color: dark ? colors.onErrorContainer : colors.onError,
+        },
+      }),
+    [colors, dark],
   );
 }
 

@@ -47,6 +47,7 @@ export default function DocumentForm(props: DocumentFormProps) {
     control,
     disabled,
     errors,
+    isDirty,
     isLoading,
     isNew,
     isVerify,
@@ -138,7 +139,7 @@ export default function DocumentForm(props: DocumentFormProps) {
             />
           )}
 
-          <ValidationText error={errors.root} />
+          {!disabled && <ValidationText error={errors.root} />}
 
           <View style={styles.buttonContainer}>
             {disabled ? (
@@ -146,7 +147,12 @@ export default function DocumentForm(props: DocumentFormProps) {
                 Edit
               </Button>
             ) : (
-              <Button mode="contained" icon="content-save" disabled={isSubmitting} onPress={submitDocument}>
+              <Button
+                mode="contained"
+                icon="content-save"
+                disabled={!(isVerify || isDirty) || isSubmitting}
+                onPress={submitDocument}
+              >
                 {isSubmitting ? <ButtonActivityIndicator /> : isNew ? "Create" : isVerify ? "Verify" : "Update"}
               </Button>
             )}
@@ -251,7 +257,7 @@ function useDocument({ id }: DocumentFormProps) {
   const { data: document, isLoading, error } = useFindQuery({ documentId: id || "", userId }, { skip: !id });
   const scan = useAppSelector(state => state.scan);
   const isNew = id == null;
-  const isVerify = scan.id === id;
+  const isVerify = !isNew && scan.id === id;
   const [uri, setUri] = useState(isVerify ? scan.uri : undefined);
   const imageUri = useDocumentImageUri(id);
 
@@ -265,7 +271,7 @@ function useDocument({ id }: DocumentFormProps) {
 
   const {
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors, isDirty, isSubmitting },
     setError,
     setFocus,
     reset,
@@ -434,8 +440,9 @@ function useDocument({ id }: DocumentFormProps) {
     disabled,
     errors,
     uri: uri || imageUri,
-    isNew,
+    isDirty,
     isLoading,
+    isNew,
     isSubmitting,
     isVerify,
     deleteDocument,
