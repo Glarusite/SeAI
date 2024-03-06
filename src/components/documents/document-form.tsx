@@ -132,6 +132,7 @@ export default function DocumentForm(props: DocumentFormProps) {
               locale="en-GB"
               mode="outlined"
               value={uploadDate}
+              iconStyle={styles.uploadDateIcon}
               onChange={noop}
               disabled
             />
@@ -220,6 +221,10 @@ function useStyles(wide: boolean) {
           width: wide ? "50%" : undefined,
           justifyContent: "center",
           alignContent: "center",
+        },
+
+        uploadDateIcon: {
+          display: "none",
         },
 
         buttonContainer: {
