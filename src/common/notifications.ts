@@ -1,6 +1,6 @@
 import type { ReminderPeriod } from "@src/models";
 import type { FindAllApiResponse, GetDocumentResponse } from "@src/store";
-import type { NotificationPermissionsStatus, NotificationRequestInput } from "expo-notifications";
+import type { NotificationPermissionsStatus } from "expo-notifications";
 import {
   IosAuthorizationStatus,
   cancelAllScheduledNotificationsAsync,
@@ -53,16 +53,13 @@ async function scheduleDocumentNotificationAsync(document: GetDocumentResponse, 
   }
 
   const identifier = `${document.id}-${period.value}-${period.type}`;
-  const notificationRequest: NotificationRequestInput = {
+
+  await scheduleNotificationAsync({
     identifier,
     trigger: { date },
     content: {
       title: "Document expiration",
       body: `Document ${document.name} expires in ${period.value} ${period.type}${period.value === 1 ? "" : "s"}`,
     },
-  };
-
-  if (Platform.OS !== "web") {
-    await scheduleNotificationAsync(notificationRequest);
-  }
+  });
 }

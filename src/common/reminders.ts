@@ -37,7 +37,17 @@ export function toReminderDate(
   }
 
   if (time != null) {
-    reminderDate.setHours(time.hours, time.minutes, time.seconds);
+    const { hours, minutes, seconds } = time;
+
+    reminderDate.setHours(hours);
+
+    if (minutes) {
+      reminderDate.setMinutes(minutes);
+    }
+
+    if (seconds) {
+      reminderDate.setSeconds(seconds);
+    }
   }
 
   return reminderDate;
