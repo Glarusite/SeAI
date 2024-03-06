@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
@@ -14,6 +15,7 @@ import { useVoyages } from "./use-voyages";
 export default function VoyagesList() {
   const { data, isLoading, error } = useVoyages();
   const [fabGroupState, setFabGroupState] = useState({ open: false });
+  const isFocused = useIsFocused();
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -68,18 +70,24 @@ export default function VoyagesList() {
         )}
       />
 
-      <Portal>
-        <FAB.Group
-          visible
-          icon={fabGroupState.open ? "close" : "plus"}
-          open={fabGroupState.open}
-          onStateChange={setFabGroupState}
-          actions={[
-            { icon: "camera", label: "Scan Voyage List", onPress: showFeatureInDevelopmentToast },
-            { icon: "plus", label: "Add New Voyage", onPress: () => router.push("/voyages/new") },
-          ]}
-        />
-      </Portal>
+      {isFocused && (
+        <Portal>
+          <FAB.Group
+            visible
+            icon={fabGroupState.open ? "close" : "plus"}
+            open={fabGroupState.open}
+            onStateChange={setFabGroupState}
+            actions={
+              fabGroupState.open
+                ? [
+                    { icon: "camera", label: "Scan Voyage List", onPress: showFeatureInDevelopmentToast },
+                    { icon: "plus", label: "Add New Voyage", onPress: () => router.push("/voyages/new") },
+                  ]
+                : []
+            }
+          />
+        </Portal>
+      )}
     </>
   );
 }
