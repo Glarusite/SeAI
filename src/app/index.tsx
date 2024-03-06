@@ -17,6 +17,10 @@ export default function MarketingPage() {
     }
   }, [accessToken]);
 
+  if (accessToken) {
+    return null;
+  }
+
   return (
     <>
       <Image source={backgroundImageSource} style={{ height: "100%", width: "100%" }} contentFit="cover" />
