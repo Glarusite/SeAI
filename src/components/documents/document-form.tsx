@@ -3,6 +3,7 @@ import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { toFormData } from "@src/common/form-data";
 import { useAppDimensions } from "@src/common/hooks";
+import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { isBlank, isInvalidDate } from "@src/common/validators";
 import type { DocumentFormData } from "@src/models";
 import {
@@ -83,7 +84,7 @@ export default function DocumentForm(props: DocumentFormProps) {
           </TouchableHighlight>
         )
       ) : (
-        <TouchableHighlight style={{ ...styles.imageContainer, ...styles.newImageContainer }} onPress={uploadImage}>
+        <TouchableHighlight style={[styles.imageContainer, styles.newImageContainer]} onPress={uploadImage}>
           <Text style={styles.addImageText}>Add image</Text>
         </TouchableHighlight>
       )}
@@ -131,7 +132,6 @@ export default function DocumentForm(props: DocumentFormProps) {
               locale="en-GB"
               mode="outlined"
               value={uploadDate}
-              iconStyle={{ display: "none" }}
               onChange={noop}
               disabled
             />
@@ -139,25 +139,40 @@ export default function DocumentForm(props: DocumentFormProps) {
 
           <ValidationText error={errors.root} />
 
-          {disabled ? (
-            <Button mode="contained" onPress={() => setDisabled(false)}>
-              Edit
-            </Button>
-          ) : (
-            <Button mode="contained" disabled={isSubmitting} onPress={submitDocument}>
-              {isSubmitting ? <ButtonActivityIndicator /> : isNew ? "Create" : isVerify ? "Verify" : "Update"}
-            </Button>
-          )}
+          <View style={styles.buttonContainer}>
+            {disabled ? (
+              <Button mode="contained" icon="file-edit" onPress={() => setDisabled(false)}>
+                Edit
+              </Button>
+            ) : (
+              <Button mode="contained" icon="content-save" disabled={isSubmitting} onPress={submitDocument}>
+                {isSubmitting ? <ButtonActivityIndicator /> : isNew ? "Create" : isVerify ? "Verify" : "Update"}
+              </Button>
+            )}
 
-          {isNew || !disabled ? (
-            <Button mode="contained-tonal" disabled={isSubmitting} onPress={discardDocument}>
-              Discard
-            </Button>
-          ) : (
-            <Button mode="contained-tonal" disabled={isSubmitting} onPress={deleteDocument}>
-              Delete
-            </Button>
-          )}
+            {isNew || !disabled ? (
+              <Button mode="contained-tonal" icon="file-undo" disabled={isSubmitting} onPress={discardDocument}>
+                Discard
+              </Button>
+            ) : (
+              <Button
+                mode="contained-tonal"
+                icon="delete"
+                style={styles.deleteButton}
+                textColor={styles.deleteButton.color}
+                disabled={isSubmitting}
+                onPress={deleteDocument}
+              >
+                Delete
+              </Button>
+            )}
+
+            {disabled && (
+              <Button mode="contained-tonal" icon="share" onPress={showFeatureInDevelopmentToast}>
+                Share
+              </Button>
+            )}
+          </View>
         </FormView>
       </View>
     </View>
@@ -165,7 +180,7 @@ export default function DocumentForm(props: DocumentFormProps) {
 }
 
 function useStyles(wide: boolean) {
-  const { colors } = useTheme();
+  const { dark, colors } = useTheme();
   const { height } = useAppDimensions();
 
   return useMemo(
@@ -206,8 +221,22 @@ function useStyles(wide: boolean) {
           justifyContent: "center",
           alignContent: "center",
         },
+
+        buttonContainer: {
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          gap: 16,
+          width: "100%",
+          justifyContent: "space-evenly",
+        },
+
+        deleteButton: {
+          backgroundColor: dark ? colors.errorContainer : colors.error,
+          color: dark ? colors.onErrorContainer : colors.onError,
+        },
       }),
-    [colors.inverseSurface, height, wide],
+    [colors, dark, height, wide],
   );
 }
 
