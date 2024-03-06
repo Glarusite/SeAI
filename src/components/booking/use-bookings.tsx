@@ -62,7 +62,7 @@ export function useBookings() {
       totalSlots: 20,
     },
     {
-      id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      id: "a50157c0-082d-4819-9485-0e837d1ad9d3",
       trainingCenter: "Helios Training Center",
       courseName: "Maritime Environmental Awareness",
       startDateTime: `2024-${nextMonth}-17T11:30:00.000Z`,
@@ -128,7 +128,7 @@ export function useBookings() {
       totalSlots: 7,
     },
     {
-      id: "7e2e4fd8-230f-4a48-a8f3-0af8e7c8b2a1",
+      id: "8bde0a3c-1613-4709-88ce-e6efe5012225",
       trainingCenter: "Ocean Navigator School",
       courseName: "Personal Safety and Social Responsibilities",
       startDateTime: `2024-06-01T09:30:00.000Z`,

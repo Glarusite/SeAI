@@ -63,6 +63,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
             key={id}
             style={[styles.card, id != null && selection?.has(id) && styles.selectedCard]}
             onPress={event => id && (selection == null ? router.push(`/documents/${id}`) : toggleSelection(event, id))}
+            onLongPress={() => id && setSelection(new Set([id]))}
           >
             <List.Item
               title={
@@ -136,7 +137,7 @@ function useStyles() {
 
         filterContainer: {
           paddingHorizontal: 16,
-          paddingVertical: 32,
+          paddingVertical: 16,
         },
 
         contentContainer: {
@@ -160,16 +161,17 @@ function useStyles() {
           alignItems: "center",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          marginBottom: 8,
         },
 
         gridContainer: {
+          paddingTop: 8,
           flexDirection: "row",
           gap: 16,
         },
 
         valueContainer: {
-          flex: 1,
+          // TODO: Find out the reason for this hack
+          flex: Platform.OS === "web" ? 1 : undefined,
         },
       }),
     [colors],

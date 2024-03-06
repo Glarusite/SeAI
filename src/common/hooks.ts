@@ -1,7 +1,13 @@
 import type { MaybePromise } from "@reduxjs/toolkit/dist/query/tsHelpers";
 import { useRootNavigation } from "expo-router";
+import type { Orientation } from "expo-screen-orientation";
+import {
+  addOrientationChangeListener,
+  getOrientationAsync,
+  removeOrientationChangeListener,
+} from "expo-screen-orientation";
 import { useEffect, useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 
 export function useAsync(effect: () => Promise<void>, deps: unknown[]) {
   useEffect(() => {
@@ -20,8 +26,12 @@ export function useAppNavigation(effect: () => MaybePromise<void>, deps: unknown
       return;
     }
 
-    rootNavigation.addListener("state", setIsReady);
-    return () => rootNavigation.removeListener("state", setIsReady);
+    if (Platform.OS === "web") {
+      rootNavigation.addListener("state", setIsReady);
+      return () => rootNavigation.removeListener("state", setIsReady);
+    } else {
+      setIsNavigationReady(true);
+    }
   }, [rootNavigation]);
 
   useEffect(() => {
@@ -40,4 +50,19 @@ export function useAppDimensions(dimension: "screen" | "window" = "window") {
   }, [dimension]);
 
   return dimensions;
+}
+
+export function useAppOrientation() {
+  const [orientation, setOrientation] = useState<Orientation>();
+
+  useAsync(async () => setOrientation(await getOrientationAsync()), []);
+
+  useEffect(() => {
+    const subscription = addOrientationChangeListener(({ orientationInfo }) =>
+      setOrientation(orientationInfo.orientation),
+    );
+    return () => removeOrientationChangeListener(subscription);
+  }, []);
+
+  return orientation;
 }

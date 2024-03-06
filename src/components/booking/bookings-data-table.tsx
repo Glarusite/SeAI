@@ -4,7 +4,7 @@ import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { useAppSelector } from "@src/store";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
+import { ActivityIndicator, Button, DataTable, HelperText, Text } from "react-native-paper";
 
 import DataTableRow from "../ui/data-table-row";
 
@@ -63,11 +63,15 @@ export default function BookingsDataTable() {
                   <DataTable.Cell>{index + from + 1}</DataTable.Cell>
                   <DataTable.Cell style={styles.cell}>{startDate?.toLocaleDateString()}</DataTable.Cell>
                   <DataTable.Cell style={styles.cell}>{endDate?.toLocaleDateString()}</DataTable.Cell>
-                  <DataTable.Cell style={styles.wideCell} textStyle={styles.text}>
-                    {isSeafarer ? trainingCenter : "BMKC"}
+                  <DataTable.Cell style={styles.wideCell}>
+                    <Text style={styles.text} numberOfLines={2} ellipsizeMode="middle">
+                      {isSeafarer ? trainingCenter : "BMKC"}
+                    </Text>
                   </DataTable.Cell>
-                  <DataTable.Cell style={styles.wideCell} textStyle={styles.text}>
-                    {courseName}
+                  <DataTable.Cell style={styles.wideCell}>
+                    <Text style={styles.text} numberOfLines={2} ellipsizeMode="middle">
+                      {courseName}
+                    </Text>
                   </DataTable.Cell>
                   <DataTable.Cell style={styles.wideCell}>
                     {timeFormat.format(startDate)} - {timeFormat.format(endDate)}
@@ -121,7 +125,5 @@ const styles = StyleSheet.create({
 
   text: {
     textAlign: "center",
-    whiteSpace: "wrap",
-    padding: 8,
   },
 });

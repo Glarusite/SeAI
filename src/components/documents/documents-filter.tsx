@@ -26,12 +26,10 @@ export default function DocumentsFilter({ style, filter }: DocumentsFilterProps)
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     gap: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    maxHeight: 32,
   },
 });
 

@@ -2,10 +2,10 @@ import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { router } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { GestureResponderEvent } from "react-native";
-import { StyleSheet, View } from "react-native";
-import { ActivityIndicator, Button, Checkbox, DataTable, HelperText } from "react-native-paper";
+import { Platform, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Button, Checkbox, DataTable, HelperText, useTheme } from "react-native-paper";
 
 import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
@@ -19,6 +19,7 @@ import { useDocuments } from "./use-documents";
 export interface DocumentsDataTableProps extends DocumentsFilterProps {}
 
 export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) {
+  const styles = useStyles();
   const { data, isLoading, error } = useDocuments(filter);
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
@@ -36,7 +37,6 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
       } else {
         selection.add(id);
       }
-      console.log(selection);
       setSelection(new Set(selection));
     },
     [selection],
@@ -74,20 +74,39 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
       <DataTable>
         <DataTable.Header>
           <DataTable.Cell style={styles.checkboxCell}>
-            <Checkbox
-              status={
-                selection.size > 0 && selection.size === data.length
-                  ? "checked"
-                  : selection.size > 0
-                    ? "indeterminate"
-                    : "unchecked"
-              }
-              onPress={() =>
-                selection.size < data.length
-                  ? setSelection(new Set(data.map(document => document.id).filter(Boolean) as string[]))
-                  : setSelection(new Set())
-              }
-            />
+            {Platform.OS === "ios" ? (
+              <View style={styles.checkboxContainer}>
+                <Checkbox
+                  status={
+                    selection.size > 0 && selection.size === data.length
+                      ? "checked"
+                      : selection.size > 0
+                        ? "indeterminate"
+                        : "unchecked"
+                  }
+                  onPress={() =>
+                    selection.size < data.length
+                      ? setSelection(new Set(data.map(document => document.id).filter(Boolean) as string[]))
+                      : setSelection(new Set())
+                  }
+                />
+              </View>
+            ) : (
+              <Checkbox
+                status={
+                  selection.size > 0 && selection.size === data.length
+                    ? "checked"
+                    : selection.size > 0
+                      ? "indeterminate"
+                      : "unchecked"
+                }
+                onPress={() =>
+                  selection.size < data.length
+                    ? setSelection(new Set(data.map(document => document.id).filter(Boolean) as string[]))
+                    : setSelection(new Set())
+                }
+              />
+            )}
           </DataTable.Cell>
           <DataTable.Title style={styles.cell}>Preview</DataTable.Title>
           <DataTable.Title style={styles.cell}>Name</DataTable.Title>
@@ -101,10 +120,19 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
         {data?.slice(from, to).map(({ id, name, number, issueDate, expiryDate, createdDate }, index) => (
           <DataTableRow key={id} index={index} onPress={() => id && router.push(`/documents/${id}`)}>
             <DataTable.Cell style={styles.checkboxCell}>
-              <Checkbox
-                status={id && selection?.has(id) ? "checked" : "unchecked"}
-                onPress={event => id && toggleSelection(event, id)}
-              />
+              {Platform.OS === "ios" ? (
+                <View style={styles.checkboxContainer}>
+                  <Checkbox
+                    status={id && selection?.has(id) ? "checked" : "unchecked"}
+                    onPress={event => id && toggleSelection(event, id)}
+                  />
+                </View>
+              ) : (
+                <Checkbox
+                  status={id && selection?.has(id) ? "checked" : "unchecked"}
+                  onPress={event => id && toggleSelection(event, id)}
+                />
+              )}
             </DataTable.Cell>
             <DataTable.Cell style={styles.cell}>
               <DocumentThumbnail documentId={id} size={64} />
@@ -136,17 +164,33 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
   );
 }
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 16,
-    width: "100%",
-    justifyContent: "space-evenly",
-  },
-  checkboxCell: { flex: 2, alignItems: "center" },
-  cell: { flex: 5 },
-});
+function useStyles() {
+  const { colors } = useTheme();
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        buttonContainer: {
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          gap: 16,
+          width: "100%",
+          justifyContent: "space-evenly",
+        },
+
+        checkboxContainer: {
+          borderColor: colors.outline,
+          backgroundColor: colors.background,
+          borderWidth: 2,
+          borderRadius: 24,
+        },
+
+        checkboxCell: { flex: 2.5, alignItems: "center" },
+
+        cell: { flex: 5 },
+      }),
+    [colors],
+  );
+}
 
 const numberOfItemsPerPageList = [10, 20, 50];
