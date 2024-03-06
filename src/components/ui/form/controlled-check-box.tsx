@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import type { Control, ControllerRenderProps, FieldValues, Path, PathValue } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { CheckboxProps } from "react-native-paper";
 import { Checkbox, Text, useTheme } from "react-native-paper";
 
@@ -37,7 +37,7 @@ export default function ControlledCheckBox<TData extends FieldValues, TContext =
 
         return (
           <View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={styles.checkBoxContainer}>
               <Checkbox
                 onPress={onPress}
                 status={value === true ? "checked" : value === false ? "unchecked" : "indeterminate"}
@@ -54,3 +54,10 @@ export default function ControlledCheckBox<TData extends FieldValues, TContext =
     />
   );
 }
+
+const styles = StyleSheet.create({
+  checkBoxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});

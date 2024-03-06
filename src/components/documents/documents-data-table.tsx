@@ -55,16 +55,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
 
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: 16,
-          width: "100%",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <View style={styles.buttonContainer}>
         <LinkButton href="/scanner/" icon="camera" mode="contained-tonal">
           Scan Document
         </LinkButton>
@@ -146,6 +137,14 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
 }
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 16,
+    width: "100%",
+    justifyContent: "space-evenly",
+  },
   checkboxCell: { flex: 2, alignItems: "center" },
   cell: { flex: 5 },
 });

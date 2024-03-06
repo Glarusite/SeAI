@@ -3,7 +3,7 @@ import { setUserValue, useAppDispatch, useAppSelector } from "@src/store";
 import { useSegments } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useCallback } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 import type { DropDownProps } from "../ui/form/drop-down";
 import DropDown from "../ui/form/drop-down";
@@ -18,7 +18,7 @@ export default function AppDrawer() {
   return (
     <Drawer
       drawerContent={() => (
-        <SafeAreaView style={{ height: "100%" }}>
+        <SafeAreaView style={styles.scrollContainer}>
           <AppScrollView>
             <PageTitle>SeAI Menu</PageTitle>
             <ToggleThemeSwitch />
@@ -34,6 +34,12 @@ export default function AppDrawer() {
     />
   );
 }
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    height: "100%",
+  },
+});
 
 function RoleDropDown() {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import { safeBack } from "@src/common/router";
 import { Stack } from "expo-router";
-import { Platform, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { IconButton, useTheme } from "react-native-paper";
 import type { ScreenProps } from "react-native-screens";
 
@@ -24,7 +24,7 @@ export default function AppStack({ children, headerShown }: AppStackProps) {
           if (canGoBack) {
             if (Platform.OS === "web") {
               return (
-                <View style={{ flexDirection: "row" }}>
+                <View style={styles.buttonContainer}>
                   <IconButton icon="arrow-left" onPress={safeBack} />
                   <AppDrawerMenu />
                 </View>
@@ -45,3 +45,7 @@ export default function AppStack({ children, headerShown }: AppStackProps) {
     </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: { flexDirection: "row" },
+});

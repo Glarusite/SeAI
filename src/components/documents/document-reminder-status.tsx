@@ -22,12 +22,7 @@ export default function DocumentReminderStatus({ expiryDate }: DocumentReminderS
 
   const displayValue = Math.floor(Math.abs(value));
   return (
-    <Text
-      style={{
-        ...styles.root,
-        ...expiryValue(styles.valid, styles.expires, styles.expired),
-      }}
-    >
+    <Text style={[styles.root, expiryValue(styles.valid, styles.expires, styles.expired)]}>
       {expiryValue("Valid", "Expires", "Expired")} ({displayValue}&nbsp;{interval}
       {displayValue === 1 ? "" : "s"})
     </Text>
