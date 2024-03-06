@@ -1,12 +1,13 @@
 import { getDateInterval, toLocalDate } from "@src/common/date";
 import type { FindAllApiResponse, GetDocumentResponse } from "@src/store";
 import { useAppSelector, useFindAllQuery } from "@src/store";
+import { useMemo } from "react";
 
 export function useDocuments(filter?: string | string[]) {
   const userId = useAppSelector(state => state.user.userId) || "";
   const { data = [], isLoading, error } = useFindAllQuery(userId, { skip: !userId });
   return {
-    data: getFilteredData(data, filter),
+    data: useMemo(() => getFilteredData(data, filter), [data, filter]),
     isLoading,
     error,
   };

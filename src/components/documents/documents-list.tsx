@@ -1,10 +1,13 @@
+import { useIsFocused } from "@react-navigation/native";
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
+import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import type { GestureResponderEvent } from "react-native";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text } from "react-native-paper";
+import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text, useTheme } from "react-native-paper";
 
 import TextValue from "../ui/text-value";
 
@@ -19,6 +22,23 @@ export interface DocumentsListProps extends DocumentsFilterProps {}
 export default function DocumentsList({ filter }: DocumentsListProps) {
   const { data, isLoading, error } = useDocuments(filter);
   const [fabGroupState, setFabGroupState] = useState({ open: false });
+  const [selection, setSelection] = useState<Set<string>>();
+  const styles = useStyles();
+  const isFocused = useIsFocused();
+
+  const toggleSelection = useCallback(
+    (event: GestureResponderEvent, id: string) => {
+      event.stopPropagation();
+
+      if (selection?.has(id)) {
+        selection.delete(id);
+      } else {
+        selection?.add(id);
+      }
+      setSelection(new Set(selection));
+    },
+    [selection],
+  );
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
@@ -39,7 +59,11 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
         keyExtractor={({ id }) => id!}
         removeClippedSubviews
         renderItem={({ item: { id, name, number, issueDate, expiryDate, createdDate } }) => (
-          <Card key={id} style={styles.card} onPress={() => router.push(`/documents/${id}`)}>
+          <Card
+            key={id}
+            style={[styles.card, id != null && selection?.has(id) && styles.selectedCard]}
+            onPress={event => id && (selection == null ? router.push(`/documents/${id}`) : toggleSelection(event, id))}
+          >
             <List.Item
               title={
                 <View style={styles.titleContainer}>
@@ -70,58 +94,84 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
         )}
       />
 
-      <Portal>
-        <FAB.Group
-          visible
-          icon={fabGroupState.open ? "close" : "plus"}
-          open={fabGroupState.open}
-          onStateChange={setFabGroupState}
-          actions={[
-            { icon: "camera", label: "Scan Document", onPress: () => router.push("/scanner/") },
-            { icon: "plus", label: "Add New Document", onPress: () => router.push("/documents/new") },
-          ]}
-        />
-      </Portal>
+      {isFocused && (
+        <Portal>
+          <FAB.Group
+            visible
+            icon={selection ? "select" : fabGroupState.open ? "close" : "plus"}
+            open={fabGroupState.open}
+            onStateChange={setFabGroupState}
+            actions={
+              fabGroupState.open
+                ? [
+                    { icon: "camera", label: "Scan Document", onPress: () => router.push("/scanner/") },
+                    { icon: "plus", label: "Add New Document", onPress: () => router.push("/documents/new") },
+                    ...(data.length > 0
+                      ? selection == null
+                        ? [{ icon: "select", label: "Select Documents", onPress: () => setSelection(new Set()) }]
+                        : [
+                            { icon: "select-off", label: "Cancel Selection", onPress: () => setSelection(undefined) },
+                            { icon: "share", label: "Share Selection", onPress: showFeatureInDevelopmentToast },
+                          ]
+                      : []),
+                  ]
+                : []
+            }
+          />
+        </Portal>
+      )}
     </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    paddingTop: 0,
-  },
+function useStyles() {
+  const { colors } = useTheme();
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          padding: 16,
+          paddingTop: 0,
+        },
 
-  filterContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 32,
-  },
+        filterContainer: {
+          paddingHorizontal: 16,
+          paddingVertical: 32,
+        },
 
-  contentContainer: {
-    gap: 16,
-    paddingBottom: Platform.OS === "web" ? undefined : 64,
-  },
+        contentContainer: {
+          gap: 16,
+          paddingBottom: Platform.OS === "web" ? undefined : 64,
+        },
 
-  card: {
-    height: "auto",
-  },
+        card: {
+          height: "auto",
+        },
 
-  titleContainer: {
-    flexDirection: "row",
-    width: "100%",
-    gap: 8,
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    marginBottom: 8,
-  },
+        selectedCard: {
+          color: colors.onTertiaryContainer,
+          backgroundColor: colors.tertiaryContainer,
+        },
 
-  gridContainer: {
-    flexDirection: "row",
-    gap: 16,
-  },
+        titleContainer: {
+          flexDirection: "row",
+          width: "100%",
+          gap: 8,
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          marginBottom: 8,
+        },
 
-  valueContainer: {
-    flex: 1,
-  },
-});
+        gridContainer: {
+          flexDirection: "row",
+          gap: 16,
+        },
+
+        valueContainer: {
+          flex: 1,
+        },
+      }),
+    [colors],
+  );
+}
