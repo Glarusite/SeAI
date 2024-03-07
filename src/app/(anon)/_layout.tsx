@@ -17,13 +17,6 @@ export default function AnonymousLayout() {
   return (
     <AppTabs>
       <Tabs.Screen
-        name="index"
-        options={{
-          title: "SeAI",
-          href: null,
-        }}
-      />
-      <Tabs.Screen
         name="user/login"
         options={{
           tabBarIcon: () => <Icon source="login" size={20} />,
