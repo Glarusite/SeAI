@@ -1,6 +1,5 @@
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
-import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { GestureResponderEvent } from "react-native";
@@ -15,6 +14,7 @@ import DocumentThumbnail from "./document-thumbnail";
 import type { DocumentsFilterProps } from "./documents-filter";
 import DocumentsFilter from "./documents-filter";
 import { useDocuments } from "./use-documents";
+import { useDocumentsShare } from "./use-documents-share";
 
 export interface DocumentsDataTableProps extends DocumentsFilterProps {}
 
@@ -24,6 +24,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
   const [selection, setSelection] = useState<Set<string>>(new Set());
+  const { isSharing, shareSelection } = useDocumentsShare(selection);
 
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, data.length);
@@ -55,6 +56,12 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
 
   return (
     <>
+      {isSharing && (
+        <View style={styles.overlay}>
+          <ActivityIndicator size={100} />
+        </View>
+      )}
+
       <View style={styles.buttonContainer}>
         <LinkButton href="/scanner/" icon="camera" mode="contained-tonal">
           Scan Document
@@ -64,7 +71,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
           Add New Document
         </LinkButton>
 
-        <Button icon="share" mode="contained" disabled={selection.size === 0} onPress={showFeatureInDevelopmentToast}>
+        <Button icon="share" mode="contained" disabled={selection.size === 0} onPress={shareSelection}>
           Share documents
         </Button>
       </View>
@@ -169,6 +176,19 @@ function useStyles() {
   return useMemo(
     () =>
       StyleSheet.create({
+        overlay: {
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          opacity: 0.5,
+          backgroundColor: "black",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 10,
+        },
+
         buttonContainer: {
           flex: 1,
           flexDirection: "row",

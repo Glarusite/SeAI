@@ -3,7 +3,6 @@ import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { toFormData } from "@src/common/form-data";
 import { useAppDimensions } from "@src/common/hooks";
-import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { isBlank, isInvalidDate } from "@src/common/validators";
 import type { DocumentFormData } from "@src/models";
 import {
@@ -35,6 +34,7 @@ import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
 import { useDocumentImageUri } from "./use-document-image";
+import { useDocumentsShare } from "./use-documents-share";
 
 export interface DocumentFormProps {
   id?: string;
@@ -61,6 +61,7 @@ export default function DocumentForm(props: DocumentFormProps) {
     uploadImage,
   } = useDocument(props);
   const styles = useStyles(props.wide);
+  const { isSharing, shareSelection } = useDocumentsShare(props.id ? new Set([props.id]) : undefined);
 
   const setNumberFocus = useCallback(() => setFocus("number"), [setFocus]);
   const setIssueDateFocus = useCallback(() => setFocus("issueDate"), [setFocus]);
@@ -72,6 +73,12 @@ export default function DocumentForm(props: DocumentFormProps) {
 
   return (
     <View style={styles.container}>
+      {isSharing && (
+        <View style={styles.overlay}>
+          <ActivityIndicator size={100} />
+        </View>
+      )}
+
       {uri ? (
         disabled ? (
           <View style={styles.imageContainer}>
@@ -174,8 +181,8 @@ export default function DocumentForm(props: DocumentFormProps) {
               </Button>
             )}
 
-            {disabled && (
-              <Button mode="contained-tonal" icon="share" onPress={showFeatureInDevelopmentToast}>
+            {!isNew && disabled && (
+              <Button mode="contained-tonal" icon="share" onPress={shareSelection}>
                 Share
               </Button>
             )}
@@ -193,6 +200,19 @@ function useStyles(wide: boolean) {
   return useMemo(
     () =>
       StyleSheet.create({
+        overlay: {
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          opacity: 0.5,
+          backgroundColor: "black",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 10,
+        },
+
         container: {
           flexDirection: wide ? "row" : undefined,
           gap: 10,

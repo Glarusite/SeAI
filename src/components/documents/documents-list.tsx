@@ -1,7 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
-import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { router } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 import type { GestureResponderEvent } from "react-native";
@@ -16,15 +15,17 @@ import DocumentThumbnail from "./document-thumbnail";
 import type { DocumentsFilterProps } from "./documents-filter";
 import DocumentsFilter from "./documents-filter";
 import { useDocuments } from "./use-documents";
+import { useDocumentsShare } from "./use-documents-share";
 
 export interface DocumentsListProps extends DocumentsFilterProps {}
 
 export default function DocumentsList({ filter }: DocumentsListProps) {
+  const styles = useStyles();
+  const isFocused = useIsFocused();
   const { data, isLoading, error } = useDocuments(filter);
   const [fabGroupState, setFabGroupState] = useState({ open: false });
   const [selection, setSelection] = useState<Set<string>>();
-  const styles = useStyles();
-  const isFocused = useIsFocused();
+  const { isSharing, shareSelection } = useDocumentsShare(selection);
 
   const toggleSelection = useCallback(
     (event: GestureResponderEvent, id: string) => {
@@ -50,6 +51,12 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
 
   return (
     <>
+      {isSharing && (
+        <View style={styles.overlay}>
+          <ActivityIndicator size={100} />
+        </View>
+      )}
+
       <DocumentsFilter style={styles.filterContainer} filter={filter} />
 
       <FlatList
@@ -99,7 +106,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
         <Portal>
           <FAB.Group
             visible
-            icon={selection ? "select" : fabGroupState.open ? "close" : "plus"}
+            icon={selection ? (selection.size > 0 ? "share" : "select") : fabGroupState.open ? "close" : "plus"}
             open={fabGroupState.open}
             onStateChange={setFabGroupState}
             actions={
@@ -112,7 +119,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
                         ? [{ icon: "select", label: "Select Documents", onPress: () => setSelection(new Set()) }]
                         : [
                             { icon: "select-off", label: "Cancel Selection", onPress: () => setSelection(undefined) },
-                            { icon: "share", label: "Share Selection", onPress: showFeatureInDevelopmentToast },
+                            { icon: "share", label: "Share Selection", onPress: shareSelection },
                           ]
                       : []),
                   ]
@@ -130,6 +137,19 @@ function useStyles() {
   return useMemo(
     () =>
       StyleSheet.create({
+        overlay: {
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          opacity: 0.5,
+          backgroundColor: "black",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 10,
+        },
+
         container: {
           padding: 16,
           paddingTop: 0,
@@ -150,8 +170,7 @@ function useStyles() {
         },
 
         selectedCard: {
-          color: colors.onTertiaryContainer,
-          backgroundColor: colors.tertiaryContainer,
+          backgroundColor: colors.elevation.level5,
         },
 
         titleContainer: {
