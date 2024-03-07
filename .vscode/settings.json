@@ -8,10 +8,10 @@
       "severity": "downgrade",
     },
   ],
-  "files.insertFinalNewline": true,
-  "typescript.preferences.quoteStyle": "double",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.exclude": {
     "**/node_modules": true
   },
+  "files.insertFinalNewline": true,
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.tsdk": "./node_modules/typescript/lib",
 }
