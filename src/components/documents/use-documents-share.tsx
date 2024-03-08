@@ -50,7 +50,7 @@ export function useDocumentsShare(selection: ReadonlySet<string> | undefined) {
               const error = await readAsStringAsync(file.uri);
               throw new Error(toErrorMessage(error));
             } else {
-              const fileUriWithExtension = `${file.uri}.${getFileExtension(file)}`;
+              const fileUriWithExtension = `${file.uri}.${getFileExtension(file.mimeType)}`;
               await moveAsync({ from: file.uri, to: fileUriWithExtension });
               await shareAsync(fileUriWithExtension, { dialogTitle: "Share document" });
             }
@@ -67,6 +67,12 @@ export function useDocumentsShare(selection: ReadonlySet<string> | undefined) {
         } finally {
           setIsSharing(false);
         }
+      } else {
+        Toast.show({
+          type: "error",
+          text1: "Sharing unsupported",
+          text2: "Sharing files is not supported on this device",
+        });
       }
     }
   }, [accessToken, selection, userId]);
@@ -100,7 +106,6 @@ async function zipFilesAsync(files: FileSystemDownloadResult[]) {
 
   const fileErrorIndex = files.findIndex(file => file.mimeType === "application/json");
   if (fileErrorIndex > 0) {
-    console.log(base64Files[fileErrorIndex]);
     const error = atob(base64Files[fileErrorIndex]);
     throw new Error(toErrorMessage(error));
   }
@@ -109,7 +114,7 @@ async function zipFilesAsync(files: FileSystemDownloadResult[]) {
   for (const [index, file] of files.entries()) {
     const fileName = file.uri.split("/").at(-1);
     if (fileName) {
-      const extension = getFileExtension(file);
+      const extension = getFileExtension(file.mimeType);
       jsZip.file(`${fileName}.${extension}`, base64Files[index], { base64: true });
     }
   }
@@ -121,6 +126,6 @@ async function zipFilesAsync(files: FileSystemDownloadResult[]) {
   return zipFileUri;
 }
 
-function getFileExtension(file: FileSystemDownloadResult) {
-  return (file.mimeType && mime.getExtension(file.mimeType)) || "jpg";
+function getFileExtension(mimeType: string | null) {
+  return (mimeType && mime.getExtension(mimeType)) || "jpg";
 }

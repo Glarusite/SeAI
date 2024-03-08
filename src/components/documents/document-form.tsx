@@ -22,7 +22,7 @@ import { noop } from "lodash";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { StyleSheet, TouchableHighlight, View } from "react-native";
+import { Platform, StyleSheet, TouchableHighlight, View } from "react-native";
 import { ActivityIndicator, Button, Text, useTheme } from "react-native-paper";
 import { DatePickerInput } from "react-native-paper-dates";
 import Toast from "react-native-toast-message";
@@ -34,6 +34,7 @@ import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
 
 import { useDocumentImageUri } from "./use-document-image";
+import { useDocumentsDownload } from "./use-documents-download";
 import { useDocumentsShare } from "./use-documents-share";
 
 export interface DocumentFormProps {
@@ -62,6 +63,7 @@ export default function DocumentForm(props: DocumentFormProps) {
   } = useDocument(props);
   const styles = useStyles(props.wide);
   const { isSharing, shareSelection } = useDocumentsShare(props.id ? new Set([props.id]) : undefined);
+  const { isDownloading, downloadSelection } = useDocumentsDownload(props.id ? new Set([props.id]) : undefined);
 
   const setNumberFocus = useCallback(() => setFocus("number"), [setFocus]);
   const setIssueDateFocus = useCallback(() => setFocus("issueDate"), [setFocus]);
@@ -73,7 +75,7 @@ export default function DocumentForm(props: DocumentFormProps) {
 
   return (
     <View style={styles.container}>
-      {isSharing && (
+      {(isSharing || isDownloading) && (
         <View style={styles.overlay}>
           <ActivityIndicator size={100} />
         </View>
@@ -181,11 +183,17 @@ export default function DocumentForm(props: DocumentFormProps) {
               </Button>
             )}
 
-            {!isNew && disabled && (
-              <Button mode="contained-tonal" icon="share" onPress={shareSelection}>
-                Share
-              </Button>
-            )}
+            {!isNew &&
+              disabled &&
+              (Platform.OS === "web" ? (
+                <Button mode="contained-tonal" icon="download" onPress={downloadSelection}>
+                  Download
+                </Button>
+              ) : (
+                <Button mode="contained-tonal" icon="share" onPress={shareSelection}>
+                  Share
+                </Button>
+              ))}
           </View>
         </FormView>
       </View>

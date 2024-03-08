@@ -14,6 +14,7 @@ import DocumentThumbnail from "./document-thumbnail";
 import type { DocumentsFilterProps } from "./documents-filter";
 import DocumentsFilter from "./documents-filter";
 import { useDocuments } from "./use-documents";
+import { useDocumentsDownload } from "./use-documents-download";
 import { useDocumentsShare } from "./use-documents-share";
 
 export interface DocumentsDataTableProps extends DocumentsFilterProps {}
@@ -25,6 +26,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
   const [selection, setSelection] = useState<Set<string>>(new Set());
   const { isSharing, shareSelection } = useDocumentsShare(selection);
+  const { isDownloading, downloadSelection } = useDocumentsDownload(selection);
 
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, data.length);
@@ -56,7 +58,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
 
   return (
     <>
-      {isSharing && (
+      {(isSharing || isDownloading) && (
         <View style={styles.overlay}>
           <ActivityIndicator size={100} />
         </View>
@@ -71,9 +73,15 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
           Add New Document
         </LinkButton>
 
-        <Button icon="share" mode="contained" disabled={selection.size === 0} onPress={shareSelection}>
-          Share documents
-        </Button>
+        {Platform.OS === "web" ? (
+          <Button icon="download" mode="contained" disabled={selection.size === 0} onPress={downloadSelection}>
+            Download documents
+          </Button>
+        ) : (
+          <Button icon="share" mode="contained" disabled={selection.size === 0} onPress={shareSelection}>
+            Share documents
+          </Button>
+        )}
       </View>
 
       <DocumentsFilter filter={filter} />

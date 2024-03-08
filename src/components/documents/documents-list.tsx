@@ -15,6 +15,7 @@ import DocumentThumbnail from "./document-thumbnail";
 import type { DocumentsFilterProps } from "./documents-filter";
 import DocumentsFilter from "./documents-filter";
 import { useDocuments } from "./use-documents";
+import { useDocumentsDownload } from "./use-documents-download";
 import { useDocumentsShare } from "./use-documents-share";
 
 export interface DocumentsListProps extends DocumentsFilterProps {}
@@ -26,6 +27,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
   const [fabGroupState, setFabGroupState] = useState({ open: false });
   const [selection, setSelection] = useState<Set<string>>();
   const { isSharing, shareSelection } = useDocumentsShare(selection);
+  const { isDownloading, downloadSelection } = useDocumentsDownload(selection);
 
   const toggleSelection = useCallback(
     (event: GestureResponderEvent, id: string) => {
@@ -51,7 +53,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
 
   return (
     <>
-      {isSharing && (
+      {(isSharing || isDownloading) && (
         <View style={styles.overlay}>
           <ActivityIndicator size={100} />
         </View>
@@ -106,7 +108,17 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
         <Portal>
           <FAB.Group
             visible
-            icon={selection ? (selection.size > 0 ? "share" : "select") : fabGroupState.open ? "close" : "plus"}
+            icon={
+              selection
+                ? selection.size > 0
+                  ? Platform.OS === "web"
+                    ? "download"
+                    : "share"
+                  : "select"
+                : fabGroupState.open
+                  ? "close"
+                  : "plus"
+            }
             open={fabGroupState.open}
             onStateChange={setFabGroupState}
             actions={
@@ -119,7 +131,17 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
                         ? [{ icon: "select", label: "Select Documents", onPress: () => setSelection(new Set()) }]
                         : [
                             { icon: "select-off", label: "Cancel Selection", onPress: () => setSelection(undefined) },
-                            { icon: "share", label: "Share Selection", onPress: shareSelection },
+                            Platform.OS === "web"
+                              ? {
+                                  icon: "download",
+                                  label: "Download Selection",
+                                  onPress: downloadSelection,
+                                }
+                              : {
+                                  icon: "share",
+                                  label: "Share Selection",
+                                  onPress: shareSelection,
+                                },
                           ]
                       : []),
                   ]
