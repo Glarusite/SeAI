@@ -359,7 +359,7 @@ export type GetUserResponse = {
     | "Crude Oil"
     | "Product Oil"
     | "LPG (Liquefied Petroleum Gas)"
-    | "LNG (Liquefied Natural Gas"
+    | "LNG (Liquefied Natural Gas)"
     | "Reefer"
     | "Ro-Ro (Roll-On/Roll-Off)"
     | "General Cargo"
@@ -417,7 +417,7 @@ export type UserUpdateRequest = {
     | "Crude Oil"
     | "Product Oil"
     | "LPG (Liquefied Petroleum Gas)"
-    | "LNG (Liquefied Natural Gas"
+    | "LNG (Liquefied Natural Gas)"
     | "Reefer"
     | "Ro-Ro (Roll-On/Roll-Off)"
     | "General Cargo"
@@ -436,6 +436,25 @@ export type UserUpdateRequest = {
 };
 export type UpdateVoyageRequest = {
   vesselName?: string;
+  vesselType?:
+    | "Bulk Carrier"
+    | "Container"
+    | "Crude Oil"
+    | "Product Oil"
+    | "LPG (Liquefied Petroleum Gas)"
+    | "LNG (Liquefied Natural Gas)"
+    | "Reefer"
+    | "Ro-Ro (Roll-On/Roll-Off)"
+    | "General Cargo"
+    | "Cruise"
+    | "Ferry"
+    | "Ocean Liner"
+    | "Catamaran"
+    | "Motor Yacht"
+    | "Sailing Yacht"
+    | "Mega Yacht"
+    | "Explorer Yacht"
+    | "Sport Fishing Yacht";
   rank?:
     | "Master/Captain (CPT)"
     | "Chief Officer (C/O)"
@@ -496,6 +515,25 @@ export type UserRegisterRequest = {
 export type GetVoyageResponse = {
   id?: string;
   vesselName?: string;
+  vesselType?:
+    | "Bulk Carrier"
+    | "Container"
+    | "Crude Oil"
+    | "Product Oil"
+    | "LPG (Liquefied Petroleum Gas)"
+    | "LNG (Liquefied Natural Gas)"
+    | "Reefer"
+    | "Ro-Ro (Roll-On/Roll-Off)"
+    | "General Cargo"
+    | "Cruise"
+    | "Ferry"
+    | "Ocean Liner"
+    | "Catamaran"
+    | "Motor Yacht"
+    | "Sailing Yacht"
+    | "Mega Yacht"
+    | "Explorer Yacht"
+    | "Sport Fishing Yacht";
   rank?:
     | "Master/Captain (CPT)"
     | "Chief Officer (C/O)"
@@ -533,6 +571,25 @@ export type GetVoyageResponse = {
 };
 export type CreateVoyageRequest = {
   vesselName?: string;
+  vesselType?:
+    | "Bulk Carrier"
+    | "Container"
+    | "Crude Oil"
+    | "Product Oil"
+    | "LPG (Liquefied Petroleum Gas)"
+    | "LNG (Liquefied Natural Gas)"
+    | "Reefer"
+    | "Ro-Ro (Roll-On/Roll-Off)"
+    | "General Cargo"
+    | "Cruise"
+    | "Ferry"
+    | "Ocean Liner"
+    | "Catamaran"
+    | "Motor Yacht"
+    | "Sailing Yacht"
+    | "Mega Yacht"
+    | "Explorer Yacht"
+    | "Sport Fishing Yacht";
   rank?:
     | "Master/Captain (CPT)"
     | "Chief Officer (C/O)"

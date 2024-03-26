@@ -1,9 +1,6 @@
-import type { GetVoyageResponse } from "@src/store";
+import type { CreateVoyageRequest } from "@src/store";
 
-import type { ProfileFormData } from "./user";
-
-export interface VoyageFormData extends Omit<GetVoyageResponse, "joiningDate" | "leavingDate"> {
-  vesselType: ProfileFormData["vesselType"];
+export interface VoyageFormData extends Omit<CreateVoyageRequest, "joiningDate" | "leavingDate"> {
   joiningDate?: Date;
   leavingDate?: Date;
 }

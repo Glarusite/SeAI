@@ -8,7 +8,7 @@ export const vesselTypeList: DropDownList<GetUserResponse["vesselType"]> = [
   { label: "Crude Oil", value: "Crude Oil" },
   { label: "Product Oil", value: "Product Oil" },
   { label: "LPG (Liquefied Petroleum Gas)", value: "LPG (Liquefied Petroleum Gas)" },
-  { label: "LNG (Liquefied Natural Gas)", value: "LNG (Liquefied Natural Gas" },
+  { label: "LNG (Liquefied Natural Gas)", value: "LNG (Liquefied Natural Gas)" },
   { label: "Reefer", value: "Reefer" },
   { label: "Ro-Ro (Roll-On/Roll-Off)", value: "Ro-Ro (Roll-On/Roll-Off)" },
   { label: "General Cargo", value: "General Cargo" },
