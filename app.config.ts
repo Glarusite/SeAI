@@ -38,6 +38,7 @@ const AppConfig: ExpoConfig = {
     eas: {
       projectId: "b7b7d3e6-2ad7-4a5b-a877-6a6dbed92ebd",
     },
+    supportsRTL: true,
   },
   updates: {
     url: "https://u.expo.dev/b7b7d3e6-2ad7-4a5b-a877-6a6dbed92ebd",
@@ -58,6 +59,7 @@ const AppConfig: ExpoConfig = {
         photosPermission: "Allow $(PRODUCT_NAME) to access your photos for upload.",
       },
     ],
+    ["expo-localization"],
     [
       "expo-router",
       {

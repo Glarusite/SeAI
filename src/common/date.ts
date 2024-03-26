@@ -1,4 +1,5 @@
 import type { DateTime, LocalDateTime, Nullable, UtcDateTime } from "@src/models";
+import { getLocales } from "expo-localization";
 
 import { isInvalidDate } from "./validators";
 
@@ -18,8 +19,10 @@ export function toLocaleDateString(date: Nullable<string> | DateTime) {
     date = toDate(date);
   }
 
-  return date?.toLocaleDateString();
+  return date?.toLocaleDateString(locales);
 }
+
+const locales = getLocales().map(locale => locale.languageTag);
 
 export function toLocalDate(date: Nullable<string> | DateTime) {
   if (typeof date === "string") {
