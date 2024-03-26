@@ -193,7 +193,7 @@ function useVoyage({ id }: VoyageFormProps) {
         leavingDate: toUtcDate(values.leavingDate)?.toJSON(),
       };
       await (
-        id === undefined
+        isNew
           ? createRequest({ userId, createVoyageRequest: voyageRequest })
           : updateRequest({ userId, voyageId: id, updateVoyageRequest: voyageRequest })
       ).unwrap();
