@@ -3,6 +3,7 @@ import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
 
 import LinkButton from "../ui/buttons/link-button";
@@ -32,13 +33,15 @@ export default function VoyagesDataTable() {
 
   return (
     <>
-      <Button icon="camera" mode="contained" onPress={showFeatureInDevelopmentToast}>
-        Scan Voyage List
-      </Button>
+      <View style={styles.buttonContainer}>
+        <Button icon="camera" mode="contained" onPress={showFeatureInDevelopmentToast}>
+          Scan Voyage List
+        </Button>
 
-      <LinkButton href="/voyages/new" icon="plus" mode="contained-tonal">
-        Add New Voyage
-      </LinkButton>
+        <LinkButton href="/voyages/new" icon="plus" mode="contained-tonal">
+          Add New Voyage
+        </LinkButton>
+      </View>
 
       <DataTable>
         <DataTable.Header>
@@ -86,3 +89,14 @@ export default function VoyagesDataTable() {
 }
 
 const numberOfItemsPerPageList = [10, 20, 50];
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 16,
+    width: "100%",
+    justifyContent: "space-evenly",
+  },
+});
