@@ -9,6 +9,15 @@
     "plugin:unicorn/recommended",
     "prettier"
   ],
+  "ignorePatterns": [
+    ".expo",
+    ".vscode",
+    ".yarn",
+    "assets",
+    "dist",
+    "expo-env.d.ts",
+    "**/*.*js"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",

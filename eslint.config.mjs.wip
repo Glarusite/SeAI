@@ -1,0 +1,174 @@
+
+import eslintConfigPrettier from "eslint-config-prettier";
+import eslintPluginImport from "eslint-plugin-import";
+import eslintPluginPrettier from "eslint-plugin-prettier";
+import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import eslintPluginUnusedImports from "eslint-plugin-unused-imports";
+import tsEsLint from "typescript-eslint";
+
+/** @type {import("eslint").Linter.FlatConfig[]} */
+const EsLintConfig = [
+  eslintConfigPrettier,
+  ...tsEsLint.configs.recommended,
+  {
+    ignores: [
+      ".expo",
+      ".vscode",
+      ".yarn",
+      "assets",
+      "dist",
+      "expo-env.d.ts",
+      "**/*.*js",
+    ],
+  },
+  {
+    plugins: {
+      "@typescript-eslint": tsEsLint.plugin,
+      "import": eslintPluginImport,
+      "prettier": eslintPluginPrettier,
+      "react-hooks": eslintPluginReactHooks,
+      "unicorn": eslintPluginUnicorn,
+      "unused-imports": eslintPluginUnusedImports,
+    },
+    languageOptions: {
+      parser: tsEsLint.parser,
+      parserOptions: {
+        project: [
+          "tsconfig.json",
+          "tsconfig.web.json"
+        ],
+      },
+    },
+    rules: {
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          "fixStyle": "separate-type-imports"
+        }
+      ],
+      "@typescript-eslint/member-delimiter-style": [
+        "error",
+        {
+          "multiline": {
+            "delimiter": "semi",
+            "requireLast": true
+          },
+          "singleline": {
+            "delimiter": "semi",
+            "requireLast": false
+          }
+        }
+      ],
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "variable",
+          "format": [
+            "camelCase",
+            "PascalCase",
+            "UPPER_CASE"
+          ],
+          "leadingUnderscore": "allow"
+        },
+        {
+          "selector": "function",
+          "format": [
+            "camelCase",
+            "PascalCase"
+          ]
+        },
+        {
+          "selector": "typeLike",
+          "format": [
+            "PascalCase"
+          ]
+        }
+      ],
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+          "checksVoidReturn": {
+            "attributes": false
+          }
+        }
+      ],
+      "@typescript-eslint/no-shadow": [
+        "error",
+        {
+          "ignoreTypeValueShadow": true
+        }
+      ],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "args": "all",
+          "argsIgnorePattern": "^_",
+          "caughtErrors": "all",
+          "caughtErrorsIgnorePattern": "^_",
+          "destructuredArrayIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "ignoreRestSiblings": true
+        }
+      ],
+      "curly": [
+        "error",
+        "all"
+      ],
+      "dot-notation": "error",
+      "import/no-extraneous-dependencies": "error",
+      "import/order": [
+        "error",
+        {
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          },
+          "newlines-between": "always"
+        }
+      ],
+      "no-restricted-syntax": [
+        "error",
+        "ForInStatement",
+        "LabeledStatement",
+        "WithStatement"
+      ],
+      "no-void": [
+        "error",
+        {
+          "allowAsStatement": true
+        }
+      ],
+      "prefer-destructuring": [
+        "error",
+        {
+          "object": true,
+          "array": true
+        },
+        {
+          "enforceForRenamedProperties": true
+        }
+      ],
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "react-hooks/exhaustive-deps": [
+        "warn",
+        {
+          "additionalHooks": "(useAsync|useAppNavigation)"
+        }
+      ],
+      "unicorn/no-null": "off",
+      "unicorn/prevent-abbreviations": [
+        "error",
+        {
+          "ignore": [
+            "[Pp]rops",
+            "[Rr]ef"
+          ]
+        }
+      ]
+    }
+  },
+];
+
+export default EsLintConfig;

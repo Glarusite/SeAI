@@ -1,7 +1,0 @@
-.expo
-.vscode
-.yarn
-assets
-expo-env.d.ts
-node_modules
-*.js
