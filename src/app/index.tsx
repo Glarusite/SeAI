@@ -86,6 +86,7 @@ export default function MarketingPage() {
                   padding: 16,
                   fontSize: 16,
                   borderRadius: 16,
+                  color: "white",
                   backgroundColor: "rgba(0, 0, 0, 0.75)",
                   textShadowColor: "black",
                   textShadowRadius: 2,
@@ -119,12 +120,12 @@ export default function MarketingPage() {
             <View style={{ flex: 1, gap: 16, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly" }}>
               <Text style={{ fontSize: 20 }}>
                 <A href="mailto:contact@seai.co" style={{ color: colors.primary, fontWeight: "600" }}>
-                  <Icon source="email-outline" size={18} /> contact@seai.co
+                  <Icon source="email-outline" size={18} color="white" /> contact@seai.co
                 </A>
               </Text>
               <Text style={{ fontSize: 20 }}>
                 <A href="tel:+359888608980" style={{ color: colors.primary, fontWeight: "600" }}>
-                  <Icon source="cellphone" size={18} /> +359 888 608 980
+                  <Icon source="cellphone" size={18} color="white" /> +359 888 608 980
                 </A>
               </Text>
             </View>
