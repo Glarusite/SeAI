@@ -4,6 +4,7 @@ import type { DropDownList } from "./app";
 
 export const vesselTypeList: DropDownList<GetUserResponse["vesselType"]> = [
   { label: "Not selected", value: "" },
+  { label: "Bulk Carrier", value: "BULK_CARRIER" },
   { label: "Container", value: "CONTAINER" },
   { label: "Crude Oil", value: "CRUDE_OIL" },
   { label: "Product Oil", value: "PRODUCT_OIL" },
