@@ -1,14 +1,23 @@
+import { AsyncAlert } from "@src/common/async-alert";
 import { toLocalDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isInvalidDate } from "@src/common/validators";
 import { statusList, type ProfileFormData } from "@src/models";
 import { rankList, vesselTypeList } from "@src/models";
-import { useAppSelector, useGetUserQuery, useUpdateUserMutation } from "@src/store";
-import { useEffect, useMemo } from "react";
+import {
+  setUser,
+  useAppDispatch,
+  useAppSelector,
+  useDeleteUserMutation,
+  useGetUserQuery,
+  useUpdateUserMutation,
+} from "@src/store";
+import { router } from "expo-router";
+import { useCallback, useEffect, useMemo } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
-import { ActivityIndicator, Button, TextInput } from "react-native-paper";
+import { ActivityIndicator, Button, TextInput, useTheme } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
@@ -23,7 +32,7 @@ export interface ProfileFormProps {
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
-  const { control, errors, isDirty, isLoading, isSubmitting, update, setFocus } = useProfile();
+  const { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, updateProfile, setFocus } = useProfile();
   const email = useAppSelector(state => state.user.email);
   const styles = useStyles(props);
 
@@ -88,14 +97,27 @@ export default function ProfileForm(props: ProfileFormProps) {
         </View>
       </View>
 
-      <Button icon="account-edit" mode="contained" onPress={update} disabled={!isDirty || isSubmitting}>
+      <Button icon="account-edit" mode="contained" onPress={updateProfile} disabled={!isDirty || isSubmitting}>
         {isSubmitting ? <ButtonActivityIndicator /> : "Update"}
+      </Button>
+
+      <Button
+        mode="contained-tonal"
+        icon="delete"
+        style={styles.deleteButton}
+        textColor={styles.deleteButton.color}
+        disabled={isSubmitting}
+        onPress={deleteProfile}
+      >
+        Delete
       </Button>
     </FormView>
   );
 }
 
 function useStyles({ wide }: ProfileFormProps) {
+  const { dark, colors } = useTheme();
+
   return useMemo(
     () =>
       StyleSheet.create({
@@ -109,12 +131,18 @@ function useStyles({ wide }: ProfileFormProps) {
           width: wide ? "50%" : undefined,
           gap: 16,
         },
+
+        deleteButton: {
+          backgroundColor: dark ? colors.errorContainer : colors.error,
+          color: dark ? colors.onErrorContainer : colors.onError,
+        },
       }),
-    [wide],
+    [colors, dark, wide],
   );
 }
 
 function useProfile() {
+  const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.user.userId) || "";
   const {
     data,
@@ -123,8 +151,6 @@ function useProfile() {
   } = useGetUserQuery(userId, {
     skip: !userId,
   });
-
-  const [updateProfile] = useUpdateUserMutation();
 
   const {
     control,
@@ -135,10 +161,11 @@ function useProfile() {
     reset,
   } = useForm<ProfileFormData>({ resolver });
 
-  const update = handleSubmit(async values => {
+  const [updateRequest] = useUpdateUserMutation();
+  const updateProfile = handleSubmit(async values => {
     setError("root", {});
     try {
-      await updateProfile({
+      await updateRequest({
         userId,
         userUpdateRequest: {
           ...values,
@@ -160,6 +187,30 @@ function useProfile() {
       setError("root", { message });
     }
   });
+
+  const [deleteRequest] = useDeleteUserMutation();
+  const deleteProfile = useCallback(async () => {
+    const result = await AsyncAlert.confirm(
+      "Confirm deletion",
+      [
+        `All uploaded personal files and data will be permanently removed!`,
+        `Are you sure you want to delete your user profile?`,
+      ].join("\n"),
+    );
+
+    if (!result) {
+      return;
+    }
+
+    try {
+      await deleteRequest(userId).unwrap();
+      dispatch(setUser({}));
+      router.replace("/");
+      Toast.show({ type: "info", text1: "Profile deleted" });
+    } catch (deleteError) {
+      Toast.show({ type: "error", text1: "Delete error", text2: toErrorMessage(deleteError) });
+    }
+  }, [deleteRequest, dispatch, userId]);
 
   useEffect(() => {
     if (data) {
@@ -183,7 +234,7 @@ function useProfile() {
     }
   }, [queryError, setError]);
 
-  return { control, errors, isDirty, isLoading, isSubmitting, update, setFocus };
+  return { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, updateProfile, setFocus };
 }
 
 function resolver(values: ProfileFormData) {
