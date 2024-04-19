@@ -4,7 +4,7 @@ import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
 
 import LinkButton from "../ui/buttons/link-button";
@@ -35,9 +35,11 @@ export default function VoyagesDataTable() {
   return (
     <>
       <View style={styles.buttonContainer}>
-        <Button icon="camera" mode="contained" onPress={showFeatureInDevelopmentToast}>
-          Scan Voyage List
-        </Button>
+        {Platform.OS === "web" && (
+          <Button icon="camera" mode="contained" onPress={showFeatureInDevelopmentToast}>
+            Scan Voyage List
+          </Button>
+        )}
 
         <LinkButton href="/voyages/new" icon="plus" mode="contained-tonal">
           Add New Voyage

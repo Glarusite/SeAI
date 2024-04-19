@@ -10,7 +10,7 @@ import { router } from "expo-router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Button, useTheme } from "react-native-paper";
 import Toast from "react-native-toast-message";
 
@@ -76,7 +76,7 @@ export default function VoyageForm(props: VoyageFormProps) {
       {!disabled && <ValidationText error={errors.root} />}
 
       <View style={styles.buttonContainer}>
-        {!disabled && (
+        {!disabled && Platform.OS === "web" && (
           <Button mode="outlined" icon="plus" onPress={showFeatureInDevelopmentToast}>
             Add contract
           </Button>

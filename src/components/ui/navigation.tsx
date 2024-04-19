@@ -2,6 +2,7 @@ import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { resetAppValue, setUser, useAppDispatch, useAppSelector } from "@src/store";
 import { router } from "expo-router";
 import { useCallback } from "react";
+import { Platform } from "react-native";
 import { Button } from "react-native-paper";
 
 import LinkButton from "./buttons/link-button";
@@ -37,30 +38,42 @@ function SeafarerNavigation() {
       <LinkButton href="/scanner/" mode="contained">
         Smart Scanner
       </LinkButton>
+
       <LinkButton href="/user/" mode="contained-tonal">
         Profile
       </LinkButton>
+
       <LinkButton href="/documents/" mode="contained-tonal">
         Documents
       </LinkButton>
+
       <LinkButton href="/voyages/" mode="contained-tonal">
         Voyages
       </LinkButton>
-      <LinkButton href="/booking/" mode="contained-tonal">
-        Booking
-      </LinkButton>
-      <LinkButton href="/(auth)/" mode="contained-tonal">
-        Chat
-      </LinkButton>
-      <LinkButton href="/(auth)/" mode="contained-tonal">
-        Events
-      </LinkButton>
-      <LinkButton href="/(auth)/" mode="contained-tonal">
-        Maritime Administration
-      </LinkButton>
-      <LinkButton href="/(auth)/" mode="contained-tonal">
-        Information
-      </LinkButton>
+
+      {Platform.OS === "web" && (
+        <>
+          <LinkButton href="/booking/" mode="contained-tonal">
+            Booking
+          </LinkButton>
+
+          <Button onPress={showFeatureInDevelopmentToast} mode="contained-tonal">
+            Chat
+          </Button>
+
+          <Button onPress={showFeatureInDevelopmentToast} mode="contained-tonal">
+            Events
+          </Button>
+
+          <Button onPress={showFeatureInDevelopmentToast} mode="contained-tonal">
+            Maritime Administration
+          </Button>
+
+          <Button onPress={showFeatureInDevelopmentToast} mode="contained-tonal">
+            Information
+          </Button>
+        </>
+      )}
     </>
   );
 }

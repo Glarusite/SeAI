@@ -22,7 +22,6 @@ export default function AppDrawer() {
           <AppScrollView>
             <PageTitle>SeAI Menu</PageTitle>
             <ToggleThemeSwitch />
-            <RoleDropDown />
             {group === "(auth)" && page != null && <Navigation />}
           </AppScrollView>
         </SafeAreaView>

@@ -81,7 +81,9 @@ export default function VoyagesList() {
             actions={
               fabGroupState.open
                 ? [
-                    { icon: "camera", label: "Scan Voyage List", onPress: showFeatureInDevelopmentToast },
+                    ...(Platform.OS === "web"
+                      ? [{ icon: "camera", label: "Scan Voyage List", onPress: showFeatureInDevelopmentToast }]
+                      : []),
                     { icon: "plus", label: "Add New Voyage", onPress: () => router.push("/voyages/new") },
                   ]
                 : []
