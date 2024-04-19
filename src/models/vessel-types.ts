@@ -2,24 +2,32 @@ import type { GetUserResponse } from "@src/store";
 
 import type { DropDownList } from "./app";
 
-export const vesselTypeList: DropDownList<GetUserResponse["vesselType"]> = [
+export type VesselType = Required<GetUserResponse>["vesselType"];
+export const vesselTypeLabels: Record<VesselType, string> = {
+  BULK_CARRIER: "Bulk Carrier",
+  CONTAINER: "Container",
+  CRUDE_OIL: "Crude Oil",
+  PRODUCT_OIL: "Product Oil",
+  LPG: "LPG (Liquefied Petroleum Gas)",
+  LNG: "LNG (Liquefied Natural Gas)",
+  REEFER: "Reefer",
+  RO_RO: "Ro-Ro (Roll-On/Roll-Off)",
+  GENERAL_CARGO: "General Cargo",
+  CRUISE: "Cruise",
+  FERRY: "Ferry",
+  OCEAN_LINER: "Ocean Liner",
+  CATAMARAN: "Catamaran",
+  MOTOR_YACHT: "Motor Yacht",
+  SAILING_YACHT: "Sailing Yacht",
+  MEGA_YACHT: "Mega Yacht",
+  EXPLORER_YACHT: "Explorer Yacht",
+  SPORT_FISHING_YACHT: "Sport Fishing Yacht",
+};
+
+export const vesselTypeList: DropDownList<VesselType> = [
   { label: "Not selected", value: "" },
-  { label: "Bulk Carrier", value: "BULK_CARRIER" },
-  { label: "Container", value: "CONTAINER" },
-  { label: "Crude Oil", value: "CRUDE_OIL" },
-  { label: "Product Oil", value: "PRODUCT_OIL" },
-  { label: "LPG (Liquefied Petroleum Gas)", value: "LPG" },
-  { label: "LNG (Liquefied Natural Gas)", value: "LNG" },
-  { label: "Reefer", value: "REEFER" },
-  { label: "Ro-Ro (Roll-On/Roll-Off)", value: "RO_RO" },
-  { label: "General Cargo", value: "GENERAL_CARGO" },
-  { label: "Cruise", value: "CRUISE" },
-  { label: "Ferry", value: "FERRY" },
-  { label: "Ocean Liner", value: "OCEAN_LINER" },
-  { label: "Catamaran", value: "CATAMARAN" },
-  { label: "Motor Yacht", value: "MOTOR_YACHT" },
-  { label: "Sailing Yacht", value: "SAILING_YACHT" },
-  { label: "Mega Yacht", value: "MEGA_YACHT" },
-  { label: "Explorer Yacht", value: "EXPLORER_YACHT" },
-  { label: "Sport Fishing Yacht", value: "SPORT_FISHING_YACHT" },
+  ...Object.entries(vesselTypeLabels).map(([key, label]) => ({
+    value: key as VesselType,
+    label,
+  })),
 ];

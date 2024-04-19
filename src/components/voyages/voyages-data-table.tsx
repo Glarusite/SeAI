@@ -1,6 +1,7 @@
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
+import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -58,19 +59,24 @@ export default function VoyagesDataTable() {
 
         {data
           ?.slice(from, to)
-          .map(({ id, vesselName, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate }, index) => (
-            <DataTableRow key={id} index={index} onPress={() => router.push(`/voyages/${id}`)}>
-              <DataTable.Cell>{data.length - from - index}</DataTable.Cell>
-              <DataTable.Cell>{vesselName}</DataTable.Cell>
-              <DataTable.Cell>N/A</DataTable.Cell>
-              <DataTable.Cell>{rank}</DataTable.Cell>
-              <DataTable.Cell>{imoNumber}</DataTable.Cell>
-              <DataTable.Cell>{joiningPort}</DataTable.Cell>
-              <DataTable.Cell>{toLocaleDateString(joiningDate)}</DataTable.Cell>
-              <DataTable.Cell>{leavingPort}</DataTable.Cell>
-              <DataTable.Cell>{toLocaleDateString(leavingDate)}</DataTable.Cell>
-            </DataTableRow>
-          ))}
+          .map(
+            (
+              { id, vesselName, vesselType, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate },
+              index,
+            ) => (
+              <DataTableRow key={id} index={index} onPress={() => router.push(`/voyages/${id}`)}>
+                <DataTable.Cell>{data.length - from - index}</DataTable.Cell>
+                <DataTable.Cell>{vesselName}</DataTable.Cell>
+                <DataTable.Cell>{vesselType && vesselTypeLabels[vesselType]}</DataTable.Cell>
+                <DataTable.Cell>{rank && rankLabels[rank]}</DataTable.Cell>
+                <DataTable.Cell>{imoNumber}</DataTable.Cell>
+                <DataTable.Cell>{joiningPort}</DataTable.Cell>
+                <DataTable.Cell>{toLocaleDateString(joiningDate)}</DataTable.Cell>
+                <DataTable.Cell>{leavingPort}</DataTable.Cell>
+                <DataTable.Cell>{toLocaleDateString(leavingDate)}</DataTable.Cell>
+              </DataTableRow>
+            ),
+          )}
 
         <DataTable.Pagination
           page={page}

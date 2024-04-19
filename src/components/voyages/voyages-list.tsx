@@ -2,6 +2,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { toLocaleDateString } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
+import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
@@ -34,7 +35,7 @@ export default function VoyagesList() {
         keyExtractor={({ id }) => id!}
         removeClippedSubviews
         renderItem={({
-          item: { id, vesselName, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate },
+          item: { id, vesselName, vesselType, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate },
           index,
         }) => (
           <Card key={id} style={styles.card} onPress={() => router.push(`/voyages/${id}`)}>
@@ -44,8 +45,8 @@ export default function VoyagesList() {
                 <View style={styles.gridContainer}>
                   <View>
                     <Text>Vessel name:</Text>
-                    <Text>Rank:</Text>
                     <Text>Vessel type:</Text>
+                    <Text>Rank:</Text>
                     <Text>IMO number:</Text>
                     <Text>Joining port:</Text>
                     <Text>Joining date:</Text>
@@ -55,8 +56,8 @@ export default function VoyagesList() {
 
                   <View style={styles.valueContainer}>
                     <TextValue>{vesselName}</TextValue>
-                    <TextValue>{rank}</TextValue>
-                    <TextValue>N/A</TextValue>
+                    <TextValue>{vesselType && vesselTypeLabels[vesselType]}</TextValue>
+                    <TextValue>{rank && rankLabels[rank]}</TextValue>
                     <TextValue>{imoNumber}</TextValue>
                     <TextValue>{joiningPort}</TextValue>
                     <TextValue>{toLocaleDateString(joiningDate)}</TextValue>

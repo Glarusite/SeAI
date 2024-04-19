@@ -1,34 +1,43 @@
-import type { GetUserApiResponse } from "@src/store";
+import type { GetUserResponse } from "@src/store";
 
 import type { DropDownList } from "./app";
 
-export const rankList: DropDownList<GetUserApiResponse["rank"]> = [
+export type Rank = Required<GetUserResponse>["rank"];
+
+export const rankLabels: Record<Rank, string> = {
+  CAPTAIN: "Master/Captain (CPT)",
+  CHIEF_OFFICER: "Chief Officer (C/O)",
+  FIRST_OFFICER: "First Officer",
+  SECOND_OFFICER: "Second Officer (2/O)",
+  THIRD_OFFICER: "Third Officer (3/O)",
+  DECK_CADET: "Deck Cadet (D/C)",
+  CHIEF_ENGINEER: "Chief Engineer (C/E)",
+  FIRST_ENGINEER: "First Engineer (1/E)",
+  SECOND_ENGINEER: "Second Engineer (2/E)",
+  THIRD_ENGINEER: "Third Engineer (3/E)",
+  FOURTH_ENGINEER: "Fourth Engineer (4/E)",
+  ELECTRO_TECHNICAL_OFFICER: "Electro-Technical Officer (ETO)",
+  BOATSWAIN: "Boatswain (BSN)",
+  ABLE_SEAMAN: "Able Seaman (AB)",
+  ORDINARY_SEAMAN: "Ordinary Seaman (OS)",
+  CHIEF_STEWARD: "Chief Steward (C/STW)",
+  STEWARD: "Steward (STW)",
+  MESSMAN: "Messman (MSN)",
+  FITTER: "Fitter (FTR)",
+  PUMPMAN: "Pumpman (P/P)",
+  COOK: "Cook (C/K)",
+  MOTORMAN: "Motorman (M/M)",
+  OILER: "Oiler",
+  WELDER: "Welder",
+  REFRIGERATION_ENGINEER: "Refrigeration Engineer",
+  TRAINEE_OFFICER: "Trainee Officer",
+  RADIO_OFFICER: "Radio Officer/Radio Operator",
+};
+
+export const rankList: DropDownList<Rank> = [
   { label: "Not selected", value: "" },
-  { label: "Master/Captain (CPT)", value: "CAPTAIN" },
-  { label: "Chief Officer (C/O)", value: "CHIEF_OFFICER" },
-  { label: "First Officer", value: "FIRST_OFFICER" },
-  { label: "Second Officer (2/O)", value: "SECOND_OFFICER" },
-  { label: "Third Officer (3/O)", value: "THIRD_OFFICER" },
-  { label: "Deck Cadet (D/C)", value: "DECK_CADET" },
-  { label: "Chief Engineer (C/E)", value: "CHIEF_ENGINEER" },
-  { label: "First Engineer (1/E)", value: "FIRST_ENGINEER" },
-  { label: "Second Engineer (2/E)", value: "SECOND_ENGINEER" },
-  { label: "Third Engineer (3/E)", value: "THIRD_ENGINEER" },
-  { label: "Fourth Engineer (4/E)", value: "FOURTH_ENGINEER" },
-  { label: "Electro-Technical Officer (ETO)", value: "ELECTRO_TECHNICAL_OFFICER" },
-  { label: "Boatswain (BSN)", value: "BOATSWAIN" },
-  { label: "Able Seaman (AB)", value: "ABLE_SEAMAN" },
-  { label: "Ordinary Seaman (OS)", value: "ORDINARY_SEAMAN" },
-  { label: "Chief Steward (C/STW)", value: "CHIEF_STEWARD" },
-  { label: "Steward (STW)", value: "STEWARD" },
-  { label: "Messman (MSN)", value: "MESSMAN" },
-  { label: "Fitter (FTR)", value: "FITTER" },
-  { label: "Pumpman (P/P)", value: "PUMPMAN" },
-  { label: "Cook (C/K)", value: "COOK" },
-  { label: "Motorman (M/M)", value: "MOTORMAN" },
-  { label: "Oiler", value: "OILER" },
-  { label: "Welder", value: "WELDER" },
-  { label: "Refrigeration Engineer", value: "REFRIGERATION_ENGINEER" },
-  { label: "Trainee Officer", value: "TRAINEE_OFFICER" },
-  { label: "Radio Officer/Radio Operator", value: "RADIO_OFFICER" },
+  ...Object.entries(rankLabels).map(([key, label]) => ({
+    value: key as Rank,
+    label,
+  })),
 ];
