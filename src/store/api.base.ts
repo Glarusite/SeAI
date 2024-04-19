@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { memoize } from "lodash";
 
 import type { AppStoreState } from "./configure";
+import { resetAppValue } from "./slices/app";
 import { setUser } from "./slices/user";
 
 // eslint-disable-next-line prefer-destructuring
@@ -29,6 +30,7 @@ const createAppFetchBaseQuery = memoize((dispatch: BaseQueryApi["dispatch"]) =>
       const { status, headers } = response;
       if (status === 401 || status === 403) {
         dispatch(setUser({}));
+        dispatch(resetAppValue("nextLoginReminderDate"));
       }
 
       const contentType = headers.get("content-type");

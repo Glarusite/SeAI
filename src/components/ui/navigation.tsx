@@ -1,5 +1,5 @@
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
-import { setUser, useAppDispatch, useAppSelector } from "@src/store";
+import { resetAppValue, setUser, useAppDispatch, useAppSelector } from "@src/store";
 import { router } from "expo-router";
 import { useCallback } from "react";
 import { Button } from "react-native-paper";
@@ -25,6 +25,7 @@ function useLogout() {
   const dispatch = useAppDispatch();
   const logout = useCallback(() => {
     dispatch(setUser({}));
+    dispatch(resetAppValue("nextLoginReminderDate"));
     router.push("/user/login");
   }, [dispatch]);
   return logout;

@@ -59,18 +59,6 @@ export function toUtcDate(date: Nullable<DateTime>) {
   return date as UtcDateTime;
 }
 
-export function isSameDate(startDate: Date | undefined, endDate: Date | undefined) {
-  if (startDate === undefined || endDate === undefined) {
-    return false;
-  }
-
-  return (
-    startDate.getFullYear() === endDate.getFullYear() &&
-    startDate.getMonth() === endDate.getMonth() &&
-    startDate.getDate() === endDate.getDate()
-  );
-}
-
 export function getDateInterval(date1: DateTime, date2: DateTime) {
   const timeIntervals = [31_536_000, 2_628_000, 604_800, 86_400, 3600, 60, 1];
   const intervalNames = ["year", "month", "week", "day", "hour", "minute", "second"] as const;

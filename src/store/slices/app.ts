@@ -8,6 +8,10 @@ const AppSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    resetAppValue(state: Draft<AppState>, { payload: name }: PayloadAction<keyof AppState>) {
+      delete state[name];
+    },
+
     setAppValue<TKey extends keyof AppState>(
       state: Draft<AppState>,
       { payload: { name, value } }: SetFlagValuePayloadAction<TKey>,
@@ -19,11 +23,11 @@ const AppSlice = createSlice({
 
 export default AppSlice;
 export const {
-  actions: { setAppValue },
+  actions: { resetAppValue, setAppValue },
 } = AppSlice;
 export type AppState = Readonly<Partial<AppFlags>>;
 
-type SetFlagValuePayloadAction<TKey extends keyof AppState> = PayloadAction<{
+type SetFlagValuePayloadAction<TKey extends keyof AppFlags> = PayloadAction<{
   name: TKey;
-  value: AppState[TKey];
+  value: AppFlags[TKey];
 }>;

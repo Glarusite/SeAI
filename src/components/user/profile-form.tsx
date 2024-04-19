@@ -5,6 +5,7 @@ import { isBlank, isInvalidDate } from "@src/common/validators";
 import { statusList, type ProfileFormData } from "@src/models";
 import { rankList, vesselTypeList } from "@src/models";
 import {
+  resetAppValue,
   setUser,
   useAppDispatch,
   useAppSelector,
@@ -205,6 +206,7 @@ function useProfile() {
     try {
       await deleteRequest(userId).unwrap();
       dispatch(setUser({}));
+      dispatch(resetAppValue("nextLoginReminderDate"));
       router.replace("/");
       Toast.show({ type: "info", text1: "Profile deleted" });
     } catch (deleteError) {

@@ -1,14 +1,15 @@
 import { AsyncAlert } from "@src/common/async-alert";
+import { toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { useAppNavigation, useAsync } from "@src/common/hooks";
 import { allowsNotificationsAsync, scheduleAllDocumentsNotificationsAsync } from "@src/common/notifications";
-import { getNewDocumentReminders } from "@src/common/reminders";
+import { getNewDocumentReminders, toReminderDate } from "@src/common/reminders";
 import AppStack from "@src/components/app/app-stack";
 import { useDocuments } from "@src/components/documents/use-documents";
-import { useAppDispatch, useAppSelector } from "@src/store";
+import { setAppValue, useAppDispatch, useAppSelector, useGetUserQuery } from "@src/store";
 import { setNotificationHandler } from "expo-notifications";
 import { Stack, router } from "expo-router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Platform } from "react-native";
 import Toast from "react-native-toast-message";
 
@@ -22,6 +23,7 @@ export default function SeafarerLayout() {
   }, [role]);
 
   useDocumentReminderNotifications();
+  useLoginMessage();
 
   return (
     <AppStack>
@@ -98,4 +100,25 @@ function useDocumentReminderNotifications() {
       });
     }
   }, [dispatch, documents]);
+}
+
+function useLoginMessage() {
+  const dispatch = useAppDispatch();
+  const nextLoginReminderDate = useAppSelector(state => state.app.nextLoginReminderDate);
+  const userId = useAppSelector(state => state.user.userId) || "";
+  const { data } = useGetUserQuery(userId, {
+    skip: !userId,
+  });
+
+  useEffect(() => {
+    if (nextLoginReminderDate && new Date() < nextLoginReminderDate) {
+      return;
+    }
+
+    if (userId !== "" && data != null) {
+      Toast.show({ text1: `Welcome, ${data.firstName}!`, text2: "Ready to navigate your maritime journey today?" });
+      const value = toReminderDate(toUtcDate(new Date()), { value: -1, type: "day" });
+      dispatch(setAppValue({ name: "nextLoginReminderDate", value }));
+    }
+  }, [data, dispatch, nextLoginReminderDate, userId]);
 }
