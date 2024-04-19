@@ -29,6 +29,7 @@ const AppConfig: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: "co.seai",
+    icon: "./assets/ios-icon.png",
   },
   web: {
     bundler: "metro",
