@@ -1,5 +1,5 @@
 import { getDateInterval, toLocalDate } from "@src/common/date";
-import type { FindAllApiResponse, GetDocumentResponse } from "@src/store";
+import type { GetDocumentResponse } from "@src/store";
 import { useAppSelector, useFindAllQuery } from "@src/store";
 import { useMemo } from "react";
 
@@ -12,7 +12,8 @@ export function useDocuments(filter?: string | string[]) {
     error,
   };
 }
-function getFilteredData(data: FindAllApiResponse, filter: string | string[] | undefined) {
+
+function getFilteredData(data: GetDocumentResponse[], filter: string | string[] | undefined) {
   return filter === "expiring"
     ? data.filter(document => getExpiringData(document))
     : filter === "expired"

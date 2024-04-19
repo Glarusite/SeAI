@@ -1,5 +1,5 @@
 import type { ReminderPeriod } from "@src/models";
-import type { FindAllApiResponse, GetDocumentResponse } from "@src/store";
+import type { GetDocumentResponse } from "@src/store";
 import type { NotificationPermissionsStatus } from "expo-notifications";
 import {
   IosAuthorizationStatus,
@@ -35,7 +35,7 @@ function isIosStatusNotDenied(status: NotificationPermissionsStatus) {
   return status.ios?.status !== IosAuthorizationStatus.DENIED;
 }
 
-export async function scheduleAllDocumentsNotificationsAsync(documents: FindAllApiResponse) {
+export async function scheduleAllDocumentsNotificationsAsync(documents: GetDocumentResponse[]) {
   // TODO: If we have other types of notifications we should only cancel the ones with the document identifiers
   await cancelAllScheduledNotificationsAsync();
   for (const document of documents) {
