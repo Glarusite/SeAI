@@ -21,12 +21,12 @@ export default function ControlledDropDown<TData extends FieldValues, TContext =
     <Controller
       name={name}
       control={control}
-      render={({ field: { disabled, ...controlProps }, fieldState: { error } }) => (
+      render={({ field: { ...controlProps }, fieldState: { error } }) => (
         <View>
           <DropDown
             mode="outlined"
             setValue={value => controlProps.onChange(value)}
-            inputProps={{ error: error != null, disabled }}
+            error={error != null}
             {...{ ...inputProps, ...controlProps }}
           />
           <ValidationText error={error} />
