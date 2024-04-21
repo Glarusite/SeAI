@@ -381,6 +381,7 @@ export type GetUserResponse = {
   homeAirport?: string;
   readinessDate?: string;
   contractDuration?: number;
+  phone?: string;
 };
 export type UserUpdateRequest = {
   firstName?: string;
@@ -439,6 +440,7 @@ export type UserUpdateRequest = {
   homeAirport?: string;
   readinessDate?: string;
   contractDuration?: number;
+  phone?: string;
 };
 export type UpdateVoyageRequest = {
   vesselName?: string;
@@ -495,6 +497,7 @@ export type UpdateVoyageRequest = {
   leavingPort?: string;
   leavingDate?: string;
   remarks?: string;
+  flag?: string;
 };
 export type GetDocumentResponse = {
   id?: string;
@@ -574,6 +577,7 @@ export type GetVoyageResponse = {
   leavingPort?: string;
   leavingDate?: string;
   remarks?: string;
+  flag?: string;
 };
 export type CreateVoyageRequest = {
   vesselName?: string;
@@ -630,6 +634,7 @@ export type CreateVoyageRequest = {
   leavingPort?: string;
   leavingDate?: string;
   remarks?: string;
+  flag?: string;
 };
 export type CreateDocumentResponse = {
   id?: string;

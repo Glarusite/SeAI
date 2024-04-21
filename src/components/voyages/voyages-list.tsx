@@ -35,7 +35,18 @@ export default function VoyagesList() {
         keyExtractor={({ id }) => id!}
         removeClippedSubviews
         renderItem={({
-          item: { id, vesselName, vesselType, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate },
+          item: {
+            id,
+            vesselName,
+            vesselType,
+            flag,
+            imoNumber,
+            rank,
+            joiningPort,
+            joiningDate,
+            leavingPort,
+            leavingDate,
+          },
           index,
         }) => (
           <Card key={id} style={styles.card} onPress={() => router.push(`/voyages/${id}`)}>
@@ -46,8 +57,9 @@ export default function VoyagesList() {
                   <View>
                     <Text>Vessel name:</Text>
                     <Text>Vessel type:</Text>
-                    <Text>Rank:</Text>
+                    <Text>Vessel flag:</Text>
                     <Text>IMO number:</Text>
+                    <Text>Rank:</Text>
                     <Text>Joining port:</Text>
                     <Text>Joining date:</Text>
                     <Text>Leaving port:</Text>
@@ -57,8 +69,9 @@ export default function VoyagesList() {
                   <View style={styles.valueContainer}>
                     <TextValue>{vesselName}</TextValue>
                     <TextValue>{vesselType && vesselTypeLabels[vesselType]}</TextValue>
-                    <TextValue>{rank && rankLabels[rank]}</TextValue>
+                    <TextValue>{flag || "N/A"}</TextValue>
                     <TextValue>{imoNumber}</TextValue>
+                    <TextValue>{rank && rankLabels[rank]}</TextValue>
                     <TextValue>{joiningPort}</TextValue>
                     <TextValue>{toLocaleDateString(joiningDate)}</TextValue>
                     <TextValue>{leavingPort}</TextValue>

@@ -57,11 +57,13 @@ export default function VoyageForm(props: VoyageFormProps) {
         onSubmitEditing={() => setFocus("rank")}
       />
 
-      <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
-
       <ControlledDropDown control={control} name="vesselType" label="Vessel Type" list={vesselTypeList} />
 
+      <ControlledTextInput control={control} name="flag" label="Vessel Flag" defaultValue={disabled ? "N/A" : ""} />
+
       <ControlledTextInput control={control} inputMode="numeric" maxLength={7} name="imoNumber" label="IMO Number" />
+
+      <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
 
       <ControlledTextInput control={control} name="joiningPort" label="Joining Port" />
 

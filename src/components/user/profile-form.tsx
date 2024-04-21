@@ -14,6 +14,7 @@ import {
   useUpdateUserMutation,
 } from "@src/store";
 import { router } from "expo-router";
+import { AsYouType, validatePhoneNumberLength } from "libphonenumber-js";
 import { useCallback, useEffect, useMemo } from "react";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -33,7 +34,8 @@ export interface ProfileFormProps {
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
-  const { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, updateProfile, setFocus } = useProfile();
+  const { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, formatPhone, updateProfile, setFocus } =
+    useProfile();
   const email = useAppSelector(state => state.user.email);
   const styles = useStyles(props);
 
@@ -73,6 +75,14 @@ export default function ProfileForm(props: ProfileFormProps) {
             label="Date of birth"
             inputMode="start"
             locale="en-GB"
+          />
+
+          <ControlledTextInput
+            control={control}
+            name="phone"
+            label="Phone"
+            keyboardType="phone-pad"
+            onChangeText={formatPhone}
           />
         </View>
 
@@ -214,6 +224,8 @@ function useProfile() {
     }
   }, [deleteRequest, dispatch, userId]);
 
+  const formatPhone = useCallback((value: string) => new AsYouType().input(value.replace(/^0(?:0|11)/, "+")), []);
+
   useEffect(() => {
     if (data) {
       reset({
@@ -236,11 +248,11 @@ function useProfile() {
     }
   }, [queryError, setError]);
 
-  return { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, updateProfile, setFocus };
+  return { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, formatPhone, updateProfile, setFocus };
 }
 
 function resolver(values: ProfileFormData) {
-  const { firstName, lastName, dateOfBirth, contractDuration } = values;
+  const { firstName, lastName, dateOfBirth, contractDuration, phone } = values;
   const errors: FieldErrors<ProfileFormData> = {};
 
   if (isBlank(firstName)) {
@@ -257,6 +269,35 @@ function resolver(values: ProfileFormData) {
 
   if (contractDuration != null && Number.isNaN(contractDuration)) {
     errors.contractDuration = { type: "invalid", message: "Contract duration is invalid" };
+  }
+
+  if (!isBlank(phone)) {
+    const phoneValidationResult = validatePhoneNumberLength(phone);
+    switch (phoneValidationResult) {
+      case "TOO_SHORT": {
+        errors.phone = { type: "invalid", message: "Phone number is too short" };
+        break;
+      }
+      case "TOO_LONG": {
+        errors.phone = { type: "invalid", message: "Phone number is too long" };
+        break;
+      }
+      case "NOT_A_NUMBER": {
+        errors.phone = { type: "invalid", message: "Phone number must start with '+' followed by digits" };
+        break;
+      }
+      case "INVALID_COUNTRY": {
+        errors.phone = {
+          type: "invalid",
+          message: "Phone number must start with '+' followed by a valid country code",
+        };
+        break;
+      }
+      case "INVALID_LENGTH": {
+        errors.phone = { type: "invalid", message: "Phone number is invalid" };
+        break;
+      }
+    }
   }
 
   return { errors, values };

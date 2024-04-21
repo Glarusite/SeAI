@@ -5,7 +5,7 @@ import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
-import { ActivityIndicator, Button, DataTable, HelperText } from "react-native-paper";
+import { ActivityIndicator, Button, DataTable, HelperText, Text } from "react-native-paper";
 
 import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
@@ -48,34 +48,42 @@ export default function VoyagesDataTable() {
 
       <DataTable>
         <DataTable.Header>
-          <DataTable.Title>#</DataTable.Title>
-          <DataTable.Title>Vessel name</DataTable.Title>
-          <DataTable.Title>Vessel type</DataTable.Title>
-          <DataTable.Title>Rank</DataTable.Title>
-          <DataTable.Title>IMO number</DataTable.Title>
-          <DataTable.Title>Joining port</DataTable.Title>
-          <DataTable.Title>Joining date</DataTable.Title>
-          <DataTable.Title>Leaving port</DataTable.Title>
-          <DataTable.Title>Leaving date</DataTable.Title>
+          <DataTable.Title style={styles.indexCell}>#</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Vessel name</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Vessel type</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Vessel flag</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>IMO number</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Rank</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Joining port</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Joining date</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Leaving port</DataTable.Title>
+          <DataTable.Title style={styles.valueCell}>Leaving date</DataTable.Title>
         </DataTable.Header>
 
         {data
           ?.slice(from, to)
           .map(
             (
-              { id, vesselName, vesselType, rank, imoNumber, joiningPort, joiningDate, leavingPort, leavingDate },
+              { id, vesselName, vesselType, flag, imoNumber, rank, joiningPort, joiningDate, leavingPort, leavingDate },
               index,
             ) => (
               <DataTableRow key={id} index={index} onPress={() => router.push(`/voyages/${id}`)}>
-                <DataTable.Cell>{data.length - from - index}</DataTable.Cell>
-                <DataTable.Cell>{vesselName}</DataTable.Cell>
-                <DataTable.Cell>{vesselType && vesselTypeLabels[vesselType]}</DataTable.Cell>
-                <DataTable.Cell>{rank && rankLabels[rank]}</DataTable.Cell>
-                <DataTable.Cell>{imoNumber}</DataTable.Cell>
-                <DataTable.Cell>{joiningPort}</DataTable.Cell>
-                <DataTable.Cell>{toLocaleDateString(joiningDate)}</DataTable.Cell>
-                <DataTable.Cell>{leavingPort}</DataTable.Cell>
-                <DataTable.Cell>{toLocaleDateString(leavingDate)}</DataTable.Cell>
+                <DataTable.Cell style={styles.indexCell}>{data.length - from - index}</DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>
+                  <Text numberOfLines={2}>{vesselName}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>
+                  <Text numberOfLines={2}>{vesselType && vesselTypeLabels[vesselType]}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>{flag || "N/A"}</DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>{imoNumber}</DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>
+                  <Text numberOfLines={2}>{rank && rankLabels[rank]}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>{joiningPort}</DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>{toLocaleDateString(joiningDate)}</DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>{leavingPort}</DataTable.Cell>
+                <DataTable.Cell style={styles.valueCell}>{toLocaleDateString(leavingDate)}</DataTable.Cell>
               </DataTableRow>
             ),
           )}
@@ -106,5 +114,13 @@ const styles = StyleSheet.create({
     gap: 16,
     width: "100%",
     justifyContent: "space-evenly",
+  },
+
+  indexCell: {
+    flex: 1,
+  },
+
+  valueCell: {
+    flex: 5,
   },
 });

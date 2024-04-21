@@ -6,7 +6,7 @@ import VoyagesList from "@src/components/voyages/voyages-list";
 
 export default function VoyagesPage() {
   const { width } = useAppDimensions();
-  if (width < 720) {
+  if (width < 800) {
     return (
       <AppSafeAreaView>
         <VoyagesList />
