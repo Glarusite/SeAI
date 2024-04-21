@@ -12,12 +12,13 @@ export type ControlledDateInputProps<TData extends FieldValues, TContext = unkno
   name: Path<TData>;
   control: Control<TData, TContext>;
   disabled?: boolean;
-} & Omit<DatePickerInputProps, keyof ControllerRenderProps>;
+} & Omit<DatePickerInputProps, keyof Omit<ControllerRenderProps, "onBlur">>;
 
 export default function ControlledDateInput<TData extends FieldValues, TContext = unknown>({
   name,
   control,
   defaultValue = "",
+  onBlur: onInputBlur,
   ...inputProps
 }: ControlledDateInputProps<TData, TContext>) {
   return (
@@ -25,13 +26,18 @@ export default function ControlledDateInput<TData extends FieldValues, TContext 
       name={name}
       control={control}
       defaultValue={defaultValue as PathValue<TData, Path<TData>>}
-      render={({ field: { disabled, ...controlProps }, fieldState: { error } }) => (
+      render={({ field: { disabled, onBlur: onControlBlur, ...controlProps }, fieldState: { error } }) => (
         <View>
           <DatePickerInput
             mode="outlined"
             error={error != null}
             iconStyle={{ display: disabled ? "none" : undefined }}
             disabled={disabled}
+            animationType="fade"
+            onBlur={event => {
+              onInputBlur?.(event);
+              onControlBlur();
+            }}
             {...{ ...inputProps, ...controlProps }}
           />
           <ValidationText error={error} />

@@ -15,7 +15,11 @@ export default function AppScrollView({ children, wide, style, ...viewProps }: A
 
   return (
     <AppSafeAreaView>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="handled"
+        contentInsetAdjustmentBehavior="always"
+      >
         <View style={styles.container} {...viewProps}>
           {children}
         </View>
