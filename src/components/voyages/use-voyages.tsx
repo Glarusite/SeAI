@@ -16,7 +16,7 @@ export function useVoyages() {
         text2: toErrorMessage(error),
       });
     }
-  });
+  }, [error]);
 
   return {
     data: useMemo(
