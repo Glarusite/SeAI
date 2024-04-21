@@ -125,7 +125,7 @@ export default function MarketingPage() {
               </Text>
               <Text style={{ fontSize: 20 }}>
                 <A href="tel:+359888608980" style={{ color: colors.primary, fontWeight: "600" }}>
-                  <Icon source="cellphone" size={18} color="white" /> +359 888 608 980
+                  <Icon source="cellphone" size={18} color="white" /> +359 88 860 8980
                 </A>
               </Text>
             </View>
