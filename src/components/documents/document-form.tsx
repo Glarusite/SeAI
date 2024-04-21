@@ -21,9 +21,9 @@ import { router, useFocusEffect } from "expo-router";
 import { noop } from "lodash";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldErrors } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Platform, StyleSheet, TouchableHighlight, View } from "react-native";
-import { ActivityIndicator, Button, Text, useTheme } from "react-native-paper";
+import { ActivityIndicator, Button, Text, TextInput, useTheme } from "react-native-paper";
 import { DatePickerInput } from "react-native-paper-dates";
 import Toast from "react-native-toast-message";
 
@@ -44,18 +44,23 @@ export interface DocumentFormProps {
 
 export default function DocumentForm(props: DocumentFormProps) {
   const {
-    uploadDate,
     control,
     disabled,
     errors,
+    expiryDateIsFocused,
+    expiryDateValue,
     isDirty,
     isLoading,
     isNew,
-    isVerify,
     isSubmitting,
+    issueDateValue,
+    isVerify,
+    uploadDateValue,
     uri,
     deleteDocument,
     discardDocument,
+    expiryDateFocused,
+    expiryDateBlurred,
     setDisabled,
     setFocus,
     submitDocument,
@@ -102,6 +107,7 @@ export default function DocumentForm(props: DocumentFormProps) {
       <View style={styles.formContainer}>
         <FormView>
           <ControlledTextInput
+            multiline
             control={control}
             name="name"
             mode="outlined"
@@ -126,14 +132,23 @@ export default function DocumentForm(props: DocumentFormProps) {
             onSubmitEditing={setExpiryDateFocus}
           />
 
-          <ControlledDateInput
-            control={control}
-            name="expiryDate"
-            label="Expiration date"
-            inputMode="start"
-            locale="en-GB"
-            onSubmitEditing={submitDocument}
-          />
+          {disabled && expiryDateValue == null ? (
+            <TextInput disabled value="Unlimited" mode="outlined" label="Expiration date" />
+          ) : (
+            <ControlledDateInput
+              control={control}
+              name="expiryDate"
+              label={expiryDateIsFocused || expiryDateValue != null ? "Expiration date" : "Expiration date (Unlimited)"}
+              saveLabel="Save (leave blank for Unlimited)"
+              withDateFormatInLabel={expiryDateIsFocused || expiryDateValue != null}
+              onFocus={expiryDateFocused}
+              onBlur={expiryDateBlurred}
+              inputMode="end"
+              locale="en-GB"
+              validRange={{ startDate: issueDateValue }}
+              onSubmitEditing={submitDocument}
+            />
+          )}
 
           {!isNew && (
             <DatePickerInput
@@ -141,7 +156,7 @@ export default function DocumentForm(props: DocumentFormProps) {
               inputMode="start"
               locale="en-GB"
               mode="outlined"
-              value={uploadDate}
+              value={uploadDateValue}
               iconStyle={styles.uploadDateIcon}
               onChange={noop}
               disabled
@@ -290,7 +305,8 @@ function useDocument({ id }: DocumentFormProps) {
   const imageUri = useDocumentImageUri(id);
 
   const [disabled, setDisabled] = useState(!(isVerify || isNew));
-  const [uploadDate, setUploadDate] = useState<Date | undefined>();
+  const [expiryDateIsFocused, setExpiryDateIsFocused] = useState(false);
+  const [uploadDateValue, setUploadDateValue] = useState<Date>();
 
   const [createRequest] = useCreateMutation();
   const [uploadFileRequest] = useUpload1Mutation();
@@ -308,6 +324,9 @@ function useDocument({ id }: DocumentFormProps) {
     disabled,
     resolver,
   });
+
+  const issueDateValue = useWatch({ control, name: "issueDate" });
+  const expiryDateValue = useWatch({ control, name: "expiryDate" });
 
   const resetFailedScan = useCallback(() => {
     if (scan.id == null && scan.uri != null) {
@@ -327,7 +346,7 @@ function useDocument({ id }: DocumentFormProps) {
     if (document) {
       const { name, number, issueDate, expiryDate, createdDate } = document;
       reset({ name, number, issueDate: toLocalDate(issueDate), expiryDate: toLocalDate(expiryDate) });
-      setUploadDate(toLocalDate(createdDate));
+      setUploadDateValue(toLocalDate(createdDate));
     }
   }, [document, reset]);
 
@@ -462,19 +481,27 @@ function useDocument({ id }: DocumentFormProps) {
     }
   }, [id, isNew, uploadFileRequest, userId]);
 
+  const expiryDateFocused = useCallback(() => setExpiryDateIsFocused(true), []);
+  const expiryDateBlurred = useCallback(() => setExpiryDateIsFocused(false), []);
+
   return {
-    uploadDate,
     control,
     disabled,
     errors,
-    uri: uri || imageUri,
+    expiryDateIsFocused,
+    expiryDateValue,
     isDirty,
     isLoading,
     isNew,
     isSubmitting,
+    issueDateValue,
     isVerify,
+    uploadDateValue,
+    uri: uri || imageUri,
     deleteDocument,
     discardDocument,
+    expiryDateFocused,
+    expiryDateBlurred,
     setDisabled,
     setFocus,
     submitDocument,
@@ -500,9 +527,7 @@ export function resolver(values: DocumentFormData) {
     errors.issueDate = { type: "invalid", message: "Issue date is invalid" };
   }
 
-  if (expiryDate == null) {
-    errors.expiryDate = { type: "required", message: "Expiration date is required" };
-  } else if (isInvalidDate(expiryDate)) {
+  if (expiryDate && isInvalidDate(expiryDate)) {
     errors.expiryDate = { type: "invalid", message: "Expiration date is invalid" };
   }
 

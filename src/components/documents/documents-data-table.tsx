@@ -150,7 +150,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
             <DataTable.Cell style={styles.cell}>{name}</DataTable.Cell>
             <DataTable.Cell style={styles.cell}>{number}</DataTable.Cell>
             <DataTable.Cell style={styles.cell}>{toLocaleDateString(issueDate)}</DataTable.Cell>
-            <DataTable.Cell style={styles.cell}>{toLocaleDateString(expiryDate)}</DataTable.Cell>
+            <DataTable.Cell style={styles.cell}>{toLocaleDateString(expiryDate) || "Unlimited"}</DataTable.Cell>
             <DataTable.Cell style={styles.cell}>{toLocaleDateString(createdDate)}</DataTable.Cell>
             <DataTable.Cell style={styles.cell}>
               <DocumentReminderStatus expiryDate={expiryDate} />

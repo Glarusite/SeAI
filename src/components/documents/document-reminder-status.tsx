@@ -12,7 +12,7 @@ export default function DocumentReminderStatus({ expiryDate }: DocumentReminderS
   const styles = useStyles();
   expiryDate = toLocalDate(expiryDate);
   if (expiryDate == null) {
-    return <Text>Unknown</Text>;
+    return <Text style={[styles.root, styles.valid]}>Valid</Text>;
   }
 
   const { value, interval } = getDateInterval(expiryDate, new Date());

@@ -89,7 +89,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
                   <View style={styles.valueContainer}>
                     <TextValue>{number}</TextValue>
                     <TextValue>{toLocaleDateString(issueDate)}</TextValue>
-                    <TextValue>{toLocaleDateString(expiryDate)}</TextValue>
+                    <TextValue>{toLocaleDateString(expiryDate) || "Unlimited"}</TextValue>
                     <TextValue>{toLocaleDateString(createdDate)}</TextValue>
                   </View>
                 </View>
