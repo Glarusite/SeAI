@@ -1,30 +1,40 @@
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import type { ApiErrorResponse } from "@src/models";
 
+import { safeJsonParse } from "./json";
+
 export function toErrorMessage(error: unknown) {
+  error = typeof error === "string" ? safeJsonParse(error) : error;
   const errorData =
-    typeof error === "object" && "data" in (error as FetchBaseQueryError)
-      ? flattenErrorData(error as FetchBaseQueryError)
-      : error instanceof Error
-        ? error.message
-        : error;
+    flattenQueryErrorData(error) || flattenApiError(error) || (error instanceof Error ? error.message : error);
 
   const errorMessage = typeof errorData === "string" ? errorData : JSON.stringify(errorData);
 
   return errorMessage;
 }
 
-function flattenErrorData(error: FetchBaseQueryError) {
-  const { data } = error;
-  if (typeof data === "string") {
-    return data;
-  }
+function flattenQueryErrorData(error: unknown) {
+  if (typeof error === "object" && "data" in (error as FetchBaseQueryError)) {
+    const { data } = error as FetchBaseQueryError;
+    if (typeof data === "string") {
+      const jsonData = safeJsonParse(data);
+      if (jsonData) {
+        return flattenApiError(jsonData);
+      }
 
-  if (typeof data === "object") {
-    return "detail" in (data as ApiErrorResponse)
-      ? (data as ApiErrorResponse).detail
-      : "error" in (data as ApiErrorResponse)
-        ? (data as ApiErrorResponse).error
-        : error;
+      return data;
+    }
+  }
+}
+function flattenApiError(error: unknown) {
+  if (typeof error === "object") {
+    if ("detail" in (error as ApiErrorResponse)) {
+      const { detail } = error as ApiErrorResponse;
+      return detail;
+    }
+
+    if ("error" in (error as ApiErrorResponse)) {
+      return (error as ApiErrorResponse).error;
+    }
   }
 }
