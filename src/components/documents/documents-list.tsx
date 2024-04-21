@@ -1,12 +1,11 @@
 import { useIsFocused } from "@react-navigation/native";
 import { toLocaleDateString } from "@src/common/date";
-import { toErrorMessage } from "@src/common/error";
 import { router } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 import type { GestureResponderEvent } from "react-native";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text, useTheme } from "react-native-paper";
+import { ActivityIndicator, Card, FAB, List, Portal, Text, useTheme } from "react-native-paper";
 
 import TextValue from "../ui/text-value";
 
@@ -23,7 +22,7 @@ export interface DocumentsListProps extends DocumentsFilterProps {}
 export default function DocumentsList({ filter }: DocumentsListProps) {
   const styles = useStyles();
   const isFocused = useIsFocused();
-  const { data, isLoading, error } = useDocuments(filter);
+  const { data, isLoading } = useDocuments({ filter });
   const [fabGroupState, setFabGroupState] = useState({ open: false });
   const [selection, setSelection] = useState<Set<string>>();
   const { isSharing, shareSelection } = useDocumentsShare(selection);
@@ -45,10 +44,6 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
-  }
-
-  if (error) {
-    return <HelperText type="error">{toErrorMessage(error)}</HelperText>;
   }
 
   return (

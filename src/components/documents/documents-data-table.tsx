@@ -1,10 +1,9 @@
 import { toLocaleDateString } from "@src/common/date";
-import { toErrorMessage } from "@src/common/error";
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { GestureResponderEvent } from "react-native";
 import { Platform, StyleSheet, View } from "react-native";
-import { ActivityIndicator, Button, Checkbox, DataTable, HelperText, useTheme } from "react-native-paper";
+import { ActivityIndicator, Button, Checkbox, DataTable, useTheme } from "react-native-paper";
 
 import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
@@ -21,7 +20,7 @@ export interface DocumentsDataTableProps extends DocumentsFilterProps {}
 
 export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) {
   const styles = useStyles();
-  const { data, isLoading, error } = useDocuments(filter);
+  const { data, isLoading } = useDocuments({ filter });
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
   const [selection, setSelection] = useState<Set<string>>(new Set());
@@ -50,10 +49,6 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
-  }
-
-  if (error) {
-    return <HelperText type="error">{toErrorMessage(error)}</HelperText>;
   }
 
   return (

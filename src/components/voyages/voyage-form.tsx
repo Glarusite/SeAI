@@ -140,7 +140,7 @@ function useStyles() {
 }
 
 function useVoyage({ id }: VoyageFormProps) {
-  const { data, isLoading, error: loadError } = useVoyages();
+  const { data, isLoading } = useVoyages();
   const userId = useAppSelector(state => state.user.userId) || "";
   const voyage = data.find(item => item.id === id);
   const isNew = id == null;
@@ -161,17 +161,6 @@ function useVoyage({ id }: VoyageFormProps) {
     disabled,
     resolver,
   });
-
-  useEffect(() => {
-    if (loadError) {
-      const message = toErrorMessage(loadError);
-      Toast.show({
-        type: "error",
-        text1: "Voyage load error",
-        text2: message,
-      });
-    }
-  }, [loadError, setError]);
 
   useEffect(() => {
     if (voyage) {

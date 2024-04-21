@@ -1,19 +1,31 @@
 import { getDateInterval, toLocalDate } from "@src/common/date";
+import { toErrorMessage } from "@src/common/error";
 import type { GetDocumentResponse } from "@src/store";
 import { useAppSelector, useFindAllQuery } from "@src/store";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import Toast from "react-native-toast-message";
 
-export function useDocuments(filter?: string | string[]) {
+export function useDocuments({ filter, showError = true }: { filter?: string | string[]; showError?: boolean } = {}) {
   const userId = useAppSelector(state => state.user.userId) || "";
-  const { data = [], isLoading, error } = useFindAllQuery(userId, { skip: !userId });
+  const { data, isLoading, error } = useFindAllQuery(userId, { skip: !userId });
+
+  useEffect(() => {
+    if (showError && error) {
+      Toast.show({
+        type: "error",
+        text1: "Data Load Error",
+        text2: toErrorMessage(error),
+      });
+    }
+  });
+
   return {
     data: useMemo(() => getFilteredData(data, filter), [data, filter]),
     isLoading,
-    error,
   };
 }
 
-function getFilteredData(data: GetDocumentResponse[], filter: string | string[] | undefined) {
+function getFilteredData(data: GetDocumentResponse[] = [], filter: string | string[] | undefined) {
   return filter === "expiring"
     ? data.filter(document => getExpiringData(document))
     : filter === "expired"

@@ -1,29 +1,24 @@
 import { useIsFocused } from "@react-navigation/native";
 import { toLocaleDateString } from "@src/common/date";
-import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator, Card, FAB, HelperText, List, Portal, Text } from "react-native-paper";
+import { ActivityIndicator, Card, FAB, List, Portal, Text } from "react-native-paper";
 
 import TextValue from "../ui/text-value";
 
 import { useVoyages } from "./use-voyages";
 
 export default function VoyagesList() {
-  const { data, isLoading, error } = useVoyages();
+  const { data, isLoading } = useVoyages();
   const [fabGroupState, setFabGroupState] = useState({ open: false });
   const isFocused = useIsFocused();
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
-  }
-
-  if (error) {
-    return <HelperText type="error">{toErrorMessage(error)}</HelperText>;
   }
 
   return (

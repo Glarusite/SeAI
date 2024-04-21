@@ -1,11 +1,10 @@
 import { toLocaleDateString } from "@src/common/date";
-import { toErrorMessage } from "@src/common/error";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
-import { ActivityIndicator, Button, DataTable, HelperText, Text } from "react-native-paper";
+import { ActivityIndicator, Button, DataTable, Text } from "react-native-paper";
 
 import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
@@ -13,7 +12,7 @@ import DataTableRow from "../ui/data-table-row";
 import { useVoyages } from "./use-voyages";
 
 export default function VoyagesDataTable() {
-  const { data, isLoading, error } = useVoyages();
+  const { data, isLoading } = useVoyages();
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, onItemsPerPageChange] = useState(numberOfItemsPerPageList[1]);
 
@@ -26,10 +25,6 @@ export default function VoyagesDataTable() {
 
   if (isLoading) {
     return <ActivityIndicator size={100} />;
-  }
-
-  if (error) {
-    return <HelperText type="error">{toErrorMessage(error)}</HelperText>;
   }
 
   return (
