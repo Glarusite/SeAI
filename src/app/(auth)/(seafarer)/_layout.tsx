@@ -112,7 +112,6 @@ function useLoginMessage() {
 
   useEffect(() => {
     const nextLoginReminderDate = toDate(nextLoginReminderTimestamp);
-    console.log(nextLoginReminderDate);
     if (nextLoginReminderDate && new Date() < nextLoginReminderDate) {
       return;
     }
