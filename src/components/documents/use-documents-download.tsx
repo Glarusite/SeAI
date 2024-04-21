@@ -1,5 +1,5 @@
+import { downloadFile } from "@src/common/download";
 import { toErrorMessage } from "@src/common/error";
-import { downloadFile } from "@src/common/navigator";
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import { useAppSelector } from "@src/store";
 import { baseUrl } from "@src/store/api.base";

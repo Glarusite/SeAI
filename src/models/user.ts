@@ -26,8 +26,17 @@ export interface User {
   role: "SEAFARER" | "TRAINING_CENTER_ADMIN" | "TRAINING_CENTER_USER";
 }
 
-export const statusList: DropDownList<ProfileFormData["status"]> = [
+export type UserStatus = Required<GetUserResponse>["status"];
+
+export const statusLabels: Record<UserStatus, string> = {
+  HOME: "Home",
+  ONBOARD: "On board",
+};
+
+export const statusList: DropDownList<UserStatus> = [
   { label: "Not selected", value: "" },
-  { label: "Home", value: "HOME" },
-  { label: "On board", value: "ONBOARD" },
+  ...Object.entries(statusLabels).map(([key, label]) => ({
+    value: key as UserStatus,
+    label,
+  })),
 ];

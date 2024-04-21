@@ -1,8 +1,9 @@
 import { AsyncAlert } from "@src/common/async-alert";
-import { toLocalDate, toUtcDate } from "@src/common/date";
+import { toLocalDate, toLocaleDateString, toUtcDate } from "@src/common/date";
+import { downloadFile } from "@src/common/download";
 import { toErrorMessage } from "@src/common/error";
 import { isBlank, isInvalidDate } from "@src/common/validators";
-import { statusList, type ProfileFormData } from "@src/models";
+import { rankLabels, statusLabels, statusList, vesselTypeLabels, type ProfileFormData } from "@src/models";
 import { rankList, vesselTypeList } from "@src/models";
 import {
   resetAppValue,
@@ -14,6 +15,7 @@ import {
   useUpdateUserMutation,
 } from "@src/store";
 import { router } from "expo-router";
+import { Base64 } from "js-base64";
 import { AsYouType, validatePhoneNumberLength } from "libphonenumber-js";
 import { useCallback, useEffect, useMemo } from "react";
 import type { FieldErrors } from "react-hook-form";
@@ -34,8 +36,18 @@ export interface ProfileFormProps {
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
-  const { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, formatPhone, updateProfile, setFocus } =
-    useProfile();
+  const {
+    control,
+    errors,
+    isDirty,
+    isLoading,
+    isSubmitting,
+    deleteProfile,
+    formatPhone,
+    profileReport,
+    updateProfile,
+    setFocus,
+  } = useProfile();
   const email = useAppSelector(state => state.user.email);
   const styles = useStyles(props);
 
@@ -110,6 +122,10 @@ export default function ProfileForm(props: ProfileFormProps) {
 
       <Button icon="account-edit" mode="contained" onPress={updateProfile} disabled={!isDirty || isSubmitting}>
         {isSubmitting ? <ButtonActivityIndicator /> : "Update"}
+      </Button>
+
+      <Button icon="file-account" mode="contained-tonal" onPress={profileReport}>
+        Download Personal Data Report
       </Button>
 
       <Button
@@ -199,6 +215,29 @@ function useProfile() {
     }
   });
 
+  const profileReport = useCallback(() => {
+    void downloadFile(
+      `seai-personal-data`,
+      "text/plain",
+      Base64.encode(
+        [
+          `First name: ${data?.firstName}`,
+          `Last name: ${data?.lastName}`,
+          `Date of birth: ${toLocaleDateString(data?.dateOfBirth) || "N/A"}`,
+          `Phone: ${data?.phone || "N/A"}`,
+          `Rank: ${data?.rank ? rankLabels[data.rank] : "N/A"}`,
+          `Contract duration: ${data?.contractDuration || "N/A"}`,
+          `Vessel type: ${data?.vesselType ? vesselTypeLabels[data.vesselType] : "N/A"}`,
+          `Manning agents: ${data?.manningAgents || "N/A"}`,
+          `Present employer: ${data?.presentEmployer || "N/A"}`,
+          `Home airport: ${data?.homeAirport || "N/A"}`,
+          `Readiness date: ${toLocaleDateString(data?.readinessDate) || "N/A"}`,
+          `Status: ${data?.status ? statusLabels[data.status] : "N/A"}`,
+        ].join("\n"),
+      ),
+    );
+  }, [data]);
+
   const [deleteRequest] = useDeleteUserMutation();
   const deleteProfile = useCallback(async () => {
     const result = await AsyncAlert.confirm(
@@ -248,7 +287,18 @@ function useProfile() {
     }
   }, [queryError, setError]);
 
-  return { control, errors, isDirty, isLoading, isSubmitting, deleteProfile, formatPhone, updateProfile, setFocus };
+  return {
+    control,
+    errors,
+    isDirty,
+    isLoading,
+    isSubmitting,
+    deleteProfile,
+    formatPhone,
+    profileReport,
+    updateProfile,
+    setFocus,
+  };
 }
 
 function resolver(values: ProfileFormData) {

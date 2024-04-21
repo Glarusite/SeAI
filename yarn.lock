@@ -8309,6 +8309,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-base64@npm:^3.7.7":
+  version: 3.7.7
+  resolution: "js-base64@npm:3.7.7"
+  checksum: 10c0/3c905a7e78b601e4751b5e710edd0d6d045ce2d23eb84c9df03515371e1b291edc72808dc91e081cb9855aef6758292a2407006f4608ec3705373dd8baf2f80f
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -11581,6 +11588,7 @@ __metadata:
     expo-status-bar: "npm:~1.11.1"
     expo-system-ui: "npm:~2.9.4"
     expo-updates: "npm:~0.24.12"
+    js-base64: "npm:^3.7.7"
     jszip: "npm:^3.10.1"
     libphonenumber-js: "npm:^1.10.60"
     lodash: "npm:4.17.21"
