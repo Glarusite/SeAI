@@ -30,7 +30,7 @@ const createAppFetchBaseQuery = memoize((dispatch: BaseQueryApi["dispatch"]) =>
       const { status, headers } = response;
       if (status === 401 || status === 403) {
         dispatch(setUser({}));
-        dispatch(resetAppValue("nextLoginReminderDate"));
+        dispatch(resetAppValue("nextLoginReminderTimestamp"));
       }
 
       const contentType = headers.get("content-type");

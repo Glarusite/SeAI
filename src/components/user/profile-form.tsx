@@ -216,7 +216,7 @@ function useProfile() {
     try {
       await deleteRequest(userId).unwrap();
       dispatch(setUser({}));
-      dispatch(resetAppValue("nextLoginReminderDate"));
+      dispatch(resetAppValue("nextLoginReminderTimestamp"));
       router.replace("/");
       Toast.show({ type: "info", text1: "Profile deleted" });
     } catch (deleteError) {

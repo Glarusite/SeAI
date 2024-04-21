@@ -1,5 +1,5 @@
 import { AsyncAlert } from "@src/common/async-alert";
-import { toUtcDate } from "@src/common/date";
+import { toDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
 import { useAppNavigation, useAsync } from "@src/common/hooks";
 import { allowsNotificationsAsync, scheduleAllDocumentsNotificationsAsync } from "@src/common/notifications";
@@ -56,7 +56,7 @@ setNotificationHandler({
 
 function useDocumentReminderNotifications() {
   const dispatch = useAppDispatch();
-  const { data: documents } = useDocuments();
+  const { data: documents } = useDocuments({ showError: false });
   const reminders = useAppSelector(state => state.reminders.documents);
   const remindersRef = useRef(reminders);
 
@@ -104,21 +104,23 @@ function useDocumentReminderNotifications() {
 
 function useLoginMessage() {
   const dispatch = useAppDispatch();
-  const nextLoginReminderDate = useAppSelector(state => state.app.nextLoginReminderDate);
+  const nextLoginReminderTimestamp = useAppSelector(state => state.app.nextLoginReminderTimestamp);
   const userId = useAppSelector(state => state.user.userId) || "";
   const { data } = useGetUserQuery(userId, {
     skip: !userId,
   });
 
   useEffect(() => {
+    const nextLoginReminderDate = toDate(nextLoginReminderTimestamp);
+    console.log(nextLoginReminderDate);
     if (nextLoginReminderDate && new Date() < nextLoginReminderDate) {
       return;
     }
 
     if (userId !== "" && data != null) {
       Toast.show({ text1: `Welcome, ${data.firstName}!`, text2: "Ready to navigate your maritime journey today?" });
-      const value = toReminderDate(toUtcDate(new Date()), { value: -1, type: "day" });
-      dispatch(setAppValue({ name: "nextLoginReminderDate", value }));
+      const value = toReminderDate(toUtcDate(new Date()), { value: -1, type: "day" })?.toJSON();
+      dispatch(setAppValue({ name: "nextLoginReminderTimestamp", value }));
     }
-  }, [data, dispatch, nextLoginReminderDate, userId]);
+  }, [data, dispatch, nextLoginReminderTimestamp, userId]);
 }

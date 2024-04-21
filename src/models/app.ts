@@ -5,7 +5,7 @@ import type { Unboxed } from "./types";
 
 export interface AppFlags {
   colorScheme: ColorSchemeName;
-  nextLoginReminderDate: Date;
+  nextLoginReminderTimestamp: string;
 }
 
 export type DropDownList<TValue extends string | number | undefined> = DropDownListItem<TValue>[];

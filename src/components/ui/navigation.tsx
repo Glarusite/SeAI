@@ -26,7 +26,7 @@ function useLogout() {
   const dispatch = useAppDispatch();
   const logout = useCallback(() => {
     dispatch(setUser({}));
-    dispatch(resetAppValue("nextLoginReminderDate"));
+    dispatch(resetAppValue("nextLoginReminderTimestamp"));
     router.push("/user/login");
   }, [dispatch]);
   return logout;

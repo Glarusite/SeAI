@@ -14,7 +14,7 @@ const AppSlice = createSlice({
 
     setAppValue<TKey extends keyof AppState>(
       state: Draft<AppState>,
-      { payload: { name, value } }: SetFlagValuePayloadAction<TKey>,
+      { payload: { name, value } }: SetAppValuePayloadAction<TKey>,
     ) {
       state[name] = value;
     },
@@ -27,7 +27,7 @@ export const {
 } = AppSlice;
 export type AppState = Readonly<Partial<AppFlags>>;
 
-type SetFlagValuePayloadAction<TKey extends keyof AppFlags> = PayloadAction<{
+type SetAppValuePayloadAction<TKey extends keyof AppFlags> = PayloadAction<{
   name: TKey;
   value: AppFlags[TKey];
 }>;
