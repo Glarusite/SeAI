@@ -1,19 +1,24 @@
-import { useMemo, useState } from "react";
+import { forwardRef, useMemo, useState } from "react";
+import type { TouchableWithoutFeedback } from "react-native";
 import { StyleSheet } from "react-native";
 import type { TextInputProps } from "react-native-paper";
 import { useTheme } from "react-native-paper";
 import type { DropDownPropsInterface } from "react-native-paper-dropdown";
-import RNDropDown from "react-native-paper-dropdown";
+import RNPDropDown from "react-native-paper-dropdown";
 
 export type DropDownProps = Omit<DropDownPropsInterface, "onDismiss" | "showDropDown" | "visible"> &
   Pick<TextInputProps, "disabled" | "error">;
 
-export default function DropDown({ error, disabled, ...props }: DropDownProps) {
+const DropDown = forwardRef<TouchableWithoutFeedback, DropDownProps>(function DropDown(
+  { error, disabled, ...props },
+  ref,
+) {
   const [visible, setVisible] = useState(false);
   const styles = useStyles();
 
   return (
-    <RNDropDown
+    <RNPDropDown
+      ref={ref}
       inputProps={{ error, disabled }}
       dropDownItemTextStyle={styles.dropDownItemText}
       showDropDown={() => setVisible(!disabled && true)}
@@ -22,7 +27,7 @@ export default function DropDown({ error, disabled, ...props }: DropDownProps) {
       {...props}
     />
   );
-}
+});
 
 function useStyles() {
   const { colors } = useTheme();
@@ -36,3 +41,5 @@ function useStyles() {
     [colors],
   );
 }
+
+export default DropDown;
