@@ -28,28 +28,15 @@ export function useDocuments({ filter, showError = true }: { filter?: string | s
 }
 
 function getFilteredData(data: GetDocumentResponse[] = [], filter: string | string[] | undefined) {
-  return filter === "expiring"
-    ? data.filter(document => getExpiringData(document))
-    : filter === "expired"
-      ? data.filter(document => getExpiredData(document))
-      : data;
+  return filter === "expiring" ? data.filter(document => getExpiringData(document)) : data;
 }
 
 function getExpiringData(document: GetDocumentResponse) {
-  const { value = 0, interval } = getExpiryInterval(document) || {};
-  return value > 0 && interval !== "year";
-}
-
-function getExpiredData(document: GetDocumentResponse) {
-  const { value = 0 } = getExpiryInterval(document) || {};
-  return value < 0;
-}
-
-function getExpiryInterval(document: GetDocumentResponse) {
   const expiryDate = toLocalDate(document.expiryDate);
   if (expiryDate == null) {
-    return;
+    return false;
   }
 
-  return getDateInterval(expiryDate, new Date());
+  const { interval } = getDateInterval(expiryDate, new Date());
+  return interval !== "year";
 }

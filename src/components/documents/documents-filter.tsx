@@ -17,9 +17,6 @@ export default function DocumentsFilter({ style, filter }: DocumentsFilterProps)
       <Chip mode={filter === "expiring" ? "flat" : "outlined"} onPress={setExpiringParameters}>
         Expiring
       </Chip>
-      <Chip mode={filter === "expired" ? "flat" : "outlined"} onPress={setExpiredParameters}>
-        Expired
-      </Chip>
     </View>
   );
 }
@@ -39,8 +36,4 @@ function clearParameters() {
 
 function setExpiringParameters() {
   router.setParams({ filter: "expiring" });
-}
-
-function setExpiredParameters() {
-  router.setParams({ filter: "expired" });
 }
