@@ -51,7 +51,7 @@ export function useDocumentsDownload(selection: Set<string> | undefined) {
 
       if (files.length === 1) {
         const { 0: file } = files;
-        downloadFile(file.documentId, file.mimeType, file.base64);
+        void downloadFile(file.documentId, file.mimeType, file.base64);
       } else {
         const jsZip = new JSZip();
         for (const file of files) {
@@ -63,7 +63,7 @@ export function useDocumentsDownload(selection: Set<string> | undefined) {
 
         const base64Zip = await jsZip.generateAsync({ type: "base64" });
         const zipMimeType = "application/zip";
-        downloadFile(randomUUID(), zipMimeType, `data:${zipMimeType};base64,${base64Zip}`);
+        void downloadFile(randomUUID(), zipMimeType, `data:${zipMimeType};base64,${base64Zip}`);
       }
     } catch (error) {
       Toast.show({
