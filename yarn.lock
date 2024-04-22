@@ -4729,9 +4729,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001587":
-  version: 1.0.30001611
-  resolution: "caniuse-lite@npm:1.0.30001611"
-  checksum: 10c0/e6d6549a42b811212f6c4ef2798c45ab5a19484aaee0fa550ec20632a49638d3e53b64e088664d2efab0c5a278d1f8d1dec4654fbce11194e6ec1dc4ba5df466
+  version: 1.0.30001612
+  resolution: "caniuse-lite@npm:1.0.30001612"
+  checksum: 10c0/d6b405ff06f4e913bc779f9183fa68001c9d6b8526a7dd1b99c60587dd21a01aa8def3d8462cf6214f0181f1c21b9245611ff65241cf9c967fc742e86ece5065
   languageName: node
   linkType: hard
 
@@ -5554,9 +5554,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.668":
-  version: 1.4.744
-  resolution: "electron-to-chromium@npm:1.4.744"
-  checksum: 10c0/48711f84ef7b60ef5990543163250c293752aa59133dc5d66577a3287c361182c7c68d79c74c3e97939dab47fb753b0d2f810cc3f17f05552ed774a94328e6a0
+  version: 1.4.745
+  resolution: "electron-to-chromium@npm:1.4.745"
+  checksum: 10c0/2dd1842e0ee84f88e78ee6e81dbd9dd554a589cf612ab2e5920d8be837aaea78b4c00cf189e545ee25d36777514fed80c11c9a867b2194f94f173d063873ec18
   languageName: node
   linkType: hard
 
@@ -8601,10 +8601,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libphonenumber-js@npm:^1.10.60":
-  version: 1.10.60
-  resolution: "libphonenumber-js@npm:1.10.60"
-  checksum: 10c0/ee15efb27d32501d5928a323995d7e0140e8d4eb0a84327f4784d398487e457a6d93755d87e1c8920a71a376e258a4f1a8b00c939adca7b3b64e17a7ee99a309
+"libphonenumber-js@npm:^1.10.61":
+  version: 1.10.61
+  resolution: "libphonenumber-js@npm:1.10.61"
+  checksum: 10c0/0c920293b2845d0c1a613fcc9d9f7259c6d157c58fd820766471c48e64f7300205ece75fab32f8770f5e68d992512ff91793e3c600f98ffbce4a3905b6af4924
   languageName: node
   linkType: hard
 
@@ -9594,11 +9594,11 @@ __metadata:
   linkType: hard
 
 "node-abi@npm:^3.3.0":
-  version: 3.59.0
-  resolution: "node-abi@npm:3.59.0"
+  version: 3.60.0
+  resolution: "node-abi@npm:3.60.0"
   dependencies:
     semver: "npm:^7.3.5"
-  checksum: 10c0/e3838f7e8a8b0f1d6f35d72438c3f76151819e400faa96024b1fc1946a7cf8c25addb5ba4eda7da5cba1fe24f703a3f4f2b6f7b5bee13bfda79edff56600a674
+  checksum: 10c0/e375d13b2c9ed60d233cf3943d34a29b7502350626508659b8097cb9ce12e97263f8931c5fd177a974681e3ca6518d6f8a6ae2bc6b3aab0e0bd40970fb6599c8
   languageName: node
   linkType: hard
 
@@ -11590,7 +11590,7 @@ __metadata:
     expo-updates: "npm:~0.24.12"
     js-base64: "npm:^3.7.7"
     jszip: "npm:^3.10.1"
-    libphonenumber-js: "npm:^1.10.60"
+    libphonenumber-js: "npm:^1.10.61"
     lodash: "npm:4.17.21"
     mime: "npm:^4.0.1"
     prettier: "npm:3.2.5"
