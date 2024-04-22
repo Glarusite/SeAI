@@ -19,6 +19,11 @@ export function toLocaleDateString(date: Nullable<string> | DateTime) {
     date = toDate(date);
   }
 
+  // TODO: Implement smarter default strategy when US users are part of the user base
+  if (/en/i.test(locales[0])) {
+    locales[0] = "en-GB";
+  }
+
   return date?.toLocaleDateString(locales);
 }
 
