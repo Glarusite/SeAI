@@ -10892,7 +10892,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-web@npm:~0.19.10":
+"react-native-web@npm:~0.19.11":
   version: 0.19.11
   resolution: "react-native-web@npm:0.19.11"
   dependencies:
@@ -11614,7 +11614,7 @@ __metadata:
     react-native-safe-area-context: "npm:4.8.2"
     react-native-screens: "npm:~3.29.0"
     react-native-toast-message: "npm:2.2.0"
-    react-native-web: "npm:~0.19.10"
+    react-native-web: "npm:~0.19.11"
     react-redux: "npm:9.1.1"
     sharp-cli: "npm:2.1.1"
     ts-node: "npm:10.9.2"
