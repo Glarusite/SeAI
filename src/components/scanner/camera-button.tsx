@@ -1,5 +1,5 @@
 import { useAsync } from "@src/common/hooks";
-import { Camera } from "expo-camera";
+import { CameraView } from "expo-camera";
 import { useState } from "react";
 import { Platform } from "react-native";
 import Toast from "react-native-toast-message";
@@ -34,12 +34,8 @@ function useCameraStatus() {
   useAsync(async () => {
     try {
       if (Platform.OS === "web") {
-        const [isAvailable, cameraTypes] = await Promise.all([
-          Camera.isAvailableAsync(),
-          Camera.getAvailableCameraTypesAsync(),
-        ]);
-
-        setIsCameraAvailable(isAvailable && cameraTypes.length > 0);
+        const isAvailable = await CameraView.isAvailableAsync();
+        setIsCameraAvailable(isAvailable);
       } else {
         setIsCameraAvailable(true);
       }

@@ -1,5 +1,5 @@
 import { safeBack } from "@src/common/router";
-import { Camera, CameraType } from "expo-camera";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import type { ButtonProps } from "react-native-paper";
@@ -10,7 +10,7 @@ export interface FullScreenCameraProps {
   onTakePicture: ButtonProps["onPress"];
 }
 
-const FullScreenCamera = forwardRef<Camera, FullScreenCameraProps>(function FullScreenCamera(
+const FullScreenCamera = forwardRef<CameraView, FullScreenCameraProps>(function FullScreenCamera(
   { isLoading, onTakePicture },
   cameraRef,
 ) {
@@ -26,7 +26,7 @@ const FullScreenCamera = forwardRef<Camera, FullScreenCameraProps>(function Full
 
   return (
     <>
-      <Camera style={styles.camera} ref={cameraRef} type={CameraType.back} onCameraReady={onCameraReady}>
+      <CameraView style={styles.camera} ref={cameraRef} facing="back" onCameraReady={onCameraReady}>
         <SafeAreaView style={styles.overlay}>
           <View style={styles.container}>
             {isLoading ? (
@@ -36,7 +36,7 @@ const FullScreenCamera = forwardRef<Camera, FullScreenCameraProps>(function Full
             )}
           </View>
         </SafeAreaView>
-      </Camera>
+      </CameraView>
     </>
   );
 });
@@ -44,7 +44,7 @@ const FullScreenCamera = forwardRef<Camera, FullScreenCameraProps>(function Full
 export default FullScreenCamera;
 
 function useFullScreenCamera() {
-  const [permission] = Camera.useCameraPermissions({ request: true });
+  const [permission] = useCameraPermissions({ request: true });
   const [isCameraReady, setIsCameraReady] = useState(false);
 
   useEffect(() => {

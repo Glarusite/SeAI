@@ -30,6 +30,14 @@ const AppConfig: ExpoConfig = {
     supportsTablet: true,
     bundleIdentifier: "co.seai.app",
     icon: "./assets/ios-icon.png",
+    privacyManifests: {
+      NSPrivacyAccessedAPITypes: [
+        {
+          NSPrivacyAccessedAPIType: "NSPrivacyAccessedAPICategoryUserDefaults",
+          NSPrivacyAccessedAPITypeReasons: ["CA92.1"],
+        },
+      ],
+    },
   },
   web: {
     bundler: "metro",
