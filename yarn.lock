@@ -10218,9 +10218,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:~3.11.0":
-  version: 3.11.0
-  resolution: "react-native-reanimated@npm:3.11.0"
+"react-native-reanimated@npm:~3.10.1":
+  version: 3.10.1
+  resolution: "react-native-reanimated@npm:3.10.1"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
@@ -10234,7 +10234,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/e41047ae2bf1abe760a6ed1b24300c4064028230800898405b7b414a9d4bcc5aabbc250ddeffa945f103d7629e1cb50e031956fcd197f1ccd18da5059a4203b1
+  checksum: 10c0/0154123649214bd8a83710056594590d9b5f073c5f8911f5b59a0a4f5dcca671d98b475bc4f3bb106b6c8b5c3dcb645a4973efdbe8dbd997bfae2797bd83f546
   languageName: node
   linkType: hard
 
@@ -10980,7 +10980,7 @@ __metadata:
     react-native-paper: "npm:5.12.3"
     react-native-paper-dates: "npm:0.22.9"
     react-native-paper-dropdown: "npm:1.0.7"
-    react-native-reanimated: "npm:~3.11.0"
+    react-native-reanimated: "npm:~3.10.1"
     react-native-safe-area-context: "npm:4.10.1"
     react-native-screens: "npm:~3.31.1"
     react-native-toast-message: "npm:2.2.0"
