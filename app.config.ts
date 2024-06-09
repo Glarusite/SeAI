@@ -8,7 +8,7 @@ const AppConfig: ExpoConfig = {
   name: "SeAI",
   slug: "seai",
   scheme: "seai",
-  version: "1.0.1",
+  version: "1.0.2",
   orientation: "default",
   icon: "./assets/icon-light.png",
   userInterfaceStyle: "automatic",
@@ -24,7 +24,7 @@ const AppConfig: ExpoConfig = {
       backgroundColor: "#ffffff",
     },
     package: "co.seai.app",
-    versionCode: 2,
+    versionCode: 3,
   },
   ios: {
     supportsTablet: true,

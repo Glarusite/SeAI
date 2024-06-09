@@ -32,7 +32,6 @@ function useStyles({ size }: Pick<DocumentImageProps, "size">) {
         image: {
           width: size,
           minHeight: size,
-          height: "100%",
         },
       }),
     [size],

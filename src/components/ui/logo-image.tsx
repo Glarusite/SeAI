@@ -1,7 +1,7 @@
 import logoDarkImageSource from "@assets/icon-dark.png";
 import logoLightImageSource from "@assets/icon-light.png";
 import { Image } from "expo-image";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
 import PageTitle from "./page-title";
@@ -20,7 +20,11 @@ export default function LogoImage({ title }: LogoImageProps) {
     <>
       <Image source={dark ? logoDarkImageSource : logoLightImageSource} style={styles.image} />
       {title && (
-        <PageTitle fontSize={46} fontFamily="Impact" color={dark ? "white" : primary}>
+        <PageTitle
+          fontSize={46}
+          fontFamily={Platform.OS === "android" ? undefined : "Impact"}
+          color={dark ? "white" : primary}
+        >
           {title}
         </PageTitle>
       )}
