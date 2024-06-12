@@ -8,7 +8,7 @@ import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import type { LinkButtonProps } from "../ui/buttons/link-button";
 import LinkButton from "../ui/buttons/link-button";
 
-export interface CameraLinkButtonProps<T> extends Omit<LinkButtonProps<T>, "children"> {
+export interface CameraLinkButtonProps<T> extends Omit<LinkButtonProps, "children"> {
   children(isCameraChecking: boolean): React.ReactNode;
 }
 

@@ -5,7 +5,7 @@ import { Chip } from "react-native-paper";
 
 export interface DocumentsFilterProps {
   style?: ViewStyle;
-  filter: string | string[];
+  filter: string | string[] | undefined;
 }
 
 export default function DocumentsFilter({ style, filter }: DocumentsFilterProps) {
