@@ -1,5 +1,3 @@
-import { isBlank, isNotEmail } from "@src/common/validators";
-import type { PasswordResetFormData } from "@src/models";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
@@ -8,6 +6,9 @@ import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
+
+import { isBlank, isNotEmail } from "@src/common/validators";
+import type { PasswordResetFormData } from "@src/models";
 
 export default function ResetPasswordForm() {
   const { control, errors, isSubmitting, resetPassword, setFocus } = useResetPassword();

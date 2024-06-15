@@ -1,6 +1,7 @@
+import { Slot, router, useSegments } from "expo-router";
+
 import { useAppNavigation } from "@src/common/hooks";
 import { useAppSelector } from "@src/store";
-import { Slot, router, useSegments } from "expo-router";
 
 export default function AuthorizedLayout() {
   const accessToken = useAppSelector(state => state.user.accessToken);

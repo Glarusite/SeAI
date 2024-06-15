@@ -1,5 +1,3 @@
-import type { ReminderPeriod } from "@src/models";
-import type { GetDocumentResponse } from "@src/store";
 import type { NotificationPermissionsStatus } from "expo-notifications";
 import {
   IosAuthorizationStatus,
@@ -12,6 +10,9 @@ import { Platform } from "react-native";
 
 import { reminderPeriods } from "./configuration";
 import { toReminderDate } from "./reminders";
+
+import type { ReminderPeriod } from "@src/models";
+import type { GetDocumentResponse } from "@src/store";
 
 export async function allowsNotificationsAsync() {
   if (Platform.OS === "web") {

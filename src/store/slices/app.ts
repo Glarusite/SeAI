@@ -1,5 +1,6 @@
 import type { Draft, PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+
 import type { AppFlags } from "@src/models";
 
 const initialState: AppState = {};

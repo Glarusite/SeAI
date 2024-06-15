@@ -1,7 +1,8 @@
+import { Button } from "react-native-paper";
+
 import { showFeatureInDevelopmentToast } from "@src/common/toast";
 import AppScrollView from "@src/components/app/app-scroll-view";
 import LinkButton from "@src/components/ui/buttons/link-button";
-import { Button } from "react-native-paper";
 
 export default function TrainingCenterCourseManagementPage() {
   return (

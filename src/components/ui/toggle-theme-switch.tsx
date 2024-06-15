@@ -1,7 +1,8 @@
-import { setAppValue, useAppDispatch, useAppSelector } from "@src/store";
 import { useCallback } from "react";
 import { Appearance, Platform, StyleSheet, View, useColorScheme } from "react-native";
 import { Icon, Switch, Text } from "react-native-paper";
+
+import { setAppValue, useAppDispatch, useAppSelector } from "@src/store";
 
 export default function ToggleThemeSwitch() {
   const dispatch = useAppDispatch();

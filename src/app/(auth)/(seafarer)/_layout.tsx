@@ -1,3 +1,9 @@
+import { setNotificationHandler } from "expo-notifications";
+import { Stack, router } from "expo-router";
+import { useEffect, useRef } from "react";
+import { Platform } from "react-native";
+import Toast from "react-native-toast-message";
+
 import { AsyncAlert } from "@src/common/async-alert";
 import { toDate, toUtcDate } from "@src/common/date";
 import { toErrorMessage } from "@src/common/error";
@@ -7,11 +13,6 @@ import { getNewDocumentReminders, toReminderDate } from "@src/common/reminders";
 import AppStack from "@src/components/app/app-stack";
 import { useDocuments } from "@src/components/documents/use-documents";
 import { setAppValue, useAppDispatch, useAppSelector, useGetUserQuery } from "@src/store";
-import { setNotificationHandler } from "expo-notifications";
-import { Stack, router } from "expo-router";
-import { useEffect, useRef } from "react";
-import { Platform } from "react-native";
-import Toast from "react-native-toast-message";
 
 export default function SeafarerLayout() {
   const role = useAppSelector(state => state.user.role) || "SEAFARER";

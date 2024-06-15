@@ -1,7 +1,8 @@
-import type { DateTime, LocalDateTime, Nullable, UtcDateTime } from "@src/models";
 import { getLocales } from "expo-localization";
 
 import { isInvalidDate } from "./validators";
+
+import type { DateTime, LocalDateTime, Nullable, UtcDateTime } from "@src/models";
 
 export function toDate(value: Nullable<string>) {
   if (value != null) {

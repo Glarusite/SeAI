@@ -1,15 +1,16 @@
-import backgroundImageSource from "@assets/background.webp";
-import logoDarkImageSource from "@assets/icon-dark.png";
-import productPreviewImageSource from "@assets/product-preview.png";
 import { A } from "@expo/html-elements";
-import { useAppDimensions, useAppNavigation } from "@src/common/hooks";
-import AppScrollView from "@src/components/app/app-scroll-view";
-import LinkButton from "@src/components/ui/buttons/link-button";
-import { useAppSelector } from "@src/store";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import { Platform, View } from "react-native";
 import { Icon, Text, Title, useTheme } from "react-native-paper";
+
+import backgroundImageSource from "@assets/background.webp";
+import logoDarkImageSource from "@assets/icon-dark.png";
+import productPreviewImageSource from "@assets/product-preview.png";
+import { useAppDimensions, useAppNavigation } from "@src/common/hooks";
+import AppScrollView from "@src/components/app/app-scroll-view";
+import LinkButton from "@src/components/ui/buttons/link-button";
+import { useAppSelector } from "@src/store";
 
 export default function MarketingPage() {
   const accessToken = useAppSelector(state => state.user.accessToken);

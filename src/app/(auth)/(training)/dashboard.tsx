@@ -1,9 +1,10 @@
+import { Image } from "expo-image";
+import { View } from "react-native";
+
 import dashboardImage1 from "@assets/tc-dashboard-1.png";
 import dashboardImage2 from "@assets/tc-dashboard-2.png";
 import { useAppDimensions } from "@src/common/hooks";
 import AppScrollView from "@src/components/app/app-scroll-view";
-import { Image } from "expo-image";
-import { View } from "react-native";
 
 export default function TrainingCenterDashboard() {
   const { width, height } = useAppDimensions();

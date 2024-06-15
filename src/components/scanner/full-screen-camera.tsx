@@ -1,9 +1,10 @@
-import { safeBack } from "@src/common/router";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import type { ButtonProps } from "react-native-paper";
 import { ActivityIndicator, IconButton } from "react-native-paper";
+
+import { safeBack } from "@src/common/router";
 
 export interface FullScreenCameraProps {
   isLoading?: boolean;

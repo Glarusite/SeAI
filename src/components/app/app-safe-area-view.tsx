@@ -1,8 +1,9 @@
-import { useAppOrientation } from "@src/common/hooks";
 import { Orientation } from "expo-screen-orientation";
 import type { PropsWithChildren } from "react";
 import { Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { useAppOrientation } from "@src/common/hooks";
 
 export default function AppSafeAreaView({ children }: PropsWithChildren) {
   const orientation = useAppOrientation();

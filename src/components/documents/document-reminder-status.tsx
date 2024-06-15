@@ -1,8 +1,9 @@
-import { getDateInterval, toLocalDate } from "@src/common/date";
-import type { DateTime } from "@src/models";
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+
+import { getDateInterval, toLocalDate } from "@src/common/date";
+import type { DateTime } from "@src/models";
 
 export interface DocumentReminderStatusProps {
   expiryDate: string | DateTime | undefined;

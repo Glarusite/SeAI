@@ -1,7 +1,3 @@
-import { toErrorMessage } from "@src/common/error";
-import { isBlank, isNotEmail } from "@src/common/validators";
-import type { LoginFormData } from "@src/models";
-import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@src/store";
 import type { FieldErrors } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
@@ -10,6 +6,11 @@ import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
+
+import { toErrorMessage } from "@src/common/error";
+import { isBlank, isNotEmail } from "@src/common/validators";
+import type { LoginFormData } from "@src/models";
+import { setUser, useAppDispatch, useAuthenticateAndGetTokenMutation } from "@src/store";
 
 export default function LoginForm() {
   const { control, errors, isSubmitting, login, setFocus } = useLogin();

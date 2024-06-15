@@ -1,8 +1,9 @@
+import { Tabs, router, useSegments } from "expo-router";
+import { Icon } from "react-native-paper";
+
 import { useAppNavigation } from "@src/common/hooks";
 import AppTabs from "@src/components/app/app-tabs";
 import { useAppSelector } from "@src/store";
-import { Tabs, router, useSegments } from "expo-router";
-import { Icon } from "react-native-paper";
 
 export default function AnonymousLayout() {
   const accessToken = useAppSelector(state => state.user.accessToken);

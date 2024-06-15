@@ -1,7 +1,3 @@
-import { toLocalDate } from "@src/common/date";
-import { toErrorMessage } from "@src/common/error";
-import { showFeatureInDevelopmentToast } from "@src/common/toast";
-import { useAppSelector } from "@src/store";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { ActivityIndicator, Button, DataTable, HelperText, Text } from "react-native-paper";
@@ -9,6 +5,11 @@ import { ActivityIndicator, Button, DataTable, HelperText, Text } from "react-na
 import DataTableRow from "../ui/data-table-row";
 
 import { useBookings } from "./use-bookings";
+
+import { toLocalDate } from "@src/common/date";
+import { toErrorMessage } from "@src/common/error";
+import { showFeatureInDevelopmentToast } from "@src/common/toast";
+import { useAppSelector } from "@src/store";
 
 export default function BookingsDataTable() {
   const { data, isLoading, error } = useBookings();

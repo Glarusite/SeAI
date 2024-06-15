@@ -1,8 +1,9 @@
-import FullScreenCamera from "@src/components/scanner/full-screen-camera";
-import { useFileUpload } from "@src/components/scanner/handle-file-upload";
 import type { CameraView } from "expo-camera";
 import { useCallback, useRef } from "react";
 import Toast from "react-native-toast-message";
+
+import FullScreenCamera from "@src/components/scanner/full-screen-camera";
+import { useFileUpload } from "@src/components/scanner/handle-file-upload";
 
 export default function CameraPage() {
   const { cameraRef, isLoading, takePicture } = useTakePicture();

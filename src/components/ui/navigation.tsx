@@ -1,11 +1,12 @@
-import { showFeatureInDevelopmentToast } from "@src/common/toast";
-import { resetAppValue, setUser, useAppDispatch, useAppSelector } from "@src/store";
 import { router } from "expo-router";
 import { useCallback } from "react";
 import { Platform } from "react-native";
 import { Button } from "react-native-paper";
 
 import LinkButton from "./buttons/link-button";
+
+import { showFeatureInDevelopmentToast } from "@src/common/toast";
+import { resetAppValue, setUser, useAppDispatch, useAppSelector } from "@src/store";
 
 export default function Navigation() {
   const role = useAppSelector(state => state.user.role) || "SEAFARER";

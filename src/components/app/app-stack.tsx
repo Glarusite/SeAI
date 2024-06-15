@@ -1,10 +1,11 @@
-import { safeBack } from "@src/common/router";
 import { Stack } from "expo-router";
 import { Platform, StyleSheet, View } from "react-native";
 import { IconButton, useTheme } from "react-native-paper";
 import type { ScreenProps } from "react-native-screens";
 
 import AppDrawerMenu from "./app-drawer-menu";
+
+import { safeBack } from "@src/common/router";
 
 export type AppStackProps = Pick<ScreenProps, "children"> & {
   headerShown?: boolean;

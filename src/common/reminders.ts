@@ -1,11 +1,11 @@
+import { reminderPeriods } from "./configuration";
+import { getDateInterval, toLocalDate } from "./date";
+
 import type { DateTime, IntRange, Nullable, ReminderPeriod } from "@src/models";
 import type { GetDocumentResponse } from "@src/store";
 import type { AppDispatch } from "@src/store/configure";
 import type { DocumentReminder, RemindersState } from "@src/store/slices/reminders";
 import { setDocumentReminder } from "@src/store/slices/reminders";
-
-import { reminderPeriods } from "./configuration";
-import { getDateInterval, toLocalDate } from "./date";
 
 export function toReminderDate(
   date: Nullable<string> | DateTime,

@@ -1,5 +1,6 @@
-import AppScrollView from "@src/components/app/app-scroll-view";
 import { Paragraph, Title } from "react-native-paper";
+
+import AppScrollView from "@src/components/app/app-scroll-view";
 
 export default function AboutPage() {
   return (

@@ -1,20 +1,3 @@
-import { AsyncAlert } from "@src/common/async-alert";
-import { toLocalDate, toUtcDate } from "@src/common/date";
-import { toErrorMessage } from "@src/common/error";
-import { toFormData } from "@src/common/form-data";
-import { useAppDimensions } from "@src/common/hooks";
-import { isBlank, isInvalidDate } from "@src/common/validators";
-import type { DocumentFormData } from "@src/models";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useCreateMutation,
-  useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation,
-  useFindQuery,
-  useUpdateMutation,
-  useUpload1Mutation,
-} from "@src/store";
-import { resetScan } from "@src/store/slices/scan";
 import { Image } from "expo-image";
 import { MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import { router, useFocusEffect } from "expo-router";
@@ -36,6 +19,24 @@ import ValidationText from "../ui/form/validation-text";
 import { useDocumentImageUri } from "./use-document-image";
 import { useDocumentsDownload } from "./use-documents-download";
 import { useDocumentsShare } from "./use-documents-share";
+
+import { AsyncAlert } from "@src/common/async-alert";
+import { toLocalDate, toUtcDate } from "@src/common/date";
+import { toErrorMessage } from "@src/common/error";
+import { toFormData } from "@src/common/form-data";
+import { useAppDimensions } from "@src/common/hooks";
+import { isBlank, isInvalidDate } from "@src/common/validators";
+import type { DocumentFormData } from "@src/models";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCreateMutation,
+  useDeleteApiV1UsersByUserIdDocumentsAndDocumentIdMutation,
+  useFindQuery,
+  useUpdateMutation,
+  useUpload1Mutation,
+} from "@src/store";
+import { resetScan } from "@src/store/slices/scan";
 
 export interface DocumentFormProps {
   id?: string;

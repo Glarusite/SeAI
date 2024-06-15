@@ -1,13 +1,13 @@
-{
+module.exports = {
   "root": true,
   "extends": [
-    "universe/native",
+    "expo",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:unicorn/recommended",
-    "prettier"
+    "prettier",
   ],
   "ignorePatterns": [
     ".expo",
@@ -16,38 +16,48 @@
     "assets",
     "dist",
     "expo-env.d.ts",
-    "**/*.*js"
+    "**/*.*js",
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "project": [
       "tsconfig.json",
-      "tsconfig.web.json"
-    ]
+      "tsconfig.web.json",
+    ],
   },
   "plugins": [
     "unused-imports",
     "import",
     "unicorn",
-    "prettier"
+    "prettier",
   ],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+      },
+    },
+  },
   "rules": {
     "@typescript-eslint/consistent-type-imports": ["error", {
-      "fixStyle": "separate-type-imports"
+      "fixStyle": "separate-type-imports",
     }],
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
         "multiline": {
           "delimiter": "semi",
-          "requireLast": true
+          "requireLast": true,
         },
         "singleline": {
           "delimiter": "semi",
-          "requireLast": false
-        }
-      }
+          "requireLast": false,
+        },
+      },
     ],
     "@typescript-eslint/naming-convention": [
       "error",
@@ -56,41 +66,41 @@
         "format": [
           "camelCase",
           "PascalCase",
-          "UPPER_CASE"
+          "UPPER_CASE",
         ],
-        "leadingUnderscore": "allow"
+        "leadingUnderscore": "allow",
       },
       {
         "selector": "function",
         "format": [
           "camelCase",
-          "PascalCase"
-        ]
+          "PascalCase",
+        ],
       },
       {
         "selector": "typeLike",
         "format": [
-          "PascalCase"
-        ]
-      }
+          "PascalCase",
+        ],
+      },
     ],
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
         "checksVoidReturn": {
-          "attributes": false
-        }
-      }
+          "attributes": false,
+        },
+      },
     ],
     "@typescript-eslint/no-shadow": [
       "error",
       {
-        "ignoreTypeValueShadow": true
-      }
+        "ignoreTypeValueShadow": true,
+      },
     ],
     "curly": [
       "error",
-      "all"
+      "all",
     ],
     "dot-notation": "error",
     "import/no-extraneous-dependencies": "error",
@@ -99,40 +109,41 @@
       {
         "alphabetize": {
           "order": "asc",
-          "caseInsensitive": true
+          "caseInsensitive": true,
         },
-        "newlines-between": "always"
-      }
+        "newlines-between": "always",
+      },
     ],
     "no-restricted-syntax": [
       "error",
       "ForInStatement",
       "LabeledStatement",
-      "WithStatement"
+      "WithStatement",
     ],
     "no-void": [
       "error",
       {
-        "allowAsStatement": true
-      }
+        "allowAsStatement": true,
+      },
     ],
     "prefer-destructuring": [
       "error",
       {
         "object": true,
-        "array": true
+        "array": true,
       },
       {
-        "enforceForRenamedProperties": true
-      }
+        "enforceForRenamedProperties": true,
+      },
     ],
+    "prettier/prettier": "error",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": [
       "warn",
       {
-        "additionalHooks": "(useAsync|useAppNavigation)"
-      }
+        "additionalHooks": "(useAsync|useAppNavigation)",
+      },
     ],
     "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": [
@@ -140,9 +151,9 @@
       {
         "ignore": [
           "[Pp]rops",
-          "[Rr]ef"
-        ]
-      }
+          "[Rr]ef",
+        ],
+      },
     ],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
@@ -151,8 +162,8 @@
         "vars": "all",
         "varsIgnorePattern": "^_",
         "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
-    ]
-  }
-}
+        "argsIgnorePattern": "^_",
+      },
+    ],
+  },
+};

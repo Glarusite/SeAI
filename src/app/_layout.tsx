@@ -1,12 +1,13 @@
-import AppDrawer from "@src/components/app/app-drawer";
-import AppThemeProvider from "@src/components/app/app-theme-provider";
-import { useCreateStore } from "@src/store";
 import { unlockAsync } from "expo-screen-orientation";
 import { preventAutoHideAsync, hideAsync } from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { AppState, Platform } from "react-native";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
+
+import AppDrawer from "@src/components/app/app-drawer";
+import AppThemeProvider from "@src/components/app/app-theme-provider";
+import { useCreateStore } from "@src/store";
 
 // TODO: Remove this import when router crash issue is resolve, see: https://expo.dev/changelog/2024/05-07-sdk-51#known-issues
 import "react-native-reanimated";

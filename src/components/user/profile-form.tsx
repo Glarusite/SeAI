@@ -1,19 +1,3 @@
-import { AsyncAlert } from "@src/common/async-alert";
-import { toLocalDate, toLocaleDateString, toUtcDate } from "@src/common/date";
-import { downloadFile } from "@src/common/download";
-import { toErrorMessage } from "@src/common/error";
-import { isBlank, isInvalidDate } from "@src/common/validators";
-import { rankLabels, statusLabels, statusList, vesselTypeLabels, type ProfileFormData } from "@src/models";
-import { rankList, vesselTypeList } from "@src/models";
-import {
-  resetAppValue,
-  setUser,
-  useAppDispatch,
-  useAppSelector,
-  useDeleteUserMutation,
-  useGetUserQuery,
-  useUpdateUserMutation,
-} from "@src/store";
 import { router } from "expo-router";
 import { Base64 } from "js-base64";
 import { AsYouType, validatePhoneNumberLength } from "libphonenumber-js";
@@ -30,6 +14,23 @@ import ControlledDropDown from "../ui/form/controlled-drop-down";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
+
+import { AsyncAlert } from "@src/common/async-alert";
+import { toLocalDate, toLocaleDateString, toUtcDate } from "@src/common/date";
+import { downloadFile } from "@src/common/download";
+import { toErrorMessage } from "@src/common/error";
+import { isBlank, isInvalidDate } from "@src/common/validators";
+import { rankList, vesselTypeList, rankLabels, statusLabels, statusList, vesselTypeLabels } from "@src/models";
+import type { ProfileFormData } from "@src/models";
+import {
+  resetAppValue,
+  setUser,
+  useAppDispatch,
+  useAppSelector,
+  useDeleteUserMutation,
+  useGetUserQuery,
+  useUpdateUserMutation,
+} from "@src/store";
 
 export interface ProfileFormProps {
   wide: boolean;

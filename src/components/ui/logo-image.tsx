@@ -1,10 +1,11 @@
-import logoDarkImageSource from "@assets/icon-dark.png";
-import logoLightImageSource from "@assets/icon-light.png";
 import { Image } from "expo-image";
 import { Platform, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
 import PageTitle from "./page-title";
+
+import logoDarkImageSource from "@assets/icon-dark.png";
+import logoLightImageSource from "@assets/icon-light.png";
 
 export interface LogoImageProps {
   title?: string;

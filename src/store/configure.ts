@@ -1,11 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { EnhancedStore, StateFromReducersMapObject } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
-import { safeJsonParse } from "@src/common/json";
 import { debounce } from "lodash";
 
 import { api } from "./api";
 import { reducer } from "./reducer";
+
+import { safeJsonParse } from "@src/common/json";
 
 export async function configureAppStore() {
   const state = await AsyncStorage.getItem("state");

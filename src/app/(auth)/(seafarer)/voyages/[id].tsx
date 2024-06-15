@@ -1,6 +1,7 @@
+import { useLocalSearchParams } from "expo-router";
+
 import AppScrollView from "@src/components/app/app-scroll-view";
 import VoyageForm from "@src/components/voyages/voyage-form";
-import { useLocalSearchParams } from "expo-router";
 
 export default function VoyagePage() {
   const { voyageId } = useVoyagePage();

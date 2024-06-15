@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@react-navigation/native";
-import { useAppSelector } from "@src/store";
 import { StatusBar } from "expo-status-bar";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import { useEffect } from "react";
@@ -7,6 +6,8 @@ import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context";
 
 import { useAppTheme } from "./app-theme";
+
+import { useAppSelector } from "@src/store";
 
 export default function AppThemeProvider({ children }: React.PropsWithChildren) {
   const appColorScheme = useAppSelector(state => state.app.colorScheme);

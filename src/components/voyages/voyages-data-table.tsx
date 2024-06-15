@@ -1,6 +1,3 @@
-import { toLocaleDateString } from "@src/common/date";
-import { showFeatureInDevelopmentToast } from "@src/common/toast";
-import { rankLabels, vesselTypeLabels } from "@src/models";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
@@ -10,6 +7,10 @@ import LinkButton from "../ui/buttons/link-button";
 import DataTableRow from "../ui/data-table-row";
 
 import { useVoyages } from "./use-voyages";
+
+import { toLocaleDateString } from "@src/common/date";
+import { showFeatureInDevelopmentToast } from "@src/common/toast";
+import { rankLabels, vesselTypeLabels } from "@src/models";
 
 export default function VoyagesDataTable() {
   const { data, isLoading } = useVoyages();

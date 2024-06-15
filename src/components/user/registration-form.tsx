@@ -1,9 +1,4 @@
-import gdprPolicy from "@assets/gdpr.pdf";
 import { A } from "@expo/html-elements";
-import { toErrorMessage } from "@src/common/error";
-import { isBlank, isNotEmail } from "@src/common/validators";
-import type { RegisterFormData } from "@src/models";
-import { useCreateUserMutation } from "@src/store";
 import { useAssets } from "expo-asset";
 import { router } from "expo-router";
 import React, { useEffect } from "react";
@@ -17,6 +12,12 @@ import ControlledCheckBox from "../ui/form/controlled-check-box";
 import ControlledTextInput from "../ui/form/controlled-text-input";
 import FormView from "../ui/form/form-view";
 import ValidationText from "../ui/form/validation-text";
+
+import gdprPolicy from "@assets/gdpr.pdf";
+import { toErrorMessage } from "@src/common/error";
+import { isBlank, isNotEmail } from "@src/common/validators";
+import type { RegisterFormData } from "@src/models";
+import { useCreateUserMutation } from "@src/store";
 
 export default function RegistrationForm() {
   const { control, errors, isSubmitting, register, setFocus } = useRegister();

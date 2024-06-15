@@ -1,6 +1,6 @@
-import type { GetUserResponse } from "@src/store";
-
 import type { DropDownList } from "./app";
+
+import type { GetUserResponse } from "@src/store";
 
 export type VesselType = Required<GetUserResponse>["vesselType"];
 export const vesselTypeLabels: Record<VesselType, string> = {

@@ -1,7 +1,8 @@
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import type { ApiErrorResponse } from "@src/models";
 
 import { safeJsonParse } from "./json";
+
+import type { ApiErrorResponse } from "@src/models";
 
 export function toErrorMessage(error: unknown) {
   error = typeof error === "string" ? safeJsonParse(error) : error;

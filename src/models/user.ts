@@ -1,6 +1,6 @@
-import type { UserAuthenticationRequest, GetUserResponse, UserRegisterRequest } from "@src/store";
-
 import type { DropDownList } from "./app";
+
+import type { UserAuthenticationRequest, GetUserResponse, UserRegisterRequest } from "@src/store";
 
 export interface LoginFormData extends UserAuthenticationRequest {}
 

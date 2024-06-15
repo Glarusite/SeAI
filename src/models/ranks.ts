@@ -1,6 +1,6 @@
-import type { GetUserResponse } from "@src/store";
-
 import type { DropDownList } from "./app";
+
+import type { GetUserResponse } from "@src/store";
 
 export type Rank = Required<GetUserResponse>["rank"];
 

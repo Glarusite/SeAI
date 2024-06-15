@@ -1,7 +1,8 @@
+import { useLocalSearchParams } from "expo-router";
+
 import { useAppDimensions } from "@src/common/hooks";
 import AppScrollView from "@src/components/app/app-scroll-view";
 import DocumentForm from "@src/components/documents/document-form";
-import { useLocalSearchParams } from "expo-router";
 
 export default function DocumentPage() {
   const { wide, documentId } = useDocumentPage();

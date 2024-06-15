@@ -1,7 +1,8 @@
+import { Stack, router } from "expo-router";
+
 import { useAppNavigation } from "@src/common/hooks";
 import AppStack from "@src/components/app/app-stack";
 import { useAppSelector } from "@src/store";
-import { Stack, router } from "expo-router";
 
 export default function TrainingCenterLayout() {
   const role = useAppSelector(state => state.user.role) || "SEAFARER";

@@ -1,4 +1,3 @@
-import { useAsync } from "@src/common/hooks";
 import { CameraView } from "expo-camera";
 import { useState } from "react";
 import { Platform } from "react-native";
@@ -7,6 +6,8 @@ import Toast from "react-native-toast-message";
 import ButtonActivityIndicator from "../ui/buttons/button-activity-indicator";
 import type { LinkButtonProps } from "../ui/buttons/link-button";
 import LinkButton from "../ui/buttons/link-button";
+
+import { useAsync } from "@src/common/hooks";
 
 export interface CameraLinkButtonProps extends Omit<LinkButtonProps, "children"> {
   children(isCameraChecking: boolean): React.ReactNode;
