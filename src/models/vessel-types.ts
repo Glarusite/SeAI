@@ -1,4 +1,4 @@
-import type { DropDownList } from "./app";
+import type { Option } from "react-native-paper-dropdown";
 
 import type { GetUserResponse } from "@src/store";
 
@@ -24,10 +24,4 @@ export const vesselTypeLabels: Record<VesselType, string> = {
   SPORT_FISHING_YACHT: "Sport Fishing Yacht",
 };
 
-export const vesselTypeList: DropDownList<VesselType> = [
-  { label: "Not selected", value: "" },
-  ...Object.entries(vesselTypeLabels).map(([key, label]) => ({
-    value: key as VesselType,
-    label,
-  })),
-];
+export const vesselTypeList: Option[] = Object.entries(vesselTypeLabels).map(([value, label]) => ({ label, value }));

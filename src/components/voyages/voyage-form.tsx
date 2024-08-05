@@ -58,13 +58,13 @@ export default function VoyageForm(props: VoyageFormProps) {
         onSubmitEditing={() => setFocus("rank")}
       />
 
-      <ControlledDropDown control={control} name="vesselType" label="Vessel Type" list={vesselTypeList} />
+      <ControlledDropDown control={control} name="vesselType" label="Vessel Type" options={vesselTypeList} />
 
       <ControlledTextInput control={control} name="flag" label="Vessel Flag" defaultValue={disabled ? "N/A" : ""} />
 
       <ControlledTextInput control={control} inputMode="numeric" maxLength={7} name="imoNumber" label="IMO Number" />
 
-      <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
+      <ControlledDropDown control={control} name="rank" label="Rank" options={rankList} />
 
       <ControlledTextInput control={control} name="joiningPort" label="Joining Port" />
 
@@ -196,7 +196,7 @@ function useVoyage({ id }: VoyageFormProps) {
       });
 
       if (isNew) {
-        router.push("/voyages/");
+        router.push("/voyages");
       } else {
         setDisabled(true);
         reset(values);
@@ -209,7 +209,7 @@ function useVoyage({ id }: VoyageFormProps) {
 
   const discardVoyage = useCallback(() => {
     if (isNew) {
-      router.replace("/voyages/");
+      router.replace("/voyages");
     } else {
       reset();
       setDisabled(true);
@@ -228,7 +228,7 @@ function useVoyage({ id }: VoyageFormProps) {
 
     try {
       await deleteRequest({ userId, voyageId: id });
-      router.push("/(auth)/(seafarer)/voyages/");
+      router.push("/voyages");
       Toast.show({ text1: "Voyage deleted" });
     } catch (error) {
       Toast.show({

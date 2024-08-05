@@ -395,7 +395,7 @@ function useDocument({ id }: DocumentFormProps) {
       });
 
       if (isNew || isVerify) {
-        router.push("/documents/");
+        router.push("/documents");
       } else {
         setDisabled(true);
         reset(values);
@@ -416,7 +416,7 @@ function useDocument({ id }: DocumentFormProps) {
         type: "info",
         text1: "New document discarded",
       });
-      router.replace("/documents/");
+      router.replace("/documents");
     } else if (isVerify) {
       try {
         await deleteRequest({ documentId: id, userId }).unwrap();
@@ -432,7 +432,7 @@ function useDocument({ id }: DocumentFormProps) {
         });
       } finally {
         dispatch(resetScan());
-        router.replace("/documents/");
+        router.replace("/documents");
       }
     } else {
       reset();
@@ -452,7 +452,7 @@ function useDocument({ id }: DocumentFormProps) {
 
     try {
       await deleteRequest({ documentId: id, userId }).unwrap();
-      router.replace("/documents/");
+      router.replace("/documents");
       Toast.show({ type: "info", text1: "Document deleted" });
     } catch (deleteError) {
       Toast.show({ type: "error", text1: "Delete error", text2: toErrorMessage(deleteError) });

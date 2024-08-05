@@ -1,5 +1,4 @@
-import type { MaybePromise } from "@reduxjs/toolkit/dist/query/tsHelpers";
-import { useRootNavigation } from "expo-router";
+import { useNavigationContainerRef } from "expo-router";
 import type { Orientation } from "expo-screen-orientation";
 import {
   addOrientationChangeListener,
@@ -9,6 +8,8 @@ import {
 import { useEffect, useState } from "react";
 import { Dimensions, Platform } from "react-native";
 
+import type { MaybePromise } from "@src/models";
+
 export function useAsync(effect: () => Promise<void>, deps: unknown[]) {
   useEffect(() => {
     void effect();
@@ -17,7 +18,7 @@ export function useAsync(effect: () => Promise<void>, deps: unknown[]) {
 }
 
 export function useAppNavigation(effect: () => MaybePromise<void>, deps: unknown[]) {
-  const rootNavigation = useRootNavigation();
+  const rootNavigation = useNavigationContainerRef();
   const [isNavigationReady, setIsNavigationReady] = useState(false);
   const setIsReady = () => setIsNavigationReady(true);
 

@@ -9,7 +9,7 @@ import ToggleThemeSwitch from "../ui/toggle-theme-switch";
 import AppScrollView from "./app-scroll-view";
 
 export default function AppDrawer() {
-  const { 0: group, 1: page } = useSegments();
+  const segments = useSegments();
   return (
     <Drawer
       drawerContent={() => (
@@ -17,7 +17,7 @@ export default function AppDrawer() {
           <AppScrollView>
             <PageTitle>SeAI Menu</PageTitle>
             <ToggleThemeSwitch />
-            {group === "(auth)" && page != null && <Navigation />}
+            {segments[0] !== "(anon)" && segments[1] != null && <Navigation />}
           </AppScrollView>
         </SafeAreaView>
       )}

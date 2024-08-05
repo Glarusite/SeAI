@@ -10,7 +10,7 @@ import LinkButton from "../ui/buttons/link-button";
 import { useAsync } from "@src/common/hooks";
 
 export interface CameraLinkButtonProps extends Omit<LinkButtonProps, "children"> {
-  children(isCameraChecking: boolean): React.ReactNode;
+  children(this: void, isCameraChecking: boolean): React.ReactNode;
 }
 
 export default function CameraLinkButton({ children, disabled, ...props }: CameraLinkButtonProps) {

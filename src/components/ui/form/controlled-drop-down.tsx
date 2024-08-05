@@ -1,16 +1,16 @@
 import type { Control, ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { View } from "react-native";
+import type { DropdownProps } from "react-native-paper-dropdown";
+import { Dropdown } from "react-native-paper-dropdown";
 
-import type { DropDownProps } from "./drop-down";
-import DropDown from "./drop-down";
 import ValidationText from "./validation-text";
 
 export type ControlledDropDownProps<TData extends FieldValues, TContext = unknown> = {
   name: Path<TData>;
   control: Control<TData, TContext>;
   disabled?: boolean;
-} & Omit<DropDownProps, keyof ControllerRenderProps | "setValue">;
+} & Omit<DropdownProps, keyof ControllerRenderProps | "setValue">;
 
 export default function ControlledDropDown<TData extends FieldValues, TContext = unknown>({
   name,
@@ -23,7 +23,7 @@ export default function ControlledDropDown<TData extends FieldValues, TContext =
       control={control}
       render={({ field: { onChange, ...controlProps }, fieldState: { error } }) => (
         <View>
-          <DropDown mode="outlined" setValue={onChange} error={error != null} {...{ ...inputProps, ...controlProps }} />
+          <Dropdown mode="outlined" onSelect={onChange} error={error != null} {...{ ...inputProps, ...controlProps }} />
           <ValidationText error={error} />
         </View>
       )}

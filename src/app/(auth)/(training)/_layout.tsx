@@ -9,7 +9,7 @@ export default function TrainingCenterLayout() {
 
   useAppNavigation(() => {
     if (role === "SEAFARER") {
-      router.push("/(auth)/(seafarer)/");
+      router.push("/(seafarer)");
     }
   }, [role]);
 

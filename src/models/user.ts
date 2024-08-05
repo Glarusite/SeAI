@@ -1,4 +1,4 @@
-import type { DropDownList } from "./app";
+import type { Option } from "react-native-paper-dropdown";
 
 import type { UserAuthenticationRequest, GetUserResponse, UserRegisterRequest } from "@src/store";
 
@@ -33,7 +33,7 @@ export const statusLabels: Record<UserStatus, string> = {
   ONBOARD: "On board",
 };
 
-export const statusList: DropDownList<UserStatus> = [
+export const statusList: Option[] = [
   { label: "Not selected", value: "" },
   ...Object.entries(statusLabels).map(([key, label]) => ({
     value: key as UserStatus,

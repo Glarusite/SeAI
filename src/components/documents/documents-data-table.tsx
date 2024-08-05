@@ -61,7 +61,7 @@ export default function DocumentsDataTable({ filter }: DocumentsDataTableProps) 
       )}
 
       <View style={styles.buttonContainer}>
-        <LinkButton href="/scanner/" icon="camera" mode="contained-tonal">
+        <LinkButton href="/scanner" icon="camera" mode="contained-tonal">
           Scan Document
         </LinkButton>
 

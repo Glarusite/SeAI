@@ -23,3 +23,5 @@ type Enumerate<N extends number, Accumulator extends number[] = []> = Accumulato
   : Enumerate<N, [...Accumulator, Accumulator["length"]]>;
 
 export type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>;
+
+export type MaybePromise<T> = T | Promise<T>;

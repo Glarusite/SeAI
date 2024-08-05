@@ -20,7 +20,7 @@ export default function MarketingPage() {
 
   useAppNavigation(() => {
     if (accessToken) {
-      router.push("/(auth)/");
+      router.push("/(auth)");
     } else if (Platform.OS === "android") {
       router.push("/user/login");
     }

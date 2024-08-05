@@ -120,7 +120,7 @@ export default function DocumentsList({ filter }: DocumentsListProps) {
             actions={
               fabGroupState.open
                 ? [
-                    { icon: "camera", label: "Scan Document", onPress: () => router.push("/scanner/") },
+                    { icon: "camera", label: "Scan Document", onPress: () => router.push("/scanner") },
                     { icon: "plus", label: "Add New Document", onPress: () => router.push("/documents/new") },
                     ...(data.length > 0
                       ? selection == null

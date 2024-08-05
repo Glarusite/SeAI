@@ -68,7 +68,7 @@ export default function ProfileForm(props: ProfileFormProps) {
             locale="en-GB"
           />
 
-          <ControlledDropDown control={control} name="status" label="Status" list={statusList} />
+          <ControlledDropDown control={control} name="status" label="Status" options={statusList} />
 
           <TextInput label="E-mail" mode="outlined" value={email} disabled />
 
@@ -100,7 +100,7 @@ export default function ProfileForm(props: ProfileFormProps) {
         </View>
 
         <View style={styles.inputContainer}>
-          <ControlledDropDown control={control} name="rank" label="Rank" list={rankList} />
+          <ControlledDropDown control={control} name="rank" label="Rank" options={rankList} />
 
           <ControlledTextInput
             control={control}
@@ -109,7 +109,7 @@ export default function ProfileForm(props: ProfileFormProps) {
             keyboardType="numeric"
           />
 
-          <ControlledDropDown control={control} name="vesselType" label="Vessel type" list={vesselTypeList} />
+          <ControlledDropDown control={control} name="vesselType" label="Vessel type" options={vesselTypeList} />
 
           <ControlledTextInput control={control} name="manningAgents" label="Manning agents" />
 

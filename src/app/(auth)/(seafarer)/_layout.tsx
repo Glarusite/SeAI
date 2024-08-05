@@ -19,7 +19,7 @@ export default function SeafarerLayout() {
 
   useAppNavigation(() => {
     if (role !== "SEAFARER") {
-      router.push("/(auth)/(training)/");
+      router.push("/(training)");
     }
   }, [role]);
 
@@ -79,7 +79,7 @@ function useDocumentReminderNotifications() {
             "You have expiring one or more expiring documents. Would you like to go to the expiring documents page to review them?",
           );
           if (redirectChoice) {
-            router.push("/documents/");
+            router.push("/documents");
             router.setParams({ filter: "expiring" });
           }
         } else {

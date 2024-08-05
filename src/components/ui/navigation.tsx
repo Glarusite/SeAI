@@ -36,25 +36,25 @@ function useLogout() {
 function SeafarerNavigation() {
   return (
     <>
-      <LinkButton href="/scanner/" mode="contained">
+      <LinkButton href="/scanner" mode="contained">
         Smart Scanner
       </LinkButton>
 
-      <LinkButton href="/user/" mode="contained-tonal">
+      <LinkButton href="/user" mode="contained-tonal">
         Profile
       </LinkButton>
 
-      <LinkButton href="/documents/" mode="contained-tonal">
+      <LinkButton href="/documents" mode="contained-tonal">
         Documents
       </LinkButton>
 
-      <LinkButton href="/voyages/" mode="contained-tonal">
+      <LinkButton href="/voyages" mode="contained-tonal">
         Voyages
       </LinkButton>
 
       {Platform.OS === "web" && (
         <>
-          <LinkButton href="/booking/" mode="contained-tonal">
+          <LinkButton href="/booking" mode="contained-tonal">
             Booking
           </LinkButton>
 
@@ -86,7 +86,7 @@ function TrainingCenterNavigation() {
 
   return (
     <>
-      <LinkButton href="/(auth)/(training)/dashboard" mode="contained">
+      <LinkButton href="/dashboard" mode="contained">
         Dashboard
       </LinkButton>
       <LinkButton href="/course-management" mode="contained-tonal">

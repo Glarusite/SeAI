@@ -1,4 +1,4 @@
-import type { DropDownList } from "./app";
+import type { Option } from "react-native-paper-dropdown";
 
 import type { GetUserResponse } from "@src/store";
 
@@ -34,10 +34,4 @@ export const rankLabels: Record<Rank, string> = {
   RADIO_OFFICER: "Radio Officer/Radio Operator",
 };
 
-export const rankList: DropDownList<Rank> = [
-  { label: "Not selected", value: "" },
-  ...Object.entries(rankLabels).map(([key, label]) => ({
-    value: key as Rank,
-    label,
-  })),
-];
+export const rankList: Option[] = Object.entries(rankLabels).map(([value, label]) => ({ label, value }));

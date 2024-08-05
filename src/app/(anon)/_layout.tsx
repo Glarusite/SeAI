@@ -11,7 +11,7 @@ export default function AnonymousLayout() {
 
   useAppNavigation(() => {
     if (accessToken && group === "(anon)") {
-      router.push("/(auth)/");
+      router.push("/(auth)");
     }
   }, [accessToken, group]);
 
